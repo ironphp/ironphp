@@ -35,7 +35,7 @@ $ composer create-project IronPHP/IronPHP -s dev
 
 # Security
 
-If you’ve found a security issue in IronPHP, please use the following procedure instead of the normal bug reporting system. Instead of using the bug tracker, mailing list or IRC please send an email to security [at] IronPHP.org. Emails sent to this address go to the IronPHP core team on a private mailing list.
+If you’ve found a security issue in IronPHP, please use the following procedure instead of the normal bug reporting system. Instead of using the bug tracker, mailing list or IRC please send an email to gaurangkumarp@gmail.com.
 
 For each report, we try to first confirm the vulnerability. Once confirmed, the IronPHP will take the following actions:
 
