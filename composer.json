@@ -1,0 +1,58 @@
+{
+    "name": "ironphp/ironphp",
+    "description": "The IronPHP Framework",
+    "homepage": "https://github.com/ironphp/ironphp",
+    "type": "project",
+    "keywords": [
+        "php",
+        "mvc",
+        "framework",
+        "ironphp"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Gaurang Parmar",
+            "email": "gaurangkumarp@gmail.com",
+            "role": "Founder and Developer"
+        }
+    ],
+    "support": {
+        "email": "gaurangkumarp@gmail.com",
+        "issues": "https://github.com/ironphp/ironphp/issues",
+        "source": "https://github.com/ironphp/ironphp"
+    },
+    "require": {
+        "php": ">=5.5"
+    }
+    "autoload": {
+        "psr-4": {
+            "Friday\\": "src/Friday/",
+            "App\\": "app/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Friday\\": "src/Friday/",
+            "App\\": "app/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.0.1-dev"
+        }
+    },
+    "scripts": {
+        "post-root-package-install": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "post-create-project-cmd": [
+            "@php jarvis key:generate"
+        ]
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "sort-packages": true
+    }
+}
