@@ -24,7 +24,7 @@
     },
     "require": {
         "php": ">=5.5"
-    },
+    }
     "autoload": {
         "psr-4": {
             "Friday\\": "src/Friday/",
@@ -53,6 +53,9 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "config": {
+        "preferred-install": {
+            "*": "dist"
+        },
         "sort-packages": true
     }
 }
