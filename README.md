@@ -1,6 +1,4 @@
-<p align="center">
-    <h1>IronPHP <smalll>Under Development</small></h1>
-</p>
+<h1 align="center">IronPHP<small>Comming Soon</small></h1>
 <p align="center">
     <a href="LICENSE" target="_blank">
         <img alt="Software License" src="https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square">
@@ -16,8 +14,26 @@
     </a>
 </p>
 
-[IronPHP] is a development framework for PHP which
+IronPHP is a development framework for PHP which
 uses Front Controller, and MVC.
+
+> **Note:** Under Development - First Beta version will be released soon.
+
+## Table of Contents
+
+- [Requirements](#requirements)
+- [Installing IronPHP via Composer](#installing-ironphp-via-composer)
+- [Update](#update)
+- [Configuration](#configuration)
+- [Community](#community)
+- [Get Support](#get-support)
+- [Security](#security)
+- [Credits](#credits)
+- [License](#license)
+
+## Requirements
+
+IronPHP requires PHP 5.5 or later; we recommend using the latest PHP version whenever possible.
 
 ## Installing IronPHP via Composer
 
@@ -25,11 +41,52 @@ You can install IronPHP as your project using
 [Composer](https://getcomposer.org)  as
 a starting point. you can run the following:
 
+1. Download [Composer](https://getcomposer.org/doc/00-intro.md) or update `composer self-update`.
+2. Run `php composer.phar create-project --prefer-dist IronPHP/IronPHP [dir_name]`.
+
+
+If Composer is installed globally, run
+
 ``` bash
-$ composer create-project IronPHP/IronPHP -s dev
+$ composer create-project ironphp/ironphp -s dev
 ```
 
-## Get Support!
+In case you want to use a custom app dir name (e.g. `/myapp/`):
+
+```bash
+composer create-project --prefer-dist ironphp/ironphp -s dev myapp
+```
+
+You can now use your machine's webserver to view the default home page:
+
+```bash
+php -S localhost:8000 -t public
+```
+
+Then visit `http://localhost:8000` to see the welcome page.
+
+## Update
+
+Since this is a starting point for your application and various files
+would have been modified as per your needs, there isn't a way to provide
+automated upgrades atleast for NOT FOR NOW, so you have to do any updates manually.
+
+## Configuration
+
+Read and edit `config/app.php` and setup the `'Datasources'` and any other
+configuration relevant for your application.
+
+## Community
+---------
+
+* Follow us on [GitHub][1]
+
+About Us
+--------
+
+IronPHP development is led by the [Gaurang Parmar](https://twitter.com/gaurangkumarp).
+
+## Get Support
 
 * [GitHub Issues](https://github.com/ironphp/ironphp/issues) - Got issues? Please tell us!
 
@@ -44,3 +101,13 @@ For each report, we try to first confirm the vulnerability. Once confirmed, the 
 - Prepare a post describing the vulnerability, and the possible exploits.
 - Release new versions of all affected versions.
 - Prominently feature the problem in the release announcement.
+
+## Credits
+
+- [Gaurang Parmar](https://github.com/gaurangkumar)
+
+## License
+
+The IronPHP framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+[1]: https://github.com/ironphp
