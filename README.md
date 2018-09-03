@@ -1,4 +1,5 @@
-<h1 align="center">IronPHP<small>Comming Soon</small></h1>
+<h1 align="center">IronPHP</h1>
+<h2 align="center">Comming Soon</h2>
 <p align="center">
     <a href="LICENSE" target="_blank">
         <img alt="Software License" src="https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square">
@@ -14,8 +15,12 @@
     </a>
 </p>
 
+## About IronPHP
+
 IronPHP is a development framework for PHP which
 uses Front Controller, and MVC.
+
+## ---------
 
 > **Note:** Under Development - First Beta version will be released soon.
 
@@ -35,6 +40,7 @@ uses Front Controller, and MVC.
 
 IronPHP requires PHP 5.5 or later; we recommend using the latest PHP version whenever possible.
 
+## ---------
 ## Installing IronPHP via Composer
 
 You can install IronPHP as your project using
@@ -65,6 +71,7 @@ php -S localhost:8000 -t public
 
 Then visit `http://localhost:8000` to see the welcome page.
 
+## ---------
 ## Update
 
 Since this is a starting point for your application and various files
@@ -77,12 +84,10 @@ Read and edit `config/app.php` and setup the `'Datasources'` and any other
 configuration relevant for your application.
 
 ## Community
----------
 
 * Follow us on [GitHub][1]
 
-About Us
---------
+## About Us
 
 IronPHP development is led by the [Gaurang Parmar](https://twitter.com/gaurangkumarp).
 
