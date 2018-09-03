@@ -1,16 +1,19 @@
 <h1 align="center">IronPHP</h1>
 <p align="center">
-    <a href="LICENSE" target="_blank">
-        <img alt="Software License" src="https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square">
+    <a href="https://packagist.org/packages/ironphp/ironphp" target="_blank">
+        <img alt="Total Downloads" src="https://poser.pugx.org/ironphp/ironphp/d/total.svg">
+    </a>
+    <a href="https://packagist.org/packages/ironphp/ironphp" target="_blank">
+        <img alt="Latest Stable Version" src="https://poser.pugx.org/ironphp/ironphp/v/stable.svg">
+    </a>
+    <a href='https://coveralls.io/github/ironphp/ironphp?branch=master'>
+        <img alt='Coverage Status' src='https://coveralls.io/repos/github/ironphp/ironphp/badge.svg?branch=master'>
     </a>
     <a href="https://travis-ci.org/ironphp/ironphp" target="_blank">
-        <img alt="Build Status" src="https://img.shields.io/travis/ironphp/ironphp/master.svg?style=flat-square">
+        <img alt="Build Status" src="https://api.travis-ci.org/ironphp/ironphp.svg">
     </a>
-    <a href="https://packagist.org/packages/ironphp/ironphp" target="_blank">
-        <img alt="Total Downloads" src="https://img.shields.io/packagist/dt/ironphp/ironphp.svg?style=flat-square">
-    </a>
-    <a href="https://packagist.org/packages/ironphp/ironphp" target="_blank">
-        <img alt="Latest Stable Version" src="https://img.shields.io/packagist/v/ironphp/ironphp.svg?style=flat-square&label=stable">
+    <a href="https://opensource.org/licenses/MIT" target="_blank">
+        <img alt="Software License" src="https://poser.pugx.org/ironphp/ironphp/license.svg">
     </a>
 </p>
 
