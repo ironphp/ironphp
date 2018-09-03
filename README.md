@@ -14,8 +14,8 @@
     </a>
 </p>
 
-## About IronPHP
----------
+# About IronPHP
+---
 
 IronPHP is a development framework for PHP which
 uses Front Controller, and MVC.
