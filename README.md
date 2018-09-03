@@ -1,5 +1,4 @@
-<h1 align="center">IronPHP</h1>
-<h2 align="center">Comming Soon</h2>
+<h1 align="center">IronPHP<br>Comming Soon</h1>
 <p align="center">
     <a href="LICENSE" target="_blank">
         <img alt="Software License" src="https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square">
@@ -16,15 +15,15 @@
 </p>
 
 ## About IronPHP
+---------
 
 IronPHP is a development framework for PHP which
 uses Front Controller, and MVC.
 
-## ---------
-
 > **Note:** Under Development - First Beta version will be released soon.
 
 ## Table of Contents
+---------
 
 - [Requirements](#requirements)
 - [Installing IronPHP via Composer](#installing-ironphp-via-composer)
@@ -37,11 +36,12 @@ uses Front Controller, and MVC.
 - [License](#license)
 
 ## Requirements
+---------
 
 IronPHP requires PHP 5.5 or later; we recommend using the latest PHP version whenever possible.
 
-## ---------
 ## Installing IronPHP via Composer
+---------
 
 You can install IronPHP as your project using
 [Composer](https://getcomposer.org)  as
@@ -71,31 +71,36 @@ php -S localhost:8000 -t public
 
 Then visit `http://localhost:8000` to see the welcome page.
 
-## ---------
 ## Update
+---------
 
 Since this is a starting point for your application and various files
 would have been modified as per your needs, there isn't a way to provide
 automated upgrades atleast for NOT FOR NOW, so you have to do any updates manually.
 
 ## Configuration
+---------
 
 Read and edit `config/app.php` and setup the `'Datasources'` and any other
 configuration relevant for your application.
 
 ## Community
+---------
 
 * Follow us on [GitHub][1]
 
 ## About Us
+---------
 
 IronPHP development is led by the [Gaurang Parmar](https://twitter.com/gaurangkumarp).
 
 ## Get Support
+---------
 
 * [GitHub Issues](https://github.com/ironphp/ironphp/issues) - Got issues? Please tell us!
 
 # Security
+---------
 
 If you’ve found a security issue in IronPHP, please use the following procedure instead of the normal bug reporting system. Instead of using the bug tracker, mailing list or IRC please send an email to gaurangkumarp@gmail.com.
 
@@ -108,10 +113,12 @@ For each report, we try to first confirm the vulnerability. Once confirmed, the 
 - Prominently feature the problem in the release announcement.
 
 ## Credits
+---------
 
 - [Gaurang Parmar](https://github.com/gaurangkumar)
 
 ## License
+---------
 
 The IronPHP framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
