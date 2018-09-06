@@ -1,7 +1,7 @@
 #!/usr/bin/env php
 <?php
 /**
- * The Front Controller for handling every request
+ * The Front Controller for handling every command line request
  *
  * IronPHP : PHP Development Framework
  * Copyright (c) IronPHP (https://github.com/IronPHP/IronPHP)
@@ -20,22 +20,18 @@
 
 define('FRIDAY_START', microtime(true));
 
-echo "Welcome to JARVIS CLI\n";
-
-/*
-|--------------------------------------------------------------------------
-| Register The Auto Loader
-|--------------------------------------------------------------------------
-|
-| Composer provides a convenient, automatically generated class loader
-| for our application. We just need to utilize it! We'll require it
-| into the script here so that we do not have to worry about the
-| loading of any our classes "manually". Feels great to relax.
-|
-*/
+/**
+ *--------------------------------------------------------------------------
+ * Register The Auto Loader
+ *--------------------------------------------------------------------------
+ *
+ * Composer provides a convenient, automatically generated class loader
+ * for our application. We just need to utilize it! We'll require it
+ * into the script here so that we do not have to worry about the
+ * loading of any our classes "manually". Feels great to relax.
+ *
+ */
 
 require __DIR__.'/vendor/autoload.php';
 
-#$console = new Friday\Console\Command();
-
-echo "\nUnder Delelopment - Comming Soon";
+$console = new Friday\Console\Command();
