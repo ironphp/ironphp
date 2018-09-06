@@ -92,7 +92,7 @@ IronPHP development is led by the [Gaurang Parmar](https://twitter.com/gaurangku
 
 * [GitHub Issues](https://github.com/ironphp/ironphp/issues) - Got issues? Please tell us!
 
-# Security
+## Security
 
 If you’ve found a security issue in IronPHP, please use the following procedure instead of the normal bug reporting system. Instead of using the bug tracker, mailing list or IRC please send an email to gaurangkumarp@gmail.com.
 
