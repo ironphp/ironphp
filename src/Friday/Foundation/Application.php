@@ -96,32 +96,34 @@ class Application
             $this->setBasePath($basePath);
         }
 
-        $this->frontController = new \Friday\Http\FrontController();
+        if (PHP_SAPI !== 'cli') {
+            $this->frontController = new \Friday\Http\FrontController();
 
-        $this->request = $this->frontController->request();
+            $this->request = $this->frontController->request();
 
-        $this->route = $this->frontController->route();
-        \Friday\Http\Route::$instance = $this->route;
+            $this->route = $this->frontController->route();
+            \Friday\Http\Route::$instance = $this->route;
 
-        $this->requireFile(
-            $this->basePath('app/Route/web.php')
-        );
+            $this->requireFile(
+                $this->basePath('app/Route/web.php')
+            );
 
-        $this->router = $this->frontController->router();
-        $this->matchRoute = $this->router->route(
-            $this->route->routes,
-            $this->request->uri,
-            $this->request->serverRequestMethod
-        );
+            $this->router = $this->frontController->router();
+            $this->matchRoute = $this->router->route(
+                $this->route->routes,
+                $this->request->uri,
+                $this->request->serverRequestMethod
+            );
 
-        $this->dispatcher = $this->frontController->dispatcher();
-        $this->dispatcher->dispatch(
-            $this->matchRoute,
-            $this->request
-        );
+            $this->dispatcher = $this->frontController->dispatcher();
+            $this->dispatcher->dispatch(
+                $this->matchRoute,
+                $this->request
+            );
 
-        #$this->response = $this->frontController->response($_SERVER['SERVER_PROTOCOL']);
-        #$this->response->addHeader('nice')->send();
+            #$this->response = $this->frontController->response($_SERVER['SERVER_PROTOCOL']);
+            #$this->response->addHeader('nice')->send();
+        }
     }
 
     /**
