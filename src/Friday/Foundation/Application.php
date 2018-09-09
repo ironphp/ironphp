@@ -85,6 +85,13 @@ class Application
     public $matchRoute;
 
     /**
+     * Configurations from /config/*.php.
+     *
+     * @var array
+     */
+    public $config;
+
+    /**
      * Create a new Friday application instance.
      *
      * @param  string|null  $basePath
@@ -95,6 +102,15 @@ class Application
         if ($basePath) {
             $this->setBasePath($basePath);
         }
+
+        $this->config['basePath'] = $this->basePath(); 
+
+        $this->config['app'] = $this->requireFile(
+            $this->basePath('config/app.php')
+        );
+        $this->config['db'] = $this->requireFile(
+            $this->basePath('config/database.php')
+        );
 
         if (PHP_SAPI !== 'cli') {
             $this->frontController = new \Friday\Http\FrontController();
@@ -116,13 +132,25 @@ class Application
             );
 
             $this->dispatcher = $this->frontController->dispatcher();
-            $this->dispatcher->dispatch(
+            $action = $this->dispatcher->dispatch(
                 $this->matchRoute,
                 $this->request
             );
 
-            #$this->response = $this->frontController->response($_SERVER['SERVER_PROTOCOL']);
-            #$this->response->addHeader('nice')->send();
+            if($action[0] == 'output') {
+                $output = $action[1];
+            }
+            elseif($action[0] == 'controller_method') {
+                $controller = $action[1];
+                $method = $action[2];
+                ob_start();
+                $appController = new \Friday\Controller\Controller($this);
+                $appController->handleController($controller, $method);
+                $output = ob_get_clean();
+            }
+
+            $this->response = $this->frontController->response($_SERVER['SERVER_PROTOCOL']);
+            $this->response->addHeader()->send($output);
         }
     }
 
@@ -166,7 +194,8 @@ class Application
      * @param  string  $path
      * @return bool
      */
-    public function findFile($path) {
+    public function findFile($path)
+    {
         if(file_exists($path)) {
             return true;
         }
@@ -176,17 +205,90 @@ class Application
     }
 
     /**
+     * Find a Model.
+     *
+     * @param  string  $model
+     * @return string  full model file path
+     */
+    public function findModel($model)
+    {
+        $file = $this->basePath("app/Model/$model.php");
+        if($this->findFile($file)) {
+            return $file;
+        }
+        else {
+            throw new \Exception($file." Model file is missing.");
+            exit;
+        }
+    }
+
+    /**
+     * Find a View.
+     *
+     * @param  string  $view
+     * @return string  full view file path
+     */
+    public function findView($view)
+    {
+        $file = $this->basePath("app/View/$view.html");
+        if($this->findFile($file)) {
+            return $file;
+        }
+        else {
+            throw new \Exception($file." View file is missing.");
+            exit;
+        }
+    }
+
+    /**
+     * Find a Controller.
+     *
+     * @param  string  $controller
+     * @return bool
+     */
+    public function findController($controller)
+    {
+        $file = $this->basePath("app/Controller/$controller.php");
+        if($this->findFile($file)) {
+            return true;
+        }
+        else {
+            throw new \Exception($file." Controller file is missing.");
+            exit;
+        }
+    }
+
+    /**
+     * Check if Controller has method or not.
+     *
+     * @param  Object  $controllerObj
+     * @param  string  $method
+     * @return bool
+     */
+    public function hasMethod($controllerObj, $method)
+    {
+        if(method_exists($controllerObj, $method)) {
+            return true;
+        }
+        else {
+            throw new \Exception($method." method is missing in ".get_class($controllerObj)."Controller.");
+            exit;
+        }
+    }
+
+    /**
      * Require a file.
      *
      * @param  string  $file
      * @return void
      */
-    public function requireFile($file) {
+    public function requireFile($file)
+    {
         if($this->findFile($file)) {
-            require($file);
+            return require($file);
         }
         else {
-            throw new Exception($file." file is missing.");
+            throw new \Exception($file." file is missing.");
             exit;
         }
     }
