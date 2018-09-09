@@ -36,15 +36,18 @@ class Dispatcher
      */
     public function dispatch($route, $request) {
         if(is_string($route[2])) {
-            @list($controller, $method) = explode('@', $route);
-            echo $controller.'@'.$method;
+            list($controller, $method) = explode('@', $route[2]);
+            return ['controller_method', $controller, $method];
         }
         elseif(is_object($route[2])) {
             $function = $route[2];
-            //$function();
+            ob_start();
+            $function();
+            $output = ob_get_clean();
+            return ['output', $output];
         }
         else {
-            throw new Exception('Invaliding route register for: '.$route[1]);
+            throw new \Exception('Invaliding route register for: '.$route[1]);
         }
     }
 }
