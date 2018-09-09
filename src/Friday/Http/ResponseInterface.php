@@ -19,16 +19,27 @@ namespace Friday\Http;
 
 interface ResponseInterface {
 
+    /**
+     * Create new Responce instance.
+     *
+     * @param  string  $version
+     * @return void
+     */
     public function __construct($version);
  
-    public function getVersion();
- 
+    /**
+     * Add header.
+     *
+     * @return  Object  Responce
+     */
     public function addHeader($header);
  
-    public function addHeaders(array $headers);
- 
-    public function getHeaders();
- 
-    public function send();
+    /**
+     * Sent a HTTP header.
+     *
+     * @param  string  $output
+     * @return void
+     */
+    public function send($output);
 
 }
