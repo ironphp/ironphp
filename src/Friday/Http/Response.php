@@ -17,30 +17,51 @@
 
 namespace Friday\Http;
 
-/*-----------------------------------------------------
- * Having a slim HTTP request wrapper living happily on its own is all well and fine sure, but ultimately useless if not coupled to the counterpart that mimics the data and behavior of a typical HTTP response. Let’s fix and build up this complementary component:
- *-----------------------------------------------------
- * The Response class is unquestionably a more active creature than its partner Request. It acts like a basic container which allows you to stack up HTTP headers at will and is capable of sending them out to the client too.
- *-----------------------------------------------------
- * With these classes doing their thing in isolation, it’s time to tackle the next part in the construction of a front controller. In a typical implementation, the routing/dispatching processes are most of the time encapsulated inside the same method, which frankly speaking isn’t that bad at all. In this case, however, it’d be nice to break down the processes in question and delegate them to different classes. This way, things are balanced a little more in the equally of their responsibilities.
- *-----------------------------------------------------
- */
-
 class Response implements ResponseInterface
 {
-    public function __construct($version) {
+    /**
+     * HTTP version.
+     *
+     * @var string
+     */
+    public $version;
+
+    /**
+     * Header to be sent.
+     *
+     * @var string
+     */
+    public $header;
+
+    /**
+     * Create new Responce instance.
+     *
+     * @param  string  $version
+     * @return void
+     */
+    public function __construct($version)
+    {
         $this->version = $version;
     }
  
+    /*
     public function getVersion() {
         return $this->version;
     }
- 
-    public function addHeader($header) {
-        $this->headers[] = $header;
+    */
+
+    /**
+     * Add header.
+     *
+     * @return  Object  Responce
+     */
+    public function addHeader($header = null)
+    {
+        $this->header = $header;
         return $this;
     }
  
+    /*
     public function addHeaders(array $headers) {
         foreach ($headers as $header) {
             $this->addHeader($header);
@@ -51,11 +72,24 @@ class Response implements ResponseInterface
     public function getHeaders() {
         return $this->headers;
     }
- 
-    public function send() {
+    */
+
+    /**
+     * Sent a HTTP header.
+     *
+     * @param  string  $output
+     * @return void
+     */
+    public function send($output)
+    {
         if (!headers_sent()) {
-            foreach($this->headers as $header) {
-                header("$this->version $header", true);
+            if($this->version === 'HTTP/1.1') {
+                header("$this->version $this->header", true);
+                print $output;
+            }
+            else {
+                throw new \Exception("Invalid HTTP version ".$this->version.".");
+                exit;
             }
         } 
     }
