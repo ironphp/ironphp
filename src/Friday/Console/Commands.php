@@ -42,7 +42,8 @@ class Commands
      *
      * @return void
      */
-    public function help($command = null) {
+    public function help($command = null)
+    {
         print "".\Friday\Console\Colors::LIGHT_BLUE."
 ---------------------------------------------------------------
 ".\Friday\Console\Colors::GREEN."IronPHP".\Friday\Console\Colors::WHITE." Framework ".\Friday\Console\Colors::YELLOW."".$this->app->version()."".\Friday\Console\Colors::LIGHT_BLUE."
@@ -63,7 +64,8 @@ class Commands
      *
      * @return void
      */
-    public function version() {
+    public function version()
+    {
         $url = 'https://repo.packagist.org/p/ironphp/ironphp.json';
         $packagistJson = @file_get_contents($url);
         if($packagistJson === true) {
@@ -117,7 +119,8 @@ IronPHP ".\Friday\Console\Colors::WHITE."Framework ".\Friday\Console\Colors::BRO
      *
      * @return void
      */
-    public function serve($port = '8000') {
+    public function serve($port = '8000')
+    {
         print "".\Friday\Console\Colors::LIGHT_BLUE."
 ---------------------------------------------------------------
 Welcome to ".\Friday\Console\Colors::GREEN."IronPHP".\Friday\Console\Colors::WHITE." Framework ".\Friday\Console\Colors::YELLOW."".$this->app->version().\Friday\Console\Colors::WHITE." Console".\Friday\Console\Colors::LIGHT_BLUE."
@@ -126,5 +129,14 @@ Welcome to ".\Friday\Console\Colors::GREEN."IronPHP".\Friday\Console\Colors::WHI
 You can exit with `CTRL-C`\n";
         echo exec("php -S localhost:$port", $output);
         print_r($output);
+    }
+
+    /**
+     * Generate new key.
+     *
+     * @return void
+     */
+    public function key() {
+        $this->setKey();
     }
 }
