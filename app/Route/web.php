@@ -27,9 +27,4 @@ use Friday\Http\Route;
  *
  */
 
-Route::get('/', function () {
-?>
-    <h1 style="font-size:150px;font-weight:900;font-family:'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', 'DejaVu Sans', Verdana, sans-serif;text-align:center">IronPHP</h1>
-    <h1 style="font-size:70px;font-family:'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', 'DejaVu Sans', Verdana, sans-serif;text-align:center">Under Delelopment - Comming Soon</h1>
-<?php
-});
+Route::get('/', 'IndexController@Index');
