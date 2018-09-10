@@ -41,28 +41,11 @@ class FrontController {
      * @return array
      */
     public function parseUri() {
-        $uri = trim(parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH), "/");
+        $uri = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
+        $extDir = dirname(dirname($_SERVER['SCRIPT_NAME']));
+        $uri = str_replace($extDir, '', $uri);
+        $uri = rtrim($uri, '/');
         $uri = empty($uri) ? '/' : $uri;
-        $path = isset($GLOBALS['url']['path']) ? $GLOBALS['url']['path'] : null;
-        
-        # takes too much afforts and not accurate
-        #$this->query = isset($GLOBALS['url']['query']) ? $GLOBALS['url']['query'] : null;
-        #$this->query = explode('&', $this->query);
-        #foreach($this->query as $query) {
-        #    @list($key, $value) = explode('=', $query);
-        #    $array[$key] = $value;
-        #}
-        #$this->query = $array;
-
-        /**
-         * Test URI === PATH
-         */
-        if( trim($uri, '/') !== trim($path, '/')) {
-            throw new Exception("URI and PATH are not same.");
-            exit;
-        }
-        //$path = preg_replace("/[^a-zA-Z0-9]/", "", $path);
-
         $serverRequestMethod = $_SERVER['REQUEST_METHOD'];
         $params = $GLOBALS['_'.$serverRequestMethod];
 
