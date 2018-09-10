@@ -34,4 +34,6 @@ define('FRIDAY_START', microtime(true));
 
 require __DIR__.'/vendor/autoload.php';
 
-$console = new Friday\Console\Command();
+$console = new Friday\Console\Command(
+    realpath(__DIR__)
+);
