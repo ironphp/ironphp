@@ -21,13 +21,20 @@ class Commands
 {
 
     /**
+     * Application instance.
+     *
+     * @var \Friday\Foundation\Application
+     */
+    private $app;
+
+    /**
      * Create a new Commands instance.
      *
      * @return void
      */
-    public function __construct($version)
+    public function __construct($app)
     {
-        $this->version = $version;
+        $this->app = $app;
     }
 
     /**
@@ -38,7 +45,7 @@ class Commands
     public function help($command = null) {
         print "".\Friday\Console\Colors::LIGHT_BLUE."
 ---------------------------------------------------------------
-".\Friday\Console\Colors::GREEN."IronPHP".\Friday\Console\Colors::WHITE." Framework ".\Friday\Console\Colors::YELLOW."".$this->version."".\Friday\Console\Colors::LIGHT_BLUE."
+".\Friday\Console\Colors::GREEN."IronPHP".\Friday\Console\Colors::WHITE." Framework ".\Friday\Console\Colors::YELLOW."".$this->app->version()."".\Friday\Console\Colors::LIGHT_BLUE."
 ---------------------------------------------------------------
 ".\Friday\Console\Colors::YELLOW."Usage:
 ".\Friday\Console\Colors::WHITE."  command [options] [arguments]\n
@@ -57,12 +64,19 @@ class Commands
      * @return void
      */
     public function version() {
-        $packagistJson = file_get_contents('https://repo.packagist.org/p/ironphp/ironphp.json');
-        $packagistArray = json_decode($packagistJson,true);
-        $time = $packagistArray['packages']['ironphp/ironphp']['dev-master']['time'];
-        date_default_timezone_set('Asia/Kolkata');
-        $parsedTime = date_parse($time);
-        $timestamp = mktime($parsedTime['hour'], $parsedTime['minute'], $parsedTime['second'], $parsedTime['month'], $parsedTime['day'], $parsedTime['year']);
+        $url = 'https://repo.packagist.org/p/ironphp/ironphp.json';
+        $packagistJson = @file_get_contents($url);
+        if($packagistJson === true) {
+            $packagistArray = json_decode($packagistJson,true);
+            $packagistData = $packagistArray['packages']['ironphp/ironphp']['dev-master'];
+            $time = $packagistData['time'];
+            $version = $packagistData['version']; //dev-master
+            $branchAlias = $packagistData['extra']['branch-alias']['dev-master']; // 0.0.1-dev
+            date_default_timezone_set('Asia/Kolkata');
+            $parsedTime = date_parse($time);
+            $timeStamp = mktime($parsedTime['hour'], $parsedTime['minute'], $parsedTime['second'], $parsedTime['month'], $parsedTime['day'], $parsedTime['year']);
+        }
+        $installData = $this->app->getIntallTime();
 
         echo \Friday\Console\Colors::RED.''.\Friday\Console\Colors::BG_BLACK;
         print "
@@ -75,13 +89,25 @@ ___| |___  | |`\ \   | \  / |  | |  \  \| |  | |````   | |```| |  | |````
 `````````  ```   ```  ``````    ``    `````  ```       ```   ```  ```   
 ";
 echo \Friday\Console\Colors::GREEN."
-IronPHP ".\Friday\Console\Colors::WHITE."Framework ".\Friday\Console\Colors::BROWN.$this->version." ".\Friday\Console\Colors::WHITE.str_replace('T', ' ', substr(date(DATE_ATOM, $timestamp), 0, 19))."
-".\Friday\Console\Colors::GREEN."Checking updates... ".\Friday\Console\Colors::WHITE;
-        if($timestamp > time()) {
-            print "Package have an update";
+IronPHP ".\Friday\Console\Colors::WHITE."Framework ".\Friday\Console\Colors::BROWN.$this->app->version();
+
+        if($packagistJson === true) {
+            echo \Friday\Console\Colors::WHITE." ".str_replace('T', ' ', substr(date(DATE_ATOM, $timeStamp), 0, 19));
+            echo \Friday\Console\Colors::GREEN."\nChecking updates... ".\Friday\Console\Colors::WHITE;
+            if($timeStamp > $installData->time) {
+                if($branchAlias != $this->app->version()) {
+                    print "Package have an update ".$branchAlias;
+                }
+                else {
+                    print "Package have an update ".$version;
+                }
+            }
+            else {
+                print "There is no update.";
+            }
         }
         else {
-            print "There is no update.";
+            echo \Friday\Console\Colors::GREEN."\nChecking updates... ".\Friday\Console\Colors::WHITE." No internet!";
         }
         echo \Friday\Console\Colors::BG_BLACK.''.\Friday\Console\Colors::WHITE;
     }
@@ -94,7 +120,7 @@ IronPHP ".\Friday\Console\Colors::WHITE."Framework ".\Friday\Console\Colors::BRO
     public function serve($port = '8000') {
         print "".\Friday\Console\Colors::LIGHT_BLUE."
 ---------------------------------------------------------------
-Welcome to ".\Friday\Console\Colors::GREEN."IronPHP".\Friday\Console\Colors::WHITE." Framework ".\Friday\Console\Colors::YELLOW."".$this->version.\Friday\Console\Colors::WHITE." Console".\Friday\Console\Colors::LIGHT_BLUE."
+Welcome to ".\Friday\Console\Colors::GREEN."IronPHP".\Friday\Console\Colors::WHITE." Framework ".\Friday\Console\Colors::YELLOW."".$this->app->version().\Friday\Console\Colors::WHITE." Console".\Friday\Console\Colors::LIGHT_BLUE."
 ---------------------------------------------------------------
 ".\Friday\Console\Colors::LIGHT_CYAN."Built-in development server started: ".\Friday\Console\Colors::YELLOW."<http://localhost:$port>".\Friday\Console\Colors::WHITE."
 You can exit with `CTRL-C`\n";
