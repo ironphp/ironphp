@@ -308,4 +308,24 @@ class Application
             file_put_contents($file, $content);
         }
     }
+
+    /**
+     * Get Installtion Time/Version to app/install file used for checking updates.
+     *
+     * @return array
+     */
+    public function getIntallTime()
+    {
+        $file = $this->basePath('app/install');
+        if(!file_exists($file)) {
+            $data = ['time'=>time(), 'version' => $this->version()];
+            $content = json_encode($data);
+            file_put_contents($file, $content);
+        }
+        else {
+            $content = file_get_contents($file);
+            $data = json_decode($content);
+        }
+        return $data;
+    }
 }
