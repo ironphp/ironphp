@@ -103,6 +103,8 @@ class Application
             $this->setBasePath($basePath);
         }
 
+        $this->setIntallTime();
+
         $this->config['basePath'] = $this->basePath(); 
 
         $this->config['app'] = $this->requireFile(
@@ -290,6 +292,20 @@ class Application
         else {
             throw new \Exception($file." file is missing.");
             exit;
+        }
+    }
+
+    /**
+     * Set Installtion Time/Version to app/install file used for checking updates.
+     *
+     * @return bool
+     */
+    public function setIntallTime()
+    {
+        $file = $this->basePath('app/install');
+        if(!file_exists($file)) {
+            $content = json_encode(['time'=>time(), 'version' => $this->version()]);
+            file_put_contents($file, $content);
         }
     }
 }
