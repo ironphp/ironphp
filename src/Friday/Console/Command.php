@@ -37,17 +37,20 @@ class Command
     /**
      * Create a new console command instance.
      *
+     * @param  string|null  $basePath
      * @return void
      */
-    public function __construct()
+    public function __construct($basePath = null)
     {
 
-        $app = new \Friday\Foundation\Application();
+        $app = new \Friday\Foundation\Application(
+            $basePath
+        );
         
         $this->argvInput = ($_SERVER['argv'][0] === "jarvis") ? array_slice($_SERVER['argv'], 1) : [] ;
         
         // get all commands
-        $this->commands = new \Friday\Console\Commands($app->version());
+        $this->commands = new \Friday\Console\Commands($app);
         
         // run commands
         if(count($this->argvInput)) {
