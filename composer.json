@@ -47,7 +47,7 @@
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
         ],
         "post-create-project-cmd": [
-            "@php jarvis key:generate"
+            "@php jarvis key"
         ]
     },
     "minimum-stability": "dev",
