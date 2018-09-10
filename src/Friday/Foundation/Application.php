@@ -92,6 +92,13 @@ class Application
     public $config;
 
     /**
+     * Enviroment var.
+     *
+     * @var array
+     */
+    public static $env;
+
+    /**
      * Create a new Friday application instance.
      *
      * @param  string|null  $basePath
@@ -106,6 +113,12 @@ class Application
         $this->setIntallTime();
 
         $this->config['basePath'] = $this->basePath(); 
+
+        self::$env = parse_ini_file($this->basePath('.env'));
+        
+        if(empty(env('APP_KEY'))) {
+            $this->setKey();
+        }
 
         $this->config['app'] = $this->requireFile(
             $this->basePath('config/app.php')
@@ -327,5 +340,50 @@ class Application
             $data = json_decode($content);
         }
         return $data;
+    }
+
+    /**
+     * Set Application secret key.
+     *
+     * @return string
+     */
+    public function setKey()
+    {
+        $a='';
+        for($i=0;$i<32;$i++) {
+            $a.=chr(rand(0,255));
+        }
+        $a = 'base64:'.base64_encode($a);
+        $file = $this->basePath('.env');
+        file_put_contents(
+            $file,
+            str_replace('APP_KEY=','APP_KEY=\''.$a, file_get_contents($file).'\'')
+        );
+        env('APP_KEY', $a);
+        return $data;
+    }
+}
+
+if(!function_exists('env')) {
+    function env() {
+        if(func_num_args() == 1) {
+            $key = func_get_arg(0);
+            if(isset(Application::$env[$key])) {
+                return Application::$env[$key];
+            }
+            else {
+                echo "$key not exist in env()";
+                exit;
+            }
+        }
+        elseif(func_num_args() == 2) {
+            $key = func_get_arg(0);
+            $val = func_get_arg(1);
+            return Application::$env[$key] = $val;
+        }
+        else {
+            echo "invalid num of args in env()";
+            exit;
+        }
     }
 }
