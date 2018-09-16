@@ -137,6 +137,6 @@ You can exit with `CTRL-C`\n";
      * @return void
      */
     public function key() {
-        $this->setKey();
+        $this->app->setKey();
     }
 }
