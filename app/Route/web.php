@@ -27,4 +27,11 @@ use Friday\Http\Route;
  *
  */
 
+//route with controller@method
 Route::get('/', 'IndexController@Index');
+Route::get('/page1', 'IndexController@Index');
+
+//route with callable
+Route::get('/callable', function () {
+    echo 'callable';
+});
