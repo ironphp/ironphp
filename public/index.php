@@ -17,6 +17,8 @@
  * @auther        Gaurang Parmar <gaurangkumarp@gmail.com>
  */
 
+define('IRONPHP_START', microtime(true));
+
 $root = isset($root) ? $root : true;
 
 // Check platform requirements
@@ -60,3 +62,18 @@ require dirname(__DIR__) . '/vendor/autoload.php';
  */
 
 $app = require_once dirname(__DIR__) . '/app/bootstrap/app.php';
+
+define('IRONPHP_END', microtime(true));
+
+if(env('APP_DEBUG')) {
+    echo '<pre>';
+    echo 'CONFIG_LOADED   : '.round((CONFIG_LOADED - IRONPHP_START), 4)." seconds<br>";
+    echo 'REQUEST_CATCHED : '.round((REQUEST_CATCHED - CONFIG_LOADED), 4)." seconds<br>";
+    echo 'ROUTES_LOADED   : '.round((ROUTES_LOADED - REQUEST_CATCHED), 4)." seconds<br>";
+    echo 'ROUTE_MATCHED   : '.round((ROUTE_MATCHED - ROUTES_LOADED), 4)." seconds<br>";
+    echo 'DISPATCHER_INIT : '.round((DISPATCHER_INIT - ROUTE_MATCHED), 4)." seconds<br>";
+    echo 'DISPATCHED      : '.round((DISPATCHED - DISPATCHER_INIT), 4)." seconds<br>";
+    echo 'RESPONSE_SEND   : '.round((RESPONSE_SEND - DISPATCHED), 4)." seconds<br>";
+    echo 'TOTAL           : '.round((IRONPHP_END - IRONPHP_START), 4)." seconds<br>";
+    echo '</pre>';
+}
