@@ -42,16 +42,15 @@ class Command
      */
     public function __construct($basePath = null)
     {
-
         $app = new \Friday\Foundation\Application(
             $basePath
         );
-        
+
         $this->argvInput = ($_SERVER['argv'][0] === "jarvis") ? array_slice($_SERVER['argv'], 1) : [] ;
-        
-        // get all commands
+
         $this->commands = new \Friday\Console\Commands($app);
-        
+        define('APP_INIT', microtime(true));
+
         // run commands
         if(count($this->argvInput)) {
             $command = $this->argvInput[0];
@@ -66,6 +65,7 @@ class Command
         else {
             $this->commands->help();
         }
+        define('CMD_RUN', microtime(true));
     }
 
     /**
