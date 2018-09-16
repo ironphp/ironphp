@@ -18,7 +18,7 @@
  * @auther        Gaurang Parmar <gaurangkumarp@gmail.com>
  */
 
-define('FRIDAY_START', microtime(true));
+define('IRONPHP_START', microtime(true));
 
 /**
  *--------------------------------------------------------------------------
@@ -37,3 +37,15 @@ require __DIR__.'/vendor/autoload.php';
 $console = new Friday\Console\Command(
     realpath(__DIR__)
 );
+
+define('IRONPHP_END', microtime(true));
+
+if(env('APP_DEBUG')) {
+    echo "
+DEBUG
+-----
+CONFIG_LOADED \t: ".round((CONFIG_LOADED - IRONPHP_START), 4)." seconds
+APP_INIT \t: ".round((APP_INIT - CONFIG_LOADED), 4)." seconds
+CMD_RUN \t: ".round((CMD_RUN - APP_INIT), 4)." seconds
+TOTAL \t\t: ".round((IRONPHP_END - IRONPHP_START), 4)." seconds";
+}
