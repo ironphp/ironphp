@@ -23,42 +23,23 @@ class Controller
     /**
      * The name of this controller. Controller names are plural, named after the model they manipulate.
      *
-     * Set automatically using conventions in Controller::__construct().
-     *
      * @var string
      */
     protected $name;
 
     /**
-     * An instance of a \Cake\Http\ServerRequest object that contains information about the current request.
-     * This object contains all the information about a request and several methods for reading
-     * additional information about the request.
+     * An instance of a Request
      *
-     * Deprecated 3.6.0: The property will become protected in 4.0.0. Use getRequest()/setRequest instead.
-     *
-     * @var \Cake\Http\ServerRequest
-     * @link https://book.cakephp.org/3.0/en/controllers/request-response.html#request
+     * @var \Friday\Http\Request
      */
     public $request;
 
     /**
-     * An instance of a Response object that contains information about the impending response
+     * An instance of a Response
      *
-     * Deprecated 3.6.0: The property will become protected in 4.0.0. Use getResponse()/setResponse instead.
-
-     * @var \Cake\Http\Response
-     * @link https://book.cakephp.org/3.0/en/controllers/request-response.html#response
+     * @var \Friday\Http\Response
      */
     public $response;
-
-    /**
-     * Instance of the View created during rendering. Won't be set until after
-     * Controller::render() is called.
-     *
-     * @var \Cake\View\View
-     * @deprecated 3.1.0 Use viewBuilder() instead.
-     */
-    public $View;
 
     /**
      * Instance of the Application.
@@ -108,14 +89,6 @@ class Controller
      * @param  \Friday\Foundation\Application  $app
      *
      * @return  void
-     *
-     * @param \Cake\Http\ServerRequest|null $request Request object for this controller. Can be null for testing,
-     *   but expect that features that use the request parameters will not work.
-     * @param \Cake\Http\Response|null $response Response object for this controller.
-     * @param string|null $name Override the name useful in testing when using mocks.
-     * @param \Cake\Event\EventManager|null $eventManager The event manager. Defaults to a new instance.
-     * @param \Cake\Controller\ComponentRegistry|null $components The component registry. Defaults to a new instance.
-     ServerRequest $request = null, Response $response = null, $name = null, $eventManager = null, $components = null
      */
     public function __construct($app)
     {
