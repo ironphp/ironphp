@@ -73,8 +73,7 @@ class Route implements RouteInterface
      * @return void
      */
     public function register($method, $route, $mix) {
-        $route = trim($route, '/');
-        $route = empty($route) ? '/' : $route;
+        $route = '/'.trim($route, '/');
         self::$instance->routes[] = [$method, $route, $mix];
     }
 
