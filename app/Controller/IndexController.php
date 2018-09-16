@@ -43,13 +43,13 @@ class IndexController extends Controller
         //$data = $this->model('IndexModel')->delete();
         
         //$this->view('index', $data);
-        //echo '<pre>';print_r($result);echo '</pre>';exit;
     }
     public function name($param)
     {
         return "Name($param) Method Called";
     }
-    public function showUsers(){
+    public function showUsers()
+    {
         print_r($this->model->getUsers());
     }
 } 
