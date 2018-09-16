@@ -16,7 +16,6 @@
  */
 
 namespace Friday\Foundation;
-
 //use Closure; //comment does not affect on synonymous function, bound to closure & Application instance // *RECURSION*
 
 class Application
@@ -92,13 +91,6 @@ class Application
     public $config;
 
     /**
-     * Enviroment var.
-     *
-     * @var array
-     */
-    public static $env;
-
-    /**
      * Create a new Friday application instance.
      *
      * @param  string|null  $basePath
@@ -110,12 +102,20 @@ class Application
             $this->setBasePath($basePath);
         }
 
+        $this->requireFile(
+            $this->basePath('src/Friday/Helper/Helper.php')
+        );
+
         $this->setIntallTime();
 
         $this->config['basePath'] = $this->basePath(); 
 
-        self::$env = parse_ini_file($this->basePath('.env'));
-        
+        $dotenv = new \Friday\Environment\GetEnv(
+            $this->basePath(),
+            '.env'
+        );
+        $dotenv->load();
+
         if(empty(env('APP_KEY'))) {
             $this->setKey();
         }
@@ -126,14 +126,17 @@ class Application
         $this->config['db'] = $this->requireFile(
             $this->basePath('config/database.php')
         );
+        define('CONFIG_LOADED', microtime(true));
 
         if (PHP_SAPI !== 'cli') {
             $this->frontController = new \Friday\Http\FrontController();
 
             $this->request = $this->frontController->request();
+            define('REQUEST_CATCHED', microtime(true));
 
             $this->route = $this->frontController->route();
             \Friday\Http\Route::$instance = $this->route;
+            define('ROUTES_LOADED', microtime(true));
 
             $this->requireFile(
                 $this->basePath('app/Route/web.php')
@@ -145,12 +148,14 @@ class Application
                 $this->request->uri,
                 $this->request->serverRequestMethod
             );
+            define('ROUTE_MATCHED', microtime(true));
 
             $this->dispatcher = $this->frontController->dispatcher();
             $action = $this->dispatcher->dispatch(
                 $this->matchRoute,
                 $this->request
             );
+            define('DISPATCHER_INIT', microtime(true));
 
             if($action[0] == 'output') {
                 $output = $action[1];
@@ -163,9 +168,11 @@ class Application
                 $appController->handleController($controller, $method);
                 $output = ob_get_clean();
             }
+            define('DISPATCHED', microtime(true));
 
             $this->response = $this->frontController->response($_SERVER['SERVER_PROTOCOL']);
             $this->response->addHeader()->send($output);
+            define('RESPONSE_SEND', microtime(true));
         }
     }
 
@@ -349,41 +356,67 @@ class Application
      */
     public function setKey()
     {
-        $a='';
+        $appKey='';
         for($i=0;$i<32;$i++) {
-            $a.=chr(rand(0,255));
+            $appKey.=chr(rand(0,255));
         }
-        $a = 'base64:'.base64_encode($a);
+        $appKey = 'base64:'.base64_encode($appKey);
         $file = $this->basePath('.env');
-        file_put_contents(
-            $file,
-            str_replace('APP_KEY=','APP_KEY=\''.$a, file_get_contents($file).'\'')
-        );
-        env('APP_KEY', $a);
-        return $data;
-    }
-}
-
-if(!function_exists('env')) {
-    function env() {
-        if(func_num_args() == 1) {
-            $key = func_get_arg(0);
-            if(isset(Application::$env[$key])) {
-                return Application::$env[$key];
-            }
-            else {
-                echo "$key not exist in env()";
-                exit;
+        $lines = $this->parseEnvFile($file);
+        $flag = false;
+        foreach($lines as $i => $line) {
+            $lines[$i] = trim($line);
+            $lines[$i] = trim($line, "\n");
+            if(strpos($line, 'APP_KEY') !== false) {
+                $data = explode('=', $line, 2);
+                if(!isset($data[1]) || trim($data[1]) == '') {
+                    $lines[$i] = "APP_KEY=".$appKey;
+                    $flag = true;
+                }
             }
         }
-        elseif(func_num_args() == 2) {
-            $key = func_get_arg(0);
-            $val = func_get_arg(1);
-            return Application::$env[$key] = $val;
+        if($flag == false) {
+            $lines = ["APP_KEY=".$appKey] + $lines;
+        }
+        $data = implode("\n", $lines);
+        if(file_put_contents($file, $data)) {
+            putenv("APP_KEY=$appKey");
+            return true;
         }
         else {
-            echo "invalid num of args in env()";
-            exit;
+            throw new \Exception('Failed to write in .env file.');
+        }
+    }
+
+    /**
+     * Parse .env file gets its lines in array.
+     *
+     * @param  string  $file
+     *
+     * @return array
+     */
+    public function parseEnvFile($file)
+    {
+        $this->ensureFileIsReadable($file);
+
+        $lines = file($file);
+
+        return $lines;
+    }
+
+    /**
+     * Ensures the given filePath is readable.
+     *
+     * @throws \Exception
+     *
+     * @param  string  $file
+     *
+     * @return void
+     */
+    protected function ensureFileIsReadable($file)
+    {
+        if (!is_readable($file) || !is_file($file)) {
+            throw new \Exception(sprintf('Unable to read the environment file at %s.', $$file));
         }
     }
 }
