@@ -110,14 +110,14 @@ class Application
 
         $this->config['basePath'] = $this->basePath(); 
 
-        $dotenv = new \Friday\Environment\GetEnv(
+        $getenv = new \Friday\Environment\GetEnv(
             $this->basePath(),
             '.env'
         );
-        $dotenv->load();
+        $getenv->load();
 
         if(empty(env('APP_KEY'))) {
-            $this->setKey();
+            echo "APP_KEY is not defined in .env file, define it by command: php jarvis key";
         }
 
         $this->config['app'] = $this->requireFile(
@@ -381,6 +381,8 @@ class Application
         $data = implode("\n", $lines);
         if(file_put_contents($file, $data)) {
             putenv("APP_KEY=$appKey");
+            $_ENV['APP_KEY'] = $appKey;
+            $_SERVER['APP_KEY'] = $appKey;
             return true;
         }
         else {
