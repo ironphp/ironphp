@@ -30,14 +30,6 @@ class Session
     }
 
     /**
-     * Destructor.
-     */
-    public function __destruct()
-    {
-        unset($this);
-    }
-
-    /**
      * Register the session.
      *
      * @param integer $time.
