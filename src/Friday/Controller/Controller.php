@@ -58,7 +58,7 @@ class Controller
     /**
      * Instance of the View.
      *
-     * @var \App\View\{Name}View
+     * @var \Friday\View\View
      */
     public $view;
 
@@ -94,6 +94,7 @@ class Controller
     {
         $this->app = $app;
 
+        $this->view = new \Friday\View\View();
         /*
         if ($name !== null) {
             $this->name = $name;
@@ -170,15 +171,18 @@ class Controller
     }
 
     /**
-     * Instantiates the correct view class, hands it its data, and uses it to render the view output.
+     * Renders view for given data, template file and layout.
      *
-     * @param string|null $view View to use for rendering
-     * @param string|null $layout Layout to use
-     * @return \Cake\Http\Response A response object containing the rendered view.
-     * @link https://book.cakephp.org/3.0/en/controllers.html#rendering-a-view
+     * @param string|null  $view
+     * @param string       $data
+     * @param string|null  $layout
+     * @return void.
      */
-    public function render($view = null, $layout = null)
+    public function render($view = null, $data = [], $layout = null)
     {
+        $renderedView = $this->view->render($view, $data, $layout);
+        return $renderedView;
+        /*
         $builder = $this->viewBuilder();
         if (!$builder->getTemplatePath()) {
             $builder->setTemplatePath($this->_viewPath());
@@ -206,6 +210,7 @@ class Controller
         $this->response = $this->View->response->withStringBody($contents);
 
         return $this->response;
+        */
     }
 
     /**
@@ -230,22 +235,15 @@ class Controller
     /**
      * Display View.
      *
-     * @param  string       $view View to use for rendering
-     * @param  string|null  $args Arguments to use
+     * @param  string       $view  View to use for rendering
+     * @param  string       $data  Arguments to use
      *
      * @return void
      */
-    public function view($view, $args = null)
+    public function view($view, $data = [])
     {
-        #$view = ucfirst($view).'View';
         $viewPath = self::$instance->app->findView($view);
-        #$viewClass = "App\\View\\".$view;
-        #$this->view = new $viewClass();
-        $viewData = file_get_contents($viewPath);
-        foreach($args as $key => $val) {
-            $viewData = str_replace('{{'.$key.'}}', $val, $viewData);
-        }
-        echo $viewData;
+        $this->render($view, $data);
     }
 
     /**
