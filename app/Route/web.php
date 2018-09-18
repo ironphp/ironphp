@@ -31,6 +31,9 @@ use Friday\Http\Route;
 Route::get('/', 'IndexController@Index');
 Route::get('/page1', 'IndexController@Index');
 
+//route with view only (always GET method)
+Route::view('/view', 'index', ['name' => 'IronPHP']);
+
 //route with callable
 Route::get('/callable', function () {
     echo 'callable';
