@@ -84,6 +84,20 @@ class Application
     public $matchRoute;
 
     /**
+     * Instanse of Session.
+     *
+     * @var \Friday\Helper\Session
+     */
+    public $session;
+
+    /**
+     * Instanse of Cookie.
+     *
+     * @var \Friday\Helper\Cookie
+     */
+    public $cookie;
+
+    /**
      * Configurations from /config/*.php.
      *
      * @var array
@@ -128,7 +142,14 @@ class Application
         );
         define('CONFIG_LOADED', microtime(true));
 
+        $this->session = new \Friday\Helper\Session();
+        if(!$this->session->isRegistered()) {
+            $this->session->register();
+        }
+
         if (PHP_SAPI !== 'cli') {
+            $this->cookie = new \Friday\Helper\Cookie();
+
             $this->frontController = new \Friday\Http\FrontController();
 
             $this->request = $this->frontController->request();
@@ -157,6 +178,7 @@ class Application
             );
             define('DISPATCHER_INIT', microtime(true));
 
+            $appController = new \Friday\Controller\Controller($this);
             if($action[0] == 'output') {
                 $output = $action[1];
             }
@@ -164,9 +186,14 @@ class Application
                 $controller = $action[1];
                 $method = $action[2];
                 ob_start();
-                $appController = new \Friday\Controller\Controller($this);
                 $appController->handleController($controller, $method);
                 $output = ob_get_clean();
+            }
+            elseif($action[0] == 'view') {
+                $view = $action[1];
+                $data = $action[2];
+                $viewPath = $this->findView($view);
+                $output = $appController->render($viewPath, $data);
             }
             define('DISPATCHED', microtime(true));
 
@@ -252,9 +279,15 @@ class Application
      */
     public function findView($view)
     {
-        $file = $this->basePath("app/View/$view.html");
+        $file = $this->basePath("app/View/$view");
         if($this->findFile($file)) {
             return $file;
+        }
+        elseif($this->findFile($file.'.html')) {
+            return $file.'.html';
+        }
+        elseif($this->findFile($file.'.php')) {
+            return $file.'.php';
         }
         else {
             throw new \Exception($file." View file is missing.");
