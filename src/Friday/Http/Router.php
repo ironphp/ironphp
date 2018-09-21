@@ -20,6 +20,13 @@ namespace Friday\Http;
 class Router
 {
     /**
+     * Closure arguments of matched route.
+     *
+     * @var array
+     */
+    public $args = [];
+
+    /**
      * Create a new Router instance.
      *
      * @return void
@@ -36,6 +43,9 @@ class Router
      * @return object  Route
      */
     public function route($allRoute, $uriRoute, $httpMethod) {
+        if(is_null($allRoute) || (is_array($allRoute) && !count($allRoute)) ) {
+            throw new \Exception("No routes. Define them at /app/Route/web.php");
+        }
         foreach ($allRoute as $route) {
             if ($this->match($route, $uriRoute, $httpMethod)) {
                 return $route;
@@ -55,10 +65,37 @@ class Router
      * @return object  Route
      */
     public function match($route, $uriRoute, $httpMethod) {
+        if($route[0] !== $httpMethod) {
+            return false;
+        }
         if($route[0] === $httpMethod && $route[1] === $uriRoute) {
             return true;
         }
         else {
+            if(strpos($route[1], '{') !== false) {
+                $array = explode('/', trim($route[1], '/'));
+                $arrayUriRoute = explode('/', trim($uriRoute, '/'));
+                foreach($array as $i => $piece) {
+                    if(!isset($arrayUriRoute[$i])) {
+                        if(strpos($piece, '{') === false || strpos($piece, '?') !== 1) {
+                            return false;
+                        }
+                        else {
+                            //$args[trim($piece, '{?}')] = NULL;
+                        }
+                    }
+                    elseif($arrayUriRoute[$i] != $piece) {
+                        if(strpos($piece, '{') === false) {
+                            return false;
+                        }
+                        else {
+                            $args[trim($piece, '{}')] = $arrayUriRoute[$i];
+                        }
+                    }
+                }
+                $this->args = isset($args) ? $args : [];
+                return true;
+            }
             return false;
         }
     }
