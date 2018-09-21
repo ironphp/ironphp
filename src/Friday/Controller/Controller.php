@@ -178,9 +178,9 @@ class Controller
      * @param string|null  $layout
      * @return void.
      */
-    public function render($view = null, $data = [], $layout = null)
+    public function render($viewPath = null, $data = [], $layout = null)
     {
-        $renderedView = $this->view->render($view, $data, $layout);
+        $renderedView = $this->view->render($viewPath, $data, $layout);
         return $renderedView;
         /*
         $builder = $this->viewBuilder();
@@ -243,7 +243,7 @@ class Controller
     public function view($view, $data = [])
     {
         $viewPath = self::$instance->app->findView($view);
-        $this->render($view, $data);
+        echo self::$instance->render($viewPath, $data);
     }
 
     /**
@@ -262,9 +262,10 @@ class Controller
         }
         if($this->app->hasMethod($this->controller, $method)) {
             self::$instance = $this;
-            $this->controller->$method();
+            $output = $this->controller->$method();
             self::$instance = null;
         }
+        return $output;
     }
 
 }
