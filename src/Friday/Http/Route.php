@@ -24,7 +24,7 @@ class Route implements RouteInterface
      *
      * @var array
      */
-    public $routes;
+    public $routes = NULL;
 
     /**
      * Route instance.
@@ -46,35 +46,76 @@ class Route implements RouteInterface
     /**
      * register a GET method route.
      *
-     * @param  string           $route
-     * @param  string|callback  $mix
+     * @param  string                $route
+     * @param  string|callback|null  $mix
+     * @param  string|null           $view
      * @return bool
      */
-    public function get($route, $mix) {
-        self::$instance->register('GET', $route, $mix);
+    public function get($route, $mix = null, $view = null) {
+        self::$instance->register('GET', $route, $mix, $view);
     }
 
     /**
      * register a POST method route.
      *
-     * @param  string           $route
-     * @param  string|callback  $mix
+     * @param  string                $route
+     * @param  string|callback|null  $mix
+     * @param  string|null           $view
      * @return bool
      */
-    public function post($route, $mix) {
-        self::$instance->register('POST', $route, $mix);
+    public function post($route, $mix = null, $view = null) {
+        self::$instance->register('POST', $route, $mix, $view);
+    }
+
+    /**
+     * register a GET method route with view.
+     *
+     * @param  string                $route
+     * @param  string|null           $view
+     * @param  array                 $data
+     * @return bool
+     */
+    public function view($route, $view = null, array $data = []) {
+        self::$instance->register('GET', $route, null, $view, $data);
     }
 
     /**
      * register a route.
      *
-     * @param  string           $route
-     * @param  string|callback  $mix
+     * @param  string                $route
+     * @param  string|callback|null  $mix
+     * @param  string|null           $view
+     * @param  array                 $data
      * @return void
      */
-    public function register($method, $route, $mix) {
-        $route = '/'.trim($route, '/');
-        self::$instance->routes[] = [$method, $route, $mix];
+    public function register($method, $route, $mix = null, $view = null, $data = []) {
+        $route = trim($route, '/');
+        $array = explode('/', $route);
+        $route = '/'.$route;
+        if(strpos($route, '{') !== false) {
+            foreach($array as $uriPiece) {
+                $uriPiece = trim($uriPiece);
+                if(strpos($uriPiece, '{') !== false) {
+                    if(
+                        strpos($uriPiece, '{') === 0 && 
+                        strpos($uriPiece, '}') !== false && 
+                        strpos($uriPiece, '}') === (strlen($uriPiece) - 1)
+                    ) {
+                        $args[$uriPiece] = rtrim(ltrim($uriPiece, '{'), '}');
+                    }
+                    else {
+                        $args[$uriPiece] = null;
+                    }
+                }
+                else {
+                    $args[$uriPiece] = null;
+                }
+            }
+        }
+        else {
+            $args = null;
+        }
+        self::$instance->routes[] = [$method, $route, $mix, $view, $data, $args];
     }
 
     /**
