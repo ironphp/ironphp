@@ -31,6 +31,30 @@ use Friday\Http\Route;
 Route::get('/', 'IndexController@Index');
 Route::get('/page1', 'IndexController@Index');
 
+//route with optional multiple arguments - must pass default argument to all optioanl arguments
+Route::get('/member/{name}/{?id}', function ($name, $id = 1) {
+    echo "Name: [$id] $name";
+    echo '<br>Num of Ars: '.func_num_args();
+    echo '<br>Ars: ';print_r(func_get_args());
+});
+
+//route with optional arguments - must pass default  argument
+Route::get('/user/{?name}/', function ($name = 'GK') {
+    echo "Name: $name";
+    echo '<br>Num of Ars: '.func_num_args();
+    echo '<br>Ars: ';print_r(func_get_args());
+});
+
+//route with multiple arguments - must be in sequence
+Route::get('/names/{id}/{name}', function ($id, $name) {
+    echo "Name: [$id] $name";
+});
+
+//route with arguments
+Route::get('/name/{name}', function ($name) {
+    echo 'Name: '.$name;
+});
+
 //route with view only (always GET method)
 Route::view('/view', 'index', ['name' => 'IronPHP']);
 
