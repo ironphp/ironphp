@@ -169,6 +169,7 @@ class Application
                 $this->request->uri,
                 $this->request->serverRequestMethod
             );
+            $this->request->setParam('Closure', $this->router->args);
             define('ROUTE_MATCHED', microtime(true));
 
             $this->dispatcher = $this->frontController->dispatcher();
@@ -196,6 +197,7 @@ class Application
                 $output = $appController->render($viewPath, $data);
             }
             define('DISPATCHED', microtime(true));
+//echo '<pre>';print_r($output);echo '</pre>';exit;
 
             $this->response = $this->frontController->response($_SERVER['SERVER_PROTOCOL']);
             $this->response->addHeader()->send($output);
