@@ -24,7 +24,8 @@ class Dispatcher
      *
      * @return void
      */
-    public function __construct() {
+    public function __construct()
+    {
     }
 
     /**
@@ -34,21 +35,33 @@ class Dispatcher
      * @param  object  $request
      * @return void
      */
-    public function dispatch($route, $request) {
+    public function dispatch($route, $request)
+    {
 
         if(isset($route[3]) && is_string($route[3])) {
             $view = $route[3];
             $data = $route[4];
             return ['view', $view, $data];
         }
-        elseif(is_string($route[2])) {
+        elseif(isset($route[2]) && is_string($route[2])) {
             list($controller, $method) = explode('@', $route[2]);
             return ['controller_method', $controller, $method];
         }
-        elseif($route[2] instanceof Closure) {
+        elseif(isset($route[2]) && ($route[2] instanceof Closure || get_class($route[2]) === "Closure")) {
             $function = $route[2];
+            $reflectionFunction = new \ReflectionFunction($function);
+            $numReqParam = $reflectionFunction->getNumberOfRequiredParameters();
+            if($numReqParam > count($request->getParam('Closure'))) {
+                throw new \Exception('Invaliding number of required parameter passed in route\'s callable function: '.$route[1]);
+            }
             ob_start();
-            $function();
+            if($request->getParam('Closure') !== false && is_array($request->getParam('Closure')) ) {
+                call_user_func_array($route[2], $request->getParam('Closure'));
+            }
+            else {
+                //$function();
+                throw new \Exception('Invaliding parameter passed in route\'s callable function: '.$route[1]);
+            }
             $output = ob_get_clean();
             return ['output', $output];
         }
