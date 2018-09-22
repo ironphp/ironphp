@@ -41,7 +41,9 @@ class View
         'script' => true,
         'style' => true,
         'link' => false,
-        'base' => false
+        'base' => false,
+        'a' => true,
+        'i' => true
     ];
 
     /**
@@ -404,6 +406,10 @@ class View
      */
     public function renderHtml($viewData = null, $data = [], $layout = null)
     {
+                /*
+                <div class="links">
+                </div>
+                */
         $doctype = $this->createTag('!doctype'); //['HTML', 'PUBLIC', '"-//W3C//DTD HTML 4.01//EN"', '"http://www.w3.org/TR/html4/strict.dtd"']);
         $charset = $this->createTag('meta', 'charset');
         $viewport = $this->createTag('meta', ['name' => 'viewport']);
@@ -411,8 +417,13 @@ class View
         $description = $this->createTag('meta', ['name' => 'description']);
         $keywords = $this->createTag('meta', ['name' => 'keywords']);
         $author = $this->createTag('meta', ['name' => 'author']);
-        $head = $this->createTag('head', null, [$charset, $viewport, $title, $description, $keywords, $author]);
+        $linkCss = '<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">';
+        $linkCss .= "\n".'<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/v4-shims.css">';
+        $head = $this->createTag('head', null, [$charset, $viewport, $title, $description, $keywords, $author, $linkCss]);
+        //$i = $this->createTag('i', ['class' => 'fa fa-2x fa-github', 'aria-hidden' => "true"]);
+        //$a = $this->createTag('a', ['href' => 'https://github.com/ironphp/ironphp', 'title' => 'IronPHP on GitHub', 'style' => 'align-self:center'], [$i]);
         $body = $this->createTag('body', null, [$viewData]);
+//print_r($head);exit;
         $html = $this->createTag('html', null, [$head, $body]);
         $dom = $doctype."\n".$html;
         return $dom;
