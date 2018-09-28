@@ -86,51 +86,10 @@ class Controller
     /**
      * Create a new Controller instance.
      *
-     * @param  \Friday\Foundation\Application  $app
-     *
      * @return  void
      */
-    public function __construct($app)
+    public function __construct()
     {
-        $this->app = $app;
-
-        $this->view = new \Friday\View\View();
-        /*
-        if ($name !== null) {
-            $this->name = $name;
-        }
-
-        if ($this->name === null && $request && $request->getParam('controller')) {
-            $this->name = $request->getParam('controller');
-        }
-
-        if ($this->name === null) {
-            list(, $name) = namespaceSplit(get_class($this));
-            $this->name = substr($name, 0, -10);
-        }
-
-        $this->setRequest($request ?: new ServerRequest());
-        $this->response = $response ?: new Response();
-
-        if ($eventManager !== null) {
-            $this->setEventManager($eventManager);
-        }
-
-        $this->modelFactory('Table', [$this->getTableLocator(), 'get']);
-        $plugin = $this->request->getParam('plugin');
-        $modelClass = ($plugin ? $plugin . '.' : '') . $this->name;
-        $this->_setModelClass($modelClass);
-
-        if ($components !== null) {
-            $this->components($components);
-        }
-
-        $this->initialize();
-
-        $this->_mergeControllerVars();
-        $this->_loadComponents();
-        $this->getEventManager()->on($this);
-        */
     }
 
     /**
@@ -139,10 +98,13 @@ class Controller
      * Implement this method to avoid having to overwrite
      * the constructor and call parent.
      *
+     * @param  \Friday\Foundation\Application  $app
      * @return void
      */
-    public function initialize()
+    public function initialize($app)
     {
+        $this->app = $app;
+        $this->view = new \Friday\View\View($app);
     }
 
     /**
@@ -178,39 +140,24 @@ class Controller
      * @param string|null  $layout
      * @return void.
      */
-    public function render($viewPath = null, $data = [], $layout = null)
+    public function renderView($viewPath = null, $data = [], $layout = null)
     {
-        $renderedView = $this->view->render($viewPath, $data, $layout);
+        $renderedView = $this->view->renderView($viewPath, $data, $layout);
         return $renderedView;
-        /*
-        $builder = $this->viewBuilder();
-        if (!$builder->getTemplatePath()) {
-            $builder->setTemplatePath($this->_viewPath());
-        }
+    }
 
-        if ($this->request->getParam('bare')) {
-            $builder->enableAutoLayout(false);
-        }
-        $this->autoRender = false;
-
-        $event = $this->dispatchEvent('Controller.beforeRender');
-        if ($event->getResult() instanceof Response) {
-            return $event->getResult();
-        }
-        if ($event->isStopped()) {
-            return $this->response;
-        }
-
-        if ($builder->getTemplate() === null && $this->request->getParam('action')) {
-            $builder->setTemplate($this->request->getParam('action'));
-        }
-
-        $this->View = $this->createView();
-        $contents = $this->View->render($view, $layout);
-        $this->response = $this->View->response->withStringBody($contents);
-
-        return $this->response;
-        */
+    /**
+     * Renders view for given data, template file and layout.
+     *
+     * @param string|null  $view
+     * @param string       $data
+     * @param string|null  $layout
+     * @return void.
+     */
+    public function renderTemplate($templatePath = null, $data = [])
+    {
+        $renderedTemplate = $this->view->renderTemplate($templatePath, $data);
+        return $renderedTemplate;
     }
 
     /**
@@ -247,6 +194,20 @@ class Controller
     }
 
     /**
+     * Display Template.
+     *
+     * @param  string       $view  Template to use for rendering
+     * @param  string       $data  Arguments to use
+     *
+     * @return void
+     */
+    public function template($template, $data = [])
+    {
+        $templatePath = self::$instance->app->findTemplate($template);
+        echo self::$instance->renderTemplate($templatePath, $data);
+    }
+
+    /**
      * Handle new controller@method from route.
      *
      * @param  string  $controller
@@ -268,4 +229,13 @@ class Controller
         return $output;
     }
 
+    /**
+     * Get value from route->args.
+     *
+     * @return bool
+     */
+    protected function getParam()
+    {
+        return self::$instance->app->getRouteParam();
+    }
 }
