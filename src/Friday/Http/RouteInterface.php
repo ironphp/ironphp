@@ -54,18 +54,9 @@ interface RouteInterface {
     public function register($method, $route, $mix);
 
     /**
-     * Match a uri route to registered routes.
+     * sort registered routes by there base uri.
      *
-     * @param  object  $request  RequestInterface
-     * @return bool
-    public function match(RequestInterface $request);
+     * @return void
      */
- 
-    /**
-     * Create Controller instance.
-     *
-     * @return object
-    public function createController();
-     */
-
+    public function sortRoute();
 }
