@@ -116,6 +116,8 @@ class Application
             $this->setBasePath($basePath);
         }
 
+        date_default_timezone_set("Asia/Kolkata");
+
         $this->requireFile(
             $this->basePath('src/Friday/Helper/Helper.php')
         );
@@ -162,6 +164,7 @@ class Application
             $this->requireFile(
                 $this->basePath('app/Route/web.php')
             );
+            $this->route->sortRoute();
 
             $this->router = $this->frontController->router();
             $this->matchRoute = $this->router->route(
@@ -179,7 +182,8 @@ class Application
             );
             define('DISPATCHER_INIT', microtime(true));
 
-            $appController = new \Friday\Controller\Controller($this);
+            $appController = new \Friday\Controller\Controller();
+            $appController->initialize($this);
             if($action[0] == 'output') {
                 $output = $action[1];
             }
@@ -197,7 +201,6 @@ class Application
                 $output = $appController->render($viewPath, $data);
             }
             define('DISPATCHED', microtime(true));
-//echo '<pre>';print_r($output);echo '</pre>';exit;
 
             $this->response = $this->frontController->response($_SERVER['SERVER_PROTOCOL']);
             $this->response->addHeader()->send($output);
@@ -247,7 +250,7 @@ class Application
      */
     public function findFile($path)
     {
-        if(file_exists($path)) {
+        if(file_exists($path) && is_file($path)) {
             return true;
         }
         else {
@@ -281,7 +284,25 @@ class Application
      */
     public function findView($view)
     {
-        $file = $this->basePath("app/View/$view");
+        $file = $this->basePath("app/View/$view.php");
+        if($this->findFile($file)) {
+            return $file;
+        }
+        else {
+            throw new \Exception($file." View file is missing.");
+            exit;
+        }
+    }
+
+    /**
+     * Find a Template.
+     *
+     * @param  string  $template
+     * @return string  full template file path
+     */
+    public function findTemplate($template)
+    {
+        $file = $this->basePath("app/Template/$template");
         if($this->findFile($file)) {
             return $file;
         }
@@ -292,7 +313,7 @@ class Application
             return $file.'.php';
         }
         else {
-            throw new \Exception($file." View file is missing.");
+            throw new \Exception($file." Template file is missing.");
             exit;
         }
     }
@@ -455,5 +476,15 @@ class Application
         if (!is_readable($file) || !is_file($file)) {
             throw new \Exception(sprintf('Unable to read the environment file at %s.', $$file));
         }
+    }
+
+    /**
+     * Get parameter passed in route.
+     *
+     * @return array
+     */
+    public function getRouteParam()
+    {
+        return $this->router->args;
     }
 }
