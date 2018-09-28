@@ -31,7 +31,8 @@ class Router
      *
      * @return void
      */
-    public function __construct() {
+    public function __construct()
+    {
     }
  
     /**
@@ -42,12 +43,32 @@ class Router
      * @param  enum    $httpMethod  GET/POST
      * @return object  Route
      */
-    public function route($allRoute, $uriRoute, $httpMethod) {
+    public function route($allRoute, $uriRoute, $httpMethod)
+    {
         if(is_null($allRoute) || (is_array($allRoute) && !count($allRoute)) ) {
             throw new \Exception("No routes. Define them at /app/Route/web.php");
         }
+        $route = trim($uriRoute, '/ ');
+        $array = $route === '' ? [] : explode('/', $route);
+        $size = count($array);
+        $allRoute = array_filter($allRoute, function($v) use ($size, $httpMethod) {
+            if($v[0] != $httpMethod) {
+                return false;
+            }
+            if($v[6] == $size) {
+                return true;
+            }
+            if($v[8] == true && $v[7] <= $size && $v[6] >= $size) {
+                return true;
+            }
+        });
         foreach ($allRoute as $route) {
-            if ($this->match($route, $uriRoute, $httpMethod)) {
+            if ($this->match($route, $uriRoute)) {
+                return $route;
+            }
+        }
+        foreach ($allRoute as $route) {
+            if ($this->match($route, $uriRoute, $httpMethod, true)) {
                 return $route;
             }
         }
@@ -61,27 +82,27 @@ class Router
      *
      * @param  array   $allRoute
      * @param  string  $uriRoute
-     * @param  enum    $httpMethod  GET/POST
+     * @param  bool    $parameterized
      * @return object  Route
      */
-    public function match($route, $uriRoute, $httpMethod) {
-        if($route[0] !== $httpMethod) {
-            return false;
-        }
-        if($route[0] === $httpMethod && $route[1] === $uriRoute) {
+    public function match($route, $uriRoute, $parameterized = false)
+    {
+        if($route[1] === $uriRoute) {
             return true;
         }
-        else {
+        if($parameterized) {
+            $array = explode('/', trim($route[1], '/'));
+            $size = count($array);
             if(strpos($route[1], '{') !== false) {
                 $array = explode('/', trim($route[1], '/'));
                 $arrayUriRoute = explode('/', trim($uriRoute, '/'));
                 foreach($array as $i => $piece) {
-                    if(!isset($arrayUriRoute[$i])) {
+                    if(!isset($arrayUriRoute[$i]) || $arrayUriRoute[$i] === null || $arrayUriRoute[$i] === "") {
                         if(strpos($piece, '{') === false || strpos($piece, '?') !== 1) {
                             return false;
                         }
                         else {
-                            //$args[trim($piece, '{?}')] = NULL;
+                            //$args[trim($piece, '{?}')] = NULL; Couses problem in default param closure passed in route
                         }
                     }
                     elseif($arrayUriRoute[$i] != $piece) {
@@ -89,7 +110,7 @@ class Router
                             return false;
                         }
                         else {
-                            $args[trim($piece, '{}')] = $arrayUriRoute[$i];
+                            $args[trim($piece, '{?}')] = $arrayUriRoute[$i];
                         }
                     }
                 }
