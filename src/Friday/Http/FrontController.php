@@ -49,7 +49,14 @@ class FrontController {
         $uri = empty($uri) ? '/' : $uri;
         $serverRequestMethod = $_SERVER['REQUEST_METHOD'];
         $params = $GLOBALS['_'.$serverRequestMethod];
-
+        if(!empty($_SERVER['HTTPS']) && ('on' == $_SERVER['HTTPS'])) {
+            $https = true;
+        }
+        else {
+            $https = false;
+        }
+        $host = $_SERVER['HTTP_HOST'].$extDir;
+        $ip = $_SERVER['REMOTE_ADDR'];
         /**
          * Test GET === _GET
          * _GET !== QUERY
@@ -81,7 +88,7 @@ class FrontController {
             $params = ['GET' => $params, 'POST' => []];
         }
 
-        return ['uri' => $uri, 'params' => $params, 'method' => $serverRequestMethod];
+        return ['uri' => $uri, 'params' => $params, 'method' => $serverRequestMethod, 'https' => $https, 'host' => $host, 'ip' => $ip];
         /*
         if (strpos($path, $this->basePath) === 0) {
             $path = substr($path, strlen($this->basePath));
@@ -130,7 +137,7 @@ class FrontController {
             }
         }
         */
-        return new \Friday\Http\Request($parse['uri'], $parse['params'], $parse['method']);
+        return new \Friday\Http\Request($parse['uri'], $parse['params'], $parse['method'], $parse['https'], $parse['host'], $parse['ip']);
     }
 
     /**
