@@ -300,31 +300,62 @@ class Table
      * @param  array|null  $field
      * @rturn  array
      */
+    public function num_rows()
+    {
+        $sql = $this->query('select');
+        $result = $this->execute($sql);
+        $data = $result->num_rows;
+        return $data;
+    }
+
+    /**
+     * Get field from table
+     *
+     * @param  array|null  $field
+     * @rturn  array
+     */
     public function get($fields = null)
     {
-        $sql = $this->query('select', $field);
+        $sql = $this->query('select', $fields);
         $result = $this->execute($sql);
         $data = $result->fetch_array(MYSQLI_ASSOC);
         return $data;
+    }
+
+    /**
+     * Get all field from table
+     *
+     * @param  array|null  $field
+     * @rturn  array
+     */
+    public function getAll($fields = null)
+    {
+        $sql = $this->query('select', $fields);
+        $result = $this->execute($sql);
+        while($row = $result->fetch_array(MYSQLI_ASSOC)) {
+            $data[] = $row;
+        }
+        return $data;
+
         /*
-        $key = (array)$this->getPrimaryKey();
-        $alias = $this->getAlias();
+        $key = ['id']; //(array)$this->getPrimaryKey();
+        $alias = 'sid';//$this->getAlias();
         foreach ($key as $index => $keyname) {
             $key[$index] = $alias . '.' . $keyname;
         }
-        $primaryKey = (array)$primaryKey;
+        $primaryKey = ['mid'];//(array)$primaryKey;
         if (count($key) !== count($primaryKey)) {
             $primaryKey = $primaryKey ?: [null];
             $primaryKey = array_map(function ($key) {
                 return var_export($key, true);
             }, $primaryKey);
 
-            throw new InvalidPrimaryKeyException(sprintf(
+            echo sprintf(
                 'Record not found in table "%s" with primary key [%s]',
                 $this->getTable(),
                 implode($primaryKey, ', ')
-            ));
-        }
+            );
+        } // error handling
         $conditions = array_combine($key, $primaryKey);
 
         $cacheConfig = isset($options['cache']) ? $options['cache'] : false;
@@ -426,7 +457,7 @@ class Table
     }
 
     /**
-     * Create where clause
+     * Create WHERE clause
      *
      * @param   array  $where
      * @param   string $glue
@@ -445,6 +476,23 @@ class Table
             $where = trim($where, 'WHERE ');
             $where = rtrim($where);
             $this->where = ' WHERE '.$where;
+        }
+        return $this;
+    }
+
+    /**
+     * Create ORDER BY clause
+     *
+     * @param   string  $field
+     * @param   string $order
+     * @return  $this
+     */
+    public function orderby($field, $order = 'ASC')
+    {
+        if(is_string($field) && trim($field) != '') {
+            $field = trim($field);
+            $field = ltrim($field, 'ORDER BY ');
+            $this->order = ' ORDER BY `'.$field.'`'.(($order == 'DESC') ? ' DESC' : ' ASC');
         }
         return $this;
     }
@@ -469,7 +517,7 @@ class Table
                 }
                 $field = trim(implode(' ,', $field));
             }
-            $sql = "SELECT `$field` FROM ".$this->getTable().$this->where;
+            $sql = "SELECT $field FROM `".$this->getTable().'` '.$this->where.$this->order;
         }
         elseif($type == 'insert') {
             if(is_array($field)) {
@@ -528,7 +576,7 @@ class Table
         $this->errno = $this->connection->errno;
         $this->error = $this->connection->error;
         if($this->connection->errno) {
-            echo 'query error';
+            echo 'query error: '.$this->error;
         }
         if($this->connection->errno == 1054) {
             echo 'database table not set properly';
