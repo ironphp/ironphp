@@ -19,42 +19,12 @@ namespace Friday\Model;
 
 class Table
 {
-
-    /**
-     * The alias this object is assigned to validators as.
-     *
-     * @var string
-     */
-    const VALIDATOR_PROVIDER_NAME = 'table';
-
-    /**
-     * The name of the event dispatched when a validator has been built.
-     *
-     * @var string
-     */
-    const BUILD_VALIDATOR_EVENT = 'Model.buildValidator';
-
-    /**
-     * The rules class name that is used.
-     *
-     * @var string
-     */
-    const RULES_CLASS = 'Cake\ORM\RulesChecker';
-
     /**
      * Name of the table as it can be found in the database
      *
      * @var string
      */
     protected $_table;
-
-    /**
-     * Human name giving to this particular instance. Multiple objects representing
-     * the same database table can exist by using different aliases.
-     *
-     * @var string
-     */
-    protected $_alias;
 
     /**
      * Connection instance
@@ -120,28 +90,6 @@ class Table
     private $connection;
 
     /**
-     * Table name
-     *
-     * @var string
-     */
-    private $table;
-
-    /**
-     * WHERE clause
-     *
-     * @var string
-     */
-    private $where;
-
-    /**
-     * ORDER BY clause
-     *
-     * @var array
-     */
-    private $order;
-
-
-    /**
      * Connection error no
      *
      * @var int
@@ -168,6 +116,42 @@ class Table
      * @var string
      */
     private $error;
+
+    /**
+     * Table name
+     *
+     * @var string
+     */
+    private $table;
+
+    /**
+     * WHERE clause
+     *
+     * @var string
+     */
+    private $where;
+
+    /**
+     * ORDER BY clause
+     *
+     * @var array
+     */
+    private $order;
+
+    /**
+     * Instance of the Pagination.
+     *
+     * @var \Friday\Helper\Pagination
+     */
+    private $pagination = null;
+
+    /**
+     * LIMIT clause.
+     *
+     * @var string
+     */
+    private $limit = null;
+
     /**
      * Create a new Table instance.
      *
@@ -264,10 +248,12 @@ class Table
      * Sets the database table name.
      *
      * @param  string  $table
+     * @param  \Friday\Helper\Pagination  $pagination
      * @return $this
      */
-    public function setTable($table)
+    public function setTable($table, $pagination)
     {
+        $this->pagination = $pagination;
         $this->table = $table;
 
         return $this;
@@ -323,7 +309,7 @@ class Table
     }
 
     /**
-     * Get all field from table
+     * Get all fields from table
      *
      * @param  array|null  $field
      * @rturn  array
@@ -379,6 +365,22 @@ class Table
 
         return $query->firstOrFail();
         */
+    }
+
+    /**
+     * Get paginated fields from table
+     *
+     * @param  array|null  $limit
+     * @rturn  array
+     */
+    public function getPaginated($limit = 1, $fields = null)
+    {
+        $sql = $this->query('select', $fields, ['count'=>null, 'field'=>'num']);
+        $result = $this->execute($sql);
+        $row = $result->fetch_array(MYSQLI_ASSOC);
+        $total = $row['num'];
+        $this->pagination->initialize($limit, $total);
+        return $this->limit($limit, $this->pagination->getStartPoint())->getAll();
     }
 
     /**
@@ -484,15 +486,34 @@ class Table
      * Create ORDER BY clause
      *
      * @param   string  $field
-     * @param   string $order
+     * @param   string  $order
      * @return  $this
      */
-    public function orderby($field, $order = 'ASC')
+    public function orderBy($field, $order = 'ASC')
     {
         if(is_string($field) && trim($field) != '') {
             $field = trim($field);
             $field = ltrim($field, 'ORDER BY ');
             $this->order = ' ORDER BY `'.$field.'`'.(($order == 'DESC') ? ' DESC' : ' ASC');
+        }
+        return $this;
+    }
+
+    /**
+     * Create LIMIT clause
+     *
+     * @param   int  $start
+     * @param   int  $limit
+     * @return  $this
+     */
+    public function limit($limit, $start = null)
+    {
+        if(is_int($limit)) {
+            $build = $limit;
+            if(is_int($start)) {
+                $build = $start.', '.$limit;
+            }
+            $this->limit = ' LIMIT '.$build;
         }
         return $this;
     }
@@ -505,8 +526,9 @@ class Table
      *
      * @return  string
      */
-    public function query($type, $field = null)
+    public function query($type, $field = null, $extra = null)
     {
+        //SELECT COUNT(*) as `num` 
         if($type == 'select') {
             if($field == null) {
                 $field = "*";
@@ -517,7 +539,24 @@ class Table
                 }
                 $field = trim(implode(' ,', $field));
             }
-            $sql = "SELECT $field FROM `".$this->getTable().'` '.$this->where.$this->order;
+            $ex = '';
+            if($extra != null && is_array($extra)) {
+                foreach($extra as $i => $v) {
+                    if($i == 'count') {
+                        $ex .= 'COUNT';
+                        if($v == null) {
+                            $ex .= '(*)';
+                        }
+                    }
+                    if($i == 'field') {
+                        $ex .= ' as `'.$v.'`';
+                    }
+                }
+                $sql = "SELECT $ex FROM `".$this->getTable().'` '.$this->where;
+            }
+            else {
+                $sql = "SELECT $field FROM `".$this->getTable().'` '.$this->where.$this->order.$this->limit;
+            }
         }
         elseif($type == 'insert') {
             if(is_array($field)) {
