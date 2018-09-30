@@ -41,6 +41,13 @@ class ModelService
     private $dataMapper = null;
 
     /**
+     * Instance of the Pagination.
+     *
+     * @var \Friday\Helper\Pagination
+     */
+    private $pagination = null;
+
+    /**
      * Create a new ModelService instance.
      *
      * @return void
@@ -64,7 +71,6 @@ class ModelService
      * Create Instance of Table.
      *
      * @param  string  $tableName
-     *
      * @return \App\Model\Table
      */
     public function table($tableName)
@@ -72,7 +78,30 @@ class ModelService
         if($this->dataMapper == null) {
             $this->dataMapper = new \Friday\Model\DataMapper(self::$app->config);
         }
-        return $this->dataMapper->getTable($tableName);
+        return $this->dataMapper->getTable($tableName, $this->getPagination());
     }
 
+    /**
+     * Get Instance of Pagination.
+     *
+     * @return \Friday\Helper\Pagination
+     */
+    private function getPagination()
+    {
+        if($this->pagination == null) {
+            $this->pagination = new \Friday\Helper\Pagination();
+        }
+        return $this->pagination;
+    }
+
+    /**
+     * Get pagination html.
+     *
+     * @param  string $urlstr
+     * @return string
+     */
+    public function getPaginationHtml($urlstr = '?')
+    {
+        return $this->pagination->getPaginationHtml($urlstr);
+    }
 }
