@@ -104,4 +104,34 @@ class ModelService
     {
         return $this->pagination->getPaginationHtml($urlstr);
     }
+
+    /**
+     * Is user logged or not.
+     *
+     * @return string
+     */
+    public function isLogged()
+    {
+        if(self::$app->session->get('user_id')) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    /**
+     * Is user admin or not.
+     *
+     * @return string
+     */
+    public function isAdmin()
+    {
+        if(self::$app->session->get('master')) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 }
