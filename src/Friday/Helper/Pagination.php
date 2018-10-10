@@ -85,14 +85,17 @@ class Pagination
      * Get pagination html.
      *
      * @param  string  $url
-     * @return string
+     * @return string|null
      */
     public function getPaginationHtml($url)
     {
-	    $adjacents = "2"; 
+	    if($this->total == null) {
+            return null;
+        }
+        $adjacents = "2"; 
     	
 	    $page = ($this->page == 0 ? 1 : $this->page);  
-        $start = ($page - 1) * $this->limit;								
+        $start = ($page - 1) * $this->limit;
 	
         $prev = $page - 1;							
         $next = $page + 1;

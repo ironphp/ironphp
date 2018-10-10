@@ -26,7 +26,9 @@ class Session
      */
     public function __construct()
     {
-        session_start();
+        if(is_session_started() === false ) {
+            session_start();
+        }
     }
 
     /**
@@ -73,7 +75,7 @@ class Session
      */
     public function get($key)
     {
-        return isset($_SESSION[$key]) ? $_SESSION[$key]:false;
+        return isset($_SESSION[$key]) ? $_SESSION[$key] : false;
     }
 
     /**
