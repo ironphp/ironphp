@@ -24,7 +24,7 @@ class Route implements RouteInterface
      *
      * @var array
      */
-    public $routes = NULL;
+    public $routes = [];
 
     /**
      * Route instance.
@@ -32,6 +32,13 @@ class Route implements RouteInterface
      * @var Route
      */
     public static $instance;
+
+    /**
+     * Route prefix name.
+     *
+     * @var string
+     */
+    public $prefix = NULL;
 
     /**
      * Create Route instance.
@@ -95,6 +102,7 @@ class Route implements RouteInterface
     public function register($method, $route, $mix = null, $view = null, $data = [])
     {
         $route = trim($route, '/ ');
+        $route = (self::$instance->prefix == null) ? $route : self::$instance->prefix.'/'.$route;
         $array = $route==='' ? [] : explode('/', $route);
         $size = count($array);
         $route = '/'.$route;
@@ -147,5 +155,38 @@ class Route implements RouteInterface
             }
             return ($a[7] > $b[7]) ? -1 : 1;
         });
+    }
+
+    /**
+     * Group routes by prefix.
+     *
+     * @param  string  $prefix
+     * @return Friday\Http\Route
+     */
+    public function prefix($prefix)
+    {
+        self::$instance->prefix = $prefix;
+        return self::$instance;
+    }
+
+    /**
+     * Registered group routes.
+     *
+     * @param  Closure  $closure
+     * @return void
+     */
+    public function group($closure)
+    {
+        $backtrace = debug_backtrace();
+        if(!isset($this) || $backtrace[0]['type'] == '::' || self::$instance->prefix == null) {
+            exit('Can not be called statically or directly. Use Route::prefix(name)->group(routes-to-be-registered)');
+        }
+        if($closure instanceof \Closure) {
+            call_user_func($closure);
+        }
+        $this->prefix = null;
+        //print_r($closure);exit;
+        //self::$instance->prefix = $prefix;
+        //return self::$instance;
     }
 }
