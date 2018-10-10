@@ -213,7 +213,7 @@ class Controller
      * @param  string  $controller
      * @param  string  $method
      *
-     * @return bool
+     * @return mix
      */
     public function handleController($controller, $method)
     {
@@ -223,9 +223,15 @@ class Controller
         }
         if($this->app->hasMethod($this->controller, $method)) {
             self::$instance = $this;
-            $output = $this->controller->$method();
+            ob_start();
+            $return = $this->controller->$method();
+            $output = ob_get_clean();
             self::$instance = null;
         }
+        if($return !== null) {
+            //handle returned value
+        }
+        $output = $output ?: null;
         return $output;
     }
 
@@ -237,5 +243,54 @@ class Controller
     protected function getParam()
     {
         return self::$instance->app->getRouteParam();
+    }
+
+    /**
+     * Download a file.
+     *
+     * @param  string  $file
+     * @param  string  $name
+     * @return bool
+     */
+    protected function downloadFile($file, $name = null)
+    {
+        if(file_exists($file) && is_file($file) && is_readable($file)) {
+            $mime_type = mime_content_type($file);
+            if(in_array($mime_type, ['image/gif', 'image/jpeg', 'image/png'])) {
+                $exif_type = exif_imagetype($file);
+                $img_ext = image_type_to_extension($exif_type);
+                if($img_ext == '.jpeg') {
+                    $img_ext = '.jpg';
+                }
+                switch($exif_type) {
+                    case IMAGETYPE_JPEG:
+                        $img = imagecreatefromjpeg($file);
+                        imagejpeg( $img, NULL, 100 ); 
+                        break;
+                    case IMAGETYPE_GIF:
+                        $img = imagecreatefromgif($file);
+                        imagegif( $img ); 
+                        break;
+                    case IMAGETYPE_PNG:
+                        $img = imagecreatefrompng($file);
+                        imagepng( $img, NULL, 100 ); 
+                        break;
+                }
+                if(!$img) {
+                }
+                else {
+                    imagedestroy( $img );
+                }
+                $headers[] = "Content-Type: $mime_type";
+                if($name !== null && trim($name) !== '') {
+                    //download - without it image will not be downloaded just displayed on broswer
+                    if( (strlen($name)-strlen($img_ext)) !== strpos($name, $img_ext) ) {
+                        $name .= $img_ext;
+                    }
+                    $headers[] = "Content-Disposition: attachment; filename=$name";
+                }
+                self::$instance->app->headers = $headers;
+            }
+        }
     }
 }
