@@ -153,6 +153,20 @@ class Table
     private $limit = null;
 
     /**
+     * ON DUPLICATE KEY UPDATE clause.
+     *
+     * @var string
+     */
+    private $duplicateUpdate = null;
+
+    /**
+     * Full builded query.
+     *
+     * @var string
+     */
+    private $query = null;
+
+    /**
      * Create a new Table instance.
      *
      * @param  array  $config
@@ -253,6 +267,11 @@ class Table
      */
     public function setTable($table, $pagination)
     {
+        $this->where = null;
+        $this->limit = null;
+        $this->order = null;
+        $this->duplicateUpdate = null;
+        $this->query = null;
         $this->pagination = $pagination;
         $this->table = $table;
 
@@ -284,25 +303,32 @@ class Table
      * Get field from table
      *
      * @param  array|null  $field
+     * @param  string|null  $sqlQuery
      * @rturn  array
      */
-    public function num_rows()
+    public function num_rows($sqlQuery = false)
     {
         $sql = $this->query('select');
+        if($sqlQuery === true) {
+            return $this->getQuery();
+        }
         $result = $this->execute($sql);
-        $data = $result->num_rows;
-        return $data;
+        return $result->num_rows;
     }
 
     /**
      * Get field from table
      *
      * @param  array|null  $field
+     * @param  string|null  $sqlQuery
      * @rturn  array
      */
-    public function get($fields = null)
+    public function get($fields = null, $sqlQuery = false)
     {
         $sql = $this->query('select', $fields);
+        if($sqlQuery === true) {
+            return $this->getQuery();
+        }
         $result = $this->execute($sql);
         $data = $result->fetch_array(MYSQLI_ASSOC);
         return $data;
@@ -311,13 +337,20 @@ class Table
     /**
      * Get all fields from table
      *
-     * @param  array|null  $field
+     * @param  array|null   $field
+     * @param  string|null  $sqlQuery
      * @rturn  array
      */
-    public function getAll($fields = null)
+    public function getAll($fields = null, $sqlQuery = false)
     {
         $sql = $this->query('select', $fields);
+        if($sqlQuery === true) {
+            return $this->getQuery();
+        }
         $result = $this->execute($sql);
+        if($result->num_rows == 0) {
+            return [];
+        }
         while($row = $result->fetch_array(MYSQLI_ASSOC)) {
             $data[] = $row;
         }
@@ -371,43 +404,39 @@ class Table
      * Get paginated fields from table
      *
      * @param  array|null  $limit
+     * @param  string|null  $sqlQuery
      * @rturn  array
      */
-    public function getPaginated($limit = 1, $fields = null)
+    public function getPaginated($limit = 1, $fields = null, $sqlQuery = false)
     {
         $sql = $this->query('select', $fields, ['count'=>null, 'field'=>'num']);
         $result = $this->execute($sql);
         $row = $result->fetch_array(MYSQLI_ASSOC);
         $total = $row['num'];
+        if($total == 0 && $sqlQuery == false) {
+            return [];
+        }
         $this->pagination->initialize($limit, $total);
-        return $this->limit($limit, $this->pagination->getStartPoint())->getAll();
+        return $this->limit($limit, $this->pagination->getStartPoint())->getAll($fields, $sqlQuery);
     }
 
     /**
      * Add data to table
      *
-     * @param  string|null  $field
+     * @param  string|null  $data
+     * @param  string|null  $sqlQuery
      * @rturn  bool
      */
-    public function add()
+    public function add($data, $sqlQuery = false)
     {
-        $field = func_get_args();
-        if(func_num_args() == 0) {
+        if(!is_array($data) || count($data) == 0) {
             echo 'no data to save'; //no argument
             exit;
         }
-        elseif(func_num_args() == 1) {
-            if(is_array($field[0])) {
-                $data = $field[0]; //single array with all data
-            }
-            else {
-                $data = $field[0]; //single data without field //string with all/single data
-            }
-        }
-        else {
-            $data = $field; //more than 1 data without field //string with all/single data
-        }
         $sql = $this->query('insert', $data);
+        if($sqlQuery === true) {
+            return $this->getQuery();
+        }
         $result = $this->execute($sql);
         return $result;
     }
@@ -416,9 +445,10 @@ class Table
      * Update data to table
      *
      * @param  string|null  $field
+     * @param  string|null  $sqlQuery
      * @rturn  bool
      */
-    public function update()
+    public function update($sqlQuery = false)
     {
         $field = func_get_args();
         if(func_num_args() == 0) {
@@ -438,6 +468,9 @@ class Table
             exit;
         }
         $sql = $this->query('update', $data);
+        if($sqlQuery === true) {
+            return $this->getQuery();
+        }
         $result = $this->execute($sql);
         return $result;
     }
@@ -445,15 +478,19 @@ class Table
     /**
      * Delete data from table
      *
+     * @param  string|null  $sqlQuery
      * @rturn  bool
      */
-    public function delete()
+    public function delete($sqlQuery = false)
     {
         if(func_num_args() != 0) {
             echo 'invalid';
             exit;
         }
         $sql = $this->query('delete');
+        if($sqlQuery === true) {
+            return $this->getQuery();
+        }
         $result = $this->execute($sql);
         return $result;
     }
@@ -470,6 +507,30 @@ class Table
         if(is_array($where) && count($where) != 0) {
             foreach($where as $field => $value) {
                 $array[] = " `$field` = ".((is_string($value) ? "'$value'" : $value));
+            }
+            $this->where = " WHERE".implode(" $glue", $array);
+        }
+        elseif(is_string($where) && trim($where) != '') {
+            $where = trim($where);
+            $where = trim($where, 'WHERE ');
+            $where = rtrim($where);
+            $this->where = ' WHERE '.$where;
+        }
+        return $this;
+    }
+
+    /**
+     * Create WHERE LIKE clause
+     *
+     * @param   array  $where
+     * @param   string $glue
+     * @return  $this
+     */
+    public function like($where, $glue = 'AND')
+    {
+        if(is_array($where) && count($where) != 0) {
+            foreach($where as $field => $value) {
+                $array[] = " `$field` LIKE ".((is_string($value) ? "'$value'" : $value));
             }
             $this->where = " WHERE".implode(" $glue", $array);
         }
@@ -519,6 +580,30 @@ class Table
     }
 
     /**
+     * Create LIMIT clause
+     *
+     * @param   int  $start
+     * @param   int  $limit
+     * @return  $this
+     */
+    public function onDuplicateUpdate($fields)
+    {
+        if(is_array($fields) && count($fields) != 0) {
+            foreach($fields as $field => $value) {
+                $array[] = " `$field` = ".((is_string($value) ? "'$value'" : $value));
+            }
+            $this->duplicateUpdate = " ON DUPLICATE KEY UPDATE ".implode(" $glue", $array);
+        }
+        elseif(is_string($fields) && trim($fields) != '') {
+            $fields = trim($fields);
+            //$where = trim($where, 'WHERE ');
+            //$where = rtrim($where);
+            $this->duplicateUpdate = ' ON DUPLICATE KEY UPDATE '.$fields;
+        }
+        return $this;
+    }
+
+    /**
      * Create sql query.
      *
      * @param   string       $type
@@ -528,7 +613,6 @@ class Table
      */
     public function query($type, $field = null, $extra = null)
     {
-        //SELECT COUNT(*) as `num` 
         if($type == 'select') {
             if($field == null) {
                 $field = "*";
@@ -582,7 +666,7 @@ class Table
             }
             $values = "($values)";
             $keys = ($keys !== '') ? "($keys)" : '';
-            $sql = "INSERT INTO `".$this->getTable()."` $keys VALUES $values";
+            $sql = "INSERT INTO `".$this->getTable()."` $keys VALUES $values".$this->duplicateUpdate;
         }
         elseif($type == 'update') {
             if(is_array($field)) {
@@ -599,6 +683,7 @@ class Table
         elseif($type == 'delete') {
             $sql = "DELETE FROM `".$this->getTable()."` ".$this->where;
         }
+        $this->query = $sql;
         return $sql;
     }
 
@@ -615,7 +700,7 @@ class Table
         $this->errno = $this->connection->errno;
         $this->error = $this->connection->error;
         if($this->connection->errno) {
-            echo 'query error: '.$this->error;
+            echo 'query error ['.$this->connection->errno.'] : '.$this->error.' : '.$sql;
         }
         if($this->connection->errno == 1054) {
             echo 'database table not set properly';
@@ -623,6 +708,30 @@ class Table
         }
         return $result;
     }
+
+    /**
+     * Get builded sql query.
+     *
+     * @return  string
+     */
+    private function getQuery()
+    {
+        return $this->query;   
+    }
+
+    /**
+     * Function to sanitize values received from the form. Prevents SQL injection.
+     *
+     * @param   mixed   $str
+     * @return  mixed
+     */
+    function sanitizeFormValue($str) {
+	    $str = trim($str);
+	    if(get_magic_quotes_gpc()) {
+		    $str = stripslashes($str);
+	    }
+	    return $this->connection->real_escape_string($str);
+	}
 
     /**
      * Sets the connection instance.
@@ -2325,7 +2434,7 @@ class Table
     /**
      * Returns the association named after the passed value if exists, otherwise
      * throws an exception.
-     *
+     *----called when undefined method or variable is used
      * @param string $property the association name
      * @return \Cake\ORM\Association
      * @throws \RuntimeException if no association with such name exists
