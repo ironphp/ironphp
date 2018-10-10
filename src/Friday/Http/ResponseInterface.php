@@ -28,18 +28,47 @@ interface ResponseInterface {
     public function __construct($version);
  
     /**
+     * Get version.
+     *
+     * @return  Friday\Http\Response
+     */
+    public function getVersion();
+
+    /**
      * Add header.
      *
-     * @return  Object  Responce
+     * @param   string   $header
+     * @return  Friday\Http\Response
      */
-    public function addHeader($header);
+    public function addHeader($header = null);
  
+    /**
+     * Get header.
+     *
+     * @return  string
+     */
+    public function getHeader();
+
+    /**
+     * Add headers.
+     *
+     * @param   array   $headers
+     * @return  Friday\Http\Response
+     */
+    public function addHeaders(array $headers);
+
+    /**
+     * Get headers.
+     *
+     * @return  array
+     */
+    public function getHeaders();
+
     /**
      * Sent a HTTP header.
      *
      * @param  string  $output
      * @return void
      */
-    public function send($output);
-
+    public function sendHeader($output = null);
 }
