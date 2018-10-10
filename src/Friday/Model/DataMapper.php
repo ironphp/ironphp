@@ -53,13 +53,14 @@ class DataMapper
     }
 
     /**
-     * Create a new Table instance.
+     * Set Table name and get table instance.
      *
-     * @param  string  $table
-     *
-     * @return void
+     * @param  string                     $table
+     * @param  \Friday\Helper\Pagination  $pagination
+     * @return \Friday\Model\Table
      */
-    public function getTable($table) {
-        return $this->connection->setTable($table);
+    public function getTable($table, $pagination)
+    {
+        return $this->connection->setTable($table, $pagination);
     }
 }
