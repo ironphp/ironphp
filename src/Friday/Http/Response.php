@@ -24,14 +24,21 @@ class Response implements ResponseInterface
      *
      * @var string
      */
-    public $version;
+    private $version;
 
     /**
      * Header to be sent.
      *
      * @var string
      */
-    public $header;
+    private $header = null;
+
+    /**
+     * Headers to be sent.
+     *
+     * @var array
+     */
+    private $headers = [];
 
     /**
      * Create new Responce instance.
@@ -39,21 +46,26 @@ class Response implements ResponseInterface
      * @param  string  $version
      * @return void
      */
-    public function __construct($version)
+    public function __construct($version = null)
     {
         $this->version = $version;
     }
  
-    /*
-    public function getVersion() {
+    /**
+     * Get version.
+     *
+     * @return  Friday\Http\Response
+     */
+    public function getVersion()
+    {
         return $this->version;
     }
-    */
 
     /**
      * Add header.
      *
-     * @return  Object  Responce
+     * @param   string   $header
+     * @return  Friday\Http\Response
      */
     public function addHeader($header = null)
     {
@@ -61,18 +73,42 @@ class Response implements ResponseInterface
         return $this;
     }
  
-    /*
-    public function addHeaders(array $headers) {
-        foreach ($headers as $header) {
-            $this->addHeader($header);
+    /**
+     * Get header.
+     *
+     * @return  string
+     */
+    public function getHeader()
+    {
+        return $this->header;
+    }
+
+    /**
+     * Add headers.
+     *
+     * @param   array   $headers
+     * @return  Friday\Http\Response
+     */
+    public function addHeaders(array $headers = [])
+    {
+        $this->headers = [];
+        if($headers != []) {
+            foreach ($headers as $header) {
+                $this->headers[] = $header;
+            }
         }
         return $this;
     }
  
-    public function getHeaders() {
+    /**
+     * Get headers.
+     *
+     * @return  array
+     */
+    public function getHeaders()
+    {
         return $this->headers;
     }
-    */
 
     /**
      * Sent a HTTP header.
@@ -80,15 +116,21 @@ class Response implements ResponseInterface
      * @param  string  $output
      * @return void
      */
-    public function send($output)
+    public function sendHeader($output = null)
     {
         if (!headers_sent()) {
             if($this->version === 'HTTP/1.1') {
-                header("$this->version $this->header", true);
-                print $output;
+                //header("$this->version $this->header");
             }
             else {
                 throw new \Exception("Invalid HTTP version ".$this->version.".");
+                exit;
+            }
+            foreach($this->headers as $header) {
+                header("$header");
+            }
+            if($output) {
+                print $output;
                 exit;
             }
         } 
