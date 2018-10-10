@@ -24,7 +24,7 @@ interface RouteInterface {
      *
      * @return void
      */
-    public function __construct(/*$path, $controllerClass*/);
+    public function __construct();
  
     /**
      * register a GET method route.
