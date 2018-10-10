@@ -105,6 +105,13 @@ class Application
     public $config;
 
     /**
+     * Headers to be sent.
+     *
+     * @var array
+     */
+    public $headers = [];
+
+    /**
      * Create a new Friday application instance.
      *
      * @param  string|null  $basePath
@@ -119,7 +126,7 @@ class Application
         date_default_timezone_set("Asia/Kolkata");
 
         $this->requireFile(
-            $this->basePath('src/Friday/Helper/Helper.php')
+            $this->basePath('src\Friday\Helper\Function.php')//src/Friday/Helper/Helper.php')
         );
 
         $this->setIntallTime();
@@ -137,10 +144,12 @@ class Application
         }
 
         $this->config['app'] = $this->requireFile(
-            $this->basePath('config/app.php')
+            $this->basePath('config/app.php'),
+            true
         );
         $this->config['db'] = $this->requireFile(
-            $this->basePath('config/database.php')
+            $this->basePath('config/database.php'),
+            true
         );
         define('CONFIG_LOADED', microtime(true));
 
@@ -190,9 +199,7 @@ class Application
             elseif($action[0] == 'controller_method') {
                 $controller = $action[1];
                 $method = $action[2];
-                ob_start();
-                $appController->handleController($controller, $method);
-                $output = ob_get_clean();
+                $output = $appController->handleController($controller, $method);
             }
             elseif($action[0] == 'view') {
                 $view = $action[1];
@@ -203,7 +210,7 @@ class Application
             define('DISPATCHED', microtime(true));
 
             $this->response = $this->frontController->response($_SERVER['SERVER_PROTOCOL']);
-            $this->response->addHeader()->send($output);
+            $this->response->addHeaders($this->headers)->sendHeader($output);
             define('RESPONSE_SEND', microtime(true));
         }
     }
@@ -349,7 +356,7 @@ class Application
             return true;
         }
         else {
-            throw new \Exception($method." method is missing in ".get_class($controllerObj)."Controller.");
+            throw new \Exception($method." method is missing in ".get_class($controllerObj)." Controller.");
             exit;
         }
     }
@@ -358,12 +365,18 @@ class Application
      * Require a file.
      *
      * @param  string  $file
+     * @param  bool    $return
      * @return void
      */
-    public function requireFile($file)
+    public function requireFile($file, $return = false)
     {
         if($this->findFile($file)) {
-            return require($file);
+            if($return !== false) {
+                return require($file);
+            }
+            else {
+                require($file);
+            }
         }
         else {
             throw new \Exception($file." file is missing.");
