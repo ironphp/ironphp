@@ -19,34 +19,60 @@ namespace Friday\Http;
 
 interface FrontControllerInterface
 {
-
     /**
      * Create a new FrontController instance.
      *
      * @return void
      */
-    public function __construct(/*array $options = array()*/);
-
+    public function __construct();
+    
     /**
-     * Parse Uri and get path uri params.
+     * Parse Uri and get path uri, params, server method.
      *
-     * @return void
+     * @return array
      */
     public function parseUri();
-
+    
     /**
      * Create Responce instance.
      *
-     * @return object
+     * @return \Friday\Http\Request
      */
     public function request();
 
-    /*
-    public function setController($controller);
-    public function setAction($action);
-    public function setParams(array $params);
-    */
+    /**
+     * Create Route instance.
+     *
+     * @return \Friday\Http\Route
+     */
+    public function route();
 
+    /**
+     * Create Router instance.
+     *
+     * @return \Friday\Http\Router
+     */
+    public function router();
+
+    /**
+     * Create Dispatcher instance.
+     *
+     * @return \Friday\Http\Dispatcher
+     */
+    public function dispatcher();
+
+    /**
+     * Create Response instance.
+     *
+     * @param  string  $serverProtocol
+     * @return \Friday\Http\Response
+     */
+    public function response($serverProtocol);
+
+    /**
+     * Call method of controller with parameters.
+     *
+     * @return void
+     */
     public function run();
-
 }
