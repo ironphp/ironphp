@@ -32,7 +32,8 @@ class FrontController {
      *
      * @return void
      */
-    public function __construct(/*array $options = array()*/) {
+    public function __construct(/*array $options = array()*/)
+    {
     }
     
     /**
@@ -40,7 +41,8 @@ class FrontController {
      *
      * @return array
      */
-    public function parseUri() {
+    public function parseUri()
+    {
         $uri = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
         $uri = str_replace(['{', '}'], '', urldecode($uri));
         $extDir = dirname(dirname($_SERVER['SCRIPT_NAME']));
@@ -118,9 +120,10 @@ class FrontController {
     /**
      * Create Responce instance.
      *
-     * @return object
+     * @return \Friday\Http\Request
      */
-    public function request() {
+    public function request()
+    {
         //if (empty($options)) {
            $parse = $this->parseUri();
         //}
@@ -137,33 +140,36 @@ class FrontController {
             }
         }
         */
-        return new \Friday\Http\Request($parse['uri'], $parse['params'], $parse['method'], $parse['https'], $parse['host'], $parse['ip']);
+        return new \Friday\Http\Request($parse['uri'], $parse['host'], $parse['ip'], $parse['params'], $parse['method'], $parse['https']);
     }
 
     /**
      * Create Route instance.
      *
-     * @return object
+     * @return \Friday\Http\Route
      */
-    public function route() {
+    public function route()
+    {
         return new \Friday\Http\Route();
     }
 
     /**
      * Create Router instance.
      *
-     * @return object
+     * @return \Friday\Http\Router
      */
-    public function router() {
+    public function router()
+    {
         return new \Friday\Http\Router();
     }
 
     /**
      * Create Dispatcher instance.
      *
-     * @return object
+     * @return \Friday\Http\Dispatcher
      */
-    public function dispatcher() {
+    public function dispatcher()
+    {
         return new \Friday\Http\Dispatcher();
     }
 
@@ -171,14 +177,16 @@ class FrontController {
      * Create Response instance.
      *
      * @param  string  $serverProtocol
-     * @return object
+     * @return \Friday\Http\Response
      */
-    public function response($serverProtocol) {
+    public function response($serverProtocol)
+    {
         return new \Friday\Http\Response($serverProtocol);
     }
 
     /*
-    public function setController($controller) {
+    public function setController($controller)
+    {
         $controller = ucfirst(strtolower($controller)) . "Controller";
         if (!class_exists($controller)) {
             throw new \InvalidArgumentException(
@@ -204,10 +212,14 @@ class FrontController {
     }
     */
 
-    public function run() {
+    /**
+     * Call method of controller with parameters.
+     *
+     * @return void
+     */
+    public function run()
+    {
         $controller = "Controller\\".$this->controller;
         call_user_func_array(array($controller, $this->action), $this->params);
     }
-
-
 }
