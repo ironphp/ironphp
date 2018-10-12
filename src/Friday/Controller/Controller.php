@@ -163,7 +163,7 @@ class Controller
     /**
      * Create Instance of Model.
      *
-     * @param  string       $model   View to use for rendering
+     * @param  string   $model   View to use for rendering
      *
      * @return \App\Model\{Name}Model
      */
@@ -182,8 +182,8 @@ class Controller
     /**
      * Display View.
      *
-     * @param  string       $view  View to use for rendering
-     * @param  string       $data  Arguments to use
+     * @param  string   $view  View to use for rendering
+     * @param  string   $data  Arguments to use
      *
      * @return void
      */
@@ -196,8 +196,8 @@ class Controller
     /**
      * Display Template.
      *
-     * @param  string       $view  Template to use for rendering
-     * @param  string       $data  Arguments to use
+     * @param  string   $view  Template to use for rendering
+     * @param  string   $data  Arguments to use
      *
      * @return void
      */
