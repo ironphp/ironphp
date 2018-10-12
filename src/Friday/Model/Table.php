@@ -177,14 +177,24 @@ class Table
     {
         $mysqli = new \mysqli($config['host'], $config['username'], $config['password'], $config['database'], $config['port']);
 
-        /*
-         * This is the 'official' OO way to do it,
-         * BUT $connect_error was broken until PHP 5.2.9 and 5.3.0.
-         */
+        if (version_compare(PHP_VERSION, '5.2.9', '<=') && version_compare(PHP_VERSION, '5.3.0', '>=')) {
+            /*
+             * This is the "official" OO way to do it,
+             * BUT $connect_error was broken until PHP 5.2.9 and 5.3.0.
+             * Works as of PHP 5.2.9 and 5.3.0.
+             */
+            $this->connect_error = $mysqli->connect_error;
+        }
+        else {
+            /*
+             * Use this instead of $connect_error if you need to ensure
+             * compatibility with PHP versions prior to 5.2.9 and 5.3.0.
+             */
+            $this->connect_error = mysqli_connect_error();
+        }
         $this->connect_errno = $mysqli->connect_errno;
-        $this->connect_error = $mysqli->connect_error;
-        if ($mysqli->connect_errno) {
-            die('Connect Error: '.$this->connect_error);
+        if ($this->connect_errno) {
+            die('Connect Error ['.$this->connect_errno.']: '.$this->connect_error);
         }
         $this->connection = $mysqli;
         /*
@@ -308,11 +318,11 @@ class Table
      */
     public function num_rows($sqlQuery = false)
     {
-        $sql = $this->query('select');
+        $sql = $this->buildQuery('select');
         if($sqlQuery === true) {
             return $this->getQuery();
         }
-        $result = $this->execute($sql);
+        $result = $this->executeQuery($sql);
         return $result->num_rows;
     }
 
@@ -325,11 +335,11 @@ class Table
      */
     public function get($fields = null, $sqlQuery = false)
     {
-        $sql = $this->query('select', $fields);
+        $sql = $this->buildQuery('select', $fields);
         if($sqlQuery === true) {
             return $this->getQuery();
         }
-        $result = $this->execute($sql);
+        $result = $this->executeQuery($sql);
         $data = $result->fetch_array(MYSQLI_ASSOC);
         return $data;
     }
@@ -343,11 +353,11 @@ class Table
      */
     public function getAll($fields = null, $sqlQuery = false)
     {
-        $sql = $this->query('select', $fields);
+        $sql = $this->buildQuery('select', $fields);
         if($sqlQuery === true) {
             return $this->getQuery();
         }
-        $result = $this->execute($sql);
+        $result = $this->executeQuery($sql);
         if($result->num_rows == 0) {
             return [];
         }
@@ -409,8 +419,8 @@ class Table
      */
     public function getPaginated($limit = 1, $fields = null, $sqlQuery = false)
     {
-        $sql = $this->query('select', $fields, ['count'=>null, 'field'=>'num']);
-        $result = $this->execute($sql);
+        $sql = $this->buildQuery('select', $fields, ['count'=>null, 'field'=>'num']);
+        $result = $this->executeQuery($sql);
         $row = $result->fetch_array(MYSQLI_ASSOC);
         $total = $row['num'];
         if($total == 0 && $sqlQuery == false) {
@@ -433,11 +443,11 @@ class Table
             echo 'no data to save'; //no argument
             exit;
         }
-        $sql = $this->query('insert', $data);
+        $sql = $this->buildQuery('insert', $data);
         if($sqlQuery === true) {
             return $this->getQuery();
         }
-        $result = $this->execute($sql);
+        $result = $this->executeQuery($sql);
         return $result;
     }
 
@@ -467,11 +477,11 @@ class Table
             echo 'invalid data';
             exit;
         }
-        $sql = $this->query('update', $data);
+        $sql = $this->buildQuery('update', $data);
         if($sqlQuery === true) {
             return $this->getQuery();
         }
-        $result = $this->execute($sql);
+        $result = $this->executeQuery($sql);
         return $result;
     }
 
@@ -487,11 +497,11 @@ class Table
             echo 'invalid';
             exit;
         }
-        $sql = $this->query('delete');
+        $sql = $this->buildQuery('delete');
         if($sqlQuery === true) {
             return $this->getQuery();
         }
-        $result = $this->execute($sql);
+        $result = $this->executeQuery($sql);
         return $result;
     }
 
@@ -608,10 +618,9 @@ class Table
      *
      * @param   string       $type
      * @param   string|null  $field
-     *
      * @return  string
      */
-    public function query($type, $field = null, $extra = null)
+    public function buildQuery($type, $field = null, $extra = null)
     {
         if($type == 'select') {
             if($field == null) {
@@ -691,20 +700,18 @@ class Table
      * Run sql query.
      *
      * @param   string  $sql
-     *
-     * @return  string
+     * @return  mysqli_result
      */
-    public function execute($sql)
+    public function executeQuery($sql)
     {
         $result = $this->connection->query($sql);
         $this->errno = $this->connection->errno;
         $this->error = $this->connection->error;
         if($this->connection->errno) {
-            echo 'query error ['.$this->connection->errno.'] : '.$this->error.' : '.$sql;
+            echo 'Query Error ['.$this->errno.'] : '.$this->error.' : '.$sql;
         }
-        if($this->connection->errno == 1054) {
-            echo 'database table not set properly';
-            exit;
+        if($this->errno == 1054) {
+            echo 'Table not set properly in query';
         }
         return $result;
     }
