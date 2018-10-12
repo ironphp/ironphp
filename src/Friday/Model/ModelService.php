@@ -64,21 +64,20 @@ class ModelService
      */
     public function initialize($app)
     {
-        self::$app = $app;
+        if(self::$app === NULL) {
+            self::$app = $app;
+        }
     }
 
     /**
      * Create Instance of Table.
      *
      * @param  string  $tableName
-     * @return \App\Model\Table
+     * @return \Friday\Model\Table
      */
     public function table($tableName)
     {
-        if($this->dataMapper == null) {
-            $this->dataMapper = new \Friday\Model\DataMapper(self::$app->config);
-        }
-        return $this->dataMapper->getTable($tableName, $this->getPagination());
+        return $this->getDataMapper()->getTable($tableName, $this->getPagination());
     }
 
     /**
@@ -97,12 +96,15 @@ class ModelService
     /**
      * Get pagination html.
      *
-     * @param  string $urlstr
-     * @return string
+     * @param  string  $url
+     * @param  int     $style
+     * @param  array   $cssClass
+     * @param  bool    $replaceClass
+     * @return string|null
      */
-    public function getPaginationHtml($urlstr = '?')
+    protected function getPaginationHtml($url = '?', $style = 0, $cssClass = null, $replaceClass = false)
     {
-        return $this->pagination->getPaginationHtml($urlstr);
+        return $this->pagination->getPaginationHtml($url, $style, $cssClass, $replaceClass);
     }
 
     /**
@@ -110,9 +112,9 @@ class ModelService
      *
      * @return string
      */
-    public function isLogged()
+    protected function isLogged()
     {
-        if(self::$app->session->get('user_id')) {
+        if(self::$app->session->get('SESS_MEMBER_ID')) {
             return true;
         }
         else {
@@ -121,17 +123,84 @@ class ModelService
     }
 
     /**
-     * Is user admin or not.
+     * Is user superadmin or not.
      *
      * @return string
      */
-    public function isAdmin()
+    protected function isAdmin()
     {
-        if(self::$app->session->get('master')) {
+        $usertype = self::$app->session->get('SESS_USER_TYPE');
+        if($usertype === 'Master') {
             return true;
         }
         else {
             return false;
         }
+    }
+
+    /**
+     * Function to sanitize values received from the form. Prevents SQL injection.
+     *
+     * @param   mixed   $string
+     * @return  mixed
+     */
+    protected function sanitizeFormValue($string)
+    {
+        return $this->getDataMapper()->getConnection()->sanitizeFormValue($string);
+    }
+
+    /**
+     * Get instance of Request.
+     *
+     * @return \Friday\Http\Request
+     */
+    protected function request()
+    {
+        return self::$app->request;
+    }
+
+    /**
+     * Get APP_KEY value.
+     *
+     * @return string
+     */
+    protected function getAppKey()
+    {
+        $key = env('APP_KEY');
+        $key = str_replace('base64:', '', $key);
+        return base64_decode($key);
+    }
+
+    /**
+     * Get hash salt value.
+     *
+     * @return string
+     */
+    protected function getSalt()
+    {
+        return self::$app->config['app']['salt'];
+    }
+
+    /**
+     * Execute SQL Query.
+     *
+     * @return mysqli_result
+     */
+    protected function runQuery($query)
+    {
+        return $this->getDataMapper()->getConnection()->executeQuery($query);
+    }
+
+    /**
+     * Get instance of DataMapper.
+     *
+     * @return \Friday\Model\DataMapper
+     */
+    private function getDataMapper()
+    {
+        if($this->dataMapper == null) {
+            $this->dataMapper = new \Friday\Model\DataMapper(self::$app->config);
+        }
+        return $this->dataMapper;
     }
 }
