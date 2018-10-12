@@ -26,6 +26,5 @@ class DomainLogic
      */
     public function __construct($basePath = null)
     {
-        
     }
 }
