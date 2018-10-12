@@ -41,17 +41,57 @@ class Request implements RequestInterface {
     public $serverRequestMethod;
     
     /**
+     * User IP.
+     *
+     * @var string
+     */
+    public $ip;
+    
+    /**
      * Create new Request instance with uri and param.
      *
      * @param  string  $uri
+     * @param  string  $host
+     * @param  string  $ip
      * @param  array   $params
      * @param  enum    $method  (GET, POST)
+     * @param  bool    $https
      * @return void
      */
-    public function __construct($uri, $params = array(), $method = 'GET') { 
+    public function __construct($uri, $host, $ip, $params = array(), $method = 'GET', $https = false)
+    { 
         $this->uri = $uri;
         $this->params = $params;
         $this->serverRequestMethod = $method;
+        $this->https = $https;
+        $this->host = rtrim($host, '/');
+        $this->ip = $ip;
+    }
+ 
+    /**
+     * Get Host.
+     *
+     * @return string
+     */
+    public function getHost()
+    {
+        if($this->https) {
+            $pre = 'https://';
+        }
+        else {
+            $pre = 'http://';
+        }
+        return $pre.$this->host;
+    }
+ 
+    /**
+     * Get URL.
+     *
+     * @return string
+     */
+    public function getUrl()
+    {
+        return $this->getHost().$this->uri;
     }
  
     /**
@@ -59,7 +99,8 @@ class Request implements RequestInterface {
      *
      * @return string
      */
-    public function getUri() {
+    public function getUri()
+    {
         return $this->uri;
     }
  
@@ -70,7 +111,8 @@ class Request implements RequestInterface {
      * @param  mix     $value
      * @return object
      */
-    public function setParam($key, $value) {
+    public function setParam($key, $value)
+    {
         $this->params[$key] = $value;
         return $this;
     }
@@ -80,7 +122,8 @@ class Request implements RequestInterface {
      *
      * @return mix
      */
-    public function getParam($key) {
+    public function getParam($key)
+    {
         if (!isset($this->params[$key])) {
             throw new \InvalidArgumentException("The request parameter with key '$key' is invalid."); 
         }
@@ -92,8 +135,18 @@ class Request implements RequestInterface {
      *
      * @return array
      */
-    public function getParams() {
+    public function getParams()
+    {
         return $this->params;
     }
 
+    /**
+     * Get user IP.
+     *
+     * @return string
+     */
+    public function getIp()
+    {
+        return $this->ip;
+    }
 }
