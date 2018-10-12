@@ -126,10 +126,8 @@ class Application
         date_default_timezone_set("Asia/Kolkata");
 
         $this->requireFile(
-            $this->basePath('src\Friday\Helper\Function.php')//src/Friday/Helper/Helper.php')
+            $this->basePath('src\Friday\Helper\Function.php')
         );
-
-        $this->setIntallTime();
 
         $this->config['basePath'] = $this->basePath(); 
 
@@ -139,8 +137,13 @@ class Application
         );
         $getenv->load();
 
-        if(empty(env('APP_KEY'))) {
-            echo "APP_KEY is not defined in .env file, define it by command: php jarvis key";
+        if($this->getIntallTime(true) === false) {
+            $this->setIntallTime();
+        }
+        else {
+            if(empty(env('APP_KEY'))) {
+                echo "APP_KEY is not defined in .env file, define it by command: php jarvis key";
+            }
         }
 
         $this->config['app'] = $this->requireFile(
@@ -394,24 +397,35 @@ class Application
         $file = $this->basePath('app/install');
         if(!file_exists($file)) {
             $content = json_encode(['time'=>time(), 'version' => $this->version()]);
-            file_put_contents($file, $content);
+            $byte = file_put_contents($file, $content);
+            if($byte) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        else {
+            return true;
         }
     }
 
     /**
      * Get Installtion Time/Version to app/install file used for checking updates.
      *
-     * @return array
+     * @param  bool  $checkSet
+     * @return bool|array
      */
-    public function getIntallTime()
+    public function getIntallTime($checkSet = false)
     {
         $file = $this->basePath('app/install');
         if(!file_exists($file)) {
-            $data = ['time'=>time(), 'version' => $this->version()];
-            $content = json_encode($data);
-            file_put_contents($file, $content);
+            return false;
         }
         else {
+            if($checkSet === true) {
+                return true;
+            }
             $content = file_get_contents($file);
             $data = json_decode($content);
         }
