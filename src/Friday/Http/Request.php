@@ -109,7 +109,7 @@ class Request implements RequestInterface {
      *
      * @param  string  $key
      * @param  mix     $value
-     * @return object
+     * @return $this
      */
     public function setParam($key, $value)
     {

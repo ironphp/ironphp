@@ -23,11 +23,29 @@ interface RequestInterface {
      * Create new Request instance with uri and param.
      *
      * @param  string  $uri
+     * @param  string  $host
+     * @param  string  $ip
      * @param  array   $params
+     * @param  enum    $method  (GET, POST)
+     * @param  bool    $https
      * @return void
      */
-    public function __construct($uri, $params = array());
+    public function __construct($uri, $host, $ip, $params = array(), $method = 'GET', $https = false);
  
+    /**
+     * Get Host.
+     *
+     * @return string
+     */
+    public function getHost();
+
+    /**
+     * Get URL.
+     *
+     * @return string
+     */
+    public function getUrl();
+
     /**
      * Get URI.
      *
@@ -40,7 +58,7 @@ interface RequestInterface {
      *
      * @param  string  $key
      * @param  mix     $value
-     * @return object
+     * @return $this
      */
     public function setParam($key, $value);
  
@@ -58,4 +76,10 @@ interface RequestInterface {
      */
     public function getParams();
 
+    /**
+     * Get user IP.
+     *
+     * @return string
+     */
+    public function getIp();
 }
