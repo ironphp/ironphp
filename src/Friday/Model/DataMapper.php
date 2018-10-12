@@ -53,7 +53,7 @@ class DataMapper
     }
 
     /**
-     * Set Table name and get table instance.
+     * Set Table name and get Table instance.
      *
      * @param  string                     $table
      * @param  \Friday\Helper\Pagination  $pagination
@@ -62,5 +62,15 @@ class DataMapper
     public function getTable($table, $pagination)
     {
         return $this->connection->setTable($table, $pagination);
+    }
+
+    /**
+     * Get Table instance.
+     *
+     * @return \Friday\Model\Table
+     */
+    public function getConnection()
+    {
+        return $this->connection;
     }
 }
