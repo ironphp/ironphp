@@ -62,10 +62,10 @@ In case you want to use a custom app dir name (e.g. `/myapp/`):
 composer create-project --prefer-dist ironphp/ironphp -s dev myapp
 ```
 
-You can now use your machine's webserver to view the default home page:
+You can now use php developement webserver to view the default home page:
 
 ```bash
-php -S localhost:8000 -t public
+php jarvis serve
 ```
 
 Then visit `http://localhost:8000` to see the welcome page.
