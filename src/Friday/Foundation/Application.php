@@ -196,17 +196,17 @@ class Application
 
             $appController = new \Friday\Controller\Controller();
             $appController->initialize($this);
-            if($action[0] == 'output') {
-                $output = $action[1];
+            if(isset($action['output'])) {
+                $output = $action['output'][0].$action['output'][0];
             }
-            elseif($action[0] == 'controller_method') {
-                $controller = $action[1];
-                $method = $action[2];
+            elseif(isset($action['controller'])) {
+                $controller = $action['controller'][0];
+                $method = $action['controller'][1];
                 $output = $appController->handleController($controller, $method);
             }
-            elseif($action[0] == 'view') {
-                $view = $action[1];
-                $data = $action[2];
+            elseif(isset($action['view'])) {
+                $view = $action['view'][0];
+                $data = $action['view'][1];
                 $viewPath = $this->findView($view);
                 $output = $appController->render($viewPath, $data);
             }
