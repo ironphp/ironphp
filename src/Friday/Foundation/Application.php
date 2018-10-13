@@ -197,7 +197,7 @@ class Application
             $appController = new \Friday\Controller\Controller();
             $appController->initialize($this);
             if(isset($action['output'])) {
-                $output = $action['output'][0].$action['output'][0];
+                $output = $action['output'][0].$action['output'][1];
             }
             elseif(isset($action['controller'])) {
                 $controller = $action['controller'][0];
