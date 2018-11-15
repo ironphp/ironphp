@@ -35,6 +35,13 @@ class Command
     protected $commands;
 
     /**
+     * Short Commands.
+     *
+     * @array
+     */
+    protected $short = ['-h' => 'help', '--help' => 'help', '-V' => 'version', '--version' => 'version'];
+
+    /**
      * Create a new console command instance.
      *
      * @param  string|null  $basePath
@@ -50,30 +57,38 @@ class Command
 
         $this->commands = new \Friday\Console\Commands($app);
         define('APP_INIT', microtime(true));
-
+        
         // run commands
         if(count($this->argvInput)) {
             $command = $this->argvInput[0];
+            if(isset($this->short[$command])) {
+                $command = $this->short[$command];
+            }
             if($this->findCommand($command)) {
                 $this->commands->$command();
             }
             else {
-                print "Command not found.\n";
-                $this->commands->help();
+                print "
+".\Friday\Console\Colors::BG_RED."                                 
+".\Friday\Console\Colors::WHITE ."  Command \"".$command."\" is not defined.  
+".\Friday\Console\Colors::BG_RED."                                 \n";
+                echo \Friday\Console\Colors::BG_BLACK.''.\Friday\Console\Colors::WHITE;
             }
         }
         else {
-            $this->commands->help();
+            $this->commands->list();
         }
         define('CMD_RUN', microtime(true));
     }
 
     /**
-     * Find aCommand command.
+     * Find Command.
      *
+     * @param  string  $command
      * @return bool
      */
-    public function findCommand($command) {
+    public function findCommand($command)
+    {
         return method_exists($this->commands, $command);
     }
 }

@@ -42,7 +42,7 @@ class Commands
      *
      * @return void
      */
-    public function help($command = null)
+    public function list($command = null)
     {
         print "".\Friday\Console\Colors::LIGHT_BLUE."
 ---------------------------------------------------------------
@@ -51,8 +51,10 @@ class Commands
 ".\Friday\Console\Colors::YELLOW."Usage:
 ".\Friday\Console\Colors::WHITE."  command [options] [arguments]\n
 ".\Friday\Console\Colors::YELLOW."Options:
-".\Friday\Console\Colors::GREEN."  -h, --help".\Friday\Console\Colors::WHITE."\t\tDisplay this help message\n
-".\Friday\Console\Colors::GREEN."Available commands:
+".\Friday\Console\Colors::GREEN."  -h, --help".\Friday\Console\Colors::WHITE."\t\tDisplay this help message
+".\Friday\Console\Colors::GREEN."  -V, --version".\Friday\Console\Colors::WHITE."\t\tDisplay this application version\n
+".\Friday\Console\Colors::YELLOW."Available commands:
+".\Friday\Console\Colors::GREEN."  list".\Friday\Console\Colors::WHITE."\t\t- Lists commands
 ".\Friday\Console\Colors::GREEN."  serve".\Friday\Console\Colors::WHITE."\t\t- Serve the application on the PHP development server
 ".\Friday\Console\Colors::GREEN."  version".\Friday\Console\Colors::WHITE."\t- Display Version
 ".\Friday\Console\Colors::GREEN."  help".\Friday\Console\Colors::WHITE."\t\t- Displays help for a command\n";
@@ -123,7 +125,7 @@ IronPHP ".\Friday\Console\Colors::WHITE."Framework ".\Friday\Console\Colors::BRO
     {
         print "".\Friday\Console\Colors::LIGHT_BLUE."
 ---------------------------------------------------------------
-Welcome to ".\Friday\Console\Colors::GREEN."IronPHP".\Friday\Console\Colors::WHITE." Framework ".\Friday\Console\Colors::YELLOW."".$this->app->version().\Friday\Console\Colors::WHITE." Console".\Friday\Console\Colors::LIGHT_BLUE."
+".\Friday\Console\Colors::WHITE."Welcome to ".\Friday\Console\Colors::GREEN."IronPHP".\Friday\Console\Colors::WHITE." Framework ".\Friday\Console\Colors::YELLOW."".$this->app->version().\Friday\Console\Colors::WHITE." Console".\Friday\Console\Colors::LIGHT_BLUE."
 ---------------------------------------------------------------
 ".\Friday\Console\Colors::LIGHT_CYAN."Built-in development server started: ".\Friday\Console\Colors::YELLOW."<http://localhost:$port>".\Friday\Console\Colors::WHITE."
 You can exit with `CTRL-C`\n";
@@ -138,5 +140,30 @@ You can exit with `CTRL-C`\n";
      */
     public function key() {
         $this->app->setKey();
+    }
+
+    /**
+     * Get all command.
+     *
+     * @return void
+     */
+    public function help($command = null)
+    {
+        print "".\Friday\Console\Colors::LIGHT_BLUE."
+---------------------------------------------------------------
+".\Friday\Console\Colors::GREEN."IronPHP".\Friday\Console\Colors::WHITE." Framework ".\Friday\Console\Colors::YELLOW."".$this->app->version()."".\Friday\Console\Colors::LIGHT_BLUE."
+---------------------------------------------------------------
+".\Friday\Console\Colors::YELLOW."Usage:
+".\Friday\Console\Colors::WHITE."  help [options] [--] [<command_name>]\n
+".\Friday\Console\Colors::YELLOW."Options:
+".\Friday\Console\Colors::GREEN."  -h, --help".\Friday\Console\Colors::WHITE."\t\tDisplay this help message
+".\Friday\Console\Colors::GREEN."  -V, --version".\Friday\Console\Colors::WHITE."\t\tDisplay this application version\n
+".\Friday\Console\Colors::YELLOW."Help:
+".\Friday\Console\Colors::WHITE."  The ".\Friday\Console\Colors::GREEN."help".\Friday\Console\Colors::WHITE." command displays help for a given command:
+
+".\Friday\Console\Colors::GREEN."    php jarvis help
+
+".\Friday\Console\Colors::WHITE."  To display the list of available commands, please use the ".\Friday\Console\Colors::GREEN."list".\Friday\Console\Colors::WHITE." command.";
+        echo \Friday\Console\Colors::BG_BLACK.''.\Friday\Console\Colors::WHITE;
     }
 }
