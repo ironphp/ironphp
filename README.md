@@ -106,7 +106,7 @@ For each report, we try to first confirm the vulnerability. Once confirmed, the 
 
 ## Authors
 
-- Gaurang Parmar  | [GitHub](https://github.com/gaurangkumar)  | [Twitter](https://twitter.com/gaurangkumarp) | [Patreon] | (https://www.patreon.com/gaurangkumar) <gaurangkumarp@gmail.com>
+- Gaurang Parmar  | [GitHub](https://github.com/gaurangkumar)  | [Twitter](https://twitter.com/gaurangkumarp) | [Patreon](https://www.patreon.com/gaurangkumar) | <gaurangkumarp@gmail.com>
 
 ## License
 
