@@ -104,9 +104,9 @@ For each report, we try to first confirm the vulnerability. Once confirmed, the 
 - Release new versions of all affected versions.
 - Prominently feature the problem in the release announcement.
 
-## Credits
+## Authors
 
-- [Gaurang Parmar](https://github.com/gaurangkumar)
+- Gaurang Parmar  | [GitHub](https://github.com/gaurangkumar)  | [Twitter](https://twitter.com/gaurangkumarp) | [Patreon](https://www.patreon.com/gaurangkumar) <gaurangkumarp@gmail.com>
 
 ## License
 
