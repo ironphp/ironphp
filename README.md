@@ -10,7 +10,10 @@
         <img alt='Coverage Status' src='https://coveralls.io/repos/github/ironphp/ironphp/badge.svg?branch=master'>
     </a>
     <a href="https://travis-ci.org/ironphp/ironphp" target="_blank">
-        <img alt="Build Status" src="https://api.travis-ci.org/ironphp/ironphp.svg">
+        <img alt="Travis-CI Build Status" src="https://api.travis-ci.org/ironphp/ironphp.svg">
+    </a>
+    <a href="https://ci.appveyor.com/project/gaurangkumar/ironphp/branch/master" target="_blank">
+        <img alt="AppVeyor Build Status" src="https://ci.appveyor.com/api/projects/status/gaurangkumar/ironphp/branch/master?svg=true">
     </a>
     <a href="https://opensource.org/licenses/MIT" target="_blank">
         <img alt="Software License" src="https://poser.pugx.org/ironphp/ironphp/license.svg">
