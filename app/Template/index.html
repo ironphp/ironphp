@@ -1,20 +1,59 @@
-<style>
-h1 {
-    font-size:90px;
-    font-weight:900;
-    font-family:'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', 'DejaVu Sans', Verdana, sans-serif;
-    text-align:center;
-    box-shadow:#767676 10px 10px 10px 10px;
-    text-shadow:#767676 10px 10px 10px;
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IronPHP: The PHP Framework</title>
+	<link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link href="favicon.ico" type="image/x-icon" rel="shortcut icon">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+    <link href="https://fonts.googleapis.com/css?family=Raleway:500i|Roboto:300,400,700|Roboto+Mono" rel="stylesheet">
+
+    <style>
+    a {
+        text-decoration:none
+    }
+    h1 {
+        font-size:90px;
+        font-weight:900;
+        font-family:'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', 'DejaVu Sans', Verdana, sans-serif;
+        text-align:center;
+        box-shadow:#767676 10px 10px 10px 10px;
+        text-shadow:#767676 10px 10px 10px;
+    }
+    .style {
+        color: #962A2B;
+        text-align:center;
+    }
+ul {
+    list-style-type: none;
+    margin: 0 0 30px 0;
 }
-.style {
-    color: #962A2B;
+
+li {
+    padding-left: 1.8em;
 }
-</style>
-<h1 class="style">{{name}}</h1>
-<h1 style="font-size:50px">Under Development<br>Comming Soon</h1>
-<div style="text-align:center">
-    <a href="https://github.com/ironphp/ironphp" title="IronPHP on GitHub">
-        <i class="fab fa-5x fa-github"></i>
-    </a>
-</div>
+
+ul li ul, ul li ul li {
+    margin: 0;
+    padding: 0;
+}
+    </style>
+</head>
+<body>
+    <header class="style">
+        <img src="logo.png" alt="IronPHP" width="100">
+        <h1>{{name}} {{version}}</h1>
+    </header>
+    <h1 style="font-size:50px">The PHP Framework</h1>
+    <h3 style="text-align:center">
+        Developed and Maintained By <a href="https://twitter.com/gaurangkumarp" title="GaurangKumar on Twitter">GaurangKumar</a>
+        On
+        <a href="https://github.com/ironphp/ironphp" title="IronPHP on GitHub">
+            <i class="fab fa-1x fa-github"></i> Github
+        </a>
+    </h3>
+</body>
+</html>
