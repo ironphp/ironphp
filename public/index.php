@@ -66,7 +66,7 @@ $app = require_once dirname(__DIR__) . '/app/bootstrap/app.php';
 define('IRONPHP_END', microtime(true));
 
 if(env('APP_DEBUG')) {
-    echo '<pre>';
+    echo '<hr><pre>';
     echo 'CONFIG_LOADED   : '.round((CONFIG_LOADED - IRONPHP_START), 4)." seconds<br>";
     echo 'REQUEST_CATCHED : '.round((REQUEST_CATCHED - CONFIG_LOADED), 4)." seconds<br>";
     echo 'ROUTES_LOADED   : '.round((ROUTES_LOADED - REQUEST_CATCHED), 4)." seconds<br>";
