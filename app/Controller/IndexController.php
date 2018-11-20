@@ -32,8 +32,8 @@ class IndexController extends Controller
 
     public function index()
     {
-        //$this->view('index');
-        $this->view('index', ['name'=>'IronPHP']);
+        $this->template('index', ['name'=>'IronPHP', 'version'=>\Friday\Foundation\Application::VERSION]);
+        #Examples
         //$data = $this->model('IndexModel')->get('name');
         //$data = $this->model('IndexModel')->get(null, ['id' => 1]);
         //$data = $this->model('IndexModel')->get(null, ['id' => 1, 'status' => 0]);
@@ -41,13 +41,15 @@ class IndexController extends Controller
         //$data = $this->model('IndexModel')->add();
         //$data = $this->model('IndexModel')->update();
         //$data = $this->model('IndexModel')->delete();
-        
+        //$this->view('index');
         //$this->view('index', $data);
     }
+
     public function name($param)
     {
         return "Name($param) Method Called";
     }
+
     public function showUsers()
     {
         print_r($this->model->getUsers());
