@@ -50,7 +50,7 @@
             "@php jarvis key"
         ]
     },
-    "minimum-stability": "alpha",
+    "minimum-stability": "dev",
     "prefer-stable": false,
     "config": {
         "preferred-install": {
