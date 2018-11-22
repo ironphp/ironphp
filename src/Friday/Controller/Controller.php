@@ -17,6 +17,9 @@
 
 namespace Friday\Controller;
 
+use Friday\View\View;
+use Friday\Model\ModelService;
+
 class Controller
 {
 
@@ -104,7 +107,7 @@ class Controller
     public function initialize($app)
     {
         $this->app = $app;
-        $this->view = new \Friday\View\View($app);
+        $this->view = new View($app);
     }
 
     /**
@@ -173,7 +176,7 @@ class Controller
         $modelPath = self::$instance->app->findModel($model);
         $modelClass = "App\\Model\\".$model;
         $this->model = new $modelClass();
-        self::$instance->modelService = new \Friday\Model\ModelService();
+        self::$instance->modelService = new ModelService();
         self::$instance->modelService->initialize(self::$instance->app);
         return $this->model;
         //$appModel->handleModel($controller, $method);
