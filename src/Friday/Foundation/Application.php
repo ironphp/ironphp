@@ -16,8 +16,13 @@
  */
 
 namespace Friday\Foundation;
-//use Closure; //comment does not affect on synonymous function, bound to closure & Application instance // *RECURSION*
 
+use Friday\Environment\GetEnv;
+use Friday\Helper\Session;
+
+/**
+ * Runs an application invoking all the registered application.
+ */
 class Application
 {
     /**
@@ -35,81 +40,11 @@ class Application
     protected $basePath;
 
     /**
-     * FrontController instance.
-     *
-     * @var object
-     */
-    public $frontController;
-
-    /**
-     * Request instance.
-     *
-     * @var object
-     */
-    public $request;
-
-    /**
-     * Route instance.
-     *
-     * @var object
-     */
-    public $route;
-
-    /**
-     * Router instance.
-     *
-     * @var object
-     */
-    public $router;
-
-    /**
-     * Dispatcher instance.
-     *
-     * @var object
-     */
-    public $dispatcher;
-
-    /**
-     * Response instance.
-     *
-     * @var object
-     */
-    public $response;
-
-    /**
-     * Matched Route to uri.
-     *
-     * @var array
-     */
-    public $matchRoute;
-
-    /**
-     * Instanse of Session.
-     *
-     * @var \Friday\Helper\Session
-     */
-    public $session;
-
-    /**
-     * Instanse of Cookie.
-     *
-     * @var \Friday\Helper\Cookie
-     */
-    public $cookie;
-
-    /**
      * Configurations from /config/*.php.
      *
      * @var array
      */
     public $config;
-
-    /**
-     * Headers to be sent.
-     *
-     * @var array
-     */
-    public $headers = [];
 
     /**
      * Create a new Friday application instance.
@@ -123,98 +58,42 @@ class Application
             $this->setBasePath($basePath);
         }
 
+        #set locale
         date_default_timezone_set("Asia/Kolkata");
 
+        #load function
         $this->requireFile(
             $this->basePath('src\Friday\Helper\Function.php')
         );
 
         $this->config['basePath'] = $this->basePath(); 
 
-        $getenv = new \Friday\Environment\GetEnv(
-            $this->basePath(),
-            '.env'
-        );
-        $getenv->load();
+        #Configurator
+        #enviro config
+        $env = new GetEnv( $this->basePath(), '.env' );
+        $env->load();
 
+        #set install config
         if($this->getIntallTime(true) === false) {
             $this->setIntallTime();
         }
-        else {
-            if(empty(env('APP_KEY'))) {
-                echo "APP_KEY is not defined in .env file, define it by command: php jarvis key";
-            }
+        elseif(empty(env('APP_KEY'))) {
+            echo "APP_KEY is not defined in .env file, define it by command: php jarvis key";
         }
 
+        #load config
         $this->config['app'] = $this->requireFile(
-            $this->basePath('config/app.php'),
-            true
+            $this->basePath('config/app.php'), true
         );
         $this->config['db'] = $this->requireFile(
-            $this->basePath('config/database.php'),
-            true
+            $this->basePath('config/database.php'), true
         );
         define('CONFIG_LOADED', microtime(true));
 
-        $this->session = new \Friday\Helper\Session();
+        #load session
+        $this->session = new Session();
         if(!$this->session->isRegistered()) {
             $this->session->register();
-        }
-
-        if (PHP_SAPI !== 'cli') {
-            $this->cookie = new \Friday\Helper\Cookie();
-
-            $this->frontController = new \Friday\Http\FrontController();
-
-            $this->request = $this->frontController->request();
-            define('REQUEST_CATCHED', microtime(true));
-
-            $this->route = $this->frontController->route();
-            \Friday\Http\Route::$instance = $this->route;
-            define('ROUTES_LOADED', microtime(true));
-
-            $this->requireFile(
-                $this->basePath('app/Route/web.php')
-            );
-            $this->route->sortRoute();
-
-            $this->router = $this->frontController->router();
-            $this->matchRoute = $this->router->route(
-                $this->route->routes,
-                $this->request->uri,
-                $this->request->serverRequestMethod
-            );
-            $this->request->setParam('Closure', $this->router->args);
-            define('ROUTE_MATCHED', microtime(true));
-
-            $this->dispatcher = $this->frontController->dispatcher();
-            $action = $this->dispatcher->dispatch(
-                $this->matchRoute,
-                $this->request
-            );
-            define('DISPATCHER_INIT', microtime(true));
-
-            $appController = new \Friday\Controller\Controller();
-            $appController->initialize($this);
-            if(isset($action['output'])) {
-                $output = $action['output'][0].$action['output'][1];
-            }
-            elseif(isset($action['controller'])) {
-                $controller = $action['controller'][0];
-                $method = $action['controller'][1];
-                $output = $appController->handleController($controller, $method);
-            }
-            elseif(isset($action['view'])) {
-                $view = $action['view'][0];
-                $data = $action['view'][1];
-                $viewPath = $this->findView($view);
-                $output = $appController->render($viewPath, $data);
-            }
-            define('DISPATCHED', microtime(true));
-
-            $this->response = $this->frontController->response($_SERVER['SERVER_PROTOCOL']);
-            $this->response->addHeaders($this->headers)->sendHeader($output);
-            define('RESPONSE_SEND', microtime(true));
         }
     }
 
@@ -439,6 +318,9 @@ class Application
      */
     public function setKey()
     {
+        if(trim(env('APP_KEY')) != '') {
+            return true;
+        }
         $appKey='';
         for($i=0;$i<32;$i++) {
             $appKey.=chr(rand(0,255));
@@ -477,7 +359,6 @@ class Application
      * Parse .env file gets its lines in array.
      *
      * @param  string  $file
-     *
      * @return array
      */
     public function parseEnvFile($file)
@@ -493,9 +374,7 @@ class Application
      * Ensures the given filePath is readable.
      *
      * @throws \Exception
-     *
      * @param  string  $file
-     *
      * @return void
      */
     protected function ensureFileIsReadable($file)
@@ -506,12 +385,23 @@ class Application
     }
 
     /**
-     * Get parameter passed in route.
+     * Find a Command.
      *
-     * @return array
+     * @throws \Exception
+     * @param  string  $command
+     * @param  bool    $system
+     * @return bool
      */
-    public function getRouteParam()
+    public function findCommand($command, $system = true)
     {
-        return $this->router->args;
+        $file = dirname(__DIR__) . "/Console/Command/" . ucfirst($command) . "Command.php";
+        if($this->findFile($file)) {
+            return true;
+        }
+        else {
+            return false;
+            #throw new \Exception($file." Command Class is missing.");
+            #exit;
+        }
     }
 }
