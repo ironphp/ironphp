@@ -19,7 +19,6 @@ namespace Friday\Console;
 
 class Command
 {
-
     /**
      * Argv Inputs from console parameters.
      *
@@ -28,11 +27,11 @@ class Command
     protected $argvInput;
 
     /**
-     * Commands instance.
+     * Console instance.
      *
      * @var
      */
-    protected $commands;
+    static protected $console;
 
     /**
      * Short Commands.
@@ -42,53 +41,90 @@ class Command
     protected $short = ['-h' => 'help', '--help' => 'help', '-V' => 'version', '--version' => 'version'];
 
     /**
-     * Create a new console command instance.
+     * Default Command.
      *
-     * @param  string|null  $basePath
+     * @string
+     */
+    protected $default;
+
+    /**
+     * Output to display.
+     *
+     * @string
+     */
+    protected $output;
+
+    /**
+     * Create a new Command instance.
+     *
+     * @param \Friday\Foundation\Console
      * @return void
      */
-    public function __construct($basePath = null)
+    public function __construct($console)
     {
-        $app = new \Friday\Foundation\Application(
-            $basePath
-        );
-
-        $this->argvInput = ($_SERVER['argv'][0] === "jarvis") ? array_slice($_SERVER['argv'], 1) : [] ;
-
-        $this->commands = new \Friday\Console\Commands($app);
-        define('APP_INIT', microtime(true));
-        
-        // run commands
-        if(count($this->argvInput)) {
-            $command = $this->argvInput[0];
+        self::$console = $console;
+        $tokens = $console->getToken();
+        $default = 'list';
+        # Run commands
+        if(0 < \count($tokens)) {
+            $command = $tokens[0];
             if(isset($this->short[$command])) {
                 $command = $this->short[$command];
             }
-            if($this->findCommand($command)) {
-                $this->commands->$command();
+            if($console->findCommand($command)) {
+                $this->execute($command);
             }
             else {
-                print "
-".\Friday\Console\Colors::BG_RED."                                 
-".\Friday\Console\Colors::WHITE ."  Command \"".$command."\" is not defined.  
-".\Friday\Console\Colors::BG_RED."                                 \n";
-                echo \Friday\Console\Colors::BG_BLACK.''.\Friday\Console\Colors::WHITE;
+                $this->output = $console->commandError("Command \"".$command."\" is not defined.");
             }
+            //if(isset($this->short[$command])) {
+            //    $command = $this->short[$command];
+            //}
         }
         else {
-            $this->commands->list();
+            $command = $default;
+            if($console->findCommand($command)) {
+                $this->execute($command);
+            }
+            else {
+                $this->output = $console->commandError("Command \"".$command."\" is not defined.");
+            }
         }
+
+        $this->getOutput();
         define('CMD_RUN', microtime(true));
     }
 
     /**
-     * Find Command.
+     * Display Output of command execution.
+     *
+     * @return string
+     */
+    public function getOutput()
+    {
+        print($this->output);
+    }
+
+    /**
+     * Execute command.
      *
      * @param  string  $command
-     * @return bool
+     * @return string
      */
-    public function findCommand($command)
+    public function execute($command)
     {
-        return method_exists($this->commands, $command);
+        $commandClass = "\\Friday\\Console\\Command\\".ucfirst($command)."Command";
+        $cmd = new $commandClass();
+        $this->output = $cmd->run();
+    }
+
+    /**
+     * Get instance of Console.
+     *
+     * @return \Friday\Foundation\Console
+     */
+    public function getConsole()
+    {
+        return self::$console;
     }
 }
