@@ -18,6 +18,8 @@
  * @auther        Gaurang Parmar <gaurangkumarp@gmail.com>
  */
 
+use Friday\Foundation\Console;
+
 define('IRONPHP_START', microtime(true));
 
 /**
@@ -34,9 +36,7 @@ define('IRONPHP_START', microtime(true));
 
 require __DIR__.'/vendor/autoload.php';
 
-$console = new Friday\Console\Command(
-    realpath(__DIR__)
-);
+$console = new Console(realpath(__DIR__));
 
 define('IRONPHP_END', microtime(true));
 
