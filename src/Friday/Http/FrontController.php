@@ -17,12 +17,18 @@
 
 namespace Friday\Http;
 
-class FrontController {
+use Friday\Http\Request;
+use Friday\Http\Route;
+use Friday\Http\Router;
+use Friday\Http\Dispatcher;
+use Friday\Http\Response;
 
+/**
+ * Runs a Front Controller.
+ */
+class FrontController implements FrontControllerInterface
+{
     /*
-    const DEFAULT_CONTROLLER = "IndexController";
-    const DEFAULT_ACTION = "index";
-    
     protected $controller = self::DEFAULT_CONTROLLER;
     protected $action = self::DEFAULT_ACTION;
     */
@@ -37,95 +43,14 @@ class FrontController {
     }
     
     /**
-     * Parse Uri and get path uri, params, server method.
-     *
-     * @return array
-     */
-    public function parseUri()
-    {
-        $uri = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
-        $uri = str_replace(['{', '}'], '', urldecode($uri));
-        $extDir = dirname(dirname($_SERVER['SCRIPT_NAME']));
-        $uri = str_replace($extDir, '', $uri);
-        $uri = rtrim($uri, '/');
-        $uri = empty($uri) ? '/' : $uri;
-        $serverRequestMethod = $_SERVER['REQUEST_METHOD'];
-        $params = $GLOBALS['_'.$serverRequestMethod];
-        if(!empty($_SERVER['HTTPS']) && ('on' == $_SERVER['HTTPS'])) {
-            $https = true;
-        }
-        else {
-            $https = false;
-        }
-        $host = $_SERVER['HTTP_HOST'].$extDir;
-        $ip = $_SERVER['REMOTE_ADDR'];
-        /**
-         * Test GET === _GET
-         * _GET !== QUERY
-         * Test POST === _POST
-         */
-        if($serverRequestMethod === 'GET' && $diff = array_diff_assoc($params, $_GET)) {
-            echo '<pre>';
-            var_dump($diff);
-            var_dump($params);
-            var_dump($_GET);
-            echo '</pre>';
-            throw new \Exception("POST and _POST are not same at line ".__LINE__);
-            exit;
-        }
-        if($serverRequestMethod === 'POST' && $diff = array_diff_assoc($params, $_POST)) {
-            echo '<pre>';
-            var_dump($diff);
-            var_dump($params);
-            var_dump($_POST);
-            echo '</pre>';
-            throw new \Exception("POST and _POST are not same at line ".__LINE__);
-            exit;
-        }
-        
-        if($serverRequestMethod === 'POST') {
-            $params = ['GET' => $_GET, 'POST' => $params];
-        }
-        else {
-            $params = ['GET' => $params, 'POST' => []];
-        }
-
-        return ['uri' => $uri, 'params' => $params, 'method' => $serverRequestMethod, 'https' => $https, 'host' => $host, 'ip' => $ip];
-        /*
-        if (strpos($path, $this->basePath) === 0) {
-            $path = substr($path, strlen($this->basePath));
-        }
-
-        @list($controller, $action, $params) = explode("/", $path, 3);
-        if (isset($controller) && !empty($controller)) {
-            $this->setController($controller);
-        }
-        else {
-            $this->setController('Index');
-        }
-
-        if (isset($action)) {
-            $this->setAction($action);
-        }
-        else {
-            $this->setAction('Index');
-        }
-
-        if (isset($params)) {
-            $this->setParams(explode("/", $params));
-        }
-        */
-    }
-    
-    /**
      * Create Responce instance.
      *
+     * @param  array  $parsedUrl
      * @return \Friday\Http\Request
      */
-    public function request()
+    public function request($parsedUrl)
     {
         //if (empty($options)) {
-           $parse = $this->parseUri();
         //}
         /*
         else {
@@ -140,7 +65,7 @@ class FrontController {
             }
         }
         */
-        return new \Friday\Http\Request($parse['uri'], $parse['host'], $parse['ip'], $parse['params'], $parse['method'], $parse['https']);
+        return new Request($parsedUrl['uri'], $parsedUrl['host'], $parsedUrl['ip'], $parsedUrl['params'], $parsedUrl['method'], $parsedUrl['https']);
     }
 
     /**
@@ -150,7 +75,7 @@ class FrontController {
      */
     public function route()
     {
-        return new \Friday\Http\Route();
+        return new Route();
     }
 
     /**
@@ -160,7 +85,7 @@ class FrontController {
      */
     public function router()
     {
-        return new \Friday\Http\Router();
+        return new Router();
     }
 
     /**
@@ -170,7 +95,7 @@ class FrontController {
      */
     public function dispatcher()
     {
-        return new \Friday\Http\Dispatcher();
+        return new Dispatcher();
     }
 
     /**
@@ -181,7 +106,7 @@ class FrontController {
      */
     public function response($serverProtocol)
     {
-        return new \Friday\Http\Response($serverProtocol);
+        return new Response($serverProtocol);
     }
 
     /*
