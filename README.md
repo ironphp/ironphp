@@ -65,6 +65,18 @@ In case you want to use a custom app dir name (e.g. `/myapp/`):
 $ composer create-project --prefer-dist ironphp/ironphp -s dev myapp
 ```
 
+Go to myapp dir, if installed with myapp dirname:
+
+```bash
+$ cd myapp
+```
+
+Go to ironphp dir, if installed without dirname:
+
+```bash
+$ cd ironphp
+```
+
 You can now use php developement webserver to view the default home page:
 
 ```bash
