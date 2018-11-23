@@ -12,13 +12,15 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Gaurang Parmar",
+            "name": "GaurangKumar Parmar",
             "email": "gaurangkumarp@gmail.com",
+            "homepage": "https://twitter.com/gaurangkumarp",
             "role": "Founder and Developer"
         }
     ],
     "support": {
         "email": "gaurangkumarp@gmail.com",
+        "homepage": "https://www.facebook.com/IronPHP-Framwork-325690624644002",
         "issues": "https://github.com/ironphp/ironphp/issues",
         "source": "https://github.com/ironphp/ironphp"
     },
