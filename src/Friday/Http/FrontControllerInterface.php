@@ -14,11 +14,23 @@
  * @license       MIT License (https://opensource.org/licenses/mit-license.php)
  * @auther        Gaurang Parmar <gaurangkumarp@gmail.com>
  */
-
 namespace Friday\Http;
 
+/**
+ * FrontController Interface
+ */
 interface FrontControllerInterface
 {
+    /**
+     * Default controller.
+     */
+    const DEFAULT_CONTROLLER = "IndexController";
+
+    /**
+     * Default method.
+     */
+    const DEFAULT_ACTION = "index";
+
     /**
      * Create a new FrontController instance.
      *
@@ -27,18 +39,12 @@ interface FrontControllerInterface
     public function __construct();
     
     /**
-     * Parse Uri and get path uri, params, server method.
-     *
-     * @return array
-     */
-    public function parseUri();
-    
-    /**
      * Create Responce instance.
      *
+     * @param  array  $parsedUrl
      * @return \Friday\Http\Request
      */
-    public function request();
+    public function request($parsedUrl);
 
     /**
      * Create Route instance.
