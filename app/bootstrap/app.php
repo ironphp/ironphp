@@ -25,7 +25,9 @@
  *
  */
 
-$app = new Friday\Foundation\Application(
+use Friday\Foundation\Server;
+
+$app = new Server(
     realpath(__DIR__.'/../../')
 );
 
