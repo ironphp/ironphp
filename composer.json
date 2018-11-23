@@ -20,7 +20,7 @@
     ],
     "support": {
         "email": "gaurangkumarp@gmail.com",
-        "homepage": "https://www.facebook.com/IronPHP-Framwork-325690624644002",
+        "forum": "https://www.facebook.com/IronPHP-Framwork-325690624644002",
         "issues": "https://github.com/ironphp/ironphp/issues",
         "source": "https://github.com/ironphp/ironphp"
     },
@@ -31,7 +31,9 @@
         "psr-4": {
             "Friday\\": "src/Friday/",
             "App\\": "app/"
-        }
+        },
+        "files": ["src/Friday/Helper/Function.php"],
+        "exclude-from-classmap": ["/Tests/", "/test/", "/tests/"]
     },
     "autoload-dev": {
         "psr-4": {
