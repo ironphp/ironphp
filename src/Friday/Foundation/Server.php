@@ -120,6 +120,7 @@ class Server extends Application
 
         #get url, client data
         $parse = $this->parseUri();
+
         #request
         $this->request = $this->frontController->request($parse);
         $this->request->setConstant();
