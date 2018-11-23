@@ -58,14 +58,6 @@ class Application
             $this->setBasePath($basePath);
         }
 
-        #set locale
-        date_default_timezone_set("Asia/Kolkata");
-
-        #load function
-        $this->requireFile(
-            $this->basePath('src\Friday\Helper\Function.php')
-        );
-
         $this->config['basePath'] = $this->basePath(); 
 
         #Configurator
@@ -89,6 +81,13 @@ class Application
             $this->basePath('config/database.php'), true
         );
         define('CONFIG_LOADED', microtime(true));
+
+        #set locale-timezone
+        $this->setTimezone($this->config['app']['timezone']);
+        $timezone = date_default_timezone_get();
+        if (strcmp($timezone, ini_get('date.timezone'))){
+            ini_set('date.timezone', $timezone);
+        }
 
         #load session
         $this->session = new Session();
@@ -403,5 +402,49 @@ class Application
             #throw new \Exception($file." Command Class is missing.");
             #exit;
         }
+    }
+
+    /**
+     * Set timezone.
+     *
+     * @param  string  default
+     * @return bool
+     */
+    public function setTimezone($default) {
+        /*
+        I'm sure I'm not the only one who is distressed by the recent default behavior change to E_NOTICE when the timezone isn't explicitly set in the program or in .ini.  I insure that the clock on the server IS correct, and I don't want to have to set it in two places (the system AND PHP).  So I want to read it from the system.  But PHP won't accept that answer, and insists on a call to this function
+        Use it by calling it with a fallback default answer. It doesn't work on Windows.
+        */
+        $timezone = "";
+    
+        // On many systems (Mac, for instance) "/etc/localtime" is a symlink
+        // to the file with the timezone info
+        if (is_link("/etc/localtime")) {
+        
+            // If it is, that file's name is actually the "Olsen" format timezone
+            $filename = readlink("/etc/localtime");
+        
+            $pos = strpos($filename, "zoneinfo");
+            if ($pos) {
+                // When it is, it's in the "/usr/share/zoneinfo/" folder
+                $timezone = substr($filename, $pos + strlen("zoneinfo/"));
+            }
+            else {
+                // If not, bail
+                $timezone = $default;
+            }
+        }
+        elseif (is_link("/etc/timezone")) {
+            // On other systems, like Ubuntu, there's file with the Olsen time
+            // right inside it.
+            $timezone = file_get_contents("/etc/timezone");
+            if (!strlen($timezone)) {
+                $timezone = $default;
+            }
+        }
+        else {
+            $timezone = $default;
+        }
+        date_default_timezone_set($timezone);
     }
 }
