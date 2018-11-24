@@ -49,7 +49,7 @@ You can install IronPHP as your project using
 [Composer](https://getcomposer.org)  as
 a starting point. you can run the following:
 
-1. Download [Composer](https://getcomposer.org/doc/00-intro.md) or update `composer self-update`.
+1. Download [Composer-Setup.exe](https://getcomposer.org/Composer-Setup.exe) or update `composer self-update`.
 2. Run `php composer.phar create-project --prefer-dist IronPHP/IronPHP [dir_name]`.
 
 
