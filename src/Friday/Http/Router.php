@@ -12,10 +12,13 @@
  * @link          
  * @since         0.0.1
  * @license       MIT License (https://opensource.org/licenses/mit-license.php)
- * @auther        Gaurang Parmar <gaurangkumarp@gmail.com>
+ * @auther        GaurangKumar Parmar <gaurangkumarp@gmail.com>
  */
 
 namespace Friday\Http;
+
+use Exception;
+use OutOfRangeException;
 
 class Router
 {
@@ -41,12 +44,14 @@ class Router
      * @param  array   $allRoute
      * @param  string  $uriRoute
      * @param  enum    $httpMethod  GET/POST
-     * @return object  Route
+     * @return \Friday\Http\Route
+     * @throws Exception,
+     *         OutOfRangeException
      */
     public function route($allRoute, $uriRoute, $httpMethod)
     {
         if(is_null($allRoute) || (is_array($allRoute) && !count($allRoute)) ) {
-            throw new \Exception("No routes. Define them at /app/Route/web.php");
+            throw new Exception("No routes. Define them at /app/Route/web.php");
         }
         $route = trim($uriRoute, '/ ');
         $array = $route === '' ? [] : explode('/', $route);
@@ -74,7 +79,7 @@ class Router
         }
         // need a 404 route
         //$response->addHeader("404 Page Not Found")->send();
-        throw new \OutOfRangeException("No route matched the given URI : ".$uriRoute);
+        throw new OutOfRangeException("No route matched the given URI : ".$uriRoute);
     }
 
     /**

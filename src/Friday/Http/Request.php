@@ -12,13 +12,16 @@
  * @link          
  * @since         0.0.1
  * @license       MIT License (https://opensource.org/licenses/mit-license.php)
- * @auther        Gaurang Parmar <gaurangkumarp@gmail.com>
+ * @auther        GaurangKumar Parmar <gaurangkumarp@gmail.com>
  */
 
 namespace Friday\Http;
 
-class Request implements RequestInterface {
-
+/**
+ * Get HTTP Server Request.
+ */
+class Request implements RequestInterface
+{
     /**
      * URI without parameter.
      *
@@ -113,7 +116,12 @@ class Request implements RequestInterface {
      */
     public function setParam($key, $value)
     {
-        $this->params[$key] = $value;
+        if(!isset($this->params[$key]) || $this->params[$key] === []) {
+            $this->params[$key] = $value;
+        }
+        else {
+            $this->params[$key] = array_merge($this->params[$key], [$value]);
+        }
         return $this;
     }
  
@@ -148,5 +156,18 @@ class Request implements RequestInterface {
     public function getIp()
     {
         return $this->ip;
+    }
+
+    /**
+     * Define constants.
+     * Without trailing slash
+     *
+     * @return void
+     */
+    public function setConstant()
+    {
+        define('SERVER_ROOT', $this->getHost(), true);
+        define('PUBLIC_ROOT', $this->getHost().'/public', true);
+        define('HOST', $_SERVER['HTTP_HOST'], true);
     }
 }

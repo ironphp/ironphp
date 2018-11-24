@@ -12,10 +12,13 @@
  * @link          
  * @since         0.0.1
  * @license       MIT License (https://opensource.org/licenses/mit-license.php)
- * @auther        Gaurang Parmar <gaurangkumarp@gmail.com>
+ * @auther        GaurangKumar Parmar <gaurangkumarp@gmail.com>
  */
 
 namespace Friday\Http;
+
+use Closure;
+use Friday\Http\Response;
 
 class Route implements RouteInterface
 {
@@ -161,7 +164,7 @@ class Route implements RouteInterface
      * Group routes by prefix.
      *
      * @param  string  $prefix
-     * @return Friday\Http\Route
+     * @return \Friday\Http\Route
      */
     public function prefix($prefix)
     {
@@ -172,7 +175,7 @@ class Route implements RouteInterface
     /**
      * Registered group routes.
      *
-     * @param  Closure  $closure
+     * @param  \Closure  $closure
      * @return void
      */
     public function group($closure)
@@ -181,12 +184,25 @@ class Route implements RouteInterface
         if(!isset($this) || $backtrace[0]['type'] == '::' || self::$instance->prefix == null) {
             exit('Can not be called statically or directly. Use Route::prefix(name)->group(routes-to-be-registered)');
         }
-        if($closure instanceof \Closure) {
+        if($closure instanceof Closure) {
             call_user_func($closure);
         }
         $this->prefix = null;
-        //print_r($closure);exit;
-        //self::$instance->prefix = $prefix;
-        //return self::$instance;
+    }
+
+    /**
+     * Registered redirect routes.
+     *
+     * @param  string  $routeFrom
+     * @param  string  $routeTo
+     * @param  int     $http_response_code
+     * @return void
+     */
+    public function redirect($routeFrom, $routeTo, $http_response_code)
+    {
+        $closure = function($routeTo, $replace, $http_response_code) {
+            Response::$redirectHeader = [$routeTo, $replace, $http_response_code];
+        };
+        self::$instance->register('GET', $routeFrom, $closure, null, [$routeTo, true, $http_response_code]);
     }
 }

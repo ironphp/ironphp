@@ -12,11 +12,16 @@
  * @link          
  * @since         0.0.1
  * @license       MIT License (https://opensource.org/licenses/mit-license.php)
- * @auther        Gaurang Parmar <gaurangkumarp@gmail.com>
+ * @auther        GaurangKumar Parmar <gaurangkumarp@gmail.com>
  */
 
 namespace Friday\Http;
 
+use Exception;
+
+/**
+ * Send Responce to client.
+ */
 class Response implements ResponseInterface
 {
     /**
@@ -41,6 +46,13 @@ class Response implements ResponseInterface
     private $headers = [];
 
     /**
+     * Header for redirect.
+     *
+     * @var string
+     */
+    public static $redirectHeader;
+
+    /**
      * Create new Responce instance.
      *
      * @param  string  $version
@@ -54,7 +66,7 @@ class Response implements ResponseInterface
     /**
      * Get version.
      *
-     * @return  Friday\Http\Response
+     * @return  \Friday\Http\Response
      */
     public function getVersion()
     {
@@ -65,7 +77,7 @@ class Response implements ResponseInterface
      * Add header.
      *
      * @param   string   $header
-     * @return  Friday\Http\Response
+     * @return  \Friday\Http\Response
      */
     public function addHeader($header = null)
     {
@@ -87,7 +99,7 @@ class Response implements ResponseInterface
      * Add headers.
      *
      * @param   array   $headers
-     * @return  Friday\Http\Response
+     * @return  \Friday\Http\Response
      */
     public function addHeaders(array $headers = [])
     {
@@ -111,28 +123,52 @@ class Response implements ResponseInterface
     }
 
     /**
-     * Sent a HTTP header.
+     * Send a HTTP header.
      *
-     * @param  string  $output
+     * @param  string    $output
+     * @param  bool      $replace
+     * @param  int|null  $http_response_code
      * @return void
+     * @throws \Exception
      */
-    public function sendHeader($output = null)
+    public function sendHeader($output = null, $replace = true, $http_response_code = null)
     {
         if (!headers_sent()) {
+            if(static::$redirectHeader !== null) {
+                $this->redirect();
+            }
             if($this->version === 'HTTP/1.1') {
-                //header("$this->version $this->header");
+                if(count($this->headers) === 0) {
+                    header("$this->version $this->header");
+                }
             }
             else {
-                throw new \Exception("Invalid HTTP version ".$this->version.".");
+                throw new Exception("Invalid HTTP version ".$this->version.".");
                 exit;
             }
             foreach($this->headers as $header) {
-                header("$header");
+                if($http_response_code == null) {
+                    header("$header", $replace);
+                }
+                else {
+                    header("$header", $replace, $http_response_code);
+                }
             }
             if($output) {
                 print $output;
                 exit;
             }
         } 
+    }
+
+    /**
+     * Redirect to URL.
+     *
+     * @return void
+     */
+    public function redirect()
+    {
+        header("Location: " . SERVER_ROOT.static::$redirectHeader[0], static::$redirectHeader[1], static::$redirectHeader[2]);
+        exit;
     }
 }

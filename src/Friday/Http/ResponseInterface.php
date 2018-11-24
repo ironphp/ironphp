@@ -12,7 +12,7 @@
  * @link          
  * @since         0.0.1
  * @license       MIT License (https://opensource.org/licenses/mit-license.php)
- * @auther        Gaurang Parmar <gaurangkumarp@gmail.com>
+ * @auther        GaurangKumar Parmar <gaurangkumarp@gmail.com>
  */
 
 namespace Friday\Http;
@@ -30,7 +30,7 @@ interface ResponseInterface {
     /**
      * Get version.
      *
-     * @return  Friday\Http\Response
+     * @return  \Friday\Http\Response
      */
     public function getVersion();
 
@@ -38,7 +38,7 @@ interface ResponseInterface {
      * Add header.
      *
      * @param   string   $header
-     * @return  Friday\Http\Response
+     * @return  \Friday\Http\Response
      */
     public function addHeader($header = null);
  
@@ -53,7 +53,7 @@ interface ResponseInterface {
      * Add headers.
      *
      * @param   array   $headers
-     * @return  Friday\Http\Response
+     * @return  \Friday\Http\Response
      */
     public function addHeaders(array $headers);
 
@@ -65,10 +65,20 @@ interface ResponseInterface {
     public function getHeaders();
 
     /**
-     * Sent a HTTP header.
+     * Send a HTTP header.
      *
-     * @param  string  $output
+     * @param  string    $output
+     * @param  bool      $replace
+     * @param  int|null  $http_response_code
+     * @return void
+     * @throws \Exception
+     */
+    public function sendHeader($output = null, $replace = true, $http_response_code = null);
+
+    /**
+     * Redirect to URL.
+     *
      * @return void
      */
-    public function sendHeader($output = null);
+    public function redirect();
 }

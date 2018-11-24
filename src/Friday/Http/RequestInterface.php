@@ -12,12 +12,13 @@
  * @link          
  * @since         0.0.1
  * @license       MIT License (https://opensource.org/licenses/mit-license.php)
- * @auther        Gaurang Parmar <gaurangkumarp@gmail.com>
+ * @auther        GaurangKumar Parmar <gaurangkumarp@gmail.com>
  */
 
 namespace Friday\Http;
 
-interface RequestInterface {
+interface RequestInterface
+{
 
     /**
      * Create new Request instance with uri and param.
@@ -82,4 +83,12 @@ interface RequestInterface {
      * @return string
      */
     public function getIp();
+
+    /**
+     * Define constants.
+     * Without trailing slash
+     *
+     * @return void
+     */
+    public function setConstant();
 }
