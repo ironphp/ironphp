@@ -56,7 +56,7 @@ class ListCommand extends Command
         Colors::YELLOW."Options:".PHP_EOL.
         Colors::GREEN."  -h, --help".Colors::WHITE."\t\tDisplay this help message".PHP_EOL.
         Colors::GREEN."  -V, --version".Colors::WHITE."\t\tDisplay this application version".PHP_EOL.PHP_EOL.
-        Colors::YELLOW."Available commands:".PHP_EOL.
+        Colors::YELLOW."Available commands: [default: \"list\"]".PHP_EOL.
         Colors::GREEN."  list".Colors::WHITE."\t\t- Lists commands".PHP_EOL.
         Colors::GREEN."  serve".Colors::WHITE."\t\t- Serve the application on the PHP development server".PHP_EOL.
         Colors::GREEN."  key".Colors::WHITE."\t\t- Set the application key".PHP_EOL.
