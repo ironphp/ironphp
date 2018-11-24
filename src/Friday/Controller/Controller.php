@@ -12,7 +12,7 @@
  * @link          
  * @since         0.0.1
  * @license       MIT License (https://opensource.org/licenses/mit-license.php)
- * @auther        Gaurang Parmar <gaurangkumarp@gmail.com>
+ * @auther        GaurangKumar Parmar <gaurangkumarp@gmail.com>
  */
 
 namespace Friday\Controller;
@@ -68,7 +68,7 @@ class Controller
     /**
      * Instance of the Model.
      *
-     * @var \App\Model\{Name}Model
+     * @var \{App}\Model\{Name}Model
      */
     public $model;
 
@@ -114,7 +114,7 @@ class Controller
      * Returns the controller name.
      *
      * @return string
-     * @since 3.6.0
+     * @since 0.0.0
      */
     public function getName()
     {
@@ -126,7 +126,7 @@ class Controller
      *
      * @param string $name Controller name.
      * @return $this
-     * @since 3.6.0
+     * @since 0.0.0
      */
     public function setName($name)
     {
@@ -168,7 +168,7 @@ class Controller
      *
      * @param  string   $model   View to use for rendering
      *
-     * @return \App\Model\{Name}Model
+     * @return \{App}\Model\{Name}Model
      */
     public function model($model)
     {
