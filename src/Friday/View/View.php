@@ -17,6 +17,8 @@
 
 namespace Friday\View;
 
+use Exception;
+
 class View
 {
 
@@ -105,7 +107,7 @@ class View
      * Current passed params. Passed to View from the creating Controller for convenience.
      *
      * @var array
-     * @deprecated 3.1.0 Use `$this->request->getParam('pass')` instead.
+     * @deprecated 0.0.0 Use `$this->request->getParam('pass')` instead.
      */
     public $passedArgs = [];
 
@@ -132,18 +134,18 @@ class View
     public $theme;
 
     /**
-     * An instance of a \Cake\Http\ServerRequest object that contains information about the current request.
+     * An instance of a \Friday\Http\Request object that contains information about the current request.
      * This object contains all the information about a request and several methods for reading
      * additional information about the request.
      *
-     * @var \Cake\Http\ServerRequest
+     * @var \Friday\Http\Request
      */
     public $request;
 
     /**
      * Reference to the Response object
      *
-     * @var \Cake\Http\Response
+     * @var \Friday\Http\Response
      */
     public $response;
 
@@ -151,135 +153,17 @@ class View
      * Create a new View instance.
      *
      * @param  \Friday\Foundation\Application  $app
-     *
      * @return void
      */
     public function __construct($app)
     {
         $this->app = $app;
-        /*
-        if (isset($viewOptions['view'])) {
-            $this->setTemplate($viewOptions['view']);
-        }
-        if (isset($viewOptions['viewPath'])) {
-            $this->setTemplatePath($viewOptions['viewPath']);
-        }
-        foreach ($this->_passedVars as $var) {
-            if (isset($viewOptions[$var])) {
-                $this->{$var} = $viewOptions[$var];
-            }
-        }
-        if ($eventManager !== null) {
-            $this->setEventManager($eventManager);
-        }
-        $this->request = $request ?: Router::getRequest(true);
-        $this->response = $response ?: new Response();
-        if (!$this->request) {
-            $this->request = new ServerRequest([
-                'base' => '',
-                'url' => '',
-                'webroot' => '/'
-            ]);
-        }
-        $this->Blocks = new $this->_viewBlockClass();
-        $this->initialize();
-        $this->loadHelpers();
-        */
-    }
-
-    /**
-     * Initialization hook method.
-     *
-     * Properties like $helpers etc. cannot be initialized statically in your custom
-     * view class as they are overwritten by values from controller in constructor.
-     * So this method allows you to manipulate them as required after view instance
-     * is constructed.
-     *
-     * @return void
-     */
-    public function initialize()
-    {
-    }
-
-    /**
-     * Get path for templates files.
-     *
-     * @return string
-     */
-    public function getTemplatePath()
-    {
-        return $this->templatePath;
-    }
-
-    /**
-     * Set path for templates files.
-     *
-     * @param string $path Path for template files.
-     *
-     * @return $this
-     */
-    public function setTemplatePath($path)
-    {
-        $this->templatePath = $path;
-
-        return $this;
-    }
-
-    /**
-     * Get the current view theme.
-     *
-     * @return string|null
-     */
-    public function getTheme()
-    {
-        return $this->theme;
-    }
-
-    /**
-     * Set the view theme to use.
-     *
-     * @param string|null $theme Theme name.
-     *
-     * @return $this
-     */
-    public function setTheme($theme)
-    {
-        $this->theme = $theme;
-
-        return $this;
-    }
-
-    /**
-     * Get the name of the template file to render. The name specified is the
-     * filename in /src/Template/<SubFolder> without the .ctp extension.
-     *
-     * @return string
-     */
-    public function getTemplate()
-    {
-        return $this->template;
-    }
-
-    /**
-     * Set the name of the template file to render. The name specified is the
-     * filename in /src/Template/<SubFolder> without the .ctp extension.
-     *
-     * @param string $name Template file name to set.
-     *
-     * @return $this
-     */
-    public function setTemplate($name)
-    {
-        $this->template = $name;
-
-        return $this;
     }
 
     /**
      * Renders view with HTML tags and given data, template file and layout.
      *
      * @param   array  $tags
-     *
      * @return  void
      */
     public function addRenderTags($tags)
@@ -299,45 +183,12 @@ class View
             $i[0]++;
         }
         $this->tempView = implode("\n", $temp);
-        /*
-        {
-        $tags, $text = NULL, $parent = NULL, $child = NULL, $before = NULL, $after = NULL
-        $tempView = '<'.$tags;
-        if(isset($this->attr[$tags]) && $this->attr[$tags] != NULL) {
-            foreach($this->attr[$tags] as $attr => $val) {
-                $args[] = $attr.($val == NULL ? '' : "=\"$val\"");
-            }
-            $args = implode(' ', $args);
-        }
-        $tempView .= isset($args) ? ' '.$args.'>' : '>'; 
-        if($child != NULL) {
-            $tempView .= $text;
-        }
-        if($child != NULL) {
-            $tempView .= '{'.$child.'}';
-        }
-        if($this->tags[$tags] === true) {
-            $tempView .= "\n".'</'.$tags.'>';
-        }
-        if($after != NULL) {
-            $tempView = $tempView."\n".'@'.$after.'@';
-        }
-        if($parent != NULL) {
-            $tempView = str_replace('{'.$parent.'}', "\n".$tempView, $this->tempView);
-        }
-        if($before != NULL) {
-            $tempView = str_replace('@'.$before.'@', $tempView, $this->tempView);
-        }
-        $this->tempView = $tempView;
-        }
-        */
     }
 
     /**
      * Renders view with HTML tags and given data, template file and layout.
      *
      * @param   string   $tag
-     *
      * @return  array
      */
     public function createTag($tag, $attr = NULL, $content = NULL)
@@ -400,39 +251,6 @@ class View
             $temp .= '</'.$tag.'>';
         }
         return $temp;
-
-        {
-        /*
-        $tags, $text = NULL, $parent = NULL, $child = NULL, $before = NULL, $after = NULL
-        $tempView = '<'.$tags;
-        if(isset($this->attr[$tags]) && $this->attr[$tags] != NULL) {
-            foreach($this->attr[$tags] as $attr => $val) {
-                $args[] = $attr.($val == NULL ? '' : "=\"$val\"");
-            }
-            $args = implode(' ', $args);
-        }
-        $tempView .= isset($args) ? ' '.$args.'>' : '>'; 
-        if($child != NULL) {
-            $tempView .= $text;
-        }
-        if($child != NULL) {
-            $tempView .= '{'.$child.'}';
-        }
-        if($this->tags[$tags] === true) {
-            $tempView .= "\n".'</'.$tags.'>';
-        }
-        if($after != NULL) {
-            $tempView = $tempView."\n".'@'.$after.'@';
-        }
-        if($parent != NULL) {
-            $tempView = str_replace('{'.$parent.'}', "\n".$tempView, $this->tempView);
-        }
-        if($before != NULL) {
-            $tempView = str_replace('@'.$before.'@', $tempView, $this->tempView);
-        }
-        $this->tempView = $tempView;
-        */
-        }
     }
 
     /**
@@ -441,7 +259,6 @@ class View
      * @param string|null  $viewPath
      * @param string       $data
      * @param string|null  $layout
-     *
      * @return  $viewData.
      */
     public function renderHtml($viewData = null, $data = [], $layout = null)
@@ -466,96 +283,7 @@ class View
         $author = $this->createTag('meta', ['name' => 'author']);
         $canonical = $this->createTag('link', ['rel' => 'canonical', 'href' => $this->app->request->getUrl()]);
         $robot = $this->createTag('meta', ['name' => "robots", 'content' => "index, follow"]);
-        $style = '';/*'<style type="text/css">
-.sk-spinner-double-bounce.sk-spinner {
-  width: 40px;
-  height: 40px;
-  position: relative;
-  margin: 0 auto;
-}
-.sk-spinner-double-bounce .sk-double-bounce1,
-.sk-spinner-double-bounce .sk-double-bounce2 {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  background-color: #1ab394;
-  opacity: 0.6;
-  position: absolute;
-  top: 0;
-  left: 0;
-  -webkit-animation: sk-doubleBounce 2s infinite ease-in-out;
-  animation: sk-doubleBounce 2s infinite ease-in-out;
-}
-.sk-spinner-double-bounce .sk-double-bounce2 {
-  -webkit-animation-delay: -1s;
-  animation-delay: -1s;
-}
-@-webkit-keyframes sk-doubleBounce {
-  0%,
-  100% {
-    -webkit-transform: scale(0);
-    transform: scale(0);
-  }
-  50% {
-    -webkit-transform: scale(1);
-    transform: scale(1);
-  }
-}
-@keyframes sk-doubleBounce {
-  0%,
-  100% {
-    -webkit-transform: scale(0);
-    transform: scale(0);
-  }
-  50% {
-    -webkit-transform: scale(1);
-    transform: scale(1);
-  }
-}
-		#sp-bottom{background-color:#3c3c3c;padding:70px 0px 0px;}#sp-footer{background-color:#3c3c3c;}
-		@media (max-width: 384px) {
-			.image-thumb{
-				min-width:100%;
-			}
-			.img-footer{
-				margin-bottom:-1px;
-				margin-top:-35px;
-			}
-			.download-now{
-				display:none;
-			}
-		}
-		@media (max-width: 450px) {
-			.img-footer{
-				margin-bottom:-1px;
-				margin-top:-15px;
-			}
-		}
-		@media (max-width: 250px) {
-			.resbar{
-				display:none;
-			}
-			.img-footer{
-				margin-bottom:-5px;
-				margin-top:-5px;
-			}
-		}
-		.hot{
-			color:#F29CB2 !important;
-		}
-		.hot:hover{
-			color:#E7476F !important;
-		}
-		.hot-o{
-			color:#E5456E !important;
-			background-color:#F2A2B6 !important;
-		}
-		.hot-o:hover{
-			color:#ED7C99 !important;
-			background-color:#F7C4D1 !important;
-		}
-.download-button {margin-right:50px}
-	</style>';*/
+        $style = '';
         $linkCss = '<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">';
         $linkCss .= "\n".'<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/v4-shims.css">';
         $linkCss .= "\n".'<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">';
@@ -628,34 +356,6 @@ class View
         $html = $this->createTag('html', null, [$head, $body]);
         $dom = $doctype."\n".$html;
         return $dom;
-?>
-
-
-        
-
-<?php
-        {
-        /*
-        $p1 = $this->createTag('p', null, 'Text');
-        $p2 = $this->createTag('p', null, 'Text');
-        $span1 = $this->createTag('span', null, [$p1, $p2]);
-        $span2 = $this->createTag('span', null, [$p1, $p2]);
-        $div1 = $this->createTag('div', null, [$span1, $span2]);
-        $div2 = $this->createTag('div', null, [$span1, $span2]);
-        $header = $this->createTag('header', null, [$div1, $div2]);
-        */
-
-        #$html = ['!doctype' => null, 'html' => ['head' => null]];
-        #$this->addRenderTags($html);
-
-        /*
-        $this->addRenderTags('!doctype', NULL, NULL, false, NULL, 'doc');
-        $this->addRenderTags('html', NULL, NULL, 'html', 'doc', NULL);
-        $this->addRenderTags('head', NULL, 'html', 'head', NULL, 'head');
-        $this->addRenderTags('body', NULL, NULL, NULL, 'head', NULL);
-        $this->addRenderTags('title', 'IronPHP', 'head', NULL, NULL, NULL);
-        */
-        }
     }
 
     /**
@@ -684,36 +384,6 @@ class View
             $viewData = $this->renderHtml($viewData);
         }
         return $viewData;
-        /*
-        if ($this->hasRendered) {
-            return null;
-        }
-
-        $defaultLayout = null;
-        if ($layout !== null) {
-            $defaultLayout = $this->layout;
-            $this->layout = $layout;
-        }
-
-        $viewFileName = $view !== false ? $this->_getViewFileName($view) : null;
-        if ($viewFileName) {
-            $this->_currentType = static::TYPE_TEMPLATE;
-            $this->dispatchEvent('View.beforeRender', [$viewFileName]);
-            $this->Blocks->set('content', $this->_render($viewFileName));
-            $this->dispatchEvent('View.afterRender', [$viewFileName]);
-        }
-
-        if ($this->layout && $this->autoLayout) {
-            $this->Blocks->set('content', $this->renderLayout('', $this->layout));
-        }
-        if ($layout !== null) {
-            $this->layout = $defaultLayout;
-        }
-
-        $this->hasRendered = true;
-
-        return $this->Blocks->get('content');
-        */
     }
 
     /**
@@ -721,14 +391,14 @@ class View
      *
      * @param string|null  $templatePath
      * @param string       $data
-     *
      * @return  $templateData.
+     * @throws  \Exception
      */
     public function renderTemplate($templatePath = null, $data = [])
     {
         $templateData = $this->readTemplate($templatePath);
         if($data === null) {
-            throw new \Exception("template(): expects parameter 2 to be array, null given");
+            throw new Exception("template(): expects parameter 2 to be array, null given");
         }
         foreach($data as $key => $val) {
             if(is_array($val)) {
@@ -778,18 +448,19 @@ class View
      * Renders Template for given data, template file.
      *
      * @param string|null  $viewPath
-     * @return  $viewData.
+     * @return  $viewData
+     * @throws  \Exception
      */
     public function readTemplate($templatePath)
     {
         if(!is_readable($templatePath)) {
-            throw new \Exception("No permissons to read template: ".$templatePath);
+            throw new Exception("No permissons to read template: ".$templatePath);
         }
         if($templateData = file_get_contents($templatePath)) {
             return $templateData;
         }
         else {
-            throw new \Exception("Can not read template: ".$templatePath);
+            throw new Exception("Can not read template: ".$templatePath);
         }
     }
 }
