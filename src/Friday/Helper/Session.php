@@ -12,7 +12,7 @@
  * @link          
  * @since         0.0.1
  * @license       MIT License (https://opensource.org/licenses/mit-license.php)
- * @auther        Gaurang Parmar <gaurangkumarp@gmail.com>
+ * @auther        GaurangKumar Parmar <gaurangkumarp@gmail.com>
  */
 
 namespace Friday\Helper;
@@ -34,7 +34,7 @@ class Session
     /**
      * Register the session.
      *
-     * @param integer $time.
+     * @param integer $time
      */
     public function register($time = 60)
     {
@@ -46,7 +46,7 @@ class Session
     /**
      * Checks to see if the session is registered.
      *
-     * @return  True if it is, False if not.
+     * @return bool
      */
     public function isRegistered()
     {
@@ -60,8 +60,9 @@ class Session
     /**
      * Set key/value in session.
      *
-     * @param mixed $key
-     * @param mixed $value
+     * @param  mixed $key
+     * @param  mixed $value
+     * @return void
      */
     public function set($key, $value)
     {
@@ -71,7 +72,7 @@ class Session
     /**
      * Retrieve value stored in session by key.
      *
-     * @var mixed
+     * @param mixed
      */
     public function get($key)
     {
@@ -91,7 +92,7 @@ class Session
     /**
      * Gets the id for the current session.
      *
-     * @return integer - session id
+     * @return integer
      */
     public function getSessionId()
     {
@@ -101,7 +102,7 @@ class Session
     /**
      * Checks to see if the session is over based on the amount of time given.
      *
-     * @return boolean
+     * @return bool
     */
     public function isExpired()
     {
@@ -123,7 +124,7 @@ class Session
     /**
      * Returns the current time.
      *
-     * @return unix timestamp
+     * @return integer
      */
     private function timeNow()
     {
@@ -139,7 +140,7 @@ class Session
     /**
      * Generates new time.
      *
-     * @return unix timestamp
+     * @return integer
      */
     private function newTime()
     {
@@ -154,6 +155,8 @@ class Session
 
     /**
      * Destroys the session.
+     *
+     * @return void
      */
     public function end()
     {
@@ -161,79 +164,3 @@ class Session
         $_SESSION = array();
     }
 }
-/*
-##### Logging in. (login.php)
-```php
-<?php
-    require 'vendor/autoload.php';
-    use rcastera\Browser\Session\Session;
-
-    $errors = array();
-
-    // You'll definitely want to add more validation here and check against a
-    // database or something. This is just an example.
-    if (! empty($_POST)) {
-        if ($_POST['username'] == 'test' && $_POST['password'] == 'test') {
-            $session = new Session();
-
-            // You can define what you like to be stored.
-            $user = array(
-                'user_id' => 1,
-                'username' => $_POST['username']
-            );
-
-            $session->register(120); // Register for 2 hours.
-            $session->set('current_user', $user);
-            header('location: index.php');
-            exit;
-        } else {
-            $errors[] = 'Invalid login.';
-        }
-    }
-?>
-
-// Your form here.
-```
-
-
-##### Secure area once authenticated. (index.php/controller/whatever)
-```php
-<?php
-    require 'vendor/autoload.php';
-    use rcastera\Browser\Session\Session;
-
-    $session = new Session();
-
-    // Check if the session registered.
-    if ($session->isRegistered()) {
-        // Check to see if the session has expired.
-        // If it has, end the session and redirect to login.
-        if ($session->isExpired()) {
-            $session->end();
-            header('location: login.php');
-            exit;
-        } else {
-            // Keep renewing the session as long as they keep taking action.
-            $session->renew();
-        }
-    } else {
-        header('location: login.php');
-        exit;
-    }
-?>
-```
-
-
-##### Logging out. (logout.php)
-```php
-<?php
-    require 'vendor/autoload.php';
-    use rcastera\Browser\Session\Session;
-
-    $session = new Session();
-    $session->end();
-    header('location: login.php');
-    exit;
-?>
-```
-*/

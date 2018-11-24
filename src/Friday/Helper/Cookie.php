@@ -12,7 +12,7 @@
  * @link          
  * @since         0.0.1
  * @license       MIT License (https://opensource.org/licenses/mit-license.php)
- * @auther        Gaurang Parmar <gaurangkumarp@gmail.com>
+ * @auther        GaurangKumar Parmar <gaurangkumarp@gmail.com>
  */
 
 namespace Friday\Helper;
@@ -29,7 +29,6 @@ class Cookie
      * (default value: 0)
      * 
      * @var     integer
-     * @access  protected
      */
     protected $_expiry = 0;
 
@@ -38,57 +37,41 @@ class Cookie
      *  
      * @note    default value will be pulled from <_SERVER>
      * @var     string
-     * @access  protected
      */
     protected $_host;
 
     /**
      * _httponly
      *  
-     * (default value: true)
-     * 
      * @var     boolean
-     * @access  protected
      */
     protected $_httponly = true;
 
     /**
      * _lifetime
      *  
-     * (default value: 900)
-     * 
      * @var     integer
-     * @access  protected
      */
     protected $_lifetime = 900;
 
     /**
      * _name
      *  
-     * (default value: 'SN')
-     * 
      * @var     string
-     * @access  protected
      */
     protected $_name = 'SN';
 
     /**
      * _open
      *  
-     * (default value: false)
-     * 
      * @var     boolean
-     * @access  protected
      */
     protected $_open = false;
 
     /**
      * _path
      * 
-     * (default value: '/')
-     * 
      * @var     string
-     * @access  protected
      */
     protected $_path = '/';
 
@@ -98,37 +81,27 @@ class Cookie
      * Secret used for generating the signature. Is used in conjunction with
      * the <stamp> method for securing sessions.
      * 
-     * (default value: 'jkn*#j34!')
-     * 
      * @var     string
-     * @access  protected
      */
     protected $_secret = 'jkn*#j34!';
 
     /**
      * _secure
      *  
-     * (default value: false)
-     * 
      * @var     boolean
-     * @access  protected
      */
     protected $_secure = false;
 
     /**
      * _secureWithIpAddress
      *  
-     * (default value: false)
-     * 
      * @var     boolean
-     * @access  protected
      */
     protected $_secureWithIpAddress = false;
 
     /**
-     * __construct
+     * Create instance of Cookie
      * 
-     * @access  public
      * @return  void
      */
     public function __construct()
@@ -141,7 +114,6 @@ class Cookie
      * 
      * @note    decoupled from <open> method to allow for logging by child
      *          classes
-     * @access  protected
      * @return  void
      */
     public function _invalid()
@@ -157,7 +129,6 @@ class Cookie
      * Returns the client's IP address, either directly, or whichever was
      * forwarded by the detected load balancer.
      * 
-     * @access  protected
      * @return  string
      */
     protected function _ip()
@@ -174,7 +145,6 @@ class Cookie
     /**
      * _setup
      * 
-     * @access  protected
      * @return  void
      */
     protected function _setup()
@@ -196,7 +166,6 @@ class Cookie
      * Generates a signature by appending the <stamp> method response with
      * the a secret. This signature is hashed before being returned.
      * 
-     * @access  protected
      * @param   string $sid
      * @return  string
      */
@@ -214,7 +183,6 @@ class Cookie
      * user agent and IP of the client.
      * 
      * @note    decoupled from <_sign> to allow for customizing the stamp
-     * @access  protected
      * @return  string
      */
     protected function _stamp()
@@ -232,7 +200,6 @@ class Cookie
      * Checks whether the session is valid (eg. hasn't been tampered with)
      * by regenerating the signature and comparing it to what was passed.
      * 
-     * @access  protected
      * @param   string $sid
      * @param   string $signature
      * @return  boolean
@@ -247,7 +214,6 @@ class Cookie
     /**
      * destroy
      * 
-     * @access  public
      * @return  void
      */
     public function destroy()
@@ -290,7 +256,6 @@ class Cookie
     /**
      * open
      * 
-     * @access  public
      * @return  void
      */
     public function open()
@@ -338,7 +303,6 @@ class Cookie
     /**
      * setExpiry
      * 
-     * @access  public
      * @param   integer $seconds
      * @return  void
      */
@@ -350,7 +314,6 @@ class Cookie
     /**
      * setHost
      * 
-     * @access  public
      * @param   string $host
      * @return  void
      */
@@ -362,7 +325,6 @@ class Cookie
     /**
      * setLifetime
      * 
-     * @access  public
      * @param   string $lifetime
      * @return  void
      */
@@ -376,7 +338,6 @@ class Cookie
      * 
      * Sets the name of the session (cookie-wise).
      * 
-     * @access  public
      * @param   string $name
      * @return  void
      */
@@ -388,7 +349,6 @@ class Cookie
     /**
      * setPath
      * 
-     * @access  public
      * @param   string $path
      * @return  void
      */
@@ -402,7 +362,6 @@ class Cookie
      * 
      * Secret used for the hashing/signature process.
      * 
-     * @access  public
      * @param   string $secret
      * @return  void
      */
@@ -414,7 +373,6 @@ class Cookie
     /**
      * setSecured
      * 
-     * @access  public
      * @return  void
      */
     public function setSecured()

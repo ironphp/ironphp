@@ -12,7 +12,7 @@
  * @link          
  * @since         0.0.1
  * @license       MIT License (https://opensource.org/licenses/mit-license.php)
- * @auther        Gaurang Parmar <gaurangkumarp@gmail.com>
+ * @auther        GaurangKumar Parmar <gaurangkumarp@gmail.com>
  */
 
 namespace Friday\Helper;
@@ -84,10 +84,10 @@ class Pagination
     /**
      * Get pagination html.
      *
-     * @param  string  $url
-     * @param  int     $style
-     * @param  array   $cssClass
-     * @param  bool    $replaceClass
+     * @param  string       $url
+     * @param  int          $style
+     * @param  array        $cssClass
+     * @param  bool         $replaceClass
      * @return string|null
      */
     public function getPaginationHtml($url, $style = 0, $cssClass = null, $replaceClass = false)
