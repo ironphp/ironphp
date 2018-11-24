@@ -12,8 +12,9 @@
  * @link          
  * @since         0.0.1
  * @license       MIT License (https://opensource.org/licenses/mit-license.php)
- * @auther        Gaurang Parmar <gaurangkumarp@gmail.com>
+ * @auther        GaurangKumar Parmar <gaurangkumarp@gmail.com>
  */
+
 namespace Friday\Foundation;
 
 use Friday\Helper\Cookie;
@@ -27,74 +28,11 @@ use Friday\Controller\Controller;
 class Server extends Application
 {
     /**
-     * FrontController instance.
-     *
-     * @var object
-     */
-    public $frontController;
-
-    /**
-     * Request instance.
-     *
-     * @var object
-     */
-    public $request;
-
-    /**
-     * Route instance.
-     *
-     * @var object
-     */
-    public $route;
-
-    /**
-     * Router instance.
-     *
-     * @var object
-     */
-    public $router;
-
-    /**
-     * Dispatcher instance.
-     *
-     * @var object
-     */
-    public $dispatcher;
-
-    /**
-     * Response instance.
-     *
-     * @var object
-     */
-    public $response;
-
-    /**
-     * Matched Route to uri.
-     *
-     * @var array
-     */
-    public $matchRoute;
-
-    /**
      * Instanse of Session.
      *
      * @var \Friday\Helper\Session
      */
     public $session;
-
-    /**
-     * Instanse of Cookie.
-     *
-     * @var \Friday\Helper\Cookie
-     */
-    public $cookie;
-
-    /**
-     * Headers to be sent.
-     *
-     * @var array
-     */
-    public $headers = [];
 
     /**
      * Create a new Friday application instance.

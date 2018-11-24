@@ -12,7 +12,7 @@
  * @link          
  * @since         0.0.1
  * @license       MIT License (https://opensource.org/licenses/mit-license.php)
- * @auther        Gaurang Parmar <gaurangkumarp@gmail.com>
+ * @auther        GaurangKumar Parmar <gaurangkumarp@gmail.com>
  */
 
 namespace Friday\Foundation;
@@ -25,42 +25,42 @@ class Console extends Application
     /**
      * FrontController instance.
      *
-     * @var object
+     * @var \Friday\Http\FrontController
      */
     public $frontController;
 
     /**
      * Request instance.
      *
-     * @var object
+     * @var \Friday\Http\Request
      */
     public $request;
 
     /**
      * Route instance.
      *
-     * @var object
+     * @var \Friday\Http\Route
      */
     public $route;
 
     /**
      * Router instance.
      *
-     * @var object
+     * @var \Friday\Http\FrontController
      */
     public $router;
 
     /**
      * Dispatcher instance.
      *
-     * @var object
+     * @var \Friday\Http\FrontController
      */
     public $dispatcher;
 
     /**
      * Response instance.
      *
-     * @var object
+     * @var \Friday\Http\FrontController
      */
     public $response;
 
@@ -102,7 +102,7 @@ class Console extends Application
     /**
      * Command instance.
      *
-     * @var Friday\Console\Command
+     * @var \Friday\Console\Command
      */
     protected $command;
 
