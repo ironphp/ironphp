@@ -12,13 +12,16 @@
  * @link          
  * @since         0.0.1
  * @license       MIT License (https://opensource.org/licenses/mit-license.php)
- * @auther        Gaurang Parmar <gaurangkumarp@gmail.com>
+ * @auther        GaurangKumar Parmar <gaurangkumarp@gmail.com>
  */
 
 namespace Friday\Console;
 
 class Colors
 {
+    /*
+     * Foreground Colors with their Light colors
+     */
     const BLACK = "\033[0;30m";
     const DARK_GRAY = "\033[1;30m";
     const BLUE = "\033[0;34m";
@@ -36,6 +39,9 @@ class Colors
     const LIGHT_GRAY = "\033[0;37m";
     const WHITE = "\033[1;37m";
 
+    /*
+     * Background Colors
+     */
     const BG_BLACK = "\033[40m";
     const BG_RED = "\033[41m";
     const BG_GREEN = "\033[42m";
