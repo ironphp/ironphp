@@ -14,7 +14,7 @@
  * @link          
  * @since         0.0.1
  * @license       MIT License (https://opensource.org/licenses/mit-license.php)
- * @auther        Gaurang Parmar <gaurangkumarp@gmail.com>
+ * @auther        GaurangKumar Parmar <gaurangkumarp@gmail.com>
  */
 
 /**
@@ -22,6 +22,6 @@
  *
  * You can remove this if you are confident that your PHP version is sufficient.
  */
-if (version_compare(PHP_VERSION, '5.4.0') < 0) {
-    trigger_error('Your PHP version must be equal or higher than 5.6.0 to use CakePHP.' . PHP_EOL, E_USER_ERROR);
+if (version_compare(PHP_VERSION, '5.5.0') < 0) {
+    trigger_error('Your PHP version must be equal or higher than 5.5.0 to use CakePHP.' . PHP_EOL, E_USER_ERROR);
 }

@@ -12,7 +12,7 @@
  * @link          
  * @since         0.0.1
  * @license       MIT License (https://opensource.org/licenses/mit-license.php)
- * @auther        Gaurang Parmar <gaurangkumarp@gmail.com>
+ * @auther        GaurangKumar Parmar <gaurangkumarp@gmail.com>
  */
 
 return [
@@ -36,11 +36,11 @@ return [
      *--------------------------------------------------------------------------
      *
      * This value determines the "environment" your application is currently
-     * running in.
+     * running in. [pro/dev]
      *
      */
 
-    'env' => env('APP_ENV', 'production'),
+    'env' => env('APP_ENV', 'dev'),
 
     /**
      *--------------------------------------------------------------------------
@@ -53,7 +53,7 @@ return [
      *
      */
 
-    'debug' => env('APP_ENV', true),
+    'debug' => env('APP_DEBUG', true),
 
     /**
      *--------------------------------------------------------------------------
@@ -65,7 +65,7 @@ return [
      *
      */
 
-    'url' => env('APP_ENV', 'http://localhost'),
+    'url' => env('APP_URL', 'http://localhost'),
 
     /**
      *--------------------------------------------------------------------------
@@ -77,7 +77,7 @@ return [
      *
      */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Asia/Kolkata',
 
     /**
      *--------------------------------------------------------------------------
