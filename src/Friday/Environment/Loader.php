@@ -12,7 +12,7 @@
  * @link          
  * @since         0.0.1
  * @license       MIT License (https://opensource.org/licenses/mit-license.php)
- * @auther        Gaurang Parmar <gaurangkumarp@gmail.com>
+ * @auther        GaurangKumar Parmar <gaurangkumarp@gmail.com>
  */
 
 namespace Friday\Environment;
@@ -37,7 +37,7 @@ class Loader
     protected $filePath;
 
     /**
-     * Are we immutable?
+     * Is it immutable?
      *
      * @var bool
      */
@@ -51,10 +51,10 @@ class Loader
     public $variableNames = array();
 
     /**
-     * Create a new loader instance.
+     * Create a new Loader instance.
      *
-     * @param string $filePath
-     * @param bool   $immutable
+     * @param string  $filePath
+     * @param bool    $immutable
      *
      * @return void
      */
@@ -67,7 +67,7 @@ class Loader
     /**
      * Set immutable value.
      *
-     * @param bool $immutable
+     * @param  bool  $immutable
      * @return $this
      */
     public function setImmutable($immutable = false)
@@ -88,9 +88,9 @@ class Loader
     }
 
     /**
-     * Load `.env` file in given directory.
+     * Load .env file in given directory.
      *
-     * @return array
+     * @return  array
      */
     public function load()
     {
@@ -110,9 +110,8 @@ class Loader
     /**
      * Ensures the given filePath is readable.
      *
-     * @throws \Dotenv\Exception\InvalidPathException
-     *
-     * @return void
+     * @return  void
+     * @throws  \Friday\Environment\Exception\InvalidPathException
      */
     protected function ensureFileIsReadable()
     {
@@ -130,9 +129,8 @@ class Loader
      * - cleaning the name of quotes,
      * - resolving nested variables.
      *
-     * @param string $name
-     * @param string $value
-     *
+     * @param  string  $name
+     * @param  string  $value
      * @return array
      */
     protected function normaliseEnvironmentVariable($name, $value)
@@ -149,9 +147,8 @@ class Loader
      *
      * Called from `normaliseEnvironmentVariable` and the `VariableFactory`, passed as a callback in `$this->loadFromFile()`.
      *
-     * @param string $name
-     * @param string $value
-     *
+     * @param  string  $name
+     * @param  string  $value
      * @return array
      */
     public function processFilters($name, $value)
@@ -166,9 +163,8 @@ class Loader
     /**
      * Read lines from the file, auto detecting line endings.
      *
-     * @param string $filePath
-     *
-     * @return array
+     * @param   string  $filePath
+     * @return  array
      */
     protected function readLinesFromFile($filePath)
     {
@@ -184,9 +180,8 @@ class Loader
     /**
      * Determine if the line in the file is a comment, e.g. begins with a #.
      *
-     * @param string $line
-     *
-     * @return bool
+     * @param   string  $line
+     * @return  bool
      */
     protected function isComment($line)
     {
@@ -198,9 +193,8 @@ class Loader
     /**
      * Determine if the given line looks like it's setting a variable.
      *
-     * @param string $line
-     *
-     * @return bool
+     * @param   string  $line
+     * @return  bool
      */
     protected function looksLikeSetter($line)
     {
@@ -213,10 +207,9 @@ class Loader
      * If the `$name` contains an `=` sign, then we split it into 2 parts, a `name` & `value`
      * disregarding the `$value` passed in.
      *
-     * @param string $name
-     * @param string $value
-     *
-     * @return array
+     * @param   string  $name
+     * @param   string  $value
+     * @return  array
      */
     protected function splitCompoundStringIntoParts($name, $value)
     {
@@ -230,12 +223,10 @@ class Loader
     /**
      * Strips quotes from the environment variable value.
      *
-     * @param string $name
-     * @param string $value
-     *
-     * @throws \Dotenv\Exception\InvalidFileException
-     *
-     * @return array
+     * @param   string  $name
+     * @param   string  $value
+     * @return  array
+     * @throws  \Friday\Enviroment\Exception\InvalidFileException
      */
     protected function sanitiseVariableValue($name, $value)
     {
@@ -288,9 +279,8 @@ class Loader
      * Look for ${varname} patterns in the variable value and replace with an
      * existing environment variable.
      *
-     * @param string $value
-     *
-     * @return mixed
+     * @param   string  $value
+     * @return  mixed
      */
     protected function resolveNestedVariables($value)
     {
@@ -316,10 +306,9 @@ class Loader
     /**
      * Strips quotes and the optional leading "export " from the environment variable name.
      *
-     * @param string $name
-     * @param string $value
-     *
-     * @return array
+     * @param   string  $name
+     * @param   string  $value
+     * @return  array
      */
     protected function sanitiseVariableName($name, $value)
     {
@@ -331,9 +320,8 @@ class Loader
     /**
      * Determine if the given string begins with a quote.
      *
-     * @param string $value
-     *
-     * @return bool
+     * @param   string  $value
+     * @return  bool
      */
     protected function beginsWithAQuote($value)
     {
@@ -343,9 +331,8 @@ class Loader
     /**
      * Search the different places for environment variables and return first value found.
      *
-     * @param string $name
-     *
-     * @return string|null
+     * @param   string       $name
+     * @return  string|null
      */
     public function getEnvironmentVariable($name)
     {
@@ -370,9 +357,8 @@ class Loader
      *
      * The environment variable value is stripped of single and double quotes.
      *
-     * @param string      $name
-     * @param string|null $value
-     *
+     * @param  string       $name
+     * @param  string|null  $value
      * @return void
      */
     public function setEnvironmentVariable($name, $value = null)
@@ -411,11 +397,9 @@ class Loader
      * - putenv,
      * - unset($_ENV, $_SERVER).
      *
-     * @param string $name
-     *
-     * @see setEnvironmentVariable()
-     *
-     * @return void
+     * @param   string  $name
+     * @return  void
+     * @see     setEnvironmentVariable()
      */
     public function clearEnvironmentVariable($name)
     {

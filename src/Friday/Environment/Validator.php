@@ -12,7 +12,7 @@
  * @link          
  * @since         0.0.1
  * @license       MIT License (https://opensource.org/licenses/mit-license.php)
- * @auther        Gaurang Parmar <gaurangkumarp@gmail.com>
+ * @auther        GaurangKumar Parmar <gaurangkumarp@gmail.com>
  */
 
 namespace Friday\Environment;
@@ -37,16 +37,15 @@ class Validator
     /**
      * The loader instance.
      *
-     * @var \Dotenv\Loader
+     * @var \Friday\Environment\Loader
      */
     protected $loader;
 
     /**
      * Create a new validator instance.
      *
-     * @param array          $variables
-     * @param \Dotenv\Loader $loader
-     *
+     * @param  array                      $variables
+     * @param  \Friday\Environment\Loader $loader
      * @return void
      */
     public function __construct(array $variables, Loader $loader)
@@ -65,7 +64,7 @@ class Validator
     /**
      * Assert that each variable is not empty.
      *
-     * @return \Dotenv\Validator
+     * @return \Friday\Environment\Validator
      */
     public function notEmpty()
     {
@@ -80,7 +79,7 @@ class Validator
     /**
      * Assert that each specified variable is an integer.
      *
-     * @return \Dotenv\Validator
+     * @return \Friday\Environment\Validator
      */
     public function isInteger()
     {
@@ -95,7 +94,7 @@ class Validator
     /**
      * Assert that each specified variable is a boolean.
      *
-     * @return \Dotenv\Validator
+     * @return \Friday\Environment\Validator
      */
     public function isBoolean()
     {
@@ -114,9 +113,8 @@ class Validator
     /**
      * Assert that each variable is amongst the given choices.
      *
-     * @param string[] $choices
-     *
-     * @return \Dotenv\Validator
+     * @param  string[]                      $choices
+     * @return \Friday\Environment\Validator
      */
     public function allowedValues(array $choices)
     {
@@ -131,12 +129,10 @@ class Validator
     /**
      * Assert that the callback returns true for each variable.
      *
-     * @param callable $callback
-     * @param string   $message
-     *
-     * @throws \Dotenv\Exception\InvalidCallbackException|\Dotenv\Exception\ValidationException
-     *
-     * @return \Dotenv\Validator
+     * @param  callable                     $callback
+     * @param  string                       $message
+     * @return \Friday\Environment\Validator
+     * @throws \Friday\Environment\Exception\InvalidCallbackException|\Friday\Environment\Exception\ValidationException
      */
     protected function assertCallback($callback, $message = 'failed callback assertion')
     {

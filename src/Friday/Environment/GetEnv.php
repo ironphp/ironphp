@@ -12,7 +12,7 @@
  * @link          
  * @since         0.0.1
  * @license       MIT License (https://opensource.org/licenses/mit-license.php)
- * @auther        Gaurang Parmar <gaurangkumarp@gmail.com>
+ * @auther        GaurangKumar Parmar <gaurangkumarp@gmail.com>
  */
 
 namespace Friday\Environment;
@@ -37,16 +37,15 @@ class GetEnv
     /**
      * The loader instance.
      *
-     * @var \Dotenv\Loader|null
+     * @var \Friday\Environment\Loader|null
      */
     protected $loader;
 
     /**
      * Create a new dotenv instance.
      *
-     * @param string $path
-     * @param string $file
-     *
+     * @param  string  $path
+     * @param  string  $file
      * @return void
      */
     public function __construct($path, $file = '.env')
@@ -93,9 +92,8 @@ class GetEnv
     /**
      * Returns the full path to the file.
      *
-     * @param string $path
-     * @param string $file
-     *
+     * @param  string  $path
+     * @param  string  $file
      * @return string
      */
     protected function getFilePath($path, $file)
@@ -112,8 +110,7 @@ class GetEnv
     /**
      * Actually load the data.
      *
-     * @param bool $overload
-     *
+     * @param  bool  $overload
      * @return array
      */
     protected function loadData($overload = false)
@@ -124,9 +121,8 @@ class GetEnv
     /**
      * Required ensures that the specified variables exist, and returns a new validator object.
      *
-     * @param string|string[] $variable
-     *
-     * @return \Dotenv\Validator
+     * @param  string|string[]                $variable
+     * @return \Friday\Environment\Validator
      */
     public function required($variable)
     {
