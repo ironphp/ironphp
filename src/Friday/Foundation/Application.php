@@ -12,13 +12,14 @@
  * @link          
  * @since         0.0.1
  * @license       MIT License (https://opensource.org/licenses/mit-license.php)
- * @auther        Gaurang Parmar <gaurangkumarp@gmail.com>
+ * @auther        GaurangKumar Parmar <gaurangkumarp@gmail.com>
  */
 
 namespace Friday\Foundation;
 
 use Friday\Environment\GetEnv;
 use Friday\Helper\Session;
+use Exception;
 
 /**
  * Runs an application invoking all the registered application.
@@ -149,8 +150,9 @@ class Application
     /**
      * Find a Model.
      *
-     * @param  string  $model
-     * @return string  full model file path
+     * @param   string  $model
+     * @return  string  full model file path
+     * @throws  Exception
      */
     public function findModel($model)
     {
@@ -159,7 +161,7 @@ class Application
             return $file;
         }
         else {
-            throw new \Exception($file." Model file is missing.");
+            throw new Exception($file." Model file is missing.");
             exit;
         }
     }
@@ -167,8 +169,9 @@ class Application
     /**
      * Find a View.
      *
-     * @param  string  $view
-     * @return string  full view file path
+     * @param   string  $view
+     * @return  string  full view file path
+     * @throws  Exception
      */
     public function findView($view)
     {
@@ -177,7 +180,7 @@ class Application
             return $file;
         }
         else {
-            throw new \Exception($file." View file is missing.");
+            throw new Exception($file." View file is missing.");
             exit;
         }
     }
@@ -185,8 +188,9 @@ class Application
     /**
      * Find a Template.
      *
-     * @param  string  $template
-     * @return string  full template file path
+     * @param   string  $template
+     * @return  string  full template file path
+     * @throws  Exception
      */
     public function findTemplate($template)
     {
@@ -201,7 +205,7 @@ class Application
             return $file.'.php';
         }
         else {
-            throw new \Exception($file." Template file is missing.");
+            throw new Exception($file." Template file is missing.");
             exit;
         }
     }
@@ -209,8 +213,9 @@ class Application
     /**
      * Find a Controller.
      *
-     * @param  string  $controller
-     * @return bool
+     * @param   string  $controller
+     * @return  bool
+     * @throws  Exception
      */
     public function findController($controller)
     {
@@ -219,7 +224,7 @@ class Application
             return true;
         }
         else {
-            throw new \Exception($file." Controller file is missing.");
+            throw new Exception($file." Controller file is missing.");
             exit;
         }
     }
@@ -227,9 +232,10 @@ class Application
     /**
      * Check if Controller has method or not.
      *
-     * @param  Object  $controllerObj
-     * @param  string  $method
-     * @return bool
+     * @param   {App}\Controller\{Name}Controller  $controllerObj
+     * @param   string                             $method
+     * @return  bool
+     * @throws  Exception
      */
     public function hasMethod($controllerObj, $method)
     {
@@ -237,7 +243,7 @@ class Application
             return true;
         }
         else {
-            throw new \Exception($method." method is missing in ".get_class($controllerObj)." Controller.");
+            throw new Exception($method." method is missing in ".get_class($controllerObj)." Controller.");
             exit;
         }
     }
@@ -245,9 +251,10 @@ class Application
     /**
      * Require a file.
      *
-     * @param  string  $file
-     * @param  bool    $return
-     * @return void
+     * @param   string  $file
+     * @param   bool    $return
+     * @return  void
+     * @throws  Exception
      */
     public function requireFile($file, $return = false)
     {
@@ -260,7 +267,7 @@ class Application
             }
         }
         else {
-            throw new \Exception($file." file is missing.");
+            throw new Exception($file." file is missing.");
             exit;
         }
     }
@@ -291,7 +298,7 @@ class Application
     /**
      * Get Installtion Time/Version to app/install file used for checking updates.
      *
-     * @param  bool  $checkSet
+     * @param  bool       $checkSet
      * @return bool|array
      */
     public function getIntallTime($checkSet = false)
@@ -314,6 +321,7 @@ class Application
      * Set Application secret key.
      *
      * @return string
+     * @throws  Exception
      */
     public function setKey()
     {
@@ -350,7 +358,7 @@ class Application
             return true;
         }
         else {
-            throw new \Exception('Failed to write in .env file.');
+            throw new Exception('Failed to write in .env file.');
         }
     }
 
@@ -372,21 +380,20 @@ class Application
     /**
      * Ensures the given filePath is readable.
      *
-     * @throws \Exception
      * @param  string  $file
      * @return void
+     * @throws  Exception
      */
     protected function ensureFileIsReadable($file)
     {
         if (!is_readable($file) || !is_file($file)) {
-            throw new \Exception(sprintf('Unable to read the environment file at %s.', $$file));
+            throw new Exception(sprintf('Unable to read the environment file at %s.', $$file));
         }
     }
 
     /**
      * Find a Command.
      *
-     * @throws \Exception
      * @param  string  $command
      * @param  bool    $system
      * @return bool
@@ -399,7 +406,7 @@ class Application
         }
         else {
             return false;
-            #throw new \Exception($file." Command Class is missing.");
+            #throw new Exception($file." Command Class is missing.");
             #exit;
         }
     }
