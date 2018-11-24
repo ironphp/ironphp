@@ -12,12 +12,13 @@
  * @link          
  * @since         0.0.1
  * @license       MIT License (https://opensource.org/licenses/mit-license.php)
- * @auther        Gaurang Parmar <gaurangkumarp@gmail.com>
+ * @auther        GaurangKumar Parmar <gaurangkumarp@gmail.com>
  */
 
 namespace App\Controller;
 
 use Friday\Controller\Controller;
+use Friday\Foundation\Application;
 
 class IndexController extends Controller
 {
@@ -30,9 +31,14 @@ class IndexController extends Controller
     {
     }
 
+    /**
+     * Index method.
+     *
+     * @return void
+     */
     public function index()
     {
-        $this->template('index', ['name'=>'IronPHP', 'version'=>\Friday\Foundation\Application::VERSION]);
+        $this->template('index', ['name'=>'IronPHP', 'version'=>Application::VERSION]);
         #Examples
         //$data = $this->model('IndexModel')->get('name');
         //$data = $this->model('IndexModel')->get(null, ['id' => 1]);
@@ -45,11 +51,21 @@ class IndexController extends Controller
         //$this->view('index', $data);
     }
 
+    /**
+     * Parameter method.
+     *
+     * @return void
+     */
     public function name($param)
     {
         return "Name($param) Method Called";
     }
 
+    /**
+     * Show users from model.
+     *
+     * @return void
+     */
     public function showUsers()
     {
         print_r($this->model->getUsers());
