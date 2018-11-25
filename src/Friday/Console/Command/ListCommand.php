@@ -65,4 +65,32 @@ class ListCommand extends Command
         Colors::BG_BLACK.Colors::WHITE;
         return $output;
     }
+
+    /**
+     * Help for this Commands.
+     *
+     * @return void
+     */
+    public function help()
+    {
+        $output = Colors::LIGHT_BLUE.str_repeat("-", 63).PHP_EOL.
+        Colors::GREEN."IronPHP ".Colors::WHITE."Framework ".Colors::YELLOW.Application::VERSION.Colors::WHITE." (kernel: src, env: ".env('APP_ENV').", debug: ".env('APP_DEBUG').")".PHP_EOL.
+        Colors::LIGHT_BLUE.str_repeat("-", 63).PHP_EOL.
+        Colors::YELLOW."Description:".PHP_EOL.
+        Colors::WHITE."  Lists commands".PHP_EOL.
+        PHP_EOL.
+        Colors::YELLOW."Usage:".PHP_EOL.
+        Colors::WHITE."  list".PHP_EOL.
+        PHP_EOL.
+        Colors::YELLOW."Arguments:".PHP_EOL.
+        PHP_EOL.
+        Colors::YELLOW."Options:".PHP_EOL.
+        PHP_EOL.
+        Colors::YELLOW."Help:".PHP_EOL.
+        Colors::WHITE."  The ".Colors::GREEN."list".Colors::WHITE." command lists all commands:".PHP_EOL.
+        PHP_EOL.
+        Colors::GREEN."    php jarvis list".PHP_EOL.
+        Colors::BG_BLACK.Colors::WHITE;
+        return $output;
+    }
 }
