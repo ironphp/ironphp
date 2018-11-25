@@ -102,4 +102,33 @@ class VersionCommand extends Command
             echo Colors::GREEN."\nChecking updates... ".Colors::WHITE." No internet!";
         }
     }
+
+    /**
+     * Help for this Commands.
+     *
+     * @return void
+     */
+    public function help()
+    {
+        $output = Colors::LIGHT_BLUE.str_repeat("-", 63).PHP_EOL.
+        Colors::GREEN."IronPHP ".Colors::WHITE."Framework ".Colors::YELLOW.Application::VERSION.Colors::WHITE." (kernel: src, env: ".env('APP_ENV').", debug: ".env('APP_DEBUG').")".PHP_EOL.
+        Colors::LIGHT_BLUE.str_repeat("-", 63).PHP_EOL.
+        Colors::YELLOW."Description:".PHP_EOL.
+        Colors::WHITE."  Displays version of the ironphp framework".PHP_EOL.
+        PHP_EOL.
+        Colors::YELLOW."Usage:".PHP_EOL.
+        Colors::WHITE."  version".PHP_EOL.
+        PHP_EOL.
+        Colors::YELLOW."Arguments:".PHP_EOL.
+        PHP_EOL.
+        Colors::YELLOW."Options:".PHP_EOL.
+        PHP_EOL.
+        Colors::YELLOW."Help:".PHP_EOL.
+        Colors::WHITE."  The ".Colors::GREEN."version".Colors::WHITE." display framework version:".PHP_EOL.
+        PHP_EOL.
+        Colors::GREEN."    php jarvis version".PHP_EOL.
+        PHP_EOL.
+        Colors::BG_BLACK.Colors::WHITE;
+        return $output;
+    }
 }
