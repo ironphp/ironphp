@@ -66,31 +66,119 @@ class Command
         $tokens = $console->getToken();
         $default = 'list';
         # Run commands
-        if(0 < \count($tokens)) {
-            $command = $tokens[0];
+        switch(\count($tokens)) {
+            # php jarvis
+            case 0:
+                $command = $default;
+                if($console->findCommand($command)) {
+                    $this->execute($command);
+                }
+                else {
+                    $this->output = $console->commandError("Command \"".$command."\" is not defined.");
+                }
+                break;
+
+            # php jarvis cmd
+            case 1:
+                $command = $tokens[0];
+                if($console->findCommand($command)) {
+                    $this->execute($command);
+                }
+                elseif($command[0] == '-') {
+                    if(isset($this->short[$command])) {
+                        $command = $this->short[$command];
+                        if($console->findCommand($command)) {
+                            $this->execute($command);
+                        }
+                        else {
+                            $this->output = $console->commandError("Option \"".$tokens[0]."\" is not defined.");
+                        }
+                    }
+                    else {
+                        $this->output = $console->commandError("Option \"".$tokens[0]."\" is not defined.");
+                    }
+                }
+                else {
+                    $this->output = $console->commandError("Command \"".$command."\" is not defined.");
+                }
+                break;
+
+            # php jarvis cmd arg ...
+            default:
+                $command = $tokens[0];
+                array_shift($tokens);
+                if($console->findCommand($command)) {
+                    $opt = $tokens[0];
+                    if(isset($this->short[$opt])) {
+                        $cmd = $this->short[$opt];
+                        # php jarvis cmd help ...
+                        if($cmd == 'help') {
+                            $tokens[0] = $command;
+                            $this->execute($cmd, $tokens);
+                        }
+                        # php jarvis cmd -/--opt ...
+                        else {
+                            array_shift($tokens);
+                            $this->execute($command, $tokens);
+                        }
+                    }
+                    # php jarvis cmd opt ...
+                    else {
+                        $this->execute($command, $tokens);
+                    }
+                }
+                # php jarvis -/--opt opt ...
+                elseif($command[0] == '-') {
+                    if(isset($this->short[$command])) {
+                        $command = $this->short[$command];
+                        if($console->findCommand($command)) {
+                            $this->execute($command, $tokens);
+                        }
+                        else {
+                            $this->output = $console->commandError("Option \"".$tokens[0]."\" is not defined.");
+                        }
+                    }
+                    else {
+                        $this->output = $console->commandError("Option \"".$tokens[0]."\" is not defined.");
+                    }
+                }
+                else {
+                    $this->output = $console->commandError("Command \"".$command."\" is not defined.");
+                }
+                break;
+        }
+/*
             if(isset($this->short[$command])) {
                 $command = $this->short[$command];
+                if($command == 'help') {
+                    $options = (array)$tokens[0];
+                }
+                else {
+                    $options = $tokens;
+                }
             }
             if($console->findCommand($command)) {
-                $this->execute($command);
+                if($command != 'help') {
+                    if(isset($this->short[$tokens[0]])) {
+                        $option = $this->short[$tokens[0]];
+                        if($option == 'help') {
+                            $options = (array)$command;
+                            $command = $option;
+                        }
+                        else {
+                            $options = $tokens;
+                        }
+                    }
+                    else {
+                        $options = (array)$options[0];
+                    }
+                }
+                $this->execute($command, $tokens);
             }
             else {
                 $this->output = $console->commandError("Command \"".$command."\" is not defined.");
             }
-            //if(isset($this->short[$command])) {
-            //    $command = $this->short[$command];
-            //}
-        }
-        else {
-            $command = $default;
-            if($console->findCommand($command)) {
-                $this->execute($command);
-            }
-            else {
-                $this->output = $console->commandError("Command \"".$command."\" is not defined.");
-            }
-        }
-
+*/
         $this->getOutput();
         define('CMD_RUN', microtime(true));
     }
@@ -109,13 +197,28 @@ class Command
      * Execute command.
      *
      * @param  string  $command
-     * @return string
+     * @param  array   option
+     * @return void
      */
-    public function execute($command)
+    public function execute($command, $option = [])
     {
         $commandClass = "\\Friday\\Console\\Command\\".ucfirst($command)."Command";
-        $cmd = new $commandClass();
+        $cmd = new $commandClass($option);
         $this->output = $cmd->run();
+    }
+
+    /**
+     * Execute Help command.
+     *
+     * @param  string  $command
+     * @param  array   option
+     * @return string
+     */
+    public function executeHelp($command, $option = [])
+    {
+        $commandClass = "\\Friday\\Console\\Command\\".ucfirst($command)."Command";
+        $cmd = new $commandClass($option);
+        return $cmd->help();
     }
 
     /**
