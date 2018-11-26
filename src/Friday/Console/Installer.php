@@ -33,7 +33,7 @@ class Installer
      *
      * @return void
      */
-    public function postInstall()
+    static public function postInstall()
     {
         print('postInstall');
     }
@@ -43,7 +43,7 @@ class Installer
      *
      * @return void
      */
-    public function postUpdate()
+    static public function postUpdate()
     {
         print('postUpdate');
     }
@@ -53,7 +53,7 @@ class Installer
      *
      * @return void
      */
-    public function postInstall()
+    static public function postInstall()
     {
         print('postInstall');
     }
@@ -63,7 +63,7 @@ class Installer
      *
      * @return void
      */
-    public function postAutoloadDump()
+    static public function postAutoloadDump()
     {
         print('postAutoloadDump');
     }
