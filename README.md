@@ -6,6 +6,9 @@
     <a href="https://packagist.org/packages/ironphp/ironphp" target="_blank">
         <img alt="Latest Stable Version" src="https://poser.pugx.org/ironphp/ironphp/v/stable.svg">
     </a>
+    <a href="https://packagist.org/packages/ironphp/ironphp" target="_blank">
+        <img alt="Latest Dev Version" src="https://poser.pugx.org/ironphp/ironphp/v/unstable.svg">
+    </a>
     <a href='https://coveralls.io/github/ironphp/ironphp?branch=master'>
         <img alt='Coverage Status' src='https://coveralls.io/repos/github/ironphp/ironphp/badge.svg?branch=master'>
     </a>
