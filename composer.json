@@ -40,8 +40,6 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Friday\\": "src/Friday/",
-            "App\\": "app/"
         }
     },
     "extra": {
