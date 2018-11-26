@@ -2,12 +2,15 @@
     "name": "ironphp/ironphp",
     "description": "The IronPHP Framework",
     "homepage": "https://github.com/ironphp/ironphp",
-    "type": "project",
+    "type": "library",
     "keywords": [
         "php",
-        "mvc",
         "framework",
-        "ironphp"
+        "mvc",
+        "ironphp",
+        "frontcontroller",
+        "iron-php",
+        "ironphp-framework"
     ],
     "license": "MIT",
     "authors": [
