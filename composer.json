@@ -28,15 +28,14 @@
         "source": "https://github.com/ironphp/ironphp"
     },
     "require": {
-        "php": ">=5.5"
+        "php": ">=5.5",
+        "vlucas/phpdotenv": "^2.5@dev"
     },
     "autoload": {
         "psr-4": {
-            "Friday\\": "src/Friday/",
-            "App\\": "app/"
+            "Friday\\": "src/Friday/"
         },
-        "files": ["src/Friday/Helper/Function.php"],
-        "exclude-from-classmap": ["/Tests/", "/test/", "/tests/"]
+        "files": ["src/Friday/Helper/Function.php"]
     },
     "autoload-dev": {
         "psr-4": {
@@ -44,16 +43,8 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0.0-dev"
+            "dev-master": "1.0-dev"
         }
-    },
-    "scripts": {
-        "post-root-package-install": [
-            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
-        ],
-        "post-create-project-cmd": [
-            "@php jarvis key"
-        ]
     },
     "minimum-stability": "dev",
     "prefer-stable": false,
