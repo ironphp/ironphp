@@ -1,4 +1,4 @@
-<h1 align="center">IronPHP</h1>
+<h1 align="center">IronPHP Framework</h1>
 <p align="center">
     <a href="https://packagist.org/packages/ironphp/ironphp" target="_blank">
         <img alt="Total Downloads" src="https://poser.pugx.org/ironphp/ironphp/d/total.svg">
@@ -30,6 +30,10 @@ uses Front Controller, and MVC.
 
 > **Note:** No stable release yet - [IronPHP Framework alpha1](https://github.com/ironphp/ironphp/releases/tag/1.0.0-alpha1) version has been released. 
 
+> **Note:** This repository contains the core code of the IronPHP framework. If you want to build an application using IronPHP, visit the main [IronPHP repository](https://github.com/ironphp/ironphp).
+
+IronPHP is a web application framework for PHP which uses commonly known design patterns like Associative Data Mapping, Front Controller, and MVC. Our primary goal is to provide a structured framework that enables PHP users at all levels to rapidly develop robust web applications, without any loss to flexibility.
+
 ## Table of Contents
 
 - [Requirements](#requirements)
@@ -37,6 +41,8 @@ uses Front Controller, and MVC.
 - [Update](#update)
 - [Configuration](#configuration)
 - [Community](#community)
+- [Contributing](#contributing)
+- [Code of Conduct](#code-of-conduct)
 - [Get Support](#get-support)
 - [Security](#security)
 - [Credits](#credits)
@@ -48,45 +54,18 @@ IronPHP requires PHP 5.5 or later; we recommend using the latest PHP version whe
 
 ## Installing IronPHP via Composer
 
-You can install IronPHP as your project using
-[Composer](https://getcomposer.org)  as
-a starting point. you can run the following:
+You can install IronPHP into your project using
+[Composer](https://getcomposer.org).
 
-1. Download [Composer-Setup.exe](https://getcomposer.org/Composer-Setup.exe) or update `composer self-update`.
-2. Run `php composer.phar create-project --prefer-dist IronPHP/IronPHP [dir_name]`.
+Download [Composer-Setup.exe](https://getcomposer.org/Composer-Setup.exe) or update `composer self-update`.
 
-
-If Composer is installed globally, run
+If you're starting a new project, we
+recommend using the [app skeleton](https://github.com/ironphp/app) as
+a starting point. For existing applications you can run the following:
 
 ``` bash
-$ composer create-project ironphp/ironphp -s dev
+$ composer require ironphp/ironphp:"@dev"
 ```
-
-In case you want to use a custom app dir name (e.g. `/myapp/`):
-
-```bash
-$ composer create-project --prefer-dist ironphp/ironphp -s dev myapp
-```
-
-Go to myapp dir, if installed with myapp dirname:
-
-```bash
-$ cd myapp
-```
-
-Go to ironphp dir, if installed without dirname:
-
-```bash
-$ cd ironphp
-```
-
-You can now use php developement webserver to view the default home page:
-
-```bash
-$ php jarvis serve
-```
-
-Then visit `http://localhost:8000` to see the welcome page.
 
 ## Update
 
@@ -101,6 +80,15 @@ Read and edit `'Configuraton'` in `config/app.php` and setup the `'Datasource'` 
 ## Community
 
 * Follow us on [GitHub][1]
+* Follow us on [FaceBook][2]
+
+## Contributing
+
+* [CONTRIBUTING.md](CONTRIBUTING.md) - Quick pointers for contributing to the IronPHP project.
+
+## Code of Conduct
+
+* [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) - In order to ensure that the IronPHP community is welcoming to all, please review and abide by the Code of Conduct.
 
 ## About Us
 
@@ -131,3 +119,4 @@ For each report, we try to first confirm the vulnerability. Once confirmed, the 
 The IronPHP framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
 [1]: https://github.com/ironphp
+[2]: https://www.facebook.com/IronPHP-Framwork-325690624644002
