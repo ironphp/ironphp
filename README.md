@@ -29,8 +29,7 @@ IronPHP is a development framework for PHP which
 uses Front Controller, and MVC.
 
 > **Note:** No stable release yet - [IronPHP Framework alpha1](https://github.com/ironphp/ironphp/releases/tag/1.0.0-alpha1) version has been released. 
-
-> **Note:** This repository contains the core code of the IronPHP framework. If you want to build an application using IronPHP, visit the main [IronPHP repository](https://github.com/ironphp/ironphp).
+This repository contains the core code of the IronPHP framework. If you want to build an application using IronPHP, visit the main [IronPHP Application Skeleton](https://github.com/ironphp/ironphp).
 
 IronPHP is a web application framework for PHP which uses commonly known design patterns like Associative Data Mapping, Front Controller, and MVC. Our primary goal is to provide a structured framework that enables PHP users at all levels to rapidly develop robust web applications, without any loss to flexibility.
 
