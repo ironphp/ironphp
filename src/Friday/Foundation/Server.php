@@ -28,11 +28,67 @@ use Friday\Controller\Controller;
 class Server extends Application
 {
     /**
+     * FrontController instance.
+     *
+     * @var \Friday\Http\FrontController
+     */
+    public $frontController;
+
+    /**
+     * Request instance.
+     *
+     * @var \Friday\Http\Request
+     */
+    public $request;
+
+    /**
+     * Route instance.
+     *
+     * @var \Friday\Http\Route
+     */
+    public $route;
+
+    /**
+     * Router instance.
+     *
+     * @var \Friday\Http\FrontController
+     */
+    public $router;
+
+    /**
+     * Dispatcher instance.
+     *
+     * @var \Friday\Http\FrontController
+     */
+    public $dispatcher;
+
+    /**
+     * Response instance.
+     *
+     * @var \Friday\Http\FrontController
+     */
+    public $response;
+
+    /**
+     * Matched Route to uri.
+     *
+     * @var array
+     */
+    public $matchRoute;
+
+    /**
      * Instanse of Session.
      *
      * @var \Friday\Helper\Session
      */
     public $session;
+
+    /**
+     * Headers to be sent.
+     *
+     * @var array
+     */
+    public $headers = [];
 
     /**
      * Create a new Friday application instance.

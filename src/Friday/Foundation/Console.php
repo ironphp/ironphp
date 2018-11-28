@@ -23,55 +23,6 @@ use Friday\Console\Colors;
 class Console extends Application
 {
     /**
-     * FrontController instance.
-     *
-     * @var \Friday\Http\FrontController
-     */
-    public $frontController;
-
-    /**
-     * Request instance.
-     *
-     * @var \Friday\Http\Request
-     */
-    public $request;
-
-    /**
-     * Route instance.
-     *
-     * @var \Friday\Http\Route
-     */
-    public $route;
-
-    /**
-     * Router instance.
-     *
-     * @var \Friday\Http\FrontController
-     */
-    public $router;
-
-    /**
-     * Dispatcher instance.
-     *
-     * @var \Friday\Http\FrontController
-     */
-    public $dispatcher;
-
-    /**
-     * Response instance.
-     *
-     * @var \Friday\Http\FrontController
-     */
-    public $response;
-
-    /**
-     * Matched Route to uri.
-     *
-     * @var array
-     */
-    public $matchRoute;
-
-    /**
      * Instanse of Session.
      *
      * @var \Friday\Helper\Session
@@ -84,13 +35,6 @@ class Console extends Application
      * @var \Friday\Helper\Cookie
      */
     public $cookie;
-
-    /**
-     * Headers to be sent.
-     *
-     * @var array
-     */
-    public $headers = [];
 
     /**
      * Command and arguments from argv.
