@@ -19,6 +19,9 @@ namespace Friday\Foundation;
 
 use Friday\Environment\GetEnv;
 use Friday\Helper\Session;
+
+use Dotenv\Dotenv;
+
 use Exception;
 
 /**
@@ -63,7 +66,7 @@ class Application
 
         #Configurator
         #enviro config
-        $env = new GetEnv( $this->basePath(), '.env' );
+        $env = new Dotenv( $this->basePath(), '.env' );
         $env->load();
 
         #set install config
