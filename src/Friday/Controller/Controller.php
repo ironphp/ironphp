@@ -193,7 +193,7 @@ class Controller
     public function view($view, $data = [])
     {
         $viewPath = self::$instance->app->findView($view);
-        echo self::$instance->render($viewPath, $data);
+        echo self::$instance->renderView($viewPath, $data);
     }
 
     /**
