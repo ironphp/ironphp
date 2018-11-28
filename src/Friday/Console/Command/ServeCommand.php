@@ -48,22 +48,24 @@ class ServeCommand extends Command
      */
     public function run()
     {
-        if($this->option[0] == 'help') {
-            return $this->help();
-        }
         $host = '127.0.0.1';
         $port = '8000';
-        if(strpos($this->option[0], '--host=') === 0) {
-            $host = trim(str_replace('--host=', '', $this->option[0]));
-        }
-        elseif(strpos($this->option[0], '--port=') === 0) {
-            $port = trim(str_replace('--port=', '', $this->option[0]));
-        }
-        if(strpos($this->option[1], '--host=') === 0) {
-            $host = trim(str_replace('--host=', '', $this->option[1]));
-        }
-        elseif(strpos($this->option[1], '--port=') === 0) {
-            $port = trim(str_replace('--port=', '', $this->option[1]));
+        if(isset($this->option[0])) {
+            if($this->option[0] == 'help') {
+                return $this->help();
+            }
+            if(strpos($this->option[0], '--host=') === 0) {
+                $host = trim(str_replace('--host=', '', $this->option[0]));
+            }
+            elseif(strpos($this->option[0], '--port=') === 0) {
+                $port = trim(str_replace('--port=', '', $this->option[0]));
+            }
+            if(strpos($this->option[1], '--host=') === 0) {
+                $host = trim(str_replace('--host=', '', $this->option[1]));
+            }
+            elseif(strpos($this->option[1], '--port=') === 0) {
+                $port = trim(str_replace('--port=', '', $this->option[1]));
+            }
         }
         print Colors::LIGHT_BLUE.str_repeat("-", 72).PHP_EOL.
         Colors::WHITE."Welcome to ".Colors::GREEN."IronPHP".Colors::WHITE." Framework ".
