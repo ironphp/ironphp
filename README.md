@@ -9,15 +9,6 @@
     <a href="https://packagist.org/packages/ironphp/ironphp" target="_blank">
         <img alt="Latest Dev Version" src="https://poser.pugx.org/ironphp/ironphp/v/unstable.svg">
     </a>
-    <a href='https://coveralls.io/github/ironphp/ironphp?branch=master'>
-        <img alt='Coverage Status' src='https://coveralls.io/repos/github/ironphp/ironphp/badge.svg?branch=master'>
-    </a>
-    <a href="https://travis-ci.org/ironphp/ironphp" target="_blank">
-        <img alt="Travis-CI Build Status" src="https://api.travis-ci.org/ironphp/ironphp.svg">
-    </a>
-    <a href="https://ci.appveyor.com/project/gaurangkumar/ironphp/branch/master" target="_blank">
-        <img alt="AppVeyor Build Status" src="https://ci.appveyor.com/api/projects/status/gaurangkumar/ironphp/branch/master?svg=true">
-    </a>
     <a href="https://opensource.org/licenses/MIT" target="_blank">
         <img alt="Software License" src="https://poser.pugx.org/ironphp/ironphp/license.svg">
     </a>
@@ -78,7 +69,7 @@ Read and edit `'Configuraton'` in `config/app.php` and setup the `'Datasource'` 
 
 ## Community
 
-* Follow us on [GitHub][1]
+* IronPHP us on [GitHub][1]
 * Follow us on [FaceBook][2]
 
 ## Contributing
@@ -91,7 +82,7 @@ Read and edit `'Configuraton'` in `config/app.php` and setup the `'Datasource'` 
 
 ## About Us
 
-IronPHP development is led by the [Gaurang Parmar](https://twitter.com/gaurangkumarp).
+IronPHP development is led by the [GaurangKumar Parmar](https://twitter.com/gaurangkumarp).
 
 ## Get Support
 
@@ -111,7 +102,7 @@ For each report, we try to first confirm the vulnerability. Once confirmed, the 
 
 ## Authors
 
-- Gaurang Parmar  | [GitHub](https://github.com/gaurangkumar)  | [Twitter](https://twitter.com/gaurangkumarp) | [Patreon](https://www.patreon.com/gaurangkumar) | <gaurangkumarp@gmail.com>
+- GaurangKumar Parmar  | [GitHub](https://github.com/gaurangkumar)  | [Twitter](https://twitter.com/gaurangkumarp) | [Patreon](https://www.patreon.com/gaurangkumar) | <gaurangkumarp@gmail.com>
 
 ## License
 
