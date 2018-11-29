@@ -67,7 +67,7 @@ class Request implements RequestInterface
         $this->params = $params;
         $this->serverRequestMethod = $method;
         $this->https = $https;
-        $this->host = rtrim($host, '/');
+        $this->host = rtrim($host, '/\\');
         $this->ip = $ip;
     }
  
