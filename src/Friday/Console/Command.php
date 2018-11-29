@@ -17,6 +17,8 @@
 
 namespace Friday\Console;
 
+use Friday\Foundation\Application;
+
 class Command
 {
     /**
@@ -229,5 +231,31 @@ class Command
     public function getConsole()
     {
         return self::$console;
+    }
+
+    /**
+     * Get info of Console Application.
+     *
+     * @return string
+     */
+    public function getInfo()
+    {
+        return Colors::LIGHT_BLUE.str_repeat("-", 73).PHP_EOL.
+        Colors::GREEN."IronPHP".Colors::WHITE." Framework ".
+        Colors::YELLOW."".Application::VERSION.Colors::WHITE." (env: ".(env('APP_ENV') === 'dev' ? 'development' : 'production').", debug: ".(env('APP_DEBUG') ? 'true' : 'false').")".PHP_EOL.
+        Colors::LIGHT_BLUE.str_repeat("-", 73).PHP_EOL;
+    }
+
+    /**
+     * Get welcome info of Console Application.
+     *
+     * @return string
+     */
+    public function getWelInfo()
+    {
+        return Colors::LIGHT_BLUE.str_repeat("-", 73).PHP_EOL.
+        Colors::WHITE."Welcome to ".Colors::GREEN."IronPHP".Colors::WHITE." Framework ".
+        Colors::YELLOW."".Application::VERSION.Colors::WHITE." (env: ".(env('APP_ENV') === 'dev' ? 'development' : 'production').", debug: ".(env('APP_DEBUG') ? 'true' : 'false').")".PHP_EOL.
+        Colors::LIGHT_BLUE.str_repeat("-", 73).PHP_EOL;
     }
 }
