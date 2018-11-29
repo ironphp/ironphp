@@ -19,7 +19,6 @@ namespace Friday\Console\Command;
 
 use Friday\Console\Colors;
 use Friday\Console\Command;
-use Friday\Foundation\Application;
 
 class KeyCommand extends Command
 {
@@ -69,9 +68,7 @@ class KeyCommand extends Command
      */
     public function help()
     {
-        $output = Colors::LIGHT_BLUE.str_repeat("-", 63).PHP_EOL.
-        Colors::GREEN."IronPHP ".Colors::WHITE."Framework ".Colors::YELLOW.Application::VERSION.Colors::WHITE." (kernel: src, env: ".env('APP_ENV').", debug: ".env('APP_DEBUG').")".PHP_EOL.
-        Colors::LIGHT_BLUE.str_repeat("-", 63).PHP_EOL.
+        $output = $this->getWelInfo().
         Colors::YELLOW."Description:".PHP_EOL.
         Colors::WHITE."  Set the application key".PHP_EOL.
         PHP_EOL.

@@ -19,7 +19,6 @@ namespace Friday\Console\Command;
 
 use Friday\Console\Colors;
 use Friday\Console\Command;
-use Friday\Foundation\Application;
 
 class VersionCommand extends Command
 {
@@ -55,9 +54,7 @@ class VersionCommand extends Command
  _/ /__/ /  / /_/ / / / / .___/ ___  / .___/
 /_____/_/   \____/_/ /_/_/   /_/  /_/_/
 ".
-        Colors::LIGHT_BLUE.str_repeat("-", 63).PHP_EOL.
-        Colors::GREEN."IronPHP".Colors::WHITE." Framework ".Colors::BROWN."".Application::VERSION.Colors::WHITE." (kernel: src, env: ".env('APP_ENV').", debug: ".env('APP_DEBUG').")".PHP_EOL.
-        Colors::LIGHT_BLUE.str_repeat("-", 63).PHP_EOL.
+        $this->getWelInfo().
         Colors::BG_BLACK.Colors::WHITE;
         return $output;
     }
