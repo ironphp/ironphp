@@ -206,7 +206,7 @@ class Server extends Application
         else {
             $https = false;
         }
-        $host = $_SERVER['HTTP_HOST'].$extDir;
+        $host = $_SERVER['HTTP_HOST'].str_replace('\\', '/', $extDir);
         $ip = $_SERVER['REMOTE_ADDR'];
         
         if($serverRequestMethod === 'POST') {
