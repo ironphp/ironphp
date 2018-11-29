@@ -242,7 +242,7 @@ class Command
     {
         return Colors::LIGHT_BLUE.str_repeat("-", 73).PHP_EOL.
         Colors::GREEN."IronPHP".Colors::WHITE." Framework ".
-        Colors::YELLOW."".Application::VERSION.Colors::WHITE." (env: ".(env('APP_ENV') === 'dev' ? 'development' : 'production').", debug: ".(env('APP_DEBUG') ? 'true' : 'false').")".PHP_EOL.
+        Colors::YELLOW."".Application::VERSION.Colors::WHITE." (env: ".Colors::YELLOW.(env('APP_ENV') === 'dev' ? 'development' : 'production').Colors::WHITE.", debug: ".Colors::YELLOW.(env('APP_DEBUG') ? 'true' : 'false').Colors::WHITE.")".PHP_EOL.
         Colors::LIGHT_BLUE.str_repeat("-", 73).PHP_EOL;
     }
 
@@ -255,7 +255,7 @@ class Command
     {
         return Colors::LIGHT_BLUE.str_repeat("-", 73).PHP_EOL.
         Colors::WHITE."Welcome to ".Colors::GREEN."IronPHP".Colors::WHITE." Framework ".
-        Colors::YELLOW."".Application::VERSION.Colors::WHITE." (env: ".(env('APP_ENV') === 'dev' ? 'development' : 'production').", debug: ".(env('APP_DEBUG') ? 'true' : 'false').")".PHP_EOL.
+        Colors::YELLOW."".Application::VERSION.Colors::WHITE." (env: ".Colors::YELLOW.(env('APP_ENV') === 'dev' ? 'development' : 'production').Colors::WHITE.", debug: ".Colors::YELLOW.(env('APP_DEBUG') ? 'true' : 'false').Colors::WHITE.")".PHP_EOL.
         Colors::LIGHT_BLUE.str_repeat("-", 73).PHP_EOL;
     }
 }
