@@ -19,7 +19,6 @@ namespace Friday\Console\Command;
 
 use Friday\Console\Colors;
 use Friday\Console\Command;
-use Friday\Foundation\Application;
 
 class ServeCommand extends Command
 {
@@ -60,6 +59,8 @@ class ServeCommand extends Command
             elseif(strpos($this->option[0], '--port=') === 0) {
                 $port = trim(str_replace('--port=', '', $this->option[0]));
             }
+        }
+        if(isset($this->option[1])) {
             if(strpos($this->option[1], '--host=') === 0) {
                 $host = trim(str_replace('--host=', '', $this->option[1]));
             }
@@ -67,10 +68,7 @@ class ServeCommand extends Command
                 $port = trim(str_replace('--port=', '', $this->option[1]));
             }
         }
-        print Colors::LIGHT_BLUE.str_repeat("-", 72).PHP_EOL.
-        Colors::WHITE."Welcome to ".Colors::GREEN."IronPHP".Colors::WHITE." Framework ".
-        Colors::YELLOW."".Application::VERSION.Colors::WHITE." (kernel: src, env: ".env('APP_ENV').", debug: ".env('APP_DEBUG').")".PHP_EOL.
-        Colors::LIGHT_BLUE.str_repeat("-", 72).PHP_EOL;
+        print $this->getWelInfo();
         $this->serve($host, $port);
         return;
     }
@@ -85,10 +83,10 @@ class ServeCommand extends Command
      */
     public function serve($host = '127.0.0.1', $port = '8000', $public_html = 'public')
     {
-        print Colors::LIGHT_CYAN."Built-in development server started: ".Colors::YELLOW."<http://localhost:$port>".Colors::WHITE.PHP_EOL.
+        print Colors::LIGHT_CYAN."Built-in development server started [/public]: ".Colors::YELLOW."<http://$host:$port>".Colors::WHITE.PHP_EOL.
         "You can exit with `CTRL+C`".PHP_EOL.
         Colors::BG_BLACK.Colors::WHITE;
-        exec("php -S $host:$port -t $public_html", $output);
+        exec("php -S $host:$port -t $public_html");
     }
 
     /**
