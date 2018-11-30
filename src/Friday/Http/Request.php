@@ -17,6 +17,8 @@
 
 namespace Friday\Http;
 
+use InvalidArgumentException;
+
 /**
  * Get HTTP Server Request.
  */
@@ -129,11 +131,12 @@ class Request implements RequestInterface
      * Get specific parameter.
      *
      * @return mix
+     * @throws \InvalidArgumentException
      */
     public function getParam($key)
     {
         if (!isset($this->params[$key])) {
-            throw new \InvalidArgumentException("The request parameter with key '$key' is invalid."); 
+            throw new InvalidArgumentException("The request parameter with key '$key' is invalid."); 
         }
         return $this->params[$key];
     }
