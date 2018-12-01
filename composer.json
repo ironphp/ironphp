@@ -35,7 +35,9 @@
         "psr-4": {
             "Friday\\": "src/Friday/"
         },
-        "files": ["src/Friday/Helper/Function.php"]
+        "files": [
+			"src/Friday/Helper/Function.php"
+		]
     },
     "autoload-dev": {
         "psr-4": {
