@@ -190,6 +190,7 @@ if (! function_exists('exception_error_handler')) {
     /**
      * Exception handler callable.
      *
+ 	 * @since  1.0.1
      * @param  int      $errno (severity)
      * @param  string   $errstr (message)
      * @param  string   $file
@@ -236,6 +237,7 @@ if (! function_exists('log_error')) {
      * Error handler, passes flow over the
 	 * exception logger with new ErrorException.
      *
+ 	 * @since  1.0.1
      * @param  int      $errno (severity)
      * @param  string   $errstr (message)
      * @param  string   $errfile
@@ -252,6 +254,7 @@ if (! function_exists('log_exception')) {
     /**
 	 * Uncaught exception handler.
      *
+ 	 * @since  1.0.1
      * @param  \Exception  $e
      * @return void
      */
@@ -381,6 +384,7 @@ if (! function_exists('check_for_fatal')) {
 	 * Checks for a fatal error, work around for
 	 * set_error_handler not working on fatal errors.
      *
+ 	 * @since  1.0.1
      * @return void
      */
 	function check_for_fatal() {
