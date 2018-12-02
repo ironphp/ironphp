@@ -17,11 +17,9 @@
 
 namespace Friday\Foundation;
 
-use Friday\Environment\GetEnv;
+use Friday\Foundation\Exceptions\Handler;
 use Friday\Helper\Session;
-
 use Dotenv\Dotenv;
-
 use Exception;
 
 /**
@@ -58,13 +56,16 @@ class Application
      */
     public function __construct($basePath = null)
     {
-        if ($basePath) {
+		if ($basePath) {
             $this->setBasePath($basePath);
         }
 
         $this->config['basePath'] = $this->basePath(); 
 
-        #Configurator
+        #Set Exception Handler
+		$e = new Handler();
+
+		#Configurator
         #enviro config
         $env = new Dotenv( $this->basePath(), '.env' );
         $env->load();
@@ -98,7 +99,7 @@ class Application
         if(!$this->session->isRegistered()) {
             $this->session->register();
         }
-    }
+	}
 
     /**
      * Get the version number of the application.
