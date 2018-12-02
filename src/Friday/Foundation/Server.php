@@ -90,6 +90,14 @@ class Server extends Application
      */
     public $headers = [];
 
+
+    /**
+     * Instanse of Cookie.
+     *
+     * @var \Friday\Helper\Cookie
+     */
+    public $cookie;
+
     /**
      * Create a new Friday application instance.
      *
@@ -102,10 +110,6 @@ class Server extends Application
 
         #boot http server ???
 
-        $this->requireFile(
-            $this->basePath('config/paths.php')
-        );
-
         #load cookie
         $this->cookie = new Cookie();
 
@@ -115,13 +119,14 @@ class Server extends Application
         #get url, client data
         $parse = $this->parseUri();
 
-        #request
+		#request
         $this->request = $this->frontController->request($parse);
         $this->request->setConstant();
         define('REQUEST_CATCHED', microtime(true));
 
         #route
         $this->route = $this->frontController->route();
+
         Route::$instance = $this->route;
         define('ROUTES_LOADED', microtime(true));
 
