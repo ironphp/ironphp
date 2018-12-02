@@ -54,7 +54,7 @@ recommend using the [app skeleton](https://github.com/ironphp/app) as
 a starting point. For existing applications you can run the following:
 
 ``` bash
-$ composer require ironphp/ironphp:"@dev"
+$ composer require ironphp/ironphp:"@alpha"
 ```
 
 ## Update
