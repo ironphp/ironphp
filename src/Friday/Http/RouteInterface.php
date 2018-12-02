@@ -33,7 +33,7 @@ interface RouteInterface {
      * @param  string|callback  $mix
      * @return bool
      */
-    public function get($route, $mix);
+    static public function get($route, $mix);
 
     /**
      * register a POST method route.
@@ -42,7 +42,7 @@ interface RouteInterface {
      * @param  string|callback  $mix
      * @return bool
      */
-    public function post($route, $mix);
+    static public function post($route, $mix);
 
 
     /**
@@ -53,7 +53,7 @@ interface RouteInterface {
      * @param  array                 $data
      * @return bool
      */
-    public function view($route, $view = null, array $data = []);
+    static public function view($route, $view = null, array $data = []);
 
     /**
      * register a route.
@@ -79,7 +79,7 @@ interface RouteInterface {
      * @param  string  $prefix
      * @return \Friday\Http\Route
      */
-    public function prefix($prefix);
+    static public function prefix($prefix);
 
     /**
      * Registered group routes.
@@ -87,7 +87,7 @@ interface RouteInterface {
      * @param  \Closure  $closure
      * @return void
      */
-    public function group($closure);
+    static public function group($closure);
 
     /**
      * Registered redirect routes.
@@ -97,5 +97,5 @@ interface RouteInterface {
      * @param  int     $http_response_code
      * @return void
      */
-    public function redirect($routeFrom, $routeTo, $http_response_code);
+    static public function redirect($routeFrom, $routeTo, $http_response_code);
 }

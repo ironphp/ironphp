@@ -62,7 +62,7 @@ class Route implements RouteInterface
      * @param  string|null           $view
      * @return bool
      */
-    public function get($route, $mix = null, $view = null)
+    static public function get($route, $mix = null, $view = null)
     {
         self::$instance->register('GET', $route, $mix, $view);
     }
@@ -75,7 +75,7 @@ class Route implements RouteInterface
      * @param  string|null           $view
      * @return bool
      */
-    public function post($route, $mix = null, $view = null)
+    static public function post($route, $mix = null, $view = null)
     {
         self::$instance->register('POST', $route, $mix, $view);
     }
@@ -88,7 +88,7 @@ class Route implements RouteInterface
      * @param  array                 $data
      * @return bool
      */
-    public function view($route, $view = null, array $data = [])
+    static public function view($route, $view = null, array $data = [])
     {
         self::$instance->register('GET', $route, null, $view, $data);
     }
@@ -166,7 +166,7 @@ class Route implements RouteInterface
      * @param  string  $prefix
      * @return \Friday\Http\Route
      */
-    public function prefix($prefix)
+    static public function prefix($prefix)
     {
         self::$instance->prefix = $prefix;
         return self::$instance;
@@ -178,7 +178,7 @@ class Route implements RouteInterface
      * @param  \Closure  $closure
      * @return void
      */
-    public function group($closure)
+    static public function group($closure)
     {
         $backtrace = debug_backtrace();
         if(!isset($this) || $backtrace[0]['type'] == '::' || self::$instance->prefix == null) {
@@ -198,7 +198,7 @@ class Route implements RouteInterface
      * @param  int     $http_response_code
      * @return void
      */
-    public function redirect($routeFrom, $routeTo, $http_response_code)
+    static public function redirect($routeFrom, $routeTo, $http_response_code)
     {
         $closure = function($routeTo, $replace, $http_response_code) {
             Response::$redirectHeader = [$routeTo, $replace, $http_response_code];
