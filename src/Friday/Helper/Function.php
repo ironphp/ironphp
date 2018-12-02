@@ -186,6 +186,209 @@ if (! function_exists('is_bot')) {
     }
 }
 
+if (! function_exists('exception_error_handler')) {
+    /**
+     * Exception handler callable.
+     *
+     * @param  int      $errno (severity)
+     * @param  string   $errstr (message)
+     * @param  string   $file
+     * @param  int      $line
+     * @return void
+     * @throws \ErrorException
+     */
+	function exception_error_handler($errno, $errstr, $file, $line) {
+    	if (!(error_reporting() & $errno)) {
+        	// This error code is not included in error_reporting, so let it fall
+        	// through to the standard PHP error handler
+        	return false;
+    	}
+    	switch ($errno) {
+			case E_USER_ERROR:
+        		echo "<b>My ERROR</b> [$errno] $errstr<br>\n";
+        		echo "  Fatal error on line $errline in file $errfile";
+        		echo ", PHP " . PHP_VERSION . " (" . PHP_OS . ")<br>\n";
+        		echo "Aborting...<br>\n";
+        		exit(1);
+        		break;
+
+    		case E_USER_WARNING:
+        		echo "<b>My WARNING</b> [$errno] $errstr<br>\n";
+        		break;
+
+    		case E_USER_NOTICE:
+        		echo "<b>My NOTICE</b> [$errno] $errstr<br>\n";
+        		break;
+
+    		default:
+        		echo "<b>Error</b>: [$errno] $errstr<br>\n";
+        		break;
+    	}
+
+    	/* Don't execute PHP internal error handler */
+    	return true;
+		throw new ErrorException($errstr, 0, $errno, $file, $line);
+    }
+}
+
+if (! function_exists('log_error')) {
+    /**
+     * Error handler, passes flow over the
+	 * exception logger with new ErrorException.
+     *
+     * @param  int      $errno (severity)
+     * @param  string   $errstr (message)
+     * @param  string   $errfile
+     * @param  int      $errline
+     * @return void
+     */
+	function log_error( $errno, $errstr, $errfile, $errline, $context = null ) {
+		//print_r(func_get_args());exit;
+    	log_exception( new ErrorException( $errstr, 0, $errno, $errfile, $errline ) );
+	}
+}
+
+if (! function_exists('log_exception')) {
+    /**
+	 * Uncaught exception handler.
+     *
+     * @param  \Exception  $e
+     * @return void
+     */
+	function log_exception(Exception $e) {
+		switch($e->getSeverity()) {
+			case E_ERROR: // 1 //
+				$severity = 'E_ERROR';
+				break;
+			case E_WARNING: // 2 //
+				$severity = 'E_WARNING';
+				break;
+			case E_PARSE: // 4 //
+				$severity = 'E_PARSE';
+				break;
+			case E_NOTICE: // 8 //
+				$severity = 'E_NOTICE';
+				break;
+			case E_CORE_ERROR: // 16 //
+				$severity = 'E_CORE_ERROR';
+				break;
+			case E_CORE_WARNING: // 32 //
+				$severity = 'E_CORE_WARNING';
+				break;
+			case E_COMPILE_ERROR: // 64 //
+				$severity = 'E_COMPILE_ERROR';
+				break;
+			case E_COMPILE_WARNING: // 128 //
+				$severity = 'E_COMPILE_WARNING';
+				break;
+			case E_USER_ERROR: // 256 //
+				$severity = 'E_USER_ERROR';
+				break;
+			case E_USER_WARNING: // 512 //
+				$severity = 'E_USER_WARNING';
+				break;
+			case E_USER_NOTICE: // 1024 //
+				$severity = 'E_USER_NOTICE';
+				break;
+			case E_STRICT: // 2048 //
+				$severity = 'E_STRICT';
+				break;
+			case E_RECOVERABLE_ERROR: // 4096 //
+				$severity = 'E_RECOVERABLE_ERROR';
+				break;
+			case E_DEPRECATED: // 8192 //
+				$severity = 'E_DEPRECATED';
+				break;
+			case E_USER_DEPRECATED: // 16384 //
+				$severity = 'E_USER_DEPRECATED';
+				break;
+			case E_ALL: // 32767 //
+				$severity = 'E_ALL';
+				break;
+			default:
+				$severity = 'UNKOWN';
+				break;
+		}
+    	if ( env('APP_DEBUG') === true ) {
+        	print '
+				<!DOCTYPE html>
+				<html lang="en">
+					<head>
+						<meta charset="utf-8">
+						<meta http-equiv="X-UA-Compatible" content="IE=edge">
+						<meta name="viewport" content="width=device-width, initial-scale=1">
+						<title>Error</title>
+						<!-- Fonts -->
+						<link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
+						<style>html, body {background-color: #fff;color: #636b6f;font-family: \'Nunito\', sans-serif;font-weight: 100;height: 100vh;margin: 0;}.full-height {height: 90vh;}.flex-center {align-items: center;display: flex;justify-content: center;}.content {text-align: center;}.title {font-size: 36px;padding: 20px;}</style>
+					</head>
+					<body>
+						<div class="flex-center position-ref full-height">
+							<div class="content">
+								<h2 class="title" style="color: rgb(190, 50, 50)">Exception Occured</h2>
+        						<table style="width: 800px; display: inline-block;text-align:left">
+        							<tr style="background-color:rgb(230,230,230)">
+										<th style="width: 80px">Type</th>
+										<td>'. get_class($e) .'</td>
+									</tr>
+        							<tr style="background-color:rgb(240,240,240)">
+										<th>Code</th>
+										<td>'. $e->getCode() .'</td>
+									</tr>
+        							<tr style="background-color:rgb(240,240,240)">
+										<th>Trace</th>
+										<td>'. trim(str_replace('#', '<br>#', $e->getTraceAsString()),'<br>') .'</td>
+									</tr>
+        							<tr style="background-color:rgb(240,240,240)">
+										<th>Severity</th>
+										<td>'. $e->getSeverity() .' - '.$severity.'</td>
+									</tr>
+        							<tr style="background-color:rgb(240,240,240)">
+										<th>Message</th>
+										<td>'. $e->getMessage() .'</td>
+									</tr>
+        							<tr style="background-color:rgb(230,230,230)">
+										<th>File</th>
+										<td>'. $e->getFile() .'</td>
+									</tr>
+        							<tr style="background-color:rgb(240,240,240)">
+										<th>Line</th>
+										<td>'. $e->getLine() .'</td>
+									</tr>
+        						</table>
+							</div>
+						</div>
+					</body>
+				</html>
+			';
+    	}
+    	else {
+        	$message = "Type: " . get_class($e) . "; Message: {$e->getMessage()}; File: {$e->getFile()}; Line: {$e->getLine()};";
+        	if(!file_exists(LOGS . "/debug.log") || !is_file(LOGS . "/debug.log")) {
+				file_put_contents( LOGS . "/debug.log", '');
+			}
+        	error_log("[".date('Y-y-d H:i:s')."] " . $message . PHP_EOL . PHP_EOL, 3, LOGS . "/debug.log");
+			//header( "Location: {$config["error_page"]}" );
+			echo '<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Error</title><!-- Fonts --><link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
+<style>html, body {background-color: #fff;color: #636b6f;font-family: \'Nunito\', sans-serif;font-weight: 100;height: 100vh;margin: 0;}.full-height {height: 90vh;}.flex-center {align-items: center;display: flex;justify-content: center;}.content {text-align: center;}.title {font-size: 36px;padding: 20px;}</style><body><div class="flex-center position-ref full-height"><div class="content"><div class="title">It looks like something went wrong.</div></div></div></body></html>';
+    	}
+    	exit();
+	}
+}
+
+if (! function_exists('check_for_fatal')) {
+    /**
+	 * Checks for a fatal error, work around for
+	 * set_error_handler not working on fatal errors.
+     *
+     * @return void
+     */
+	function check_for_fatal() {
+    	$error = error_get_last();
+		log_error( $error["type"], $error["message"], $error["file"], $error["line"] );
+	}
+}
+
 /*
 function moneyInWords($m){
 	if($m>=1000){
