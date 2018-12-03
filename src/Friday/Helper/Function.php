@@ -389,7 +389,9 @@ if (! function_exists('check_for_fatal')) {
      */
 	function check_for_fatal() {
     	$error = error_get_last();
-		log_error( $error["type"], $error["message"], $error["file"], $error["line"] );
+		if($error["type"] != 0) {
+			log_error( $error["type"], $error["message"], $error["file"], $error["line"] );
+		}
 	}
 }
 
