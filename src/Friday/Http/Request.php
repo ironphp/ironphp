@@ -164,13 +164,14 @@ class Request implements RequestInterface
     /**
      * Define constants.
      * Without trailing slash
+     * @note   Defining case-insensitive constants is deprecated as of PHP 7.3.0.
      *
      * @return void
      */
     public function setConstant()
     {
-        define('SERVER_ROOT', $this->getHost(), true);
-        define('PUBLIC_ROOT', $this->getHost().'/public', true);
-        define('HOST', $_SERVER['HTTP_HOST'], true);
+        define('SERVER_ROOT', $this->getHost());
+        define('PUBLIC_ROOT', $this->getHost().'/public');
+        define('HOST', $_SERVER['HTTP_HOST']);
     }
 }
