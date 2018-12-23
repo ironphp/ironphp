@@ -1,3 +1,11 @@
+### [1.0.0-alpha2] - 2018-11-30
+
+  * CLI interface improved
+  * serve command option bug fixed
+  * URL request error fixed
+  * front-controller
+  * template rendering improved
+
 ### [1.0.0-alpha1] - 2018-11-25
 
   * Initial release
