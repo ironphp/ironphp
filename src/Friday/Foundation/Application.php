@@ -32,7 +32,7 @@ class Application
      *
      * @var string
      */
-    const VERSION = '1.0.1-alpha1';
+    const VERSION = '1.0.1-alpha2';
 
     /**
      * The base path for the IronPHP installation.
