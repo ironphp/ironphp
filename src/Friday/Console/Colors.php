@@ -19,35 +19,38 @@ namespace Friday\Console;
 
 class Colors
 {
+    const ESC = "\x1b"; # \033
+    const CSI = "\x1b["; # \033[
+
     /*
      * Foreground Colors with their Light colors
      */
-    const BLACK = "\033[0;30m";
-    const DARK_GRAY = "\033[1;30m";
-    const BLUE = "\033[0;34m";
-    const LIGHT_BLUE = "\033[1;34m";
-    const GREEN = "\033[0;32m";
-    const LIGHT_GREEN = "\033[1;32m";
-    const CYAN = "\033[0;36m";
-    const LIGHT_CYAN = "\033[1;36m";
-    const RED = "\033[0;31m";
-    const LIGHT_RED = "\033[1;31m";
-    const PURPLE = "\033[0;35m";
-    const LIGHT_PURPLE = "\033[1;35m";
-    const BROWN = "\033[0;33m";
-    const YELLOW = "\033[1;33m";
-    const LIGHT_GRAY = "\033[0;37m";
-    const WHITE = "\033[1;37m";
+    const BLACK = self::CSI."0;30m";
+    const DARK_GRAY = self::CSI."1;30m";
+    const BLUE = self::CSI."0;34m";
+    const LIGHT_BLUE = self::CSI."1;34m";
+    const GREEN = "\x1b[0;32m";
+    const LIGHT_GREEN = self::CSI."1;32m";
+    const CYAN = self::CSI."0;36m";
+    const LIGHT_CYAN = self::CSI."1;36m";
+    const RED = self::CSI."0;31m";
+    const LIGHT_RED = self::CSI."1;31m";
+    const PURPLE = self::CSI."0;35m";
+    const LIGHT_PURPLE = self::CSI."1;35m";
+    const BROWN = self::CSI."0;33m";
+    const YELLOW = self::CSI."1;33m";
+    const LIGHT_GRAY = self::CSI."0;37m";
+    const WHITE = self::CSI."1;37m";
 
     /*
      * Background Colors
      */
-    const BG_BLACK = "\033[40m";
-    const BG_RED = "\033[41m";
-    const BG_GREEN = "\033[42m";
-    const BG_YELLOW = "\033[43m";
-    const BG_BLUE = "\033[44m";
-    const BG_MAGENTA = "\033[45m";
-    const BG_CYAN = "\033[46m";
-    const BG_LIGHT_GRAY = "\033[47m";
+    const BG_BLACK = self::CSI."40";
+    const BG_RED = self::CSI."41m";
+    const BG_GREEN = self::CSI."42m";
+    const BG_YELLOW = self::CSI."43m";
+    const BG_BLUE = self::CSI."44m";
+    const BG_MAGENTA = self::CSI."45m";
+    const BG_CYAN = self::CSI."46m";
+    const BG_LIGHT_GRAY = self::CSI."47m";
 }
