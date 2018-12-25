@@ -232,15 +232,17 @@ class View
     /**
      * Renders View for given data, template file and layout.
      *
-     * @param string|null  $viewPath
-     * @param string       $data
-     * @param string|null  $layout
-     *
-     * @return  $viewData.
+     * @param  string|null  $viewPath
+     * @param  string       $data
+     * @param  string|null  $layout
+     * @return string
      */
     public function renderView($viewPath = null, $data = [], $layout = null)
     {
-        $viewData = file_get_contents($viewPath);
+        ob_start();
+        require($viewPath);
+        $viewData = ob_get_contents();
+        ob_end_clean();
         foreach($data as $key => $val) {
             if(is_array($val)) {
                 if($key == 'meta') {
