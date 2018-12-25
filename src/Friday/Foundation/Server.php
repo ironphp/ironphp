@@ -170,7 +170,7 @@ class Server extends Application
             $view = $action['view'][0];
             $data = $action['view'][1];
             $viewPath = $this->findView($view);
-            $output = $appController->render($viewPath, $data);
+            $output = $appController->renderView($viewPath, $data);
         }
         define('DISPATCHED', microtime(true));
 
