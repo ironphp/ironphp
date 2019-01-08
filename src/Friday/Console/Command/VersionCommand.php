@@ -47,7 +47,7 @@ class VersionCommand extends Command
      */
     public function run()
     {
-        $output = Colors::RED.Colors::BG_BLACK."
+        $output = Colors::RED.Colors::BG_BLACK."\
   _______                  ____  __   ______
  /__  __/_____ ___  ____  / __ \/ /  / / __ \
    / /  / ___/ __ \/ __ \/ /_/ / /__/ / /_/ /
