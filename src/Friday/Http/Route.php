@@ -104,6 +104,14 @@ class Route implements RouteInterface
      */
     public function register($method, $route, $mix = null, $view = null, $data = [])
     {
+        if($mix == null && $view == null) {
+            $mix = 'IndexController@index';
+        }
+        if(is_string($mix) && $mix !== null) {
+            if(strpos($mix, '@') === false) {
+                $mix = $mix.'@index';
+            }
+        }
         $route = trim($route, '/ ');
         $route = (self::$instance->prefix == null) ? $route : self::$instance->prefix.'/'.$route;
         $array = $route==='' ? [] : explode('/', $route);
