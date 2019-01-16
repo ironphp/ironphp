@@ -109,8 +109,8 @@ class ServeCommand extends Command
         Colors::YELLOW."Arguments:".PHP_EOL.
         PHP_EOL.
         Colors::YELLOW."Options:".PHP_EOL.
-        Colors::GREEN."      --host[=HOST]".Colors::WHITE."\t\tThe host address to serve the application on ".Colors::YELLOW."[default: \"127.0.0.1\"]".PHP_EOL.
-        Colors::GREEN."      --port[=PORT]".Colors::WHITE."\t\tThe port to serve the application on ".Colors::YELLOW."[default: 8000]".PHP_EOL.
+        Colors::GREEN."      --host[=HOST]".Colors::WHITE."\tThe host address to serve the application on ".Colors::YELLOW."[default: \"127.0.0.1\"]".PHP_EOL.
+        Colors::GREEN."      --port[=PORT]".Colors::WHITE."\tThe port to serve the application on ".Colors::YELLOW."[default: 8000]".PHP_EOL.
         Colors::GREEN."  -h, --help".Colors::WHITE."\t\tDisplay this help message".PHP_EOL.
         Colors::GREEN."  -V, --version".Colors::WHITE."\t\tDisplay this application version".PHP_EOL.
         PHP_EOL.
