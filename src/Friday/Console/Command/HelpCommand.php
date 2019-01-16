@@ -19,6 +19,7 @@ namespace Friday\Console\Command;
 
 use Friday\Console\Colors;
 use Friday\Console\Command;
+use Friday\Foundation\Application;
 
 class HelpCommand extends Command
 {
