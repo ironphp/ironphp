@@ -45,7 +45,7 @@ class Colors
     /*
      * Background Colors
      */
-    const BG_BLACK      = self::CSI."40";
+    const BG_BLACK      = self::CSI."40m";
     const BG_RED        = self::CSI."41m";
     const BG_GREEN      = self::CSI."42m";
     const BG_YELLOW     = self::CSI."43m";

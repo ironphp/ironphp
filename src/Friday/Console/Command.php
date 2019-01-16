@@ -240,7 +240,7 @@ class Command
      */
     public function getInfo()
     {
-        return Colors::LIGHT_BLUE.str_repeat("-", 73).PHP_EOL.
+        return Colors::BG_BLACK.Colors::LIGHT_BLUE.str_repeat("-", 73).PHP_EOL.
         Colors::GREEN."IronPHP".Colors::WHITE." Framework ".
         Colors::YELLOW."".Application::VERSION.Colors::WHITE." (env: ".Colors::YELLOW.(env('APP_ENV') === 'dev' ? 'development' : 'production').Colors::WHITE.", debug: ".Colors::YELLOW.(env('APP_DEBUG') ? 'true' : 'false').Colors::WHITE.")".PHP_EOL.
         Colors::LIGHT_BLUE.str_repeat("-", 73).PHP_EOL;
@@ -253,7 +253,7 @@ class Command
      */
     public function getWelInfo()
     {
-        return Colors::LIGHT_BLUE.str_repeat("-", 73).PHP_EOL.
+        return Colors::BG_BLACK.Colors::LIGHT_BLUE.str_repeat("-", 73).PHP_EOL.
         Colors::WHITE."Welcome to ".Colors::GREEN."IronPHP".Colors::WHITE." Framework ".
         Colors::YELLOW."".Application::VERSION.Colors::WHITE." (env: ".Colors::YELLOW.(env('APP_ENV') === 'dev' ? 'development' : 'production').Colors::WHITE.", debug: ".Colors::YELLOW.(env('APP_DEBUG') ? 'true' : 'false').Colors::WHITE.")".PHP_EOL.
         Colors::LIGHT_BLUE.str_repeat("-", 73).PHP_EOL;

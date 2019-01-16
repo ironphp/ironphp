@@ -17,8 +17,8 @@
 
 namespace Friday\Foundation;
 
-use Friday\Console\Command;
 use Friday\Console\Colors;
+use Friday\Console\Command;
 
 class Console extends Application
 {
@@ -89,9 +89,10 @@ class Console extends Application
      */
     public function commandError($errorMessage)
     {
-        return PHP_EOL.Colors::BG_RED.str_repeat(" ", strlen($errorMessage)+4).
-        PHP_EOL.Colors::WHITE ."  $errorMessage  ".
-        PHP_EOL.Colors::BG_RED.str_repeat(" ", strlen($errorMessage)+4).              
-        PHP_EOL.Colors::BG_BLACK.''.Colors::WHITE;
+        $output = PHP_EOL.Colors::BG_RED.str_repeat(" ", strlen($errorMessage)+4).PHP_EOL.
+        Colors::WHITE ."  $errorMessage  ".PHP_EOL.
+        Colors::BG_RED.str_repeat(" ", strlen($errorMessage)+4).PHP_EOL.
+        Colors::BG_BLACK.Colors::WHITE;
+        return $output;
     }
 }
