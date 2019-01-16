@@ -32,7 +32,7 @@ class Application
      *
      * @var string
      */
-    const VERSION = '1.0.1-alpha2';
+    const VERSION = '1.0.2-alpha1';
 
     /**
      * The base path for the IronPHP installation.
@@ -62,10 +62,10 @@ class Application
 
         $this->config['basePath'] = $this->basePath(); 
 
-		#Configurator
+		## Configurator
         #enviro config
-        $env = new Dotenv( $this->basePath(), '.env' );
-        $env->load();
+        $dotenv = Dotenv::create( $this->basePath() );
+        $dotenv->load();
 
         #Set Exception Handler
 		$e = new Handler();
