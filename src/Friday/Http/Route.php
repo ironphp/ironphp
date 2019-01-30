@@ -206,7 +206,7 @@ class Route implements RouteInterface
      * @param  int     $http_response_code
      * @return void
      */
-    static public function redirect($routeFrom, $routeTo, $http_response_code)
+    static public function redirect($routeFrom, $routeTo, $http_response_code = 302)
     {
         $closure = function($routeTo, $replace, $http_response_code) {
             Response::$redirectHeader = [$routeTo, $replace, $http_response_code];
