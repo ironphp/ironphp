@@ -189,7 +189,8 @@ class Route implements RouteInterface
     static public function group($closure)
     {
         $backtrace = debug_backtrace();
-        if(!isset($this) || $backtrace[0]['type'] == '::' || self::$instance->prefix == null) {
+        //!isset($this) || $backtrace[0]['type'] == '::' || 
+        if(self::$instance->prefix == null) {
             exit('Can not be called statically or directly. Use Route::prefix(name)->group(routes-to-be-registered)');
         }
         if($closure instanceof Closure) {
