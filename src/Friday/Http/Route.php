@@ -196,7 +196,7 @@ class Route implements RouteInterface
         if($closure instanceof Closure) {
             call_user_func($closure);
         }
-        $self::$instance->prefix = null;
+        self::$instance->prefix = null;
     }
 
     /**
