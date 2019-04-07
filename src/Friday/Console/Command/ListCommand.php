@@ -48,7 +48,7 @@ class ListCommand extends Command
      */
     public function run()
     {
-        $output = $this->getWelInfo().
+        $output = $this->getInfo().
         Colors::YELLOW."Usage:".PHP_EOL.
         Colors::WHITE."  command [options] [arguments]".PHP_EOL.PHP_EOL.
         Colors::YELLOW."Options:".PHP_EOL.
@@ -71,8 +71,7 @@ class ListCommand extends Command
      */
     public function help()
     {
-        $output = Colors::LIGHT_BLUE.str_repeat("-", 63).PHP_EOL.
-        Colors::GREEN."IronPHP ".Colors::WHITE."Framework ".Colors::YELLOW.Application::VERSION.Colors::WHITE." (kernel: src, env: ".env('APP_ENV').", debug: ".env('APP_DEBUG').")".PHP_EOL.
+        $output = $this->getInfo().
         Colors::LIGHT_BLUE.str_repeat("-", 63).PHP_EOL.
         Colors::YELLOW."Description:".PHP_EOL.
         Colors::WHITE."  Lists commands".PHP_EOL.

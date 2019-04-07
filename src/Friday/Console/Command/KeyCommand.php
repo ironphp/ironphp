@@ -69,7 +69,7 @@ class KeyCommand extends Command
      */
     public function help()
     {
-        $output = $this->getWelInfo().
+        $output = $this->getInfo().
         Colors::YELLOW."Description:".PHP_EOL.
         Colors::WHITE."  Set the application key".PHP_EOL.
         PHP_EOL.

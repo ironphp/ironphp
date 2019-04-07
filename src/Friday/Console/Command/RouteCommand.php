@@ -74,6 +74,10 @@ class RouteCommand extends Command
         $this->serve($host, $port);
         return;
         */
+        $output = Colors::WHITE.Colors::BG_BLACK.
+        $this->getWelInfo().
+        Colors::BG_BLACK.Colors::WHITE;
+        return $output;
     }
 
     /**
@@ -99,9 +103,7 @@ class RouteCommand extends Command
      */
     public function help()
     {
-        $output = Colors::LIGHT_BLUE.str_repeat("-", 63).PHP_EOL.
-        Colors::GREEN."IronPHP ".Colors::WHITE."Framework ".Colors::YELLOW.Application::VERSION.Colors::WHITE." (kernel: src, env: ".env('APP_ENV').", debug: ".env('APP_DEBUG').")".PHP_EOL.
-        Colors::LIGHT_BLUE.str_repeat("-", 63).PHP_EOL.
+        $output = $this->getInfo().
         Colors::YELLOW."Description:".PHP_EOL.
         Colors::WHITE."  List all registered routes".PHP_EOL.
         PHP_EOL.

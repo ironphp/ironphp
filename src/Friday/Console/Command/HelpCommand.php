@@ -64,7 +64,7 @@ class HelpCommand extends Command
      */
     public function help($command = 'help')
     {
-        $output = $this->getWelInfo().
+        $output = $this->getInfo().
         Colors::YELLOW."Description:".PHP_EOL.
         Colors::WHITE."  Displays help for a command".PHP_EOL.
         PHP_EOL.
