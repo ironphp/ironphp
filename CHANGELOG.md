@@ -1,3 +1,20 @@
+### [1.0.3-alpha1] - 2019-04-08
+
+  What's new in 1.0.3 ?
+  =============
+  * default http_responce_code added
+  * `route` cmd added
+  * cmd shortcut added
+
+### [1.0.2-alpha1] - 2019-01-28
+
+  What's new in 1.0.2 ?
+  =============
+  * Dotenv updated to 3.*
+  * default controller@method added
+  * BLACK_BG in CLI fixed
+  * `list help` cmd fixed
+
 ### [1.0.1-alpha1] - 2018-12-23
 
   What's new in 1.0.1 ?
