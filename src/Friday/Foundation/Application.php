@@ -18,6 +18,8 @@
 namespace Friday\Foundation;
 
 use Friday\Foundation\Exceptions\Handler;
+use Friday\Http\FrontController;
+use Friday\Http\Route;
 use Friday\Helper\Session;
 use Dotenv\Dotenv;
 use Exception;
@@ -47,6 +49,20 @@ class Application
      * @var array
      */
     public $config;
+
+    /**
+     * FrontController instance.
+     *
+     * @var \Friday\Http\FrontController
+     */
+    public $frontController;
+
+    /**
+     * Route instance.
+     *
+     * @var \Friday\Http\Route
+     */
+    public $route;
 
     /**
      * Create a new Friday application instance.
@@ -100,7 +116,22 @@ class Application
         if(!$this->session->isRegistered()) {
             $this->session->register();
         }
-	}
+
+        #frontcontroller
+        $this->frontController = new FrontController();
+
+        #route
+        $this->route = $this->frontController->route();
+
+        Route::$instance = $this->route;
+        define('ROUTES_LOADED', microtime(true));
+
+        #load routes
+        $this->requireFile(
+            $this->basePath('app/Route/web.php')
+        );
+        $this->route->sortRoute();
+    }
 
     /**
      * Get the version number of the application.
@@ -458,5 +489,15 @@ class Application
             $timezone = $default;
         }
         date_default_timezone_set($timezone);
+    }
+
+    /**
+     * Get specific or all Registered redirect routes.
+     *
+     * @param  string  uri
+     * @return array
+     */
+    public function getRoutes($uri = null) {
+        return $this->route->getRoute($uri);
     }
 }

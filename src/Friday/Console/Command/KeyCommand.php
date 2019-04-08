@@ -42,7 +42,7 @@ class KeyCommand extends Command
     }
 
     /**
-     * Execute Commands.
+     * Execute Command.
      *
      * @return void
      */

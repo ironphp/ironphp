@@ -48,52 +48,46 @@ class RouteCommand extends Command
      */
     public function run()
     {
-        /*
-        $host = '127.0.0.1';
-        $port = '8000';
-        if(isset($this->option[0])) {
-            if($this->option[0] == 'help') {
-                return $this->help();
-            }
-            if(strpos($this->option[0], '--host=') === 0) {
-                $host = trim(str_replace('--host=', '', $this->option[0]));
-            }
-            elseif(strpos($this->option[0], '--port=') === 0) {
-                $port = trim(str_replace('--port=', '', $this->option[0]));
-            }
-        }
-        if(isset($this->option[1])) {
-            if(strpos($this->option[1], '--host=') === 0) {
-                $host = trim(str_replace('--host=', '', $this->option[1]));
-            }
-            elseif(strpos($this->option[1], '--port=') === 0) {
-                $port = trim(str_replace('--port=', '', $this->option[1]));
-            }
-        }
-        print $this->getWelInfo();
-        $this->serve($host, $port);
-        return;
-        */
         $output = Colors::WHITE.Colors::BG_BLACK.
-        $this->getWelInfo().
+        $this->getRoute().
         Colors::BG_BLACK.Colors::WHITE;
         return $output;
     }
 
     /**
-     * Run app in development server.
+     * Return list of routes.
      *
-     * @param  string  $host
-     * @param  string  $port
-     * @param  string  $public_html
+     * @param  string|null  route
      * @return void
      */
-    public function serve($host = '127.0.0.1', $port = '8000', $public_html = 'public')
+    public function getRoute($route = null)
     {
-        print Colors::LIGHT_CYAN."Built-in development server started [/public]: ".Colors::YELLOW."<http://$host:$port>".Colors::WHITE.PHP_EOL.
-        "You can exit with `CTRL+C`".PHP_EOL.
-        Colors::BG_BLACK.Colors::WHITE;
-        exec("php -S $host:$port -t $public_html");
+        $routes = $this->getConsole()->getRoutes($route);
+        $l1 = 10; $l2 = 10; $l3 = 10;
+        $list = "";
+        foreach($routes as $route) {
+            if($l1 < strlen($route[1])) {
+                $l1 = strlen($route[1]);
+            }
+            if($l2 < strlen($route[0])) {
+                $l2 = strlen($route[0]);
+            }
+            if($l3 < strlen($route[2])) {
+                $l3 = strlen($route[2]);
+            }
+        }
+        foreach($routes as $route) {
+            $list .= 
+"| $route[1]".str_repeat(' ',$l1-strlen($route[1]))." | $route[0]".str_repeat(' ',$l2-strlen($route[0]))." | $route[2]".str_repeat(' ',$l3-strlen($route[2]))." |
++".str_repeat('-',$l1+2)."+".str_repeat('-',$l2+2)."+".str_repeat('-',$l3+2)."+
+";
+        }
+        $list = "
++".str_repeat('-',$l1+2)."+".str_repeat('-',$l2+2)."+".str_repeat('-',$l3+2)."+
+| ".Colors::GREEN.Colors::BG_BLACK."URI".Colors::WHITE.Colors::BG_BLACK.str_repeat(' ',$l1-strlen('URI'))." | ".Colors::GREEN.Colors::BG_BLACK."Method".Colors::WHITE.Colors::BG_BLACK.str_repeat(' ',$l2-strlen('Method'))." | ".Colors::GREEN.Colors::BG_BLACK."Action".Colors::WHITE.Colors::BG_BLACK.str_repeat(' ',$l3-strlen('Action'))." |
++".str_repeat('-',$l1+2)."+".str_repeat('-',$l2+2)."+".str_repeat('-',$l3+2)."+
+".$list;
+        return $list;
     }
 
     /**

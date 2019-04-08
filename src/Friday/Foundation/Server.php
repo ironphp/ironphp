@@ -18,8 +18,6 @@
 namespace Friday\Foundation;
 
 use Friday\Helper\Cookie;
-use Friday\Http\FrontController;
-use Friday\Http\Route;
 use Friday\Controller\Controller;
 
 /**
@@ -28,25 +26,11 @@ use Friday\Controller\Controller;
 class Server extends Application
 {
     /**
-     * FrontController instance.
-     *
-     * @var \Friday\Http\FrontController
-     */
-    public $frontController;
-
-    /**
      * Request instance.
      *
      * @var \Friday\Http\Request
      */
     public $request;
-
-    /**
-     * Route instance.
-     *
-     * @var \Friday\Http\Route
-     */
-    public $route;
 
     /**
      * Router instance.
@@ -113,9 +97,6 @@ class Server extends Application
         #load cookie
         $this->cookie = new Cookie();
 
-        #frontcontroller
-        $this->frontController = new FrontController();
-
         #get url, client data
         $parse = $this->parseUri();
 
@@ -123,18 +104,6 @@ class Server extends Application
         $this->request = $this->frontController->request($parse);
         $this->request->setConstant();
         define('REQUEST_CATCHED', microtime(true));
-
-        #route
-        $this->route = $this->frontController->route();
-
-        Route::$instance = $this->route;
-        define('ROUTES_LOADED', microtime(true));
-
-        #load routes
-        $this->requireFile(
-            $this->basePath('app/Route/web.php')
-        );
-        $this->route->sortRoute();
 
         #router
         $this->router = $this->frontController->router();
