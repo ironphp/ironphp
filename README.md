@@ -108,12 +108,12 @@ For each report, we try to first confirm the vulnerability. Once confirmed, the 
 
 ## Support Us
 you can buy me a coffee.
+<p align="center">
 <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=5WS5H79V2H7GY&source=url">
     <img src="https://www.paypalobjects.com/en_GB/i/btn/btn_donateCC_LG.gif" alt="Donate with PayPal button">
 </a>
-
-    <img alt="" border="0" src="https://www.paypal.com/en_IN/i/scr/pixel.gif" width="1" height="1">
-
+<img alt="" border="0" src="https://www.paypal.com/en_IN/i/scr/pixel.gif" width="1" height="1">
+</p>
 
 ## Credits
 Thank you for supporting us by using IronPHP Framework and by your donations.
