@@ -107,17 +107,16 @@ For each report, we try to first confirm the vulnerability. Once confirmed, the 
 - GaurangKumar Parmar  | [GitHub](https://github.com/gaurangkumar)  | [Twitter](https://twitter.com/gaurangkumarp) | [Patreon](https://www.patreon.com/gaurangkumar) | <gaurangkumarp@gmail.com>
 
 ## Support Us
-    you can buy me a coffee.
-<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-    <input type="hidden" name="cmd" value="_s-xclick" />
-    <input type="hidden" name="hosted_button_id" value="5WS5H79V2H7GY" />
-    <input type="image" src="https://www.paypalobjects.com/en_GB/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
-    <img alt="" border="0" src="https://www.paypal.com/en_IN/i/scr/pixel.gif" width="1" height="1" />
-</form>
+you can buy me a coffee.
+<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=5WS5H79V2H7GY&source=url">
+    <img src="https://www.paypalobjects.com/en_GB/i/btn/btn_donateCC_LG.gif" alt="Donate with PayPal button">
+</a>
+
+    <img alt="" border="0" src="https://www.paypal.com/en_IN/i/scr/pixel.gif" width="1" height="1">
 
 
 ## Credits
-    Thank you for supporting us by using IronPHP Framework and by your donations.
+Thank you for supporting us by using IronPHP Framework and by your donations.
 ## License
 
 The IronPHP framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
