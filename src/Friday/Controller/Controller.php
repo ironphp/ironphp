@@ -296,4 +296,15 @@ class Controller
             }
         }
     }
+
+    /**
+     * Get Request instance.
+     *
+     * @return \Friday\Http\Request
+     */
+    protected function getRequest()
+    {
+        return self::$instance->app->request;
+    }
+
 }
