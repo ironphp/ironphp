@@ -15,7 +15,7 @@
  * @auther        GaurangKumar Parmar <gaurangkumarp@gmail.com
  */
 
-namespace Frida\Log;
+namespace Friday\Log;
 
 use Psr\Log\LoggerInterface;
 

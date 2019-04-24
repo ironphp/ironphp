@@ -173,5 +173,6 @@ class Request implements RequestInterface
         define('SERVER_ROOT', $this->getHost());
         define('PUBLIC_ROOT', $this->getHost().'/public');
         define('HOST', $_SERVER['HTTP_HOST']);
+        define('LINEBREAK', "\r\n");
     }
 }

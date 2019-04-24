@@ -24,8 +24,6 @@ use Friday\Foundation\Errors\Fatal;
 use Friday\Foundation\Errors\Error;
 use ErrorException;
 
-define('LINEBREAK', "\r\n");
-
 class Handler implements HandlerInterface
 {
     /**
