@@ -512,7 +512,8 @@ class Application
      */
     public function findTheme($theme)
     {
-        $file = $this->basePath("app/Template/$template");
+        $dir = $this->basePath("app/Theme/$theme");
+        $this->parseDir($dir);exit;
         if($this->findFile($file)) {
             return $file;
         }
@@ -526,5 +527,72 @@ class Application
             throw new Exception($file." Template file is missing.");
             exit;
         }
+    }
+
+    /**
+     * Parse files/dir in dir.
+     *
+     * @param   string  dir
+     * @return  array
+     */
+    public function parseDir($dir)
+    {
+        $ext = ['html', 'htm', 'css', 'js', 'php'];
+        $files = [];
+        $handle = dir($dir);
+        /*
+        while(false != ($entry = $handle->read())) {
+            if($entry != '.' && $entry != '..') {
+                $path = $handle->path.'/'.$entry;
+                if(is_file($path)) {
+                    if(false !== ($pos = strrpos($entry, '.'))) {
+                        if(in_array(substr($entry, $pos+1), $ext)) {
+                            $files[] = $path;
+                        }
+                    }
+                } elseif(is_dir($path)) {
+                    if(strrpos($path, '.')) {
+                        continue;
+                    }
+                    $handle2 = dir($path);
+                    while(false != ($entry = $handle2->read())) {
+                        if($entry != '.' && $entry != '..') {
+                            $path2 = $handle2->path.'/'.$entry;
+                    var_dump(($path2));
+                            if(is_file($path2)) {
+                                if(false !== ($pos = strrpos($entry, '.'))) {
+                                    if(in_array(substr($entry, $pos+1), $ext)) {
+                                        $files[] = $path2;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        */
+$rdi = new \RecursiveDirectoryIterator($dir, \RecursiveDirectoryIterator::KEY_AS_PATHNAME);
+foreach (new \RecursiveIteratorIterator($rdi, \RecursiveIteratorIterator::SELF_FIRST) as $file => $info) {
+    echo $file."\n";
+}
+exit;
+        $fileSystemIterator = new \FilesystemIterator($dir);
+$files = [];
+foreach ($fileSystemIterator as $fileInfo) {
+    $files[] = $fileInfo->getFilename();
+}
+        print_r($files);//exit;
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     }
 }

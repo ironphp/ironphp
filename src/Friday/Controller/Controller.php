@@ -235,9 +235,6 @@ class Controller
      */
     public function handleController($controller, $method)
     {
-        if(self::$instance == null) {
-            return false;
-        }
         $this->setName($controller);
         if($this->app->findController($controller)) {
             $controllerClass = "App\\Controller\\".$controller;
@@ -336,7 +333,7 @@ class Controller
     }
 
     /**
-     * Set theme.
+     * Display Theme.
      *
      * @param  string   $theme  Theme to use for rendering
      * @param  string   $data   Arguments to use
@@ -347,7 +344,6 @@ class Controller
         if(self::$instance == null) {
             return false;
         }
-        print_r(self::$instance);exit;
         $themePath = self::$instance->app->findTheme($theme);
         echo self::$instance->renderTemplate($themePath, $data);
     }
