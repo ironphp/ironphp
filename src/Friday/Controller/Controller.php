@@ -145,6 +145,9 @@ class Controller
      */
     public function renderView($viewPath = null, $data = [], $layout = null)
     {
+        if(self::$instance == null) {
+            return false;
+        }
         $renderedView = $this->view->renderView($viewPath, $data, $layout);
         return $renderedView;
     }
@@ -159,6 +162,9 @@ class Controller
      */
     public function renderTemplate($templatePath = null, $data = [])
     {
+        if(self::$instance == null) {
+            return false;
+        }
         $renderedTemplate = $this->view->renderTemplate($templatePath, $data);
         return $renderedTemplate;
     }
@@ -172,6 +178,9 @@ class Controller
      */
     public function model($model)
     {
+        if(self::$instance == null) {
+            return false;
+        }
         #$model = ucfirst($model).'Model';
         $modelPath = self::$instance->app->findModel($model);
         $modelClass = "App\\Model\\".$model;
@@ -192,6 +201,9 @@ class Controller
      */
     public function view($view, $data = [])
     {
+        if(self::$instance == null) {
+            return false;
+        }
         $viewPath = self::$instance->app->findView($view);
         echo self::$instance->renderView($viewPath, $data);
     }
@@ -206,6 +218,9 @@ class Controller
      */
     public function template($template, $data = [])
     {
+        if(self::$instance == null) {
+            return false;
+        }
         $templatePath = self::$instance->app->findTemplate($template);
         echo self::$instance->renderTemplate($templatePath, $data);
     }
@@ -220,6 +235,9 @@ class Controller
      */
     public function handleController($controller, $method)
     {
+        if(self::$instance == null) {
+            return false;
+        }
         if($this->app->findController($controller)) {
             $controllerClass = "App\\Controller\\".$controller;
             $this->controller = new $controllerClass();
@@ -245,6 +263,9 @@ class Controller
      */
     protected function getParam()
     {
+        if(self::$instance == null) {
+            return false;
+        }
         return self::$instance->app->getRouteParam();
     }
 
@@ -257,6 +278,9 @@ class Controller
      */
     protected function downloadFile($file, $name = null)
     {
+        if(self::$instance == null) {
+            return false;
+        }
         if(file_exists($file) && is_file($file) && is_readable($file)) {
             $mime_type = mime_content_type($file);
             if(in_array($mime_type, ['image/gif', 'image/jpeg', 'image/png'])) {
@@ -304,6 +328,26 @@ class Controller
      */
     protected function getRequest()
     {
+        if(self::$instance == null) {
+            return false;
+        }
         return self::$instance->app->request;
+    }
+
+    /**
+     * Set theme.
+     *
+     * @param  string   $theme  Theme to use for rendering
+     * @param  string   $data   Arguments to use
+     * @return void
+     */
+    protected function theme($theme, $data = [])
+    {
+        if(self::$instance == null) {
+            return false;
+        }
+        print_r(self::$instance);exit;
+        $themePath = self::$instance->app->findTheme($theme);
+        echo self::$instance->renderTemplate($themePath, $data);
     }
 }

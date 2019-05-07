@@ -453,7 +453,8 @@ class Application
      * @param  string  default
      * @return bool
      */
-    public function setTimezone($default) {
+    public function setTimezone($default)
+    {
         /*
         I'm sure I'm not the only one who is distressed by the recent default behavior change to E_NOTICE when the timezone isn't explicitly set in the program or in .ini.  I insure that the clock on the server IS correct, and I don't want to have to set it in two places (the system AND PHP).  So I want to read it from the system.  But PHP won't accept that answer, and insists on a call to this function
         Use it by calling it with a fallback default answer. It doesn't work on Windows.
@@ -497,7 +498,33 @@ class Application
      * @param  string  uri
      * @return array
      */
-    public function getRoutes($uri = null) {
+    public function getRoutes($uri = null)
+    {
         return $this->route->getRoute($uri);
+    }
+
+    /**
+     * Find a Theme.
+     *
+     * @param   string  theme
+     * @return  string  full theme file/dir path
+     * @throws  Exception
+     */
+    public function findTheme($theme)
+    {
+        $file = $this->basePath("app/Template/$template");
+        if($this->findFile($file)) {
+            return $file;
+        }
+        elseif($this->findFile($file.'.html')) {
+            return $file.'.html';
+        }
+        elseif($this->findFile($file.'.php')) {
+            return $file.'.php';
+        }
+        else {
+            throw new Exception($file." Template file is missing.");
+            exit;
+        }
     }
 }

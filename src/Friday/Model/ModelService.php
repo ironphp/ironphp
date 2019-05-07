@@ -110,7 +110,7 @@ class ModelService
     /**
      * Is user logged or not.
      *
-     * @return bool
+     * @return string
      */
     protected function isLogged()
     {
@@ -125,7 +125,7 @@ class ModelService
     /**
      * Is user superadmin or not.
      *
-     * @return bool
+     * @return string
      */
     protected function isAdmin()
     {
@@ -202,31 +202,5 @@ class ModelService
             $this->dataMapper = new \Friday\Model\DataMapper(self::$app->config);
         }
         return $this->dataMapper;
-    }
-
-    /**
-     * Get logged userID.
-     *
-     * @return int|bool
-     */
-    protected function getUser()
-    {
-        return self::$app->session->get('SESS_MEMBER_ID');
-    }
-
-    /**
-     * Get logged superadminID.
-     *
-     * @return int|bool
-     */
-    protected function getAdmin()
-    {
-        $usertype = self::$app->session->get('SESS_USER_TYPE');
-        if($usertype === 'Master') {
-            return self::$app->session->get('SESS_MEMBER_ID');
-        }
-        else {
-            return false;
-        }
     }
 }
