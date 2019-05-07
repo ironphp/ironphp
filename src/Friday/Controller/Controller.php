@@ -238,6 +238,7 @@ class Controller
         if(self::$instance == null) {
             return false;
         }
+        $this->setName($controller);
         if($this->app->findController($controller)) {
             $controllerClass = "App\\Controller\\".$controller;
             $this->controller = new $controllerClass();
