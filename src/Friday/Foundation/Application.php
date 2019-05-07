@@ -572,27 +572,10 @@ class Application
             }
         }
         */
-$rdi = new \RecursiveDirectoryIterator($dir, \RecursiveDirectoryIterator::KEY_AS_PATHNAME);
-foreach (new \RecursiveIteratorIterator($rdi, \RecursiveIteratorIterator::SELF_FIRST) as $file => $info) {
-    echo $file."\n";
-}
-exit;
-        $fileSystemIterator = new \FilesystemIterator($dir);
-$files = [];
-foreach ($fileSystemIterator as $fileInfo) {
-    $files[] = $fileInfo->getFilename();
-}
-        print_r($files);//exit;
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+        $rdi = new \RecursiveDirectoryIterator($dir, \RecursiveDirectoryIterator::KEY_AS_PATHNAME);
+        foreach (new \RecursiveIteratorIterator($rdi, \RecursiveIteratorIterator::SELF_FIRST) as $file => $info) {
+            echo $file.$info."\n";
+        }
+        exit;
     }
 }
