@@ -345,6 +345,7 @@ class Controller
             return false;
         }
         $themePath = self::$instance->app->findTheme($theme);
+        print_r($themePath);exit;
         echo self::$instance->renderTemplate($themePath, $data);
     }
 }
