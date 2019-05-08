@@ -539,43 +539,11 @@ class Application
     {
         $ext = ['html', 'htm', 'css', 'js', 'php'];
         $json = $dir.'/ironphp-theme.json';
-        /*
-        while(false != ($entry = $handle->read())) {
-            if($entry != '.' && $entry != '..') {
-                $path = $handle->path.'/'.$entry;
-                if(is_file($path)) {
-                    if(false !== ($pos = strrpos($entry, '.'))) {
-                        if(in_array(substr($entry, $pos+1), $ext)) {
-                            $files[] = $path;
-                        }
-                    }
-                } elseif(is_dir($path)) {
-                    if(strrpos($path, '.')) {
-                        continue;
-                    }
-                    $handle2 = dir($path);
-                    while(false != ($entry = $handle2->read())) {
-                        if($entry != '.' && $entry != '..') {
-                            $path2 = $handle2->path.'/'.$entry;
-                    var_dump(($path2));
-                            if(is_file($path2)) {
-                                if(false !== ($pos = strrpos($entry, '.'))) {
-                                    if(in_array(substr($entry, $pos+1), $ext)) {
-                                        $files[] = $path2;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        */
         $fp = fopen($json, 'w');
         $getList = $this->getList($dir, $ext, []);
         fwrite($fp, json_encode($getList, JSON_PRETTY_PRINT));
         fclose($fp);
-print_r($getList);exit;
+        return $getList;
     }
 
     /*
