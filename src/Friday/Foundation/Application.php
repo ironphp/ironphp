@@ -507,10 +507,11 @@ class Application
      * Find a Theme.
      *
      * @param   string  theme
+     * @param   string  $json
      * @return  array
      * @throws  Exception
      */
-    public function findTheme($theme)
+    public function findTheme($theme, $json = null)
     {
         $ext = ['html', 'htm', 'css', 'js', 'php', 'jpg', 'png', 'svg'];
         $dir = $this->basePath("app/Theme/$theme");
@@ -518,12 +519,23 @@ class Application
             throw new Exception($dir." Directory is missing.");
             exit;
         }
-        $themeFiles = $this->parseDir($dir, $ext, true);
+        if($json == null) {
+            $json = $dir.'/ironphp-theme.json';
+        }
+        if(round(fileatime($json)/10) < round(fileatime($dir)/10)) {
+            $changed = true;
+        } else {
+            $changed = false;
+        }
+        if(file_exists($json) && is_file($json) && filesize($json) && !$changed) {
+            return $json;
+        }
+        $themeFiles = $this->parseDir($dir, $ext, $json, true);
         if(!isset($themeFiles['html']) && isset($themeFiles['htm']) && isset($themeFiles['php'])) {
             throw new Exception("HTML/HTM/PHP files is missing in Theme: ".$file);
             exit;
         }
-        return $themeFiles;
+        return $json;
     }
 
     /**
@@ -531,14 +543,14 @@ class Application
      *
      * @param   string  $dir
      * @param   array   $allowedExt
+     * @param   string  $json
      * @param   bool    $byType
      * @return  array
      */
-    public function parseDir($dir, $allowedExt, $byType = false)
+    public function parseDir($dir, $allowedExt, $json, $byType = false)
     {
-        $json = $dir.'/ironphp-theme.json';
         $fp = fopen($json, 'w');
-        $getList = $this->getList($dir, $ext, [], $byType);
+        $getList = $this->getList($dir, $allowedExt, [], $byType);
         fwrite($fp, json_encode($getList, JSON_PRETTY_PRINT));
         fclose($fp);
         return $getList;
