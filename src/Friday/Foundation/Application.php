@@ -507,40 +507,37 @@ class Application
      * Find a Theme.
      *
      * @param   string  theme
-     * @return  string  full theme file/dir path
+     * @return  array
      * @throws  Exception
      */
     public function findTheme($theme)
     {
         $dir = $this->basePath("app/Theme/$theme");
-        $this->parseDir($dir);exit;
-        if($this->findFile($file)) {
-            return $file;
-        }
-        elseif($this->findFile($file.'.html')) {
-            return $file.'.html';
-        }
-        elseif($this->findFile($file.'.php')) {
-            return $file.'.php';
-        }
-        else {
-            throw new Exception($file." Template file is missing.");
+        if(!file_exists($dir) || is_file($dir)) {
+            throw new Exception($dir." Directory is missing.");
             exit;
         }
+        $themeFiles = $this->parseDir($dir, true);
+        if(!isset($themeFiles['html']) && isset($themeFiles['htm']) && isset($themeFiles['php'])) {
+            throw new Exception("HTML/HTM/PHP files is missing in Theme: ".$file);
+            exit;
+        }
+        return $themeFiles;
     }
 
     /**
      * Parse files/dir in dir.
      *
-     * @param   string  dir
+     * @param   string  $dir
+     * @param   bool    $byType
      * @return  array
      */
-    public function parseDir($dir)
+    public function parseDir($dir, $byType = false)
     {
         $ext = ['html', 'htm', 'css', 'js', 'php'];
         $json = $dir.'/ironphp-theme.json';
         $fp = fopen($json, 'w');
-        $getList = $this->getList($dir, $ext, []);
+        $getList = $this->getList($dir, $ext, [], $byType);
         fwrite($fp, json_encode($getList, JSON_PRETTY_PRINT));
         fclose($fp);
         return $getList;
@@ -549,15 +546,16 @@ class Application
     /*
      * Get files-dir by RecursiveDirectoryIterator
      *
-     * @param  array $dir
-     * @param  array $types
-     * @param  array $ignoreDir
+     * @param   array  $dir
+     * @param   array  $types
+     * @param   array  $ignoreDir
+     * @param   bool   $byType
      * @abstract Recursively iterates over specified directory
      *           populating array based on array of file extensions
      *           while ignoring directories specified in ignoreDir
      * @return  array
      */
-    public function getList($dir, $types, $ignoreDir)
+    public function getList($dir, $types, $ignoreDir, $byType = false)
     {
         $it = new \RecursiveDirectoryIterator($dir);
         foreach (new \RecursiveIteratorIterator($it) as $info => $file) {
@@ -566,7 +564,11 @@ class Application
                 continue;
             }
             if (!in_array($it, $ignoreDir) && $types == [] || in_array(strtolower($file->getExtension()), $types)) {
+                if($byType) {
+                    $files[$file->getExtension()][$file->getBasename()] = $file->getPathname();
+                } else {
                     $files[$file->getBasename()] = $file->getPathname();
+                }
             }
         }
         return $files;
