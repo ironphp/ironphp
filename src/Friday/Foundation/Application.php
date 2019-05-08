@@ -538,8 +538,7 @@ class Application
     public function parseDir($dir)
     {
         $ext = ['html', 'htm', 'css', 'js', 'php'];
-        $files = [];
-        $handle = dir($dir);
+        $json = $dir.'/ironphp-theme.json';
         /*
         while(false != ($entry = $handle->read())) {
             if($entry != '.' && $entry != '..') {
@@ -572,10 +571,36 @@ class Application
             }
         }
         */
-        $rdi = new \RecursiveDirectoryIterator($dir, \RecursiveDirectoryIterator::KEY_AS_PATHNAME);
-        foreach (new \RecursiveIteratorIterator($rdi, \RecursiveIteratorIterator::SELF_FIRST) as $file => $info) {
-            echo $file.$info."\n";
+        $fp = fopen($json, 'w');
+        $getList = $this->getList($dir, $ext, []);
+        fwrite($fp, json_encode($getList, JSON_PRETTY_PRINT));
+        fclose($fp);
+print_r($getList);exit;
+    }
+
+    /*
+     * Get files-dir by RecursiveDirectoryIterator
+     *
+     * @param  array $dir
+     * @param  array $types
+     * @param  array $ignoreDir
+     * @abstract Recursively iterates over specified directory
+     *           populating array based on array of file extensions
+     *           while ignoring directories specified in ignoreDir
+     * @return  array
+     */
+    public function getList($dir, $types, $ignoreDir)
+    {
+        $it = new \RecursiveDirectoryIterator($dir);
+        foreach (new \RecursiveIteratorIterator($it) as $info => $file) {
+            $basename = $file->getBasename();
+            if($basename== '.' || $basename == '..' || $basename[0] == '.') {
+                continue;
+            }
+            if (!in_array($it, $ignoreDir) && $types == [] || in_array(strtolower($file->getExtension()), $types)) {
+                    $files[$file->getBasename()] = $file->getPathname();
+            }
         }
-        exit;
+        return $files;
     }
 }
