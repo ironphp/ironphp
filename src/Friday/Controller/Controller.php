@@ -337,15 +337,16 @@ class Controller
      *
      * @param  string   $theme  Theme to use for rendering
      * @param  string   $data   Arguments to use
+     * @param  string   $file   File to use for rendering
      * @return void
      */
-    protected function theme($theme, $data = [])
+    protected function theme($theme, $data = [], $file =  null)
     {
         if(self::$instance == null) {
             return false;
         }
-        $themePath = self::$instance->app->findTheme($theme);
-        print_r($themePath);exit;
-        echo self::$instance->renderTemplate($themePath, $data);
+        $themeFilePath = self::$instance->app->findTheme($theme, $file);
+        print_r($themeFilePath);exit;
+        //echo self::$instance->renderTemplate($themePath, $data);
     }
 }

@@ -126,6 +126,13 @@ class View
     public $template;
 
     /**
+     * The view theme to use.
+     *
+     * @var string|null
+     */
+    public $theme;
+
+    /**
      * Create a new View instance.
      *
      * @param  \Friday\Foundation\Application  $app
@@ -327,5 +334,28 @@ class View
         else {
             throw new Exception("Can not read template: ".$templatePath);
         }
+    }
+
+    /**
+     * Get the current view theme.
+     *
+     * @return string|null
+     */
+    public function getTheme()
+    {
+        return $this->theme;
+    }
+
+    /**
+     * Set the view theme to use.
+     *
+     * @param string|null $theme Theme name.
+     * @return $this
+     */
+    public function setTheme($theme)
+    {
+        $this->theme = $theme;
+
+        return $this;
     }
 }

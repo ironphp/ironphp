@@ -164,7 +164,7 @@ class Application
      */
     public function basePath($path = '')
     {
-        return $this->basePath.($path ? DIRECTORY_SEPARATOR.$path : $path);
+        return $this->basePath.($path ? DS.$path : $path);
     }
 
     /**
@@ -506,36 +506,54 @@ class Application
     /**
      * Find a Theme.
      *
-     * @param   string  theme
-     * @param   string  $json
-     * @return  array
+     * @param   string  $theme
+     * @param   string  $file   File to use for rendering
+     * @return  string
      * @throws  Exception
      */
-    public function findTheme($theme, $json = null)
+    public function findTheme($theme, $file = null)
     {
-        $ext = ['html', 'htm', 'css', 'js', 'php', 'jpg', 'png', 'svg'];
-        $dir = $this->basePath("app/Theme/$theme");
+        $extMain = ['html', 'htm', 'php'];
+        if($file) {
+            $array = explode('.', $file);
+            $ext = array_pop($array);
+        } else {
+            $ext = null;
+        }
+        if(!in_array($ext, $extMain)) {
+            throw new Exception("Theme file must be HTML/HTM/PHP : ".$theme.DS.$file);
+            exit;
+        }
+        $fileName = DS . ltrim($file, '/\\');
+        $allowedExt = ['html', 'htm', 'css', 'js', 'php', 'jpg', 'png', 'svg'];
+        $dir = $this->basePath("app" . DS . "Theme" . DS . $theme);
         if(!file_exists($dir) || is_file($dir)) {
             throw new Exception($dir." Directory is missing.");
             exit;
         }
-        if($json == null) {
-            $json = $dir.'/ironphp-theme.json';
-        }
+        $json = $dir.'/ironphp-theme.json';
         if(round(fileatime($json)/10) < round(fileatime($dir)/10)) {
             $changed = true;
         } else {
             $changed = false;
         }
         if(file_exists($json) && is_file($json) && filesize($json) && !$changed) {
-            return $json;
+            #return $json;
+            $themeFiles = json_decode(file_get_contents($json), true);
+        } else {
+            $themeFiles = $this->parseDir($dir, $allowedExt, $json, true);
+            if(!isset($themeFiles['html']) && isset($themeFiles['htm']) && isset($themeFiles['php'])) {
+                throw new Exception("HTML/HTM/PHP files are missing in Theme: ".$theme);
+                exit;
+            }
         }
-        $themeFiles = $this->parseDir($dir, $ext, $json, true);
-        if(!isset($themeFiles['html']) && isset($themeFiles['htm']) && isset($themeFiles['php'])) {
-            throw new Exception("HTML/HTM/PHP files is missing in Theme: ".$file);
+        if(in_array($fileName, $themeFiles[$ext])) {
+            return $themeFiles['theme_path'].$fileName;
+        } else {
+            throw new Exception($fileName." is missing in Theme: ".$theme);
             exit;
         }
-        return $json;
+        //return $json;
     }
 
     /**
@@ -570,17 +588,19 @@ class Application
      */
     public function getList($dir, $types, $ignoreDir, $byType = false)
     {
+        $files['theme_path'] = $dir;
         $it = new \RecursiveDirectoryIterator($dir);
         foreach (new \RecursiveIteratorIterator($it) as $info => $file) {
             $basename = $file->getBasename();
             if($basename== '.' || $basename == '..' || $basename[0] == '.') {
                 continue;
             }
+            $relPath = str_replace($dir, '', $file->getRealPath());
             if (!in_array($it, $ignoreDir) && $types == [] || in_array(strtolower($file->getExtension()), $types)) {
                 if($byType) {
-                    $files[$file->getExtension()][$file->getBasename()] = str_replace('/', '\\', $file->getPathname());
+                    $files[$file->getExtension()][] = $relPath;
                 } else {
-                    $files[$file->getBasename()] = str_replace('/', '\\', $file->getPathname());
+                    $files[] = $relPath;
                 }
             }
         }
