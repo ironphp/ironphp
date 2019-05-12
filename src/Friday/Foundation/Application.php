@@ -513,7 +513,7 @@ class Application
      */
     public function findTheme($theme, $file = null)
     {
-        $extMain = ['html', 'htm', 'php'];
+        $extMain = ['html', 'htm'];
         if($file) {
             $array = explode('.', $file);
             $ext = array_pop($array);
@@ -521,11 +521,11 @@ class Application
             $ext = null;
         }
         if(!in_array($ext, $extMain)) {
-            throw new Exception("Theme file must be HTML/HTM/PHP : ".$theme.DS.$file);
+            throw new Exception("Theme file must be HTML/HTM : ".$theme.DS.$file);
             exit;
         }
         $fileName = DS . ltrim($file, '/\\');
-        $allowedExt = ['html', 'htm', 'css', 'js', 'php', 'jpg', 'png', 'svg'];
+        $allowedExt = ['html', 'htm', 'css', 'js', 'jpg', 'png', 'svg'];
         $dir = $this->basePath("app" . DS . "Theme" . DS . $theme);
         if(!file_exists($dir) || is_file($dir)) {
             throw new Exception($dir." Directory is missing.");
@@ -538,22 +538,21 @@ class Application
             $changed = false;
         }
         if(file_exists($json) && is_file($json) && filesize($json) && !$changed) {
-            #return $json;
             $themeFiles = json_decode(file_get_contents($json), true);
         } else {
             $themeFiles = $this->parseDir($dir, $allowedExt, $json, true);
-            if(!isset($themeFiles['html']) && isset($themeFiles['htm']) && isset($themeFiles['php'])) {
-                throw new Exception("HTML/HTM/PHP files are missing in Theme: ".$theme);
+            if(!isset($themeFiles['html']) && isset($themeFiles['htm'])) {
+                throw new Exception("HTML/HTM files are missing in Theme: ".$theme);
                 exit;
             }
         }
         if(in_array($fileName, $themeFiles[$ext])) {
-            return $themeFiles['theme_path'].$fileName;
+            $themeFilepath = $themeFiles['theme_path'].$fileName;
         } else {
             throw new Exception($fileName." is missing in Theme: ".$theme);
             exit;
         }
-        //return $json;
+        return ['themeName' => $theme, 'themePath' => $dir, 'themeFilePath' => $themeFilepath];
     }
 
     /**

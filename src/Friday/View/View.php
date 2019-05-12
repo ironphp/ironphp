@@ -130,7 +130,7 @@ class View
      *
      * @var string|null
      */
-    public $theme;
+    private $theme;
 
     /**
      * Create a new View instance.
@@ -171,13 +171,20 @@ class View
     /**
      * Renders view with HTML tags and given data, template file and layout.
      *
-     * @param   string   $tag
+     * @param   string      $tag
+     * @param   array|null  $attr
+     * @param   string|null $content
      * @return  array
+     * @throws  \Exception
      */
-    public function createTag($tag, $attr = NULL, $content = NULL)
+    public function createTag($tag, $attr = null, $content = null)
     {
+        if(empty($tag) || !is_string($tag)) {
+            throw new Exception("Tags name can not be null or non-string");
+            exit;
+        }
         $temp = '<'.$tag;
-        if($attr != NULL) {
+        if($attr != null) {
             $attr = (array) $attr;
             foreach($attr as $key => $val) {
                 if(is_numeric($key)) {
@@ -187,7 +194,7 @@ class View
                         //$args[] = $val.($this->attr[$tag][$val] == NULL ? '' : "=\"{$this->attr[$tag][$val]}\"");
                     }
                     else {
-                        $args[$val] = NULL;
+                        $args[$val] = null;
                     }
                 }
                 else {
@@ -212,14 +219,14 @@ class View
             }
             unset($attr);
             foreach($args as $key => $val) {
-                $attr[] = $key.($val == NULL ? '' : "=\"$val\"");
+                $attr[] = $key.($val == null ? '' : "=\"$val\"");
             }
             unset($args);
             $args = array_unique($attr);
             $args = implode(' ', $args);
         }
         $temp .= isset($args) ? ' '.$args.'>' : '>'; 
-        if($content != NULL) {
+        if($content != null) {
             if(is_array($content)) {
                 array_walk($content, function(&$val, $key) { $val = trim($val); } );//5.3
                 $content = implode("\n",$content);
@@ -239,12 +246,12 @@ class View
     /**
      * Renders View for given data, template file and layout.
      *
-     * @param  string|null  $viewPath
-     * @param  string       $data
-     * @param  string|null  $layout
-     * @return string
+     * @param   string       $viewPath
+     * @param   string       $data
+     * @param   string|null  $layout
+     * @return  string
      */
-    public function renderView($viewPath = null, $data = [], $layout = null)
+    public function renderView($viewPath, $data = [], $layout = null)
     {
         ob_start();
         require($viewPath);
@@ -266,12 +273,12 @@ class View
     /**
      * Renders Template for given data, template file.
      *
-     * @param string|null  $templatePath
-     * @param string       $data
-     * @return  $templateData.
+     * @param   string  $templatePath
+     * @param   string  $data
+     * @return  string.
      * @throws  \Exception
      */
-    public function renderTemplate($templatePath = null, $data = [])
+    public function renderTemplate($templatePath, $data = [])
     {
         $templateData = $this->readTemplate($templatePath);
         if($data === null) {
@@ -319,8 +326,8 @@ class View
     /**
      * Renders Template for given data, template file.
      *
-     * @param   string|null  $viewPath
-     * @return  $viewData
+     * @param   string  $templatePath
+     * @return  string
      * @throws  \Exception
      */
     public function readTemplate($templatePath)
@@ -349,13 +356,292 @@ class View
     /**
      * Set the view theme to use.
      *
-     * @param string|null $theme Theme name.
-     * @return $this
+     * @param   string  $theme Theme name.
+     * @return  void
+     * @throws  \Exception
      */
     public function setTheme($theme)
     {
+        if(empty($theme)) {
+            throw new Exception("Theme name can not be null");
+            exit;
+        }
         $this->theme = $theme;
+    }
 
-        return $this;
+    /**
+     * Renders Theme for given data.
+     *
+     * @param   array        $themeInfo
+     * @param   string       $data
+     * @return  $templateData
+     * @throws  \Exception
+     */
+    public function renderTheme($themeInfo, $data = [])
+    {
+        $templateData = trim($this->readThemePage($themeInfo['themeFilePath']));
+        $pos1 = stripos($templateData, '<!doctype');
+        if($pos1 !== false) {
+            $pos2 = stripos($templateData, '>');
+            $doctype = substr($templateData, $pos1, $pos2+1);
+        }
+        $doctype = $doctype ?? $this->createTag('!doctype', 'html');
+        /*
+        $temp = substr($templateData, $pos+1);
+        $pos = strpos($templateData, '</head>');
+        $head = substr($temp, 0, $pos-4);
+        $body = substr($temp, $pos+2);
+        $pos = strpos($body, '</html>');
+        $body = substr($body, 0, $pos);
+        */
+        $tagArray = $this->htmlToArray($themeInfo['themeFilePath'], true, true);
+        echo $this->createTag('html');exit;
+        print_r($doctype."\n".$this->arrayToHtml($tagArray));exit;
+        if(!is_array($data) && $data !== null) {
+            throw new Exception("template(): expects parameter 2 to be array, null given");
+        }
+        foreach($data as $key => $val) {
+            if(is_array($val)) {
+                $findStart = strpos($templateData, '{{'.$key.':}}');
+                if($findStart !== false) {
+                    $findEnd = strpos($templateData, '{{:'.$key.'}}');
+                    if($findEnd !== false) {
+                        $len = 5 + strlen($key);
+                        $substr = substr($templateData, $findStart, ($findEnd - $findStart));
+                        $substr = substr($substr, $len);
+                        $loopstr = []; #fixed-for: Uncaught Error: [] operator not supported for strings $loopstr[]
+                        foreach($val as $k => $v) {
+                            $temp = $substr;
+                            if(is_array($v)) {
+                                //$temp = strtr($temp, $v); {{}} not replaced
+                                foreach($v as $ks => $vs) {
+                                    $temp = str_replace('{{'.$ks.'}}', $vs, $temp);
+                                }
+                            }
+                            else {
+                                $temp = str_replace('{{'.$key.'}}', $v, $temp);
+                            }
+                            $loopstr[] = $temp;
+                        }
+                        $loopstr = implode("\n", $loopstr);
+                        $templateData = str_replace('{{'.$key.':}}'.$substr.'{{:'.$key.'}}', $loopstr, $templateData);
+                    }
+                    else {
+                        throw new Exception('Error in template : loop has not closed properely');
+                        exit;
+                    }
+                }
+            }
+            else {
+                $templateData = str_replace('{{'.$key.'}}', $val, $templateData);
+            }
+        }
+        return $templateData;
+    }
+
+    /**
+     * Read Theme Page for given data, template file.
+     *
+     * @param   string  $themeFilePath
+     * @return  string
+     * @throws  \Exception
+     */
+    public function readThemePage($themeFilePath)
+    {
+        if(!is_readable($themeFilePath)) {
+            throw new Exception("No permissons to read template: ".$themeFilePath);
+        }
+        if($themeFilePath = file_get_contents($themeFilePath)) {
+            return $themeFilePath;
+        }
+        else {
+            throw new Exception("Can not read template: ".$themeFilePath);
+        }
+    }
+
+    /**
+     * Convert HTML tags string to array.
+     *
+     * @param   string  html
+     * @return  array
+     */
+    public function htmlToArray($html, $isFile = true, $first = true)
+    {
+        $dom = new \DOMDocument;
+        libxml_use_internal_errors(true);
+        if($isFile) {
+            $dom->loadHTMLFile($html);
+        } else {
+            $dom->loadHTML($html); 
+        }
+        $dom->loadHTML('<!doctype><html lang="en" xmlns="http://www.w3.org/1999/xhtml"><head></head><body></body></html>');
+        //<title></title>
+        $tags = $dom->getElementsByTagName('*');
+        $tagArray = [];
+        foreach($tags as $key => $tag) {
+            $tagArray[$key][$tag->nodeName] = $this->nodeToArray($tag);
+            if($first) {
+                break;
+            }
+        }
+        return $tagArray;
+    }
+
+    /**
+     * Get array from DOMDocument node data.
+     *
+     * @param   \DOMElement  $node
+     * @return  array
+     */
+    public function nodeToArray($node) 
+    {
+        $array = false;
+        if ($node->hasAttributes()) {
+            foreach ($node->attributes as $attr) {
+                $array[$attr->nodeName] = $attr->nodeValue;
+            }
+        }
+
+        if ($node->hasChildNodes()) {
+            //if ($node->childNodes->length == 1) {
+                //$array[$node->nodeName][$node->firstChild->nodeName] = empty($node->firstChild->nodeValue) ? [] : [$node->firstChild->nodeValue];
+            //} else {
+            foreach ($node->childNodes as $childNode) {
+                if ($childNode->nodeType != XML_TEXT_NODE) {
+                    if(!isset($array[$childNode->nodeName]) ||
+                       !is_array($array[$childNode->nodeName])) {
+                        $array[$childNode->nodeName] = [];
+                    }
+                    $array[$childNode->nodeName][] = $this->nodeToArray($childNode);
+                }
+            }
+            //}
+        }
+        if($array === false) {
+            $array = [];
+        }
+
+        return $array; 
+    }
+
+    /**
+     * Convert array to HTML tags string.
+     *
+     * @param   array  $tagArray
+     * @return  string
+     */
+    public function arrayToHtml($tagArray)
+    {
+        //print_r($tagArray);
+        $html = '';
+        if(!is_array($tagArray) && !is_object($tagArray)) {
+            return false;
+        }
+        $iterator = $this->getChildrenIterator($tagArray);
+        $children = $attr = [];
+        $tag = null;
+        foreach($iterator as $key => $val) {
+            #print_r(["$key =>", $val]);
+            if(!is_array($val)) {
+                #nothing
+                #$tag = is_int($key) ? $tag : $key;
+            } else {
+                foreach($val as $key1 => $val1) {
+                    $tag = is_int($key1) ? $tag : $key1;
+                    #print_r(["$key => $key1 =>", $val1, $tag]);
+                    if(!is_array($val1)) {
+                        $attr[$key1] = $val1;
+                    } else {
+                        #print_r(['key'=>"$key => $key1 =>", 'val1'=>$val1, 'tag'=>$tag, 'attr'=>$attr]);
+                        if(!is_array($val1)) {
+                            if(empty($val1)) {
+                                #nothing
+                            } else {
+                                #nothing
+                            }                            
+                        } else {
+                            foreach($val1 as $key2 => $val2) {
+                                #print_r(["$key => $key1 => $key2 =>", 'val2'=>$val2, 'tag'=>$tag, 'attr'=>$attr]);
+                                if(!is_array($val2)) {
+                                    #$tag = $key;
+                                    if($key2 == 'body') {
+                                        $children[] = $val2;
+                                    } else {
+                                        $attr[$key2] = $val2;
+                                    }
+                                } else {
+                                    //$children[] = $this->createTag($key2);
+                                    if(empty($val2)) {
+                                        #$children[] = $this->createTag($key2);
+                                    } else {
+                                        #$children[] = $this->childrenIterate([$val2]);
+                                        //print_r($children);//exit;
+                                        foreach($val2 as $key3 => $val3) {
+                                            if(!is_array($val3)) {
+                                            } else {
+                                                if(empty($val3)) {
+                                                    $children[] = $this->createTag($key2);
+                                                } else {
+                                                    $children[] = $this->childrenIterate([$key3 => $val3]);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        print_r(['tag'=>$tag, 'key'=>$key, 'val'=>$val, 'attr'=>$attr, 'children'=>$children]);
+        $html .= $this->createTag($tag, $attr, implode('', $children));
+        print_r($html."\n");print_r($tagArray);
+        return $html;
+    }
+    
+    /**
+     * Get children of RecursiveIterator.
+     *
+     * @param   array  $tagArray
+     * @return  array
+     */
+    public function getChildrenIterator($tagArray)
+    {
+        return new \RecursiveArrayIterator($tagArray);
+    }
+    
+    /**
+     * Iterate children of RecursiveIterator.
+     *
+     * @param   string  $name
+     * @param   array   $tagArray
+     * @return  array
+     */
+    public function childrenIterate($tagArray, $name = null)
+    {
+        $tag = $name;
+        $iterator = $this->getChildrenIterator($tagArray);
+        $children = $attr = [];
+        foreach ($iterator as $key => $val) {
+        print_r([$key, $val]);//, $key, $key1, is_array($val1), $attr, $children]);
+        exit;
+            if(!is_array($val)) {
+            print_r([$tag, $name, $children, $attr, $key, $val]);exit;
+                $tag = $name;
+                $attr[$key] = $val;
+            } else {
+                //$children[] = $this->childrenIterate($key, $val);
+            }
+            $childrenArray = $children == [] ? null : implode('', $children);
+            $html = $this->createTag($tag, $attr);
+            //return 'text';
+            /*
+            if($iterator->hasChildren()) {
+                return $this->getChildrenIterator($file);
+            }
+            return $file;
+            */
+        }
     }
 }

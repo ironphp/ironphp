@@ -345,8 +345,23 @@ class Controller
         if(self::$instance == null) {
             return false;
         }
-        $themeFilePath = self::$instance->app->findTheme($theme, $file);
-        print_r($themeFilePath);exit;
-        //echo self::$instance->renderTemplate($themePath, $data);
+        $themeInfo = self::$instance->app->findTheme($theme, $file);
+        echo self::$instance->renderTheme($themeInfo, $data);
+    }
+
+    /**
+     * Renders theme for given data.
+     *
+     * @param  array   $themeInfo
+     * @param  string  $data
+     * @return void
+     */
+    public function renderTheme($themeInfo, $data = [])
+    {
+        if(self::$instance == null) {
+            return false;
+        }
+        $renderedTheme = $this->view->renderTheme($themeInfo, $data);
+        return $renderedTemplate;
     }
 }
