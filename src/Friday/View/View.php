@@ -57,7 +57,28 @@ class View
         'img' => false,
         'ul' => true,
         'ol' => true,
-        'li' => true
+        'li' => true,
+        'input' => false,
+        'form' => true,
+        'dt' => true,
+        'dd' => true,
+        'br' => false,
+        'dl' => true,
+        'label' => true,
+        'option' => true,
+        'select' => true,
+        'fieldset' => true,
+        'h1' => true,
+        'h2' => true,
+        'h3' => true,
+        'h4' => true,
+        'h5' => true,
+        'h6' => true,
+        'strong' => true,
+        'code' => true,
+        'small' => true,
+        'section' => true,
+        'aside' => true
     ];
 
     /**
@@ -402,7 +423,10 @@ class View
         $body = substr($body, 0, $pos);
         */
         $tagArray = $this->htmlToArray($themeInfo['themeFilePath'], true, true);
-        print_r($doctype."\n".$this->arrayToHtml($tagArray));exit;
+        $this->arrayToHtml($tagArray);
+        #print("@@@@@@@@@@@@@@@@\n");print_r($tagArray);
+        #print_r($doctype."\n".$this->arrayToHtml($tagArray));
+        exit;
         if(!is_array($data) && $data !== null) {
             throw new Exception("template(): expects parameter 2 to be array, null given");
         }
@@ -481,7 +505,10 @@ class View
         } else {
             $dom->loadHTML($html); 
         }
-        $dom->loadHTML('<!--CMD--><!--TXT-->');
+        $dom->loadHTML('<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head><meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"></head></html>');
         if(true) {
         $tag = '
 <!DOCTYPE html>
@@ -931,6 +958,7 @@ currently not documented; only its argument list is available.
 </html>
 ';
         }
+        #$dom->loadHTML($tag);
         #print_r($dom->childNodes);exit;
         #foreach($dom->childNodes as $child) {
         if($dom->nodeType == XML_HTML_DOCUMENT_NODE) {
@@ -938,7 +966,7 @@ currently not documented; only its argument list is available.
         } else {
             $tagArray[$dom->nodeName][] = $this->nodeToArray($dom);
         }
-        print_r($tagArray);//exit;
+        #print_r($tagArray);//exit;
         #}
 /*
         $tags = $dom->getElementsByTagName('*');
@@ -961,10 +989,11 @@ currently not documented; only its argument list is available.
      */
     public function nodeToArray($node) 
     {
-        $array = false;
-        print str_repeat('#',30)."\n";
-        #print_r([$node->nodeName, $node->nodeType, $node->nodeValue]);exit;
-        #print_r(['node'=>$node, 'nodeName'=>$node->nodeName, 'nodeValue'=>$node->nodeValue, 'nodeType'=>$node->nodeType, 'attributes'=>$node->attributes, 'childNodes'=>$node->childNodes, 'array'=>$array]);
+        $array = [];//false;
+        #print str_repeat('#',30)."\n";
+        #print_r($node);
+        #print_r([$node->nodeName, $node->nodeType, $node->nodeValue]);//exit;
+        #print_r(['node'=>$node, 'nodeName'=>$node->nodeName, 'nodeValue'=>$node->nodeValue, 'nodeType'=>$node->nodeType, 'attributes'=>$node->attributes, 'childNodes'=>$node->childNodes->length, 'array'=>$array]);
 
         if ($node->hasAttributes()) {
             foreach ($node->attributes as $attr) {
@@ -973,29 +1002,32 @@ currently not documented; only its argument list is available.
         }
 
         if ($node->hasChildNodes()) {
+            #print_r($node->childNodes);
             foreach ($node->childNodes as $childNode) {
-                $array[$childNode->nodeName] = array();
-                print_r($array[$childNode->nodeName]);
-                #$array[$node->nodeName] = array();
+                #print_r($childNode);
                 #print_r(['childNode'=>$childNode, 'childNodeName'=>$childNode->nodeName, 'childNodeValue'=>$childNode->nodeValue, 'childNodeType'=>$childNode->nodeType, 'childNodeAttributes'=>$childNode->attributes, 'childNodeChildren'=>$childNode->childNodes]);
                 if($childNode->nodeType == XML_DOCUMENT_TYPE_NODE ) {
-                    $array[$node->nodeName][] = ["html", "PUBLIC", $node->doctype->publicId, $node->doctype->systemId];
-#print_r([$childNode->nodeName, $childNode->nodeType, $childNode->nodeValue, $array]);
-print str_repeat('-',30)."\n";
+                    $array[$node->nodeName] = $array[$node->nodeName] ?? [];
+                    $doctype[] = $childNode->name;
+                    if($node->doctype->publicId != null || $node->doctype->systemId != null) {
+                        $doctype[] = "PUBLIC";
+                        $doctype[] = $node->doctype->publicId;
+                        $doctype[] = $node->doctype->systemId;
+                    }
+                    $array[$node->nodeName][] = $doctype;
+                    #$array[$node->nodeName][] = ["html", "PUBLIC", $node->doctype->publicId, $node->doctype->systemId];
+                    #print_r([$childNode->nodeName, $childNode->nodeType, $childNode->nodeValue, $array]);
                 } elseif($childNode->nodeType == XML_COMMENT_NODE ) {
-                    $array[$childNode->nodeName] = $childNode->nodeValue;
-                }
-                elseif ($childNode->nodeType != XML_TEXT_NODE) {
-                    if(!isset($array[$childNode->nodeName]) ||
-                       !is_array($array[$childNode->nodeName])) {
-                        $array[$childNode->nodeName] = [];
-                    }
+                    $array[$childNode->nodeName] = $array[$childNode->nodeName] ?? [];
+                    $array[$childNode->nodeName][] = ['#text' => $childNode->nodeValue];
+                } elseif ($childNode->nodeType != XML_TEXT_NODE) {
+                    $array[$childNode->nodeName] = $array[$childNode->nodeName] ?? [];
                     $array[$childNode->nodeName][] = $this->nodeToArray($childNode);
-                } else {
-                    if ($node->childNodes->length == 1) {
-                        $array[$node->firstChild->nodeName] = $node->firstChild->nodeValue;//empty($node->firstChild->nodeValue) ? [] : [$node->firstChild->nodeValue];
-                    }
+                } elseif ($node->childNodes->length == 1) {
+                    $array[$node->firstChild->nodeName] = $node->firstChild->nodeValue;
+                    //empty($node->firstChild->nodeValue) ? [] : [$node->firstChild->nodeValue];
                 }
+                #print str_repeat('-',30)."\n";
             }
         }
 
@@ -1019,18 +1051,22 @@ print str_repeat('-',30)."\n";
         #$tagArray = $_SESSION['tags'];
         #print_r($tagArray);exit;
         $html = '';
+
         if(!is_array($tagArray) && !is_object($tagArray)) {
             return false;
         }
+
         $iterator = $this->getChildrenIterator($tagArray);
         $children = $attr = [];
         $key = $key1 = $key2 = $key3 = null;
         $tag = null;
+
+        #print_r($iterator);exit;
         foreach($iterator as $key => $val) {
-            #print_r(['T'=>$tag, 'A'=>$attr, 'C'=>$children, 'K'=>"$key =>", 'V'=>$val]);
+            $tag = is_int($key) ? $tag : $key;
+            print_r(['T'=>$tag, 'A'=>$attr, 'C'=>$children, 'K'=>"$key =>", 'V'=>$val]);
             if(!is_array($val)) {
                 #nothing
-                #$tag = is_int($key) ? $tag : $key;
             } else {
                 foreach($val as $key1 => $val1) {
                     $tag = is_int($key1) ? $tag : $key1;
@@ -1039,21 +1075,27 @@ print str_repeat('-',30)."\n";
                         $attr[$key1] = $val1;
                     } else {
                         foreach($val1 as $key2 => $val2) {
-                            #print_r(['T'=>$tag, 'A'=>$attr, 'C'=>$children, 'K2'=>"$key => $key1 => $key2 =>", 'V2'=>$val2]);
+                            #$children[] = $key2.' ';
+                            print_r(['T'=>$tag, 'A'=>$attr, 'C'=>$children, 'K2'=>"$key => $key1 => $key2 =>", 'V2'=>$val2]);
                             if(!is_array($val2)) {
                                 #$tag = $key;
-                                if($key2 == 'body' || $key2 == '#text') {
+                                if($key2 === 'body' || $key2 === '#text') {
                                     $children[] = $val2;
                                 } else {
                                     $attr[$key2] = $val2;
                                 }
-                            } else {
-                                //$children[] = $this->createTag($key2);
-                                if(empty($val2) || (count($val2) == 1 && empty($val2[0])) ) {
+                            }
+                            else {
+                                $children[] = $this->arrayToHtml([$key2 => $val2]);
+                                #$children[] = $this->createTag($key2);
+            /*
+                                if(empty($val2) || (count($val2) == 1 && empty($val2[0])) ) {echo 2;
                                     #print_r(['T'=>$tag, 'A'=>$attr, 'C'=>$children, 'K2'=>"$key => $key1 => $key2 =>", 'V2'=>$val2]);
                                     #echo $key2;exit;
                                     $children[] = $this->createTag($key2);
-                                } else {
+                                }
+                                print_r(['T'=>$key2, 'A'=>$attr, 'C'=>$children, 'K2'=>"$key => $key1 => $key2 =>", 'V2'=>$val2]);
+                                else {
                                     #$children[] = $this->childrenIterate([$val2]);
                                     foreach($val2 as $key3 => $val3) {
                                         #print_r(['T'=>$tag, 'A'=>$attr, 'C'=>$children, 'K3'=>"$key => $key1 => $key2 => $key3 =>", 'V3'=>$val3]);
@@ -1062,7 +1104,7 @@ print str_repeat('-',30)."\n";
                                             //$children[] = $val3;
                                         } else {
                                         }
-/*
+if(false) {
                                         if(!is_array($val3)) {
                                         } else {
                                             if(empty($val3)) {
@@ -1071,9 +1113,10 @@ print str_repeat('-',30)."\n";
                                                 //$children[] = $this->childrenIterate([$key3 => $val3]);
                                             }
                                         }
-*/
+}
                                     }
                                 }
+            */
                             }
                         }
                     }
@@ -1081,22 +1124,25 @@ print str_repeat('-',30)."\n";
             }
         }
         #print_r(['tag'=>$tag, 'attr'=>$attr, 'children'=>$children, "$key => $key1 => $key2 => $key3"=>$val]);
+        #echo "----------\n";
         if($tag == '#comment') {
             #print_r(['tag'=>$tag, 'attr'=>$attr, 'children'=>$children, "$key => $key1 => $key2 => $key3"=>$val]);//exit;
             foreach($children as $key => $child) {
-                $child[$key] = "<!--".$child."-->";
+                $children[$key] = "<!--".$child."-->\n";
             }
-            $html .= implode('', $child);
+            $html = "\n".implode('', $children);
+        } elseif($tag == '#root') {
+            $html = implode("\n", $children);
         } else {
             if($tag == '#document') {
                 $tag = '!doctype';
             }
             #print_r([$tag, $attr, $children]);print"--------------";
-            $html .= $this->createTag($tag, $attr, $children);echo $html;exit;
+            $html = $this->createTag($tag, $attr, $children);
         }
-        #print_r($html."\n");
+        print_r($html."\n****************\n");
         //print_r($tagArray);
-        #return $html;
+        return $html;
     }
     
     /**
@@ -1142,5 +1188,41 @@ print str_repeat('-',30)."\n";
             return $file;
             */
         }
+    }
+
+    /**
+     * Renders HTML element.
+     *
+     * @param   string      $element
+     * @param   array|null  $attr
+     * @param   string|null $content
+     * @param   bool|null $content
+     * @return  array
+     * @throws  \Exception
+     */
+    public function createTag($element, $attr = null, $content = null, $isCloseTag = null)
+    {
+        if(empty($element) || !is_string($element)) {
+            throw new Exception("Element name can not be null or non-string");
+            exit;
+        }
+        $html =  '';
+        switch($tag) {
+            case '#comment':
+                #foreach($children as $key => $child) {
+                #    $children[$key] = "<!--".$child."-->\n";
+                #}
+                #$html = "\n".implode('', $children);
+                $html = "<!--".$content."-->\n";
+                break;
+            case '#root':
+                break;
+            case '#document':
+                $tag = '!doctype';
+                break;
+            default:
+                break;
+        }
+        return $html;
     }
 }
