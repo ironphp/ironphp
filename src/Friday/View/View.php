@@ -510,13 +510,13 @@ class View
         } else {
             $dom->loadHTML($html); 
         }
-        #$dom->loadHTML('');
+        $dom->loadHTML('<!doctype html>');//<html lang="en"><head></head></html> <html></html><html></html>
         #print_r($dom->childNodes);exit;
         #foreach($dom->childNodes as $child) {
         if($dom->nodeType == XML_HTML_DOCUMENT_NODE) {
-            $tagArray['#root'][] = $this->nodeToArray($dom);
+            $tagArray['#root'] = $this->nodeToArray($dom);
         } else {
-            $tagArray[$dom->nodeName][] = $this->nodeToArray($dom);
+            $tagArray[$dom->nodeName] = $this->nodeToArray($dom);
         }
         #print_r($tagArray);//exit;
         #}
@@ -543,9 +543,9 @@ class View
     {
         $array = [];//false;
         #print str_repeat('#',30)."\n";
-        #print_r($node);
+        #print_r($node);exit;
         #print_r([$node->nodeName, $node->nodeType, $node->nodeValue]);//exit;
-        #print_r(['node'=>$node, 'nodeName'=>$node->nodeName, 'nodeValue'=>$node->nodeValue, 'nodeType'=>$node->nodeType, 'attributes'=>$node->attributes, 'childNodes'=>$node->childNodes->length, 'array'=>$array]);
+        #print_r(['node'=>'$node', 'nodeName'=>$node->nodeName, 'nodeValue'=>'$node->nodeValue', 'nodeType'=>$node->nodeType, 'attributes'=>$node->attributes, 'childNodes'=>$node->childNodes, 'array'=>$array]);
 
         if ($node->hasAttributes()) {
             foreach ($node->attributes as $attr) {
@@ -559,24 +559,24 @@ class View
                 #print_r($childNode);
                 #print_r(['childNode'=>$childNode, 'childNodeName'=>$childNode->nodeName, 'childNodeValue'=>$childNode->nodeValue, 'childNodeType'=>$childNode->nodeType, 'childNodeAttributes'=>$childNode->attributes, 'childNodeChildren'=>$childNode->childNodes]);
                 if($childNode->nodeType == XML_DOCUMENT_TYPE_NODE ) {
-                    $array[$node->nodeName] = $array[$node->nodeName] ?? [];
+                    #$array[$node->nodeName] = $array[$node->nodeName] ?? [];
                     $doctype[] = $childNode->name;
                     if($node->doctype->publicId != null || $node->doctype->systemId != null) {
                         $doctype[] = "PUBLIC";
                         $doctype[] = $node->doctype->publicId;
                         $doctype[] = $node->doctype->systemId;
                     }
-                    $array[$node->nodeName][] = $doctype;
+                    $array[] = [$node->nodeName => $doctype];
                     #$array[$node->nodeName][] = ["html", "PUBLIC", $node->doctype->publicId, $node->doctype->systemId];
                     #print_r([$childNode->nodeName, $childNode->nodeType, $childNode->nodeValue, $array]);
                 } elseif($childNode->nodeType == XML_COMMENT_NODE ) {
-                    $array[$childNode->nodeName] = $array[$childNode->nodeName] ?? [];
-                    $array[$childNode->nodeName][] = ['#text' => $childNode->nodeValue];
+                    #$array[$childNode->nodeName] = $array[$childNode->nodeName] ?? [];
+                    $array[] = [$childNode->nodeName => ['#text' => $childNode->nodeValue]];
                 } elseif ($childNode->nodeType != XML_TEXT_NODE) {
-                    $array[$childNode->nodeName] = $array[$childNode->nodeName] ?? [];
-                    $array[$childNode->nodeName][] = $this->nodeToArray($childNode);
+                    #$array[$childNode->nodeName] = $array[$childNode->nodeName] ?? [];
+                    $array[] = [$childNode->nodeName => $this->nodeToArray($childNode)];
                 } elseif ($node->childNodes->length == 1) {
-                    $array[$node->firstChild->nodeName] = $node->firstChild->nodeValue;
+                    $array = [$node->firstChild->nodeName => $node->firstChild->nodeValue];
                     //empty($node->firstChild->nodeValue) ? [] : [$node->firstChild->nodeValue];
                 }
                 #print str_repeat('-',30)."\n";
@@ -598,55 +598,73 @@ class View
      */
     public function arrayToHtml($tagArray)
     {
-        #print str_repeat('#',30)."\n";
+        print str_repeat('#',30)."\n";
         //$_SESSION['tags'] = $tagArray;
         #$tagArray = $_SESSION['tags'];
-        #print_r($tagArray);exit;
         $html = '';
 
         if(!is_array($tagArray) && !is_object($tagArray)) {
             return false;
         }
 
-        $iterator = $this->getChildrenIterator($tagArray);
+        #$iterator = $this->getChildrenIterator($tagArray);
         $children = $attr = [];
         $key = $key1 = $key2 = $key3 = null;
         $tag = null;
 
-        #print_r($iterator);exit;
-        foreach($iterator as $key => $val) {
+        #print_r($iterator);//exit;
+        print_r($tagArray);//exit;
+        foreach($tagArray as $key => $val) {
             $tag = is_int($key) ? $tag : $key;
-            #print_r(['T'=>$tag, 'A'=>$attr, 'C'=>$children, 'K'=>"$key =>", 'V'=>$val]);
+            #print_r(['T'=>$tag, 'A'=>$attr, 'C'=>$children, 'K'=>"$key =>", 'V'=>$val]);//exit;
             if(!is_array($val)) {
-                #nothing
+                $attr[$key] = $val;
+                if($key === 'body' || $key === '#text') {
+                    $children[] = $val;
+                } else {
+                    $attr[$key1] = $val;
+                }
             } else {
                 foreach($val as $key1 => $val1) {
                     $tag = is_int($key1) ? $tag : $key1;
-                    #print_r(['T'=>$tag, 'A'=>$attr, 'C'=>$children, 'K1'=>"$key => $key1 =>", 'V1'=>$val1]);
+                    print_r(['T'=>$tag, 'A'=>$attr, 'C'=>$children, 'K1'=>"$key => $key1 =>", 'V1'=>$val1]);
                     if(!is_array($val1)) {
+/*
                         $attr[$key1] = $val1;
+                        if($key1 === 'body' || $key1 === '#text') {
+                            $children[] = $val1;
+                        } else {
+                            $attr[$key1] = $val1;
+                        }
+*/
                     } else {
+                        #print_r([$key, $key1, $val1]);exit;
+                        if(empty($val1) || (count($val1) == 1 && empty($val1[0])) ) {
+                            #$children[] = $this->createElement($key1);
+                        }
                         foreach($val1 as $key2 => $val2) {
+                            #print_r([$key, $key1, $key2, $val2, $children]);//exit;
+                            $children[] = $this->arrayToHtml([$key2=>$val2]);
                             #$children[] = $key2.' ';
                             #print_r(['T'=>$tag, 'A'=>$attr, 'C'=>$children, 'K2'=>"$key => $key1 => $key2 =>", 'V2'=>$val2]);
                             if(!is_array($val2)) {
                                 #$tag = $key;
                                 if($key2 === 'body' || $key2 === '#text') {
-                                    $children[] = $val2;
+                                    #$children[] = $val2;
                                 } else {
-                                    $attr[$key2] = $val2;
+                                    #$attr[$key2] = $val2;
                                 }
                             }
                             else {
                                 #$children[] = $this->arrayToHtml([$key2 => $val2]);
-                                if(empty($val2) || (count($val2) == 1 && empty($val2[0])) ) {
-                                    $children[] = $this->createElement($key2);
+                                if(empty($val2) || (count($val2) == 1 && empty($val2[0])) ) {echo 1;
+                                    #$children[] = $this->createElement($key2);
                                 }
                                 else {
                                     #$children[] = $this->childrenIterate([$val2]);
                                     foreach($val2 as $key3 => $val3) {
                                         #print_r(['T'=>$tag, 'A'=>$attr, 'C'=>$children, 'K3'=>"$key => $key1 => $key2 => $key3 =>", 'V3'=>$val3]);
-                                        $children[] = $this->arrayToHtml([ [$key2=>$val3] ]);
+                                        #$children[] = $this->arrayToHtml([ [$key2=>$val3] ]);
                                         if($key3 == '#text') {
                                             //$children[] = $val3;
                                         } else {
@@ -670,7 +688,9 @@ if(false) {
                                 #print_r(['T'=>$key2, 'A'=>$attr, 'C'=>$children, 'K2'=>"$key => $key1 => $key2 =>", 'V2'=>$val2]);
                             }
                         }
-                    }
+                    }/*
+                    
+                    */
                 }
             }
         }
@@ -691,7 +711,7 @@ if(false) {
             #print_r([$tag, $attr, $children]);print"--------------";
             $html = $this->createTag($tag, $attr, $children);
         }
-        #print_r($html."\n****************\n");
+        print_r($html."\n****************\n");
         //print_r($tagArray);
         return $html;
     }

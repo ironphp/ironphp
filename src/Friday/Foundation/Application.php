@@ -520,38 +520,40 @@ class Application
         } else {
             $ext = null;
         }
+
         if(!in_array($ext, $extMain)) {
             throw new Exception("Theme file must be HTML/HTM : ".$theme.DS.$file);
             exit;
         }
-        $fileName = DS . ltrim($file, '/\\');
-        $allowedExt = ['html', 'htm', 'css', 'js', 'jpg', 'png', 'svg'];
-        $dir = $this->basePath("app" . DS . "Theme" . DS . $theme);
+
+        $fileName = ltrim($file, '/\\');
+        $allowedExt = ['html', 'htm', 'css', 'js', 'jpg', 'png', 'svg', 'eot', 'ttf', 'woff', 'woof2', 'scss', 'less'];
+        $dir = THEME . $theme . DS;
+        
         if(!file_exists($dir) || is_file($dir)) {
             throw new Exception($dir." Directory is missing.");
             exit;
         }
+
         $json = $dir.'/ironphp-theme.json';
-        if(round(fileatime($json)/10) < round(fileatime($dir)/10)) {
-            $changed = true;
-        } else {
-            $changed = false;
-        }
-        if(file_exists($json) && is_file($json) && filesize($json) && !$changed) {
-            $themeFiles = json_decode(file_get_contents($json), true);
-        } else {
+        if(!file_exists($json) || !is_file($json) || !filesize($json) || (round(fileatime($json)/10) < round(fileatime($dir)/10))) {
             $themeFiles = $this->parseDir($dir, $allowedExt, $json, true);
             if(!isset($themeFiles['html']) && isset($themeFiles['htm'])) {
                 throw new Exception("HTML/HTM files are missing in Theme: ".$theme);
                 exit;
             }
+        } else {
+            $themeFiles = json_decode(file_get_contents($json), true);
         }
+
         if(in_array($fileName, $themeFiles[$ext])) {
             $themeFilepath = $themeFiles['theme_path'].$fileName;
         } else {
             throw new Exception($fileName." is missing in Theme: ".$theme);
             exit;
         }
+        $this->installTheme($themeFiles, ['css', 'js', 'jpg', 'png', 'svg', 'eot', 'ttf', 'woff', 'woof2', 'scss', 'less']);
+
         return ['themeName' => $theme, 'themePath' => $dir, 'themeFilePath' => $themeFilepath];
     }
 
@@ -594,7 +596,7 @@ class Application
             if($basename== '.' || $basename == '..' || $basename[0] == '.') {
                 continue;
             }
-            $relPath = str_replace($dir, '', $file->getRealPath());
+            $relPath = str_ireplace($dir, '', $file->getRealPath());
             if (!in_array($it, $ignoreDir) && $types == [] || in_array(strtolower($file->getExtension()), $types)) {
                 if($byType) {
                     $files[$file->getExtension()][] = $relPath;
@@ -604,5 +606,49 @@ class Application
             }
         }
         return $files;
+    }
+
+    /*
+     * Copy theme files into public dir.
+     *
+     * @param   string  $jsonTheme
+     * @param   array   $allowExt
+     * @return  void
+     */
+    public function installTheme($jsonTheme, $allowExt)
+    {
+        foreach($jsonTheme as $key => $val) {
+            if($key == 'theme_path') {
+                $theme_path = $val;
+            } elseif(in_array($key, $allowExt) ) {
+                foreach($val as $file) {
+                    if(file_exists($theme_path.$file) && is_file($theme_path.$file)) {
+                        if(file_exists(WEB_ROOT.$file) && is_file(WEB_ROOT.$file)) {
+                            if(filesize($theme_path.$file) === filesize(WEB_ROOT.$file)) {
+                                #file is already copied
+                            } else {
+                                throw new Exception("Different file with same name already exist: ".WEB_ROOT.$file);
+                                exit;
+                            }
+                        } else {
+                            $dirname = dirname(WEB_ROOT.$file);
+                            $makedir = [];
+                            while(!file_exists($dirname) || !is_dir($dirname)) {
+                                $makedir[] = $dirname;
+                                $dirname = dirname($dirname);
+                            }
+                            $makedir = array_reverse($makedir);
+                            foreach($makedir as $dir) {
+                                mkdir($dir);
+                            }
+                            copy($theme_path.$file, WEB_ROOT.$file);
+                        }
+                    } else {
+                        throw new Exception("File is not exist: ".$theme_path.$file);
+                        exit;
+                    }
+                }
+            }
+        }
     }
 }
