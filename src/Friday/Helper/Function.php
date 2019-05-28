@@ -186,6 +186,19 @@ if (! function_exists('is_bot')) {
     }
 }
 
+if (! function_exists('sqldate_to_timestamp')) {
+    /**
+     * Get timestamp from SQL Format Date (yyyy-mm-dd hh:ii:ss).
+     *
+     * @param   string  $d  yyyy-mm-dd
+     * @return  int
+     */
+    function sqldate_to_timestamp($d) {
+        $date_ary = date_parse($d);print_r($date_ary);exit;
+        return mktime(0, 0, 0, $date_ary['month'], $date_ary['day'], $date_ary['year'], $date_ary['hour'], $date_ary['minute'], $date_ary['second']);
+    }
+}
+
 /*
 function moneyInWords($m){
 	if($m>=1000){
@@ -208,9 +221,9 @@ function moneyInWords($m){
 	return 'Rs. '.$money;		
 }
 function sqlDateMDY($d){//$d = mm/dd/yyyy
-	$dt=explode('/',$d);
-	$d="{$dt[2]}/{$dt[0]}/{$dt[1]}"; //yyyy/mm/dd
-	$datetime = date_create($d);
+    $dt = explode('/',$d);
+    $d = "{$dt[2]}/{$dt[0]}/{$dt[1]}"; //yyyy/mm/dd
+    return date_create($d);
 	$date = date_format($datetime, DATE_ATOM);
 	return substr($date, 0, 10); //yyyy-mm-dd
 }
@@ -221,7 +234,8 @@ function sqlDateDMY($d){//$d = dd/mm/yyyy
 	$date = date_format($datetime, DATE_ATOM);
 	return substr($date, 0, 10); //yyyy-mm-dd
 }
-function DateYMD($d){//$d = yyyy-mm-dd
+function DateYMD($d){
+    //$d = yyyy-mm-dd
 	$date_ary = date_parse($d);
 	$date = date('d/m/Y', mktime(0, 0, 0, $date_ary['month'], $date_ary['day'], $date_ary['year']));
 	return $date; //dd/mm/yyyy

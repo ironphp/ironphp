@@ -361,7 +361,6 @@ class Controller
         if(self::$instance == null) {
             return false;
         }
-        $renderedTheme = $this->view->renderTheme($themeInfo, $data);
-        return $renderedTemplate;
+        return $this->view->renderTheme($themeInfo, $data);
     }
 }
