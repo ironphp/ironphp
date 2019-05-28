@@ -195,7 +195,7 @@ if (! function_exists('sqldate_to_timestamp')) {
      */
     function sqldate_to_timestamp($d) {
         $date_ary = date_parse($d);
-        return mktime(0, 0, 0, $date_ary['month'], $date_ary['day'], $date_ary['year'], $date_ary['hour'], $date_ary['minute'], $date_ary['second']);
+        return mktime($date_ary['hour'], $date_ary['minute'], $date_ary['second'], $date_ary['month'], $date_ary['day'], $date_ary['year']);
     }
 }
 
