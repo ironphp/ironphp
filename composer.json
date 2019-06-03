@@ -29,8 +29,8 @@
     },
     "require": {
         "php": ">=5.5",
-        "psr/log": "1.1.*@stable",
-        "vlucas/phpdotenv": "3.3.*@stable"
+        "psr/log": "1.1.0",
+        "vlucas/phpdotenv": "3.3.3"
     },
     "autoload": {
         "psr-4": {
