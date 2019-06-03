@@ -29,7 +29,7 @@
     },
     "require": {
         "php": ">=5.5",
-        "psr/log": "^1.1@dev",
+        "psr/log": ">1.1",
         "vlucas/phpdotenv": ">1.2"
     },
     "autoload": {
