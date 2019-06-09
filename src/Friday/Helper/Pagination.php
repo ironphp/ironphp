@@ -131,7 +131,7 @@ class Pagination
         if($lastpage >= 1) {	
 		    $pagination .= "<ul class=\"$ul_class\">\n";
             if($style == 0) {
-                $pagination .= "\t<li class=\"$li_class[0]\"><a class=\"$a_class\">$page/$lastpage</a></li>\n";
+                $pagination .= "\t<li class=\"$li_class[0]\"><span class=\"$a_class\">$page/$lastpage</span></li>\n";
             }
 
 		    if($lastpage < 2 + ($adjacents * 2)) { // $lastpage < 6
