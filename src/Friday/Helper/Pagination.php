@@ -98,8 +98,8 @@ class Pagination
 
         if($cssClass == null) {
             $ul_class = 'pagination';
-            $li_class = ['details', '', 'active'];
-            $a_class = '';
+            $li_class = ['page-item', 'page-item', 'page-item active'];
+            $a_class = 'page-link';
         }
         else {
             if(isset($cssClass['ul']) && trim($cssClass['ul']) != '') {
@@ -166,10 +166,10 @@ class Pagination
     					    $pagination.= "<li class=\"$li_class[1]\"><a class=\"$a_class\" href='{$url}page=$counter'>$counter</a></li>";
                         }
     			    }
-    			    $pagination.= "<li class=\"$li_class[1]\"><a href='{$url}page=$lastpage'>&raquo;</a></li>";	
+    			    $pagination.= "<li class=\"$li_class[1]\"><a class=\"$a_class\" href='{$url}page=$lastpage'>&raquo;</a></li>";	
     		    }
                 else {
-    			$pagination.= "<li class=\"$li_class[1]\"><a class=\"$a_class\" href='{$url}page=1'>&laquo;</a></li>";
+                    $pagination.= "<li class=\"$li_class[1]\"><a class=\"$a_class\" href='{$url}page=1'>&laquo;</a></li>";
     			    for($counter = $lastpage - ($adjacents * 2); $counter <= $lastpage; $counter++) {
 					    if($counter == $page) {
     					    $pagination.= "<li class=\"$li_class[2]\"><a class=\"$a_class\">$counter</a></li>";
@@ -181,16 +181,16 @@ class Pagination
     		    }
     	    }
             else {
-    		    if($page < 1 + ($adjacents * 2)) {
+                if($page <= 1 + ($adjacents * 2)) {
 				    for($counter = 1; $counter < 2 + ($adjacents * 2); $counter++) {
 					    if($counter == $page) {
-    					    $pagination.= "<li class='active'><a>$counter</a></li>";
+    					    $pagination.= "<li class=\"$li_class[2]\"><a class=\"$a_class\">$counter</a></li>";
                         }
     				    else {
-    					    $pagination.= "<li><a href='{$url}page=$counter'>$counter</a></li>";
+    					    $pagination.= "<li class=\"$li_class[1]\"><a class=\"$a_class\" href='{$url}page=$counter'>$counter</a></li>";
                         }
 				    }
-				    $pagination.= "<li><a href='{$url}page=$lastpage'>&raquo;</a></li>";
+				    #$pagination.= "<li class=\"$li_class[1]\"><a class=\"$a_class\" href='{$url}page=$lastpage'>&raquo;</a></li>";
 			    }
 		    }
 		    $pagination.= "</ul>\n";		
