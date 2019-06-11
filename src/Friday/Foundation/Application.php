@@ -34,7 +34,7 @@ class Application
      *
      * @var string
      */
-    const VERSION = '1.0.3-alpha1';
+    const VERSION = '1.0.4-alpha1';
 
     /**
      * The base path for the IronPHP installation.

@@ -156,7 +156,7 @@ class Response implements ResponseInterface
             }
             if($output) {
                 print $output;
-                exit;
+                //exit;
             }
         } 
     }
