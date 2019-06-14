@@ -173,6 +173,12 @@ class Server extends Application
         $uri = rtrim($uri, '/');
         $uri = empty($uri) ? '/' : $uri;
         $serverRequestMethod = $_SERVER['REQUEST_METHOD'];
+        if($serverRequestMethod == 'POST') {
+            if(isset($_POST['_method']) && ($_POST['_method'] === 'PUT' || $_POST['_method'] === 'DELETE')) {
+                $serverRequestMethod = $_POST['_method'];
+            }
+        }
+        #echo '<pre>';print_r($serverRequestMethod);exit;
         $params = $GLOBALS['_'.$serverRequestMethod];
         if(!empty($_SERVER['HTTPS']) && ('on' == $_SERVER['HTTPS'])) {
             $https = true;

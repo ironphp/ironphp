@@ -241,4 +241,30 @@ class Route implements RouteInterface
             }
         }
     }
+
+    /**
+     * register a PUT method route.
+     *
+     * @param  string                $route
+     * @param  string|callback|null  $mix
+     * @param  string|null           $view
+     * @return bool
+     */
+    static public function put($route, $mix = null, $view = null)
+    {
+        self::$instance->register('PUT', $route, $mix, $view);
+    }
+
+    /**
+     * register a DELETE method route.
+     *
+     * @param  string                $route
+     * @param  string|callback|null  $mix
+     * @param  string|null           $view
+     * @return bool
+     */
+    static public function delete($route, $mix = null, $view = null)
+    {
+        self::$instance->register('DELETE', $route, $mix, $view);
+    }
 }

@@ -59,7 +59,8 @@
             "Friday\\": "src/Friday/"
         },
         "files": [
-            "src/Friday/Helper/Function.php"
+            "src/Friday/Helper/Function.php",
+            "src/Friday/Helper/Constant.php"
         ]
     },
     "autoload-dev": {
