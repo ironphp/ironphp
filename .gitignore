@@ -1,4 +1,11 @@
+/node_modules
 /vendor
+/dist
+/build
+.env
 composer.lock
+package-lock.json
 desktop.ini
-/phpunit.xml
+npm-debug.log
+yarn-error.log
+yarn.lock
