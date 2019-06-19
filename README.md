@@ -3,6 +3,12 @@
     <a href="https://packagist.org/packages/ironphp/ironphp" target="_blank">
         <img alt="Total Downloads" src="https://poser.pugx.org/ironphp/ironphp/d/total.svg">
     </a>
+    <a href="https://circleci.com/gh/ironphp/ironphp" target="_blank">
+        <img alt="CircleCI Build status" src="https://circleci.com/gh/ironphp/ironphp.svg?style=svg">
+    </a>
+    <a href="https://ci.appveyor.com/project/gaurangkumar/ironphp" target="_blank">
+        <img alt="AppVeyor Build status" src="https://ci.appveyor.com/api/projects/status/njmsgijb6bnr8y5y?svg=true">
+    </a>
     <a href="https://packagist.org/packages/ironphp/ironphp" target="_blank">
         <img alt="Latest Stable Version" src="https://poser.pugx.org/ironphp/ironphp/v/stable.svg">
     </a>
