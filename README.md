@@ -3,12 +3,6 @@
     <a href="https://packagist.org/packages/ironphp/ironphp" target="_blank">
         <img alt="Total Downloads" src="https://poser.pugx.org/ironphp/ironphp/d/total.svg">
     </a>
-    <a href="https://circleci.com/gh/ironphp/ironphp" target="_blank">
-        <img alt="CircleCI Build status" src="https://circleci.com/gh/ironphp/ironphp.svg?style=svg">
-    </a>
-    <a href="https://ci.appveyor.com/project/gaurangkumar/ironphp" target="_blank">
-        <img alt="AppVeyor Build status" src="https://ci.appveyor.com/api/projects/status/njmsgijb6bnr8y5y?svg=true">
-    </a>
     <a href="https://packagist.org/packages/ironphp/ironphp" target="_blank">
         <img alt="Latest Stable Version" src="https://poser.pugx.org/ironphp/ironphp/v/stable.svg">
     </a>
@@ -25,7 +19,7 @@
 IronPHP is a development framework for PHP which
 uses Front Controller, and MVC.
 
-> **Note:** No stable release yet - [IronPHP Framework 1.0.5 dev](https://github.com/ironphp/ironphp/releases/tag/1.0.4-dev) version has been released. 
+> **Note:** No stable release yet - [IronPHP Framework 1.0.3 alpha1](https://github.com/ironphp/ironphp/releases/tag/1.0.3-alpha1) version has been released. 
 This repository contains the core code of the IronPHP framework. If you want to build an application using IronPHP, visit the main [IronPHP Application Skeleton](https://github.com/ironphp/app).
 
 IronPHP is a web application framework for PHP which uses commonly known design patterns like Associative Data Mapping, Front Controller, and MVC. Our primary goal is to provide a structured framework that enables PHP users at all levels to rapidly develop robust web applications, without any loss to flexibility.
@@ -62,7 +56,7 @@ recommend using the [app skeleton](https://github.com/ironphp/app) as
 a starting point. For existing applications you can run the following:
 
 ``` bash
-$ composer require ironphp/ironphp:"@dev"
+$ composer require ironphp/ironphp:"@alpha"
 ```
 
 ## Update

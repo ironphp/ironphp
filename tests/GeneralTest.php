@@ -1,7 +1,5 @@
 <?php
-use PHPUnit\Framework\TestCase;
-
-class GeneralTest extends TestCase
+class GeneralTest extends PHPUnit_Framework_TestCase
 {
     public function testFoo()
     {

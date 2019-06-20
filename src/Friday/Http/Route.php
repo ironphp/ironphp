@@ -267,4 +267,52 @@ class Route implements RouteInterface
     {
         self::$instance->register('DELETE', $route, $mix, $view);
     }
+ 
+    /**
+     * register a GET method route.
+     *
+     * @param  string                $route
+     * @param  string|callback|null  $mix
+     * @param  string|null           $view
+     * @return bool
+     */
+    static public function get($route, $mix = null, $view = null)
+    {
+        self::$instance->register('GET', $route, $mix, $view);
+    }
+ 
+    /**
+     * register a resource CRUD route.
+     *
+     * @param  string       $route
+     * @param  string|null  $controller
+     * @return bool
+     */
+    static public function resource($route, $controller = null)
+    {
+        if($controller === null) {
+            $controller = 'IndexController';
+        }
+
+        #index
+        self::$instance->register('GET', $route, "$controller@index");
+
+        #show
+        #Route::get('/{id}', 'IndexController@show');
+
+        #create
+        #Route::get('/create', 'IndexController@create');
+
+        #store
+        #Route::post('/', 'IndexController@store');
+
+        #show
+        #Route::get('/{id}/edit', 'IndexController@edit');
+
+        #store
+        #Route::put('/{id}', 'IndexController@update');
+
+        #show
+        #Route::delete('/{id}', 'IndexController@destroy');
+    }
 }
