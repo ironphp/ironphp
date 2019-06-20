@@ -9,3 +9,4 @@ desktop.ini
 npm-debug.log
 yarn-error.log
 yarn.lock
+.phpunit.result.cache

@@ -269,19 +269,6 @@ class Route implements RouteInterface
     }
  
     /**
-     * register a GET method route.
-     *
-     * @param  string                $route
-     * @param  string|callback|null  $mix
-     * @param  string|null           $view
-     * @return bool
-     */
-    static public function get($route, $mix = null, $view = null)
-    {
-        self::$instance->register('GET', $route, $mix, $view);
-    }
- 
-    /**
      * register a resource CRUD route.
      *
      * @param  string       $route
@@ -298,21 +285,21 @@ class Route implements RouteInterface
         self::$instance->register('GET', $route, "$controller@index");
 
         #show
-        #Route::get('/{id}', 'IndexController@show');
+        self::$instance->register('GET', $route.'/{id}', "$controller@show");
 
         #create
-        #Route::get('/create', 'IndexController@create');
+        self::$instance->register('GET', $route.'/create', "$controller@create");
 
         #store
-        #Route::post('/', 'IndexController@store');
+        self::$instance->register('POST', $route.'/', "$controller@store");
 
         #show
-        #Route::get('/{id}/edit', 'IndexController@edit');
+        self::$instance->register('GET', $route.'/{id}/edit', "$controller@edit");
 
         #store
-        #Route::put('/{id}', 'IndexController@update');
+        self::$instance->register('PUT', $route.'/{id}', "$controller@update");
 
         #show
-        #Route::delete('/{id}', 'IndexController@destroy');
+        self::$instance->register('DELETE', $route.'/{id}', "$controller@destroy");
     }
 }
