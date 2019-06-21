@@ -285,6 +285,7 @@ class View
      */
     public function renderView($viewPath, $data = [], $layout = null)
     {
+        $data[''] = null;
         ob_start();
         require($viewPath);
         $viewData = ob_get_contents();
@@ -317,7 +318,6 @@ class View
             throw new Exception("template(): expects parameter 2 to be array, null given");
         }
         $data[''] = null;
-        print_r($data);exit;
         foreach($data as $key => $val) {
             if(is_array($val)) {
                 $findStart = strpos($templateData, '{{'.$key.':}}');

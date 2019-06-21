@@ -163,4 +163,15 @@ class Session
         session_destroy();
         $_SESSION = array();
     }
+
+    /**
+     * Get a new CSRF token.
+     *
+     * @return string
+     */
+    public function getToken()
+    {
+        $this->set('_token', base64_encode(openssl_random_pseudo_bytes(32)));
+        return $this->get('_token');
+    }    
 }

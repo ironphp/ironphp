@@ -197,16 +197,4 @@ class Pagination
 	    }
 	    return $pagination;
     }
-
-    /**
-     * Get a new CSRF token.
-     *
-     * @return string
-     */
-    public function getToken()
-    {
-        if (! isset($_SESSION['csrf_token'])) {
-            $_SESSION['csrf_token'] = base64_encode(openssl_random_pseudo_bytes(32));
-        }
-    }    
 }

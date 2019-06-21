@@ -148,6 +148,8 @@ class Controller
         if(self::$instance == null) {
             return false;
         }
+        $_token = $this->app->session->getToken();
+        $data['_token'] = $_token;
         $renderedView = $this->view->renderView($viewPath, $data, $layout);
         return $renderedView;
     }
@@ -165,6 +167,8 @@ class Controller
         if(self::$instance == null) {
             return false;
         }
+        $_token = $this->app->session->getToken();
+        $data['_token'] = $_token;
         $renderedTemplate = $this->view->renderTemplate($templatePath, $data);
         return $renderedTemplate;
     }
