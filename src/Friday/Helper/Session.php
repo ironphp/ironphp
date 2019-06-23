@@ -165,7 +165,7 @@ class Session
     }
 
     /**
-     * Get a new CSRF token.
+     * Get a new token.
      *
      * @return string
      */
@@ -173,5 +173,16 @@ class Session
     {
         $this->set('_token', base64_encode(openssl_random_pseudo_bytes(32)));
         return $this->get('_token');
+    }    
+
+    /**
+     * Check a token.
+     *
+     * @param  string  $token
+     * @return bool
+     */
+    public function checkToken($token)
+    {
+        return isset($token) && $token === $token;
     }    
 }

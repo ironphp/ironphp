@@ -17,6 +17,7 @@
 
 namespace Friday\Foundation;
 
+use Exception;
 use Friday\Helper\Cookie;
 use Friday\Controller\Controller;
 
@@ -87,6 +88,7 @@ class Server extends Application
      *
      * @param  string|null  $basePath
      * @return void
+     * @exception \Exception
      */
     public function __construct($basePath = null)
     {
@@ -103,6 +105,12 @@ class Server extends Application
 		#request
         $this->request = $this->frontController->request($parse);
         $this->request->setConstant();
+        if($this->request->getRequestMethod() == 'POST') {
+            if(!isset($_POST['_token']) || $_POST['_token'] != $this->session->get('_token')) {
+                throw new Exception("Token is missing or invalid for this request.");
+                exit;
+            }
+        }
         define('REQUEST_CATCHED', microtime(true));
 
         #router
@@ -176,9 +184,9 @@ class Server extends Application
         if($serverRequestMethod == 'POST') {
             if(isset($_POST['_method']) && ($_POST['_method'] === 'PUT' || $_POST['_method'] === 'DELETE')) {
                 $serverRequestMethod = $_POST['_method'];
+                $GLOBALS['_'.$serverRequestMethod] = $GLOBALS['_POST'];
             }
         }
-        #echo '<pre>';print_r($serverRequestMethod);exit;
         $params = $GLOBALS['_'.$serverRequestMethod];
         if(!empty($_SERVER['HTTPS']) && ('on' == $_SERVER['HTTPS'])) {
             $https = true;

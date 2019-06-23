@@ -86,7 +86,7 @@ class Request implements RequestInterface
         else {
             $pre = 'http://';
         }
-        return $pre.$this->host;
+        return $pre.$this->host.'/';
     }
  
     /**
@@ -171,7 +171,17 @@ class Request implements RequestInterface
     public function setConstant()
     {
         define('SERVER_ROOT', $this->getHost());
-        define('PUBLIC_ROOT', $this->getHost().'/public');
+        define('PUBLIC_ROOT', $this->getHost().'public/');
         define('HOST', $_SERVER['HTTP_HOST']);
+    }
+
+    /**
+     * Get Server Request Method.
+     *
+     * @return string
+     */
+    public function getRequestMethod()
+    {
+        return $this->serverRequestMethod;
     }
 }
