@@ -432,10 +432,7 @@ class View
         */
         $tagArray = $this->htmlToArray($themeInfo['themeFilePath'], true, true);
         $html = $this->arrayToHtml($tagArray);
-        print_r($html);
-        #print("@@@@@@@@@@@@@@@@\n");
-        #print_r($doctype."\n".$this->arrayToHtml($tagArray));
-        exit;
+
         if(!is_array($data) && $data !== null) {
             throw new Exception("template(): expects parameter 2 to be array, null given");
         }
@@ -494,16 +491,12 @@ class View
         } else {
             $dom->loadHTML($html); 
         }
-        $dom->loadHTML('<html>x</html> <html>y</html>');//<html lang="en"><head></head></html> 
-        #print_r($dom->childNodes);exit;
-        #foreach($dom->childNodes as $child) {
+        $dom->loadHTML('<html>x</html> <html>y</html>'); 
         if($dom->nodeType == XML_HTML_DOCUMENT_NODE) {
             $tagArray['#root'] = $this->nodeToArray($dom);
         } else {
             $tagArray[$dom->nodeName] = $this->nodeToArray($dom);
         }
-        #print_r($tagArray);//exit;
-        #}
         /*
         $tags = $dom->getElementsByTagName('*');
         foreach($tags as $key => $tag) {
@@ -513,7 +506,7 @@ class View
                 break;
             }
         }
-*/
+        */
         return $tagArray;
     }
 
@@ -526,11 +519,6 @@ class View
     public function nodeToArray($node) 
     {
         $array = [];//false;
-        print str_repeat('#',30)."\n";
-        print_r("\n".$node->nodeName."\n");//exit;
-        #print_r([$node->nodeName, $node->nodeType, $node->nodeValue]);//exit;
-        #print_r(['node'=>'$node', 'nodeName'=>$node->nodeName, 'nodeValue'=>'$node->nodeValue', 'nodeType'=>$node->nodeType, 'attributes'=>$node->attributes, 'childNodes'=>$node->childNodes, 'array'=>$array]);
-
         if ($node->hasAttributes()) {
             foreach ($node->attributes as $attr) {
                 $array[$attr->nodeName] = $attr->nodeValue;
@@ -538,12 +526,8 @@ class View
         }
 
         if ($node->hasChildNodes()) {
-            #print_r($node->childNodes);
             foreach ($node->childNodes as $childNode) {
-                print_r($childNode->nodeName."\n");
-                #print_r(['childNode'=>$childNode, 'childNodeName'=>$childNode->nodeName, 'childNodeValue'=>$childNode->nodeValue, 'childNodeType'=>$childNode->nodeType, 'childNodeAttributes'=>$childNode->attributes, 'childNodeChildren'=>$childNode->childNodes]);
                 if($childNode->nodeType == XML_DOCUMENT_TYPE_NODE ) {
-                    #$array[$node->nodeName] = $array[$node->nodeName] ?? [];
                     $doctype[] = $childNode->name;
                     if($node->doctype->publicId != null || $node->doctype->systemId != null) {
                         $doctype[] = "PUBLIC";
@@ -551,19 +535,13 @@ class View
                         $doctype[] = '"'.$node->doctype->systemId.'"';
                     }
                     $array[] = [$node->nodeName => $doctype];
-                    #$array[$node->nodeName][] = ["html", "PUBLIC", $node->doctype->publicId, $node->doctype->systemId];
-                    #print_r([$childNode->nodeName, $childNode->nodeType, $childNode->nodeValue, $array]);
                 } elseif($childNode->nodeType == XML_COMMENT_NODE ) {
-                    #$array[$childNode->nodeName] = $array[$childNode->nodeName] ?? [];
                     $array[] = [$childNode->nodeName => ['#text' => $childNode->nodeValue]];
                 } elseif ($childNode->nodeType != XML_TEXT_NODE) {
-                    #$array[$childNode->nodeName] = $array[$childNode->nodeName] ?? [];
                     $array[] = [$childNode->nodeName => $this->nodeToArray($childNode)];
                 } elseif ($node->childNodes->length == 1) {
                     $array = [$node->firstChild->nodeName => $node->firstChild->nodeValue];
-                    //empty($node->firstChild->nodeValue) ? [] : [$node->firstChild->nodeValue];
                 }
-                #print str_repeat('-',30)."\n";
             }
         }
 
@@ -582,22 +560,17 @@ class View
      */
     public function arrayToHtml($tagArray)
     {
-        #print str_repeat('#',30)."\n";
         $html = '';
-        #$tagArray = ['p' => ['#text'=>'html']];
         if(!is_array($tagArray) && !is_object($tagArray)) {
             return false;
         }
 
-        #$iterator = $this->getChildrenIterator($tagArray);
         $children = $attr = [];
         $key = $key1 = $key2 = $key3 = null;
         $tag = null;
 
-        print_r($tagArray);exit;
         foreach($tagArray as $key => $val) {
             $tag = is_int($key) ? $tag : $key;
-            #print_r(['T'=>$tag, 'A'=>$attr, 'C'=>$children, 'K'=>"$key =>", 'V'=>$val]);#exit;
             if(!is_array($val)) {
                 /*
                 $attr[$key] = $val;
@@ -609,25 +582,18 @@ class View
                 */
             } else {
                 foreach($val as $key1 => $val1) {
-                    #$tag = is_int($key1) ? $tag : $key1;
-                    #print_r(['T'=>$tag, 'A'=>$attr, 'C'=>$children, 'K1'=>"$key => $key1 =>", 'V1'=>$val1]);
                     if(!is_array($val1)) {
-                        #$attr[$key1] = $val1;
                         if($key1 === 'body' || $key1 === '#text') {
                             $children[] = $val1;
                         } else {
                             $attr[$key1] = $val1;
                         }
                     } else {
-                        #print_r([$key, $key1, $val1]);exit;
                         if(empty($val1) || (count($val1) == 1 && empty($val1[0])) ) {
                             #$children[] = $this->createElement($key1);
                         }
                         foreach($val1 as $key2 => $val2) {
-                            #print_r([$key, $key1, $key2, $val2, $children]);//exit;
                             $children[] = $this->arrayToHtml([$key2=>$val2]);
-                            #$children[] = $key2.' ';
-                            #print_r(['T'=>$tag, 'A'=>$attr, 'C'=>$children, 'K2'=>"$key => $key1 => $key2 =>", 'V2'=>$val2]);
                             if(!is_array($val2)) {
                                 #$tag = $key;
                                 if($key2 === 'body' || $key2 === '#text') {
@@ -637,20 +603,16 @@ class View
                                 }
                             }
                             else {
-                                #$children[] = $this->arrayToHtml([$key2 => $val2]);
                                 if(empty($val2) || (count($val2) == 1 && empty($val2[0])) ) {
                                     #$children[] = $this->createElement($key2);
                                 }
                                 else {
-                                    #$children[] = $this->childrenIterate([$val2]);
                                     foreach($val2 as $key3 => $val3) {
-                                        #print_r(['T'=>$tag, 'A'=>$attr, 'C'=>$children, 'K3'=>"$key => $key1 => $key2 => $key3 =>", 'V3'=>$val3]);
-                                        #$children[] = $this->arrayToHtml([ [$key2=>$val3] ]);
                                         if($key3 == '#text') {
                                             //$children[] = $val3;
                                         } else {
                                         }
-if(false) {
+                                        if(false) {
                                         if(!is_array($val3)) {
                                         } else {
                                             if(empty($val3)) {
@@ -662,20 +624,13 @@ if(false) {
 }
                                     }
                                 }
-                                #print_r([$key2, $val2]);//exit;
-                                #print_r(['T'=>$tag, 'A'=>$attr, 'C'=>$children, 'K2'=>"$key => $key1 => $key2 =>", 'V2'=>$val2]);
-                                #echo $key2;exit;
-                                #$children[] = $this->createTag($key2);
-                                #print_r(['T'=>$key2, 'A'=>$attr, 'C'=>$children, 'K2'=>"$key => $key1 => $key2 =>", 'V2'=>$val2]);
                             }
                         }
                     }
                 }
             }
         }
-        #echo "----------\n";
         if($tag == '#comment') {
-            #print_r(['tag'=>$tag, 'attr'=>$attr, 'children'=>$children, "$key => $key1 => $key2 => $key3"=>$val]);//exit;
             foreach($children as $key => $child) {
                 $children[$key] = "<!--".$child."-->\n";
             }
@@ -686,11 +641,8 @@ if(false) {
             if($tag == '#document') {
                 $tag = '!doctype';
             }
-            #print_r([$tag, $attr, $children]);print"--------------";
             $html = $this->createTag($tag, $attr, $children);
         }
-        #print_r(['#######', 'T'=>$tag, 'A'=>$attr, 'C'=>$children, "$key => $key1 => $key2 => $key3"=>$val, 'H'=>$html]);
-        #print_r("\n**************** $tag \n".$html."\n****************\n");
         return $html;
     }
     
@@ -718,7 +670,7 @@ if(false) {
         $iterator = $this->getChildrenIterator($tagArray);
         $children = $attr = [];
         foreach ($iterator as $key => $val) {
-        print_r([$key, $val]);//, $key, $key1, is_array($val1), $attr, $children]);
+        print_r([$key, $val]);
         exit;
             if(!is_array($val)) {
             print_r([$tag, $name, $children, $attr, $key, $val]);exit;
@@ -729,7 +681,6 @@ if(false) {
             }
             $childrenArray = $children == [] ? null : implode('', $children);
             $html = $this->createTag($tag, $attr);
-            //return 'text';
             /*
             if($iterator->hasChildren()) {
                 return $this->getChildrenIterator($file);
