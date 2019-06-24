@@ -670,10 +670,7 @@ class View
         $iterator = $this->getChildrenIterator($tagArray);
         $children = $attr = [];
         foreach ($iterator as $key => $val) {
-        print_r([$key, $val]);
-        exit;
             if(!is_array($val)) {
-            print_r([$tag, $name, $children, $attr, $key, $val]);exit;
                 $tag = $name;
                 $attr[$key] = $val;
             } else {
