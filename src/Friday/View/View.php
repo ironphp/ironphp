@@ -326,41 +326,8 @@ class View
             throw new Exception('template(): expects parameter 2 to be array, null given');
         }
         $data[''] = null;
-        foreach ($data as $key => $val) {
-            if (is_array($val)) {
-                $findStart = strpos($templateData, '{{'.$key.':}}');
-                if ($findStart !== false) {
-                    $findEnd = strpos($templateData, '{{:'.$key.'}}');
-                    if ($findEnd !== false) {
-                        $len = 5 + strlen($key);
-                        $substr = substr($templateData, $findStart, ($findEnd - $findStart));
-                        $substr = substr($substr, $len);
-                        $loopstr = []; //fixed-for: Uncaught Error: [] operator not supported for strings $loopstr[]
-                        foreach ($val as $k => $v) {
-                            $temp = $substr;
-                            if (is_array($v)) {
-                                //$temp = strtr($temp, $v); {{}} not replaced
-                                foreach ($v as $ks => $vs) {
-                                    $temp = str_replace('{{'.$ks.'}}', $vs, $temp);
-                                }
-                            } else {
-                                $temp = str_replace('{{'.$key.'}}', $v, $temp);
-                            }
-                            $loopstr[] = $temp;
-                        }
-                        $loopstr = implode("\n", $loopstr);
-                        $templateData = str_replace('{{'.$key.':}}'.$substr.'{{:'.$key.'}}', $loopstr, $templateData);
-                    } else {
-                        throw new Exception('Error in template : loop has not closed properely');
-                        exit;
-                    }
-                }
-            } else {
-                $templateData = str_replace('{{'.$key.'}}', $val, $templateData);
-            }
-        }
 
-        return $templateData;
+        return $this->putData($templateData, $data);
     }
 
     /**
@@ -448,41 +415,8 @@ class View
         if (!is_array($data) && $data !== null) {
             throw new Exception('template(): expects parameter 2 to be array, null given');
         }
-        foreach ($data as $key => $val) {
-            if (is_array($val)) {
-                $findStart = strpos($templateData, '{{'.$key.':}}');
-                if ($findStart !== false) {
-                    $findEnd = strpos($templateData, '{{:'.$key.'}}');
-                    if ($findEnd !== false) {
-                        $len = 5 + strlen($key);
-                        $substr = substr($templateData, $findStart, ($findEnd - $findStart));
-                        $substr = substr($substr, $len);
-                        $loopstr = []; //fixed-for: Uncaught Error: [] operator not supported for strings $loopstr[]
-                        foreach ($val as $k => $v) {
-                            $temp = $substr;
-                            if (is_array($v)) {
-                                //$temp = strtr($temp, $v); {{}} not replaced
-                                foreach ($v as $ks => $vs) {
-                                    $temp = str_replace('{{'.$ks.'}}', $vs, $temp);
-                                }
-                            } else {
-                                $temp = str_replace('{{'.$key.'}}', $v, $temp);
-                            }
-                            $loopstr[] = $temp;
-                        }
-                        $loopstr = implode("\n", $loopstr);
-                        $templateData = str_replace('{{'.$key.':}}'.$substr.'{{:'.$key.'}}', $loopstr, $templateData);
-                    } else {
-                        throw new Exception('Error in template : loop has not closed properely');
-                        exit;
-                    }
-                }
-            } else {
-                $templateData = str_replace('{{'.$key.'}}', $val, $templateData);
-            }
-        }
 
-        return $templateData;
+        return $this->putData($templateData, $data);
     }
 
     /**
@@ -739,5 +673,54 @@ class View
         }
 
         return $html;
+    }
+
+    /**
+     * Put value from given data in template.
+     *
+     * @param string $templateData
+     * @param string $data
+     *
+     * @throws \Exception
+     *
+     * @return string.
+     */
+    public function putData($templateData, $data = [])
+    {
+        foreach ($data as $key => $val) {
+            if (is_array($val)) {
+                $findStart = strpos($templateData, '{{'.$key.':}}');
+                if ($findStart !== false) {
+                    $findEnd = strpos($templateData, '{{:'.$key.'}}');
+                    if ($findEnd !== false) {
+                        $len = 5 + strlen($key);
+                        $substr = substr($templateData, $findStart, ($findEnd - $findStart));
+                        $substr = substr($substr, $len);
+                        $loopstr = []; //fixed-for: Uncaught Error: [] operator not supported for strings $loopstr[]
+                        foreach ($val as $k => $v) {
+                            $temp = $substr;
+                            if (is_array($v)) {
+                                //$temp = strtr($temp, $v); {{}} not replaced
+                                foreach ($v as $ks => $vs) {
+                                    $temp = str_replace('{{'.$ks.'}}', $vs, $temp);
+                                }
+                            } else {
+                                $temp = str_replace('{{'.$key.'}}', $v, $temp);
+                            }
+                            $loopstr[] = $temp;
+                        }
+                        $loopstr = implode("\n", $loopstr);
+                        $templateData = str_replace('{{'.$key.':}}'.$substr.'{{:'.$key.'}}', $loopstr, $templateData);
+                    } else {
+                        throw new Exception('Error in template : loop has not closed properely');
+                        exit;
+                    }
+                }
+            } else {
+                $templateData = str_replace('{{'.$key.'}}', $val, $templateData);
+            }
+        }
+
+        return $templateData;
     }
 }
