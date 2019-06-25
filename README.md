@@ -9,6 +9,9 @@
     <a href="https://ci.appveyor.com/project/gaurangkumar/ironphp" target="_blank">
         <img alt="AppVeyor Build status" src="https://ci.appveyor.com/api/projects/status/njmsgijb6bnr8y5y?svg=true">
     </a>
+    <a href="https://github.styleci.io/repos/147162023">
+        <img src="https://github.styleci.io/repos/147162023/shield?branch=master" alt="StyleCI">
+    </a>
     <a href="https://packagist.org/packages/ironphp/ironphp" target="_blank">
         <img alt="Latest Stable Version" src="https://poser.pugx.org/ironphp/ironphp/v/stable.svg">
     </a>
