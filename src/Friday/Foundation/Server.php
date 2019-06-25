@@ -1,16 +1,17 @@
 <?php
 /**
  * IronPHP : PHP Development Framework
- * Copyright (c) IronPHP (https://github.com/IronPHP/IronPHP)
+ * Copyright (c) IronPHP (https://github.com/IronPHP/IronPHP).
  *
  * Licensed under The MIT License
  * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice.
  *
- * @package       IronPHP
  * @copyright     Copyright (c) IronPHP (https://github.com/IronPHP/IronPHP)
- * @link          
+ *
+ * @link
  * @since         1.0.0
+ *
  * @license       MIT License (https://opensource.org/licenses/mit-license.php)
  * @auther        GaurangKumar Parmar <gaurangkumarp@gmail.com>
  */
@@ -18,8 +19,8 @@
 namespace Friday\Foundation;
 
 use Exception;
-use Friday\Helper\Cookie;
 use Friday\Controller\Controller;
+use Friday\Helper\Cookie;
 
 /**
  * Runs a server application.
@@ -75,7 +76,6 @@ class Server extends Application
      */
     public $headers = [];
 
-
     /**
      * Instanse of Cookie.
      *
@@ -86,7 +86,8 @@ class Server extends Application
     /**
      * Create a new Friday application instance.
      *
-     * @param  string|null  $basePath
+     * @param string|null $basePath
+     *
      * @return void
      * @exception \Exception
      */
@@ -94,26 +95,26 @@ class Server extends Application
     {
         parent::__construct($basePath);
 
-        #boot http server ???
+        //boot http server ???
 
-        #load cookie
+        //load cookie
         $this->cookie = new Cookie();
 
-        #get url, client data
+        //get url, client data
         $parse = $this->parseUri();
 
-		#request
+        //request
         $this->request = $this->frontController->request($parse);
         $this->request->setConstant();
-        if($this->request->getRequestMethod() == 'POST') {
-            if(!isset($_POST['_token']) || $_POST['_token'] != $this->session->get('_token')) {
-                throw new Exception("Token is missing or invalid for this request.");
+        if ($this->request->getRequestMethod() == 'POST') {
+            if (!isset($_POST['_token']) || $_POST['_token'] != $this->session->get('_token')) {
+                throw new Exception('Token is missing or invalid for this request.');
                 exit;
             }
         }
         define('REQUEST_CATCHED', microtime(true));
 
-        #router
+        //router
         $this->router = $this->frontController->router();
         $this->matchRoute = $this->router->route(
             $this->route->routes,
@@ -124,7 +125,7 @@ class Server extends Application
 
         define('ROUTE_MATCHED', microtime(true));
 
-        #dispatcher
+        //dispatcher
         $this->dispatcher = $this->frontController->dispatcher();
         $action = $this->dispatcher->dispatch(
             $this->matchRoute,
@@ -132,18 +133,16 @@ class Server extends Application
         );
         define('DISPATCHER_INIT', microtime(true));
 
-        #dispatch process
+        //dispatch process
         $appController = new Controller();
         $appController->initialize($this);
-        if(isset($action['output'])) {
+        if (isset($action['output'])) {
             $output = $action['output'][0].$action['output'][1];
-        }
-        elseif(isset($action['controller'])) {
+        } elseif (isset($action['controller'])) {
             $controller = $action['controller'][0];
             $method = $action['controller'][1];
             $output = $appController->handleController($controller, $method);
-        }
-        elseif(isset($action['view'])) {
+        } elseif (isset($action['view'])) {
             $view = $action['view'][0];
             $data = $action['view'][1];
             $viewPath = $this->findView($view);
@@ -151,7 +150,7 @@ class Server extends Application
         }
         define('DISPATCHED', microtime(true));
 
-        #responce
+        //responce
         $this->response = $this->frontController->response($_SERVER['SERVER_PROTOCOL']);
         $this->response->addHeaders($this->headers)->sendHeader($output);
         define('RESPONSE_SEND', microtime(true));
@@ -166,7 +165,7 @@ class Server extends Application
     {
         return $this->router->args;
     }
-    
+
     /**
      * Parse Uri and get path uri, params, server method.
      *
@@ -174,33 +173,31 @@ class Server extends Application
      */
     public function parseUri()
     {
-        $uri = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
+        $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
         $uri = str_replace(['{', '}'], '', urldecode($uri));
         $extDir = dirname(dirname($_SERVER['SCRIPT_NAME']));
         $uri = str_replace($extDir, '', $uri);
         $uri = rtrim($uri, '/');
         $uri = empty($uri) ? '/' : $uri;
         $serverRequestMethod = $_SERVER['REQUEST_METHOD'];
-        if($serverRequestMethod == 'POST') {
-            if(isset($_POST['_method']) && ($_POST['_method'] === 'PUT' || $_POST['_method'] === 'DELETE')) {
+        if ($serverRequestMethod == 'POST') {
+            if (isset($_POST['_method']) && ($_POST['_method'] === 'PUT' || $_POST['_method'] === 'DELETE')) {
                 $serverRequestMethod = $_POST['_method'];
                 $GLOBALS['_'.$serverRequestMethod] = $GLOBALS['_POST'];
             }
         }
         $params = $GLOBALS['_'.$serverRequestMethod];
-        if(!empty($_SERVER['HTTPS']) && ('on' == $_SERVER['HTTPS'])) {
+        if (!empty($_SERVER['HTTPS']) && ('on' == $_SERVER['HTTPS'])) {
             $https = true;
-        }
-        else {
+        } else {
             $https = false;
         }
         $host = $_SERVER['HTTP_HOST'].str_replace('\\', '/', $extDir);
         $ip = $_SERVER['REMOTE_ADDR'];
-        
-        if($serverRequestMethod === 'POST') {
+
+        if ($serverRequestMethod === 'POST') {
             $params = ['GET' => $_GET, 'POST' => $params];
-        }
-        else {
+        } else {
             $params = ['GET' => $params, 'POST' => []];
         }
 

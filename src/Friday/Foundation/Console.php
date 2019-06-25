@@ -1,16 +1,17 @@
 <?php
 /**
  * IronPHP : PHP Development Framework
- * Copyright (c) IronPHP (https://github.com/IronPHP/IronPHP)
+ * Copyright (c) IronPHP (https://github.com/IronPHP/IronPHP).
  *
  * Licensed under The MIT License
  * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice.
  *
- * @package       IronPHP
  * @copyright     Copyright (c) IronPHP (https://github.com/IronPHP/IronPHP)
- * @link          
+ *
+ * @link
  * @since         1.0.0
+ *
  * @license       MIT License (https://opensource.org/licenses/mit-license.php)
  * @auther        GaurangKumar Parmar <gaurangkumarp@gmail.com>
  */
@@ -53,7 +54,8 @@ class Console extends Application
     /**
      * Create a new Friday application instance.
      *
-     * @param  string|null  $basePath
+     * @param string|null $basePath
+     *
      * @return void
      */
     public function __construct($basePath = null)
@@ -62,7 +64,7 @@ class Console extends Application
 
         $argv = $_SERVER['argv'];
 
-        # Strip the application name
+        // Strip the application name
         array_shift($argv);
 
         $this->tokens = $argv;
@@ -70,7 +72,7 @@ class Console extends Application
         define('APP_INIT', microtime(true));
         $this->command = new Command($this);
     }
-    
+
     /**
      * Get Token.
      *
@@ -80,19 +82,21 @@ class Console extends Application
     {
         return $this->tokens;
     }
-    
+
     /**
      * Command Error.
      *
-     * @param  string  $errorMessage
+     * @param string $errorMessage
+     *
      * @return string
      */
     public function commandError($errorMessage)
     {
-        $output = PHP_EOL.Colors::BG_RED.str_repeat(" ", strlen($errorMessage)+4).PHP_EOL.
-        Colors::WHITE ."  $errorMessage  ".PHP_EOL.
-        Colors::BG_RED.str_repeat(" ", strlen($errorMessage)+4).PHP_EOL.
+        $output = PHP_EOL.Colors::BG_RED.str_repeat(' ', strlen($errorMessage) + 4).PHP_EOL.
+        Colors::WHITE."  $errorMessage  ".PHP_EOL.
+        Colors::BG_RED.str_repeat(' ', strlen($errorMessage) + 4).PHP_EOL.
         Colors::BG_BLACK.Colors::WHITE;
+
         return $output;
     }
 }
