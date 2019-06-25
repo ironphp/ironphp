@@ -7,13 +7,13 @@
  * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright (c) IronPHP (https://github.com/IronPHP/IronPHP)
+ * @copyright Copyright (c) IronPHP (https://github.com/IronPHP/IronPHP)
  *
  * @link
- * @since         1.0.0
+ * @since 1.0.0
  *
- * @license       MIT License (https://opensource.org/licenses/mit-license.php)
- * @auther        GaurangKumar Parmar <gaurangkumarp@gmail.com>
+ * @license MIT License (https://opensource.org/licenses/mit-license.php)
+ * @auther  GaurangKumar Parmar <gaurangkumarp@gmail.com>
  */
 
 namespace Friday\Controller;
@@ -304,18 +304,18 @@ class Controller
                     $img_ext = '.jpg';
                 }
                 switch ($exif_type) {
-                    case IMAGETYPE_JPEG:
-                        $img = imagecreatefromjpeg($file);
-                        imagejpeg($img, null, 100);
-                        break;
-                    case IMAGETYPE_GIF:
-                        $img = imagecreatefromgif($file);
-                        imagegif($img);
-                        break;
-                    case IMAGETYPE_PNG:
-                        $img = imagecreatefrompng($file);
-                        imagepng($img, null, 100);
-                        break;
+                case IMAGETYPE_JPEG:
+                    $img = imagecreatefromjpeg($file);
+                    imagejpeg($img, null, 100);
+                    break;
+                case IMAGETYPE_GIF:
+                    $img = imagecreatefromgif($file);
+                    imagegif($img);
+                    break;
+                case IMAGETYPE_PNG:
+                    $img = imagecreatefrompng($file);
+                    imagepng($img, null, 100);
+                    break;
                 }
                 if (!$img) {
                 } else {

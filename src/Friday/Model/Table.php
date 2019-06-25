@@ -7,13 +7,13 @@
  * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright (c) IronPHP (https://github.com/IronPHP/IronPHP)
+ * @copyright Copyright (c) IronPHP (https://github.com/IronPHP/IronPHP)
  *
  * @link
- * @since         1.0.0
+ * @since 1.0.0
  *
- * @license       MIT License (https://opensource.org/licenses/mit-license.php)
- * @auther        GaurangKumar Parmar <gaurangkumarp@gmail.com>
+ * @license MIT License (https://opensource.org/licenses/mit-license.php)
+ * @auther  GaurangKumar Parmar <gaurangkumarp@gmail.com>
  */
 
 namespace Friday\Model;
@@ -177,7 +177,7 @@ class Table
      *
      * @param array|null  $field
      * @param string|null $sqlQuery
-     * @rturn  array
+     * @rturn array
      */
     public function num_rows($sqlQuery = false)
     {
@@ -195,7 +195,7 @@ class Table
      *
      * @param array|null  $field
      * @param string|null $sqlQuery
-     * @rturn  array
+     * @rturn array
      */
     public function get($fields = null, $sqlQuery = false)
     {
@@ -214,7 +214,7 @@ class Table
      *
      * @param array|null  $field
      * @param string|null $sqlQuery
-     * @rturn  array
+     * @rturn array
      */
     public function getAll($fields = null, $sqlQuery = false)
     {
@@ -238,7 +238,7 @@ class Table
      *
      * @param array|null  $limit
      * @param string|null $sqlQuery
-     * @rturn  array
+     * @rturn array
      */
     public function getPaginated($limit = 1, $fields = null, $sqlQuery = false)
     {
@@ -259,7 +259,7 @@ class Table
      *
      * @param string|null $data
      * @param string|null $sqlQuery
-     * @rturn  bool
+     * @rturn bool
      */
     public function add($data, $sqlQuery = false)
     {
@@ -281,7 +281,7 @@ class Table
      *
      * @param string|null $field
      * @param string|null $sqlQuery
-     * @rturn  bool
+     * @rturn bool
      */
     public function update($sqlQuery = false)
     {
@@ -312,7 +312,7 @@ class Table
      * Delete data from table.
      *
      * @param string|null $sqlQuery
-     * @rturn  bool
+     * @rturn bool
      */
     public function delete($sqlQuery = false)
     {

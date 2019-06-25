@@ -7,13 +7,13 @@
  * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright (c) IronPHP (https://github.com/IronPHP/IronPHP)
+ * @copyright Copyright (c) IronPHP (https://github.com/IronPHP/IronPHP)
  *
  * @link
- * @since         1.0.0
+ * @since 1.0.0
  *
- * @license       MIT License (https://opensource.org/licenses/mit-license.php)
- * @auther        GaurangKumar Parmar <gaurangkumarp@gmail.com>
+ * @license MIT License (https://opensource.org/licenses/mit-license.php)
+ * @auther  GaurangKumar Parmar <gaurangkumarp@gmail.com>
  */
 
 namespace Friday\Helper;
@@ -36,7 +36,7 @@ class Cookie
     /**
      * _host.
      *
-     * @note    default value will be pulled from <_SERVER>
+     * @note default value will be pulled from <_SERVER>
      *
      * @var string
      */
@@ -114,7 +114,7 @@ class Cookie
     /**
      * _invalid.
      *
-     * @note    decoupled from <open> method to allow for logging by child
+     * @note decoupled from <open> method to allow for logging by child
      *          classes
      *
      * @return void
@@ -161,7 +161,7 @@ class Cookie
             $this->_host,
             $this->_secure,
             $this->_httponly
-            );
+        );
     }
 
     /**
@@ -188,7 +188,7 @@ class Cookie
      * Returns a stamp to aid in securing a server, by concatenating the
      * user agent and IP of the client.
      *
-     * @note    decoupled from <_sign> to allow for customizing the stamp
+     * @note decoupled from <_sign> to allow for customizing the stamp
      *
      * @return string
      */
@@ -241,7 +241,7 @@ class Cookie
             $this->_host,
             $this->_secure,
             $this->_httponly
-            );
+        );
         setcookie(
             $signature,
             '',
@@ -250,7 +250,7 @@ class Cookie
             $this->_host,
             $this->_secure,
             $this->_httponly
-            );
+        );
 
         /*
          * Clear out of global scope, since setcookie requires buffer flush
@@ -306,7 +306,7 @@ class Cookie
                 $this->_host,
                 $this->_secure,
                 $this->_httponly
-                );
+            );
         }
     }
 

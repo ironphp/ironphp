@@ -7,13 +7,13 @@
  * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright (c) IronPHP (https://github.com/IronPHP/IronPHP)
+ * @copyright Copyright (c) IronPHP (https://github.com/IronPHP/IronPHP)
  *
  * @link
- * @since         1.0.0
+ * @since 1.0.0
  *
- * @license       MIT License (https://opensource.org/licenses/mit-license.php)
- * @auther        GaurangKumar Parmar <gaurangkumarp@gmail.com>
+ * @license MIT License (https://opensource.org/licenses/mit-license.php)
+ * @auther  GaurangKumar Parmar <gaurangkumarp@gmail.com>
  */
 
 namespace Friday\Console;
@@ -72,76 +72,76 @@ class Command
         // Run commands
         switch (\count($tokens)) {
             // php jarvis
-            case 0:
-                $command = $default;
-                if ($console->findCommand($command)) {
-                    $this->execute($command);
-                } else {
-                    $this->output = $console->commandError('Command "'.$command.'" is not defined.');
-                }
-                break;
+        case 0:
+            $command = $default;
+            if ($console->findCommand($command)) {
+                $this->execute($command);
+            } else {
+                $this->output = $console->commandError('Command "'.$command.'" is not defined.');
+            }
+            break;
 
             // php jarvis cmd
-            case 1:
-                $command = $tokens[0];
-                if ($console->findCommand($command)) {
-                    $this->execute($command);
-                } elseif ($command[0] == '-') {
-                    if (isset($this->short[$command])) {
-                        $command = $this->short[$command];
-                        if ($console->findCommand($command)) {
-                            $this->execute($command);
-                        } else {
-                            $this->output = $console->commandError('Option "'.$tokens[0].'" is not defined.');
-                        }
+        case 1:
+            $command = $tokens[0];
+            if ($console->findCommand($command)) {
+                $this->execute($command);
+            } elseif ($command[0] == '-') {
+                if (isset($this->short[$command])) {
+                    $command = $this->short[$command];
+                    if ($console->findCommand($command)) {
+                        $this->execute($command);
                     } else {
                         $this->output = $console->commandError('Option "'.$tokens[0].'" is not defined.');
                     }
                 } else {
-                    $this->output = $console->commandError('Command "'.$command.'" is not defined.');
+                    $this->output = $console->commandError('Option "'.$tokens[0].'" is not defined.');
                 }
-                break;
+            } else {
+                $this->output = $console->commandError('Command "'.$command.'" is not defined.');
+            }
+            break;
 
             // php jarvis cmd arg ...
-            default:
-                $command = $tokens[0];
-                array_shift($tokens);
-                if ($console->findCommand($command)) {
-                    $opt = $tokens[0];
-                    if (isset($this->short[$opt])) {
-                        $cmd = $this->short[$opt];
-                        // php jarvis cmd help ...
-                        if ($cmd == 'help') {
-                            $tokens[0] = $command;
-                            $this->execute($cmd, $tokens);
-                        }
-                        // php jarvis cmd -/--opt ...
-                        else {
-                            array_shift($tokens);
-                            $this->execute($command, $tokens);
-                        }
+        default:
+            $command = $tokens[0];
+            array_shift($tokens);
+            if ($console->findCommand($command)) {
+                $opt = $tokens[0];
+                if (isset($this->short[$opt])) {
+                    $cmd = $this->short[$opt];
+                    // php jarvis cmd help ...
+                    if ($cmd == 'help') {
+                        $tokens[0] = $command;
+                        $this->execute($cmd, $tokens);
                     }
-                    // php jarvis cmd opt ...
+                    // php jarvis cmd -/--opt ...
                     else {
+                        array_shift($tokens);
                         $this->execute($command, $tokens);
                     }
                 }
-                // php jarvis -/--opt opt ...
-                elseif ($command[0] == '-') {
-                    if (isset($this->short[$command])) {
-                        $command = $this->short[$command];
-                        if ($console->findCommand($command)) {
-                            $this->execute($command, $tokens);
-                        } else {
-                            $this->output = $console->commandError('Option "'.$tokens[0].'" is not defined.');
-                        }
+                // php jarvis cmd opt ...
+                else {
+                    $this->execute($command, $tokens);
+                }
+            }
+            // php jarvis -/--opt opt ...
+            elseif ($command[0] == '-') {
+                if (isset($this->short[$command])) {
+                    $command = $this->short[$command];
+                    if ($console->findCommand($command)) {
+                        $this->execute($command, $tokens);
                     } else {
                         $this->output = $console->commandError('Option "'.$tokens[0].'" is not defined.');
                     }
                 } else {
-                    $this->output = $console->commandError('Command "'.$command.'" is not defined.');
+                    $this->output = $console->commandError('Option "'.$tokens[0].'" is not defined.');
                 }
-                break;
+            } else {
+                $this->output = $console->commandError('Command "'.$command.'" is not defined.');
+            }
+            break;
         }
         /*
                     if(isset($this->short[$command])) {
@@ -192,8 +192,8 @@ class Command
     /**
      * Execute command.
      *
-     * @param string $command
-     * @param  array   option
+     * @param string         $command
+     * @param array   option
      *
      * @return void
      */
@@ -207,8 +207,8 @@ class Command
     /**
      * Execute Help command.
      *
-     * @param string $command
-     * @param  array   option
+     * @param string         $command
+     * @param array   option
      *
      * @return string
      */

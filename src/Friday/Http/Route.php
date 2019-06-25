@@ -7,13 +7,13 @@
  * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright (c) IronPHP (https://github.com/IronPHP/IronPHP)
+ * @copyright Copyright (c) IronPHP (https://github.com/IronPHP/IronPHP)
  *
  * @link
- * @since         1.0.0
+ * @since 1.0.0
  *
- * @license       MIT License (https://opensource.org/licenses/mit-license.php)
- * @auther        GaurangKumar Parmar <gaurangkumarp@gmail.com>
+ * @license MIT License (https://opensource.org/licenses/mit-license.php)
+ * @auther  GaurangKumar Parmar <gaurangkumarp@gmail.com>
  */
 
 namespace Friday\Http;
@@ -127,10 +127,9 @@ class Route implements RouteInterface
             foreach ($array as $i => $uriPiece) {
                 $uriPiece = trim($uriPiece);
                 if (strpos($uriPiece, '{') !== false) {
-                    if (
-                        strpos($uriPiece, '{') === 0 &&
-                        strpos($uriPiece, '}') !== false &&
-                        strpos($uriPiece, '}') === (strlen($uriPiece) - 1)
+                    if (strpos($uriPiece, '{') === 0 
+                        && strpos($uriPiece, '}') !== false 
+                        && strpos($uriPiece, '}') === (strlen($uriPiece) - 1)
                     ) {
                         $args[$uriPiece] = rtrim(ltrim($uriPiece, '{'), '}');
                     } else {
@@ -163,13 +162,15 @@ class Route implements RouteInterface
      */
     public function sortRoute()
     {
-        $sort = uasort($this->routes, function ($a, $b) {
-            if ($a[7] == $b[7]) {
-                return 0;
-            }
+        $sort = uasort(
+            $this->routes, function ($a, $b) {
+                if ($a[7] == $b[7]) {
+                    return 0;
+                }
 
-            return ($a[7] > $b[7]) ? -1 : 1;
-        });
+                return ($a[7] > $b[7]) ? -1 : 1;
+            }
+        );
     }
 
     /**
@@ -226,7 +227,7 @@ class Route implements RouteInterface
     /**
      * Get specific or all Registered redirect routes.
      *
-     * @param  string  uri
+     * @param string  uri
      *
      * @return array
      */
