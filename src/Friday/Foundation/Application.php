@@ -98,10 +98,12 @@ class Application
 
         //load config
         $this->config['app'] = $this->requireFile(
-            $this->basePath('config/app.php'), true
+            $this->basePath('config/app.php'),
+            true
         );
         $this->config['db'] = $this->requireFile(
-            $this->basePath('config/database.php'), true
+            $this->basePath('config/database.php'),
+            true
         );
         define('CONFIG_LOADED', microtime(true));
 

@@ -156,11 +156,11 @@ class Cookie
         ini_set('session.name', $this->_name);
         ini_set('session.gc_maxlifetime', $this->_lifetime);
         session_set_cookie_params(
-        $this->_expiry,
-        $this->_path,
-        $this->_host,
-        $this->_secure,
-        $this->_httponly
+            $this->_expiry,
+            $this->_path,
+            $this->_host,
+            $this->_secure,
+            $this->_httponly
             );
     }
 
@@ -234,22 +234,22 @@ class Cookie
         // clear cookies from agent
         $signature = ($this->_name).'Signature';
         setcookie(
-        $this->_name,
-                '',
-                time() - 42000,
-        $this->_path,
-        $this->_host,
-        $this->_secure,
-        $this->_httponly
+            $this->_name,
+            '',
+            time() - 42000,
+            $this->_path,
+            $this->_host,
+            $this->_secure,
+            $this->_httponly
             );
         setcookie(
-        $signature,
-                '',
-                time() - 42000,
-        $this->_path,
-        $this->_host,
-        $this->_secure,
-        $this->_httponly
+            $signature,
+            '',
+            time() - 42000,
+            $this->_path,
+            $this->_host,
+            $this->_secure,
+            $this->_httponly
             );
 
         /*
