@@ -7,13 +7,13 @@
  * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright Copyright (c) IronPHP (https://github.com/IronPHP/IronPHP)
+ * @copyright     Copyright (c) IronPHP (https://github.com/IronPHP/IronPHP)
  *
  * @link
- * @since 1.0.0
+ * @since         1.0.0
  *
- * @license MIT License (https://opensource.org/licenses/mit-license.php)
- * @auther  Gaurang Parmar <gaurangkumarp@gmail.com>
+ * @license       MIT License (https://opensource.org/licenses/mit-license.php)
+ * @auther        Gaurang Parmar <gaurangkumarp@gmail.com>
  */
 
 namespace Friday\View;
@@ -218,7 +218,7 @@ class View
                     $val = strtolower(trim($val));
                     if (isset($this->attr[$tag][$val])) {
                         $args[$val] = $this->attr[$tag][$val];
-                        //$args[] = $val.($this->attr[$tag][$val] == NULL ? '' : "=\"{$this->attr[$tag][$val]}\"");
+                    //$args[] = $val.($this->attr[$tag][$val] == NULL ? '' : "=\"{$this->attr[$tag][$val]}\"");
                     } else {
                         $args[$val] = null;
                     }
@@ -254,11 +254,9 @@ class View
             if (!is_array($content)) {
                 $content = explode("\n", $content);
             }
-            array_walk(
-                $content, function (&$val, $key) {
-                    $val = trim($val);
-                }
-            ); //5.3
+            array_walk($content, function (&$val, $key) {
+                $val = trim($val);
+            }); //5.3
             $content = implode("\n", $content);
             $content = explode("\n", $content);
             $content = preg_replace('/^/', "\t", $content);
@@ -295,7 +293,7 @@ class View
     {
         $data[''] = null;
         ob_start();
-        include $viewPath;
+        require $viewPath;
         $viewData = ob_get_contents();
         ob_end_clean();
         foreach ($data as $key => $val) {
@@ -490,7 +488,7 @@ class View
     /**
      * Convert HTML tags string to array.
      *
-     * @param string  html
+     * @param   string  html
      *
      * @return array
      */
@@ -723,21 +721,21 @@ class View
         }
         $html = '';
         switch ($element) {
-        case '#comment':
-            //foreach($children as $key => $child) {
-            //    $children[$key] = "<!--".$child."-->\n";
-            //}
-            //$html = "\n".implode('', $children);
-            $html = '<!--'.$content."-->\n";
-            break;
-        case '#root':
-            break;
-        case '#document':
-            $tag = '!doctype';
-            break;
-        default:
-            $html = $this->createTag($element, $attr, $content, $isCloseTag);
-            break;
+            case '#comment':
+                //foreach($children as $key => $child) {
+                //    $children[$key] = "<!--".$child."-->\n";
+                //}
+                //$html = "\n".implode('', $children);
+                $html = '<!--'.$content."-->\n";
+                break;
+            case '#root':
+                break;
+            case '#document':
+                $tag = '!doctype';
+                break;
+            default:
+                $html = $this->createTag($element, $attr, $content, $isCloseTag);
+                break;
         }
 
         return $html;

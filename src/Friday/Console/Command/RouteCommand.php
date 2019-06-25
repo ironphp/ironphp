@@ -7,13 +7,13 @@
  * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright Copyright (c) IronPHP (https://github.com/IronPHP/IronPHP)
+ * @copyright     Copyright (c) IronPHP (https://github.com/IronPHP/IronPHP)
  *
  * @link
- * @since 1.0.0
+ * @since         1.0.0
  *
- * @license MIT License (https://opensource.org/licenses/mit-license.php)
- * @auther  GaurangKumar Parmar <gaurangkumarp@gmail.com>
+ * @license       MIT License (https://opensource.org/licenses/mit-license.php)
+ * @auther        GaurangKumar Parmar <gaurangkumarp@gmail.com>
  */
 
 namespace Friday\Console\Command;
@@ -59,7 +59,7 @@ class RouteCommand extends Command
     /**
      * Return list of routes.
      *
-     * @param string|null  route
+     * @param  string|null  route
      *
      * @return void
      */
@@ -83,7 +83,7 @@ class RouteCommand extends Command
         }
         foreach ($routes as $route) {
             $list .=
-            "| $route[1]".str_repeat(' ', $l1 - strlen($route[1]))." | $route[0]".str_repeat(' ', $l2 - strlen($route[0]))." | $route[2]".str_repeat(' ', $l3 - strlen($route[2])).' |
+"| $route[1]".str_repeat(' ', $l1 - strlen($route[1]))." | $route[0]".str_repeat(' ', $l2 - strlen($route[0]))." | $route[2]".str_repeat(' ', $l3 - strlen($route[2])).' |
 +'.str_repeat('-', $l1 + 2).'+'.str_repeat('-', $l2 + 2).'+'.str_repeat('-', $l3 + 2).'+
 ';
         }

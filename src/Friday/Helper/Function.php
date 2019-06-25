@@ -7,13 +7,13 @@
  * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright Copyright (c) IronPHP (https://github.com/IronPHP/IronPHP)
+ * @copyright     Copyright (c) IronPHP (https://github.com/IronPHP/IronPHP)
  *
  * @link
- * @since 1.0.0
+ * @since         1.0.0
  *
- * @license MIT License (https://opensource.org/licenses/mit-license.php)
- * @auther  GaurangKumar Parmar <gaurangkumarp@gmail.com>
+ * @license       MIT License (https://opensource.org/licenses/mit-license.php)
+ * @auther        GaurangKumar Parmar <gaurangkumarp@gmail.com>
  */
 use Friday\Foundation\Application;
 
@@ -64,21 +64,21 @@ if (!function_exists('env')) {
         }
 
         switch (strtolower($value)) {
-        case 'true':
-        case '(true)':
-            return true;
+            case 'true':
+            case '(true)':
+                return true;
 
-        case 'false':
-        case '(false)':
-            return false;
+            case 'false':
+            case '(false)':
+                return false;
 
-        case 'empty':
-        case '(empty)':
-            return '';
+            case 'empty':
+            case '(empty)':
+                return '';
 
-        case 'null':
-        case '(null)':
-            return;
+            case 'null':
+            case '(null)':
+                return;
         }
 
         if (strlen($value) > 1 && starts_with($value, '"') && ends_with($value, '"')) {
@@ -184,11 +184,11 @@ if (!function_exists('is_bot')) {
 
         foreach ($botlist as $bot) {
             if (strpos($_SERVER['HTTP_USER_AGENT'], $bot) !== false) {
-                return true;    // Is a bot
+                return true;	// Is a bot
             }
         }
 
-        return false;    // Not a bot
+        return false;	// Not a bot
     }
 }
 

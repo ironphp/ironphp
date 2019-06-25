@@ -7,13 +7,13 @@
  * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright Copyright (c) IronPHP (https://github.com/IronPHP/IronPHP)
+ * @copyright     Copyright (c) IronPHP (https://github.com/IronPHP/IronPHP)
  *
  * @link
- * @since 1.0.0
+ * @since         1.0.0
  *
- * @license MIT License (https://opensource.org/licenses/mit-license.php)
- * @auther  GaurangKumar Parmar <gaurangkumarp@gmail.com>
+ * @license       MIT License (https://opensource.org/licenses/mit-license.php)
+ * @auther        GaurangKumar Parmar <gaurangkumarp@gmail.com>
  */
 
 namespace Friday\Foundation;
@@ -306,9 +306,9 @@ class Application
     {
         if ($this->findFile($file)) {
             if ($return !== false) {
-                return include $file;
+                return require $file;
             } else {
-                include $file;
+                require $file;
             }
         } else {
             throw new Exception($file.' file is missing.');
@@ -461,7 +461,7 @@ class Application
     /**
      * Set timezone.
      *
-     * @param string  default
+     * @param  string  default
      *
      * @return bool
      */
@@ -504,7 +504,7 @@ class Application
     /**
      * Get specific or all Registered redirect routes.
      *
-     * @param string  uri
+     * @param  string  uri
      *
      * @return array
      */

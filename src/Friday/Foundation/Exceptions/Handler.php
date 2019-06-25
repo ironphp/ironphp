@@ -7,13 +7,13 @@
  * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright Copyright (c) IronPHP (https://github.com/IronPHP/IronPHP)
+ * @copyright     Copyright (c) IronPHP (https://github.com/IronPHP/IronPHP)
  *
  * @link
- * @since 1.0.1
+ * @since         1.0.1
  *
- * @license MIT License (https://opensource.org/licenses/mit-license.php)
- * @auther  GaurangKumar Parmar <gaurangkumarp@gmail.com>
+ * @license       MIT License (https://opensource.org/licenses/mit-license.php)
+ * @auther        GaurangKumar Parmar <gaurangkumarp@gmail.com>
  */
 
 namespace Friday\Foundation\Exceptions;
@@ -72,7 +72,7 @@ class Handler implements HandlerInterface
     /**
      * Create a new exception handler instance.
      *
-     * @param System|null  system
+     * @param  System|null  system
      *
      * @return void
      */
@@ -248,7 +248,7 @@ class Handler implements HandlerInterface
             default:
                 $severity = 'UNKOWN';
                 break;
-            }
+        }
         }
         if (env('APP_DEBUG') === true) {
             echo '
@@ -346,26 +346,26 @@ class Handler implements HandlerInterface
         }
 
         switch ($level) {
-        case E_NOTICE:
-        case E_USER_NOTICE:
+            case E_NOTICE:
+            case E_USER_NOTICE:
             //case @E_STRICT:
-            $exc = new Notice($message, $trace);
-            break;
-        case E_WARNING:
-        case E_USER_WARNING:
-            $exc = new Warning($message, $trace);
-            break;
-        case E_ERROR:
-        case E_CORE_ERROR:
-        case E_RECOVERABLE_ERROR:
-        case E_USER_ERROR:
-            $exc = new Fatal($message, $trace);
-            break;
+                $exc = new Notice($message, $trace);
+                break;
+            case E_WARNING:
+            case E_USER_WARNING:
+                $exc = new Warning($message, $trace);
+                break;
+            case E_ERROR:
+            case E_CORE_ERROR:
+            case E_RECOVERABLE_ERROR:
+            case E_USER_ERROR:
+                $exc = new Fatal($message, $trace);
+                break;
             //case @E_RECOVERABLE_ERROR:
                 //'Catchable';
-        default:
-            $exc = new Error($message, $trace);
-            break;
+            default:
+                $exc = new Error($message, $trace);
+                break;
         }
         $notice = $this->buildNotice($exc);
 
@@ -383,11 +383,11 @@ class Handler implements HandlerInterface
         // Propagate error to the next handler, allows error_get_last() to
         // work on silenced errors.
         return false;
-        //
+//
         /**
          * Exception handler callable.
          *
-         * @since 1.0.1
+         * @since  1.0.1
          *
          * @param int    $errno  (severity)
          * @param string $errstr (message)
@@ -405,32 +405,32 @@ class Handler implements HandlerInterface
             return false;
         }
         switch ($errno) {
-        case E_USER_ERROR:
-            echo "<b>My ERROR</b> [$errno] $errstr<br>\n";
-            echo "  Fatal error on line $errline in file $errfile";
-            echo ', PHP '.PHP_VERSION.' ('.PHP_OS.")<br>\n";
-            echo "Aborting...<br>\n";
-            exit(1);
+            case E_USER_ERROR:
+                echo "<b>My ERROR</b> [$errno] $errstr<br>\n";
+                echo "  Fatal error on line $errline in file $errfile";
+                echo ', PHP '.PHP_VERSION.' ('.PHP_OS.")<br>\n";
+                echo "Aborting...<br>\n";
+                exit(1);
                 break;
 
-        case E_USER_WARNING:
-            echo "<b>My WARNING</b> [$errno] $errstr<br>\n";
-            break;
+            case E_USER_WARNING:
+                echo "<b>My WARNING</b> [$errno] $errstr<br>\n";
+                break;
 
-        case E_USER_NOTICE:
-            echo "<b>My NOTICE</b> [$errno] $errstr<br>\n";
-            break;
+            case E_USER_NOTICE:
+                echo "<b>My NOTICE</b> [$errno] $errstr<br>\n";
+                break;
 
-        default:
-            echo "<b>Error</b>: [$errno] $errstr<br>\n";
-            break;
+            default:
+                echo "<b>Error</b>: [$errno] $errstr<br>\n";
+                break;
         }
 
         /* Don't execute PHP internal error handler */
         return true;
 
         throw new ErrorException($errstr, 0, $errno, $file, $line);
-        //
+//
         /*
          * Error handler, passes flow over the
          * exception logger with new ErrorException.
@@ -461,11 +461,10 @@ class Handler implements HandlerInterface
         if (($error['type'] & error_reporting()) === 0) {
             return;
         }
-        if ($this->lastError !== null 
-            && $error['message'] === $this->lastError['message'] 
-            && $error['file'] === $this->lastError['file'] 
-            && $error['line'] === $this->lastError['line']
-        ) {
+        if ($this->lastError !== null &&
+            $error['message'] === $this->lastError['message'] &&
+            $error['file'] === $this->lastError['file'] &&
+            $error['line'] === $this->lastError['line']) {
             return;
         }
         $trace = [[

@@ -7,13 +7,13 @@
  * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright Copyright (c) IronPHP (https://github.com/IronPHP/IronPHP)
+ * @copyright     Copyright (c) IronPHP (https://github.com/IronPHP/IronPHP)
  *
  * @link
- * @since 1.0.0
+ * @since         1.0.0
  *
- * @license MIT License (https://opensource.org/licenses/mit-license.php)
- * @auther  Gaurang Parmar <gaurangkumarp@gmail.com>
+ * @license       MIT License (https://opensource.org/licenses/mit-license.php)
+ * @auther        Gaurang Parmar <gaurangkumarp@gmail.com>
  */
 
 namespace Friday\Http;
@@ -35,7 +35,7 @@ class Dispatcher
     /**
      * Dispatch Request to controller or method.
      *
-     * @throw Exception
+     * @throw  Exception
      *
      * @param array               $route
      * @param Friday\Http\Request $request
