@@ -29,7 +29,7 @@ class Cookie
      *
      * (default value: 0)
      *
-     * @var integer
+     * @var int
      */
     protected $_expiry = 0;
 
@@ -45,14 +45,14 @@ class Cookie
     /**
      * _httponly.
      *
-     * @var boolean
+     * @var bool
      */
     protected $_httponly = true;
 
     /**
      * _lifetime.
      *
-     * @var integer
+     * @var int
      */
     protected $_lifetime = 900;
 
@@ -66,7 +66,7 @@ class Cookie
     /**
      * _open.
      *
-     * @var boolean
+     * @var bool
      */
     protected $_open = false;
 
@@ -90,14 +90,14 @@ class Cookie
     /**
      * _secure.
      *
-     * @var boolean
+     * @var bool
      */
     protected $_secure = false;
 
     /**
      * _secureWithIpAddress.
      *
-     * @var boolean
+     * @var bool
      */
     protected $_secureWithIpAddress = false;
 
@@ -211,7 +211,7 @@ class Cookie
      * @param string $sid
      * @param string $signature
      *
-     * @return boolean
+     * @return bool
      */
     protected function _valid($sid, $signature)
     {
