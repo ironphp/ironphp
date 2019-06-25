@@ -1,27 +1,22 @@
 <?php
 /**
  * IronPHP : PHP Development Framework
- * Copyright (c) IronPHP (https://github.com/IronPHP/IronPHP)
+ * Copyright (c) IronPHP (https://github.com/IronPHP/IronPHP).
  *
  * Licensed under The MIT License
  * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice.
  *
- * @package       IronPHP
  * @copyright     Copyright (c) IronPHP (https://github.com/IronPHP/IronPHP)
- * @link          
+ *
+ * @link
  * @since         1.0.0
+ *
  * @license       MIT License (https://opensource.org/licenses/mit-license.php)
  * @auther        Gaurang Parmar <gaurangkumarp@gmail.com>
  */
 
 namespace Friday\Http;
-
-use Friday\Http\Request;
-use Friday\Http\Route;
-use Friday\Http\Router;
-use Friday\Http\Dispatcher;
-use Friday\Http\Response;
 
 /**
  * Runs a Front Controller.
@@ -41,11 +36,12 @@ class FrontController implements FrontControllerInterface
     public function __construct(/*array $options = array()*/)
     {
     }
-    
+
     /**
      * Create Responce instance.
      *
-     * @param  array  $parsedUrl
+     * @param array $parsedUrl
+     *
      * @return \Friday\Http\Request
      */
     public function request($parsedUrl)
@@ -58,7 +54,7 @@ class FrontController implements FrontControllerInterface
                 $this->setController($options["controller"]);
             }
             if (isset($options["action"])) {
-                $this->setAction($options["action"]);     
+                $this->setAction($options["action"]);
             }
             if (isset($options["params"])) {
                 $this->setParams($options["params"]);
@@ -101,7 +97,8 @@ class FrontController implements FrontControllerInterface
     /**
      * Create Response instance.
      *
-     * @param  string  $serverProtocol
+     * @param string $serverProtocol
+     *
      * @return \Friday\Http\Response
      */
     public function response($serverProtocol)
@@ -120,7 +117,7 @@ class FrontController implements FrontControllerInterface
         $this->controller = $controller;
         return $this;
     }
-    
+
     public function setAction($action) {
         $reflector = new ReflectionClass($this->controller);
         if (!$reflector->hasMethod($action)) {
@@ -130,7 +127,7 @@ class FrontController implements FrontControllerInterface
         $this->action = $action;
         return $this;
     }
-    
+
     public function setParams(array $params) {
         $this->params = $params;
         return $this;
@@ -144,7 +141,7 @@ class FrontController implements FrontControllerInterface
      */
     public function run()
     {
-        $controller = "Controller\\".$this->controller;
-        call_user_func_array(array($controller, $this->action), $this->params);
+        $controller = 'Controller\\'.$this->controller;
+        call_user_func_array([$controller, $this->action], $this->params);
     }
 }

@@ -1,16 +1,17 @@
 <?php
 /**
  * IronPHP : PHP Development Framework
- * Copyright (c) IronPHP (https://github.com/IronPHP/IronPHP)
+ * Copyright (c) IronPHP (https://github.com/IronPHP/IronPHP).
  *
  * Licensed under The MIT License
  * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice.
  *
- * @package       IronPHP
  * @copyright     Copyright (c) IronPHP (https://github.com/IronPHP/IronPHP)
- * @link          
+ *
+ * @link
  * @since         1.0.0
+ *
  * @license       MIT License (https://opensource.org/licenses/mit-license.php)
  * @auther        GaurangKumar Parmar <gaurangkumarp@gmail.com>
  */
@@ -55,18 +56,19 @@ class Response implements ResponseInterface
     /**
      * Create new Responce instance.
      *
-     * @param  string  $version
+     * @param string $version
+     *
      * @return void
      */
     public function __construct($version = null)
     {
         $this->version = $version;
     }
- 
+
     /**
      * Get version.
      *
-     * @return  \Friday\Http\Response
+     * @return \Friday\Http\Response
      */
     public function getVersion()
     {
@@ -76,19 +78,21 @@ class Response implements ResponseInterface
     /**
      * Add header.
      *
-     * @param   string   $header
-     * @return  \Friday\Http\Response
+     * @param string $header
+     *
+     * @return \Friday\Http\Response
      */
     public function addHeader($header = null)
     {
         $this->header = $header;
+
         return $this;
     }
- 
+
     /**
      * Get header.
      *
-     * @return  string
+     * @return string
      */
     public function getHeader()
     {
@@ -98,24 +102,26 @@ class Response implements ResponseInterface
     /**
      * Add headers.
      *
-     * @param   array   $headers
-     * @return  \Friday\Http\Response
+     * @param array $headers
+     *
+     * @return \Friday\Http\Response
      */
     public function addHeaders(array $headers = [])
     {
         $this->headers = [];
-        if($headers != []) {
+        if ($headers != []) {
             foreach ($headers as $header) {
                 $this->headers[] = $header;
             }
         }
+
         return $this;
     }
- 
+
     /**
      * Get headers.
      *
-     * @return  array
+     * @return array
      */
     public function getHeaders()
     {
@@ -125,40 +131,40 @@ class Response implements ResponseInterface
     /**
      * Send a HTTP header.
      *
-     * @param  string    $output
-     * @param  bool      $replace
-     * @param  int|null  $http_response_code
-     * @return void
+     * @param string   $output
+     * @param bool     $replace
+     * @param int|null $http_response_code
+     *
      * @throws \Exception
+     *
+     * @return void
      */
     public function sendHeader($output = null, $replace = true, $http_response_code = null)
     {
         if (!headers_sent()) {
-            if(static::$redirectHeader !== null) {
+            if (static::$redirectHeader !== null) {
                 $this->redirect();
             }
-            if($this->version === 'HTTP/1.1') {
-                if(count($this->headers) === 0) {
+            if ($this->version === 'HTTP/1.1') {
+                if (count($this->headers) === 0) {
                     header("$this->version $this->header");
                 }
-            }
-            else {
-                throw new Exception("Invalid HTTP version ".$this->version.".");
+            } else {
+                throw new Exception('Invalid HTTP version '.$this->version.'.');
                 exit;
             }
-            foreach($this->headers as $header) {
-                if($http_response_code == null) {
+            foreach ($this->headers as $header) {
+                if ($http_response_code == null) {
                     header("$header", $replace);
-                }
-                else {
+                } else {
                     header("$header", $replace, $http_response_code);
                 }
             }
-            if($output) {
-                print $output;
+            if ($output) {
+                echo $output;
                 //exit;
             }
-        } 
+        }
     }
 
     /**
@@ -168,7 +174,7 @@ class Response implements ResponseInterface
      */
     public function redirect()
     {
-        header("Location: " . SERVER_ROOT.static::$redirectHeader[0], static::$redirectHeader[1], static::$redirectHeader[2]);
+        header('Location: '.SERVER_ROOT.static::$redirectHeader[0], static::$redirectHeader[1], static::$redirectHeader[2]);
         exit;
     }
 }

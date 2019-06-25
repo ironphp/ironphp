@@ -1,16 +1,17 @@
 <?php
 /**
  * IronPHP : PHP Development Framework
- * Copyright (c) IronPHP (https://github.com/IronPHP/IronPHP)
+ * Copyright (c) IronPHP (https://github.com/IronPHP/IronPHP).
  *
  * Licensed under The MIT License
  * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice.
  *
- * @package       IronPHP
  * @copyright     Copyright (c) IronPHP (https://github.com/IronPHP/IronPHP)
- * @link          
+ *
+ * @link
  * @since         1.0.0
+ *
  * @license       MIT License (https://opensource.org/licenses/mit-license.php)
  * @auther        GaurangKumar Parmar <gaurangkumarp@gmail.com>
  */
@@ -33,7 +34,8 @@ class VersionCommand extends Command
     /**
      * Create a List Commands instance.
      *
-     * @param array  $option
+     * @param array $option
+     *
      * @return void
      */
     public function __construct($option = [])
@@ -57,6 +59,7 @@ class VersionCommand extends Command
 ".
         $this->getWelInfo().
         Colors::BG_BLACK.Colors::WHITE;
+
         return $output;
     }
 
@@ -69,8 +72,8 @@ class VersionCommand extends Command
     {
         $url = 'https://repo.packagist.org/p/ironphp/ironphp.json';
         $packagistJson = @file_get_contents($url);
-        if($packagistJson === true) {
-            $packagistArray = json_decode($packagistJson,true);
+        if ($packagistJson === true) {
+            $packagistArray = json_decode($packagistJson, true);
             $packagistData = $packagistArray['packages']['ironphp/ironphp']['dev-master'];
             $time = $packagistData['time'];
             $version = $packagistData['version']; //dev-master
@@ -81,23 +84,20 @@ class VersionCommand extends Command
         }
         $installData = $this->app->getIntallTime();
 
-        if($packagistJson === true) {
-            echo Colors::WHITE." ".str_replace('T', ' ', substr(date(DATE_ATOM, $timeStamp), 0, 19));
+        if ($packagistJson === true) {
+            echo Colors::WHITE.' '.str_replace('T', ' ', substr(date(DATE_ATOM, $timeStamp), 0, 19));
             echo Colors::GREEN."\nChecking updates... ".Colors::WHITE;
-            if($timeStamp > $installData->time) {
-                if($branchAlias != $this->app->version()) {
-                    print "Package have an update ".$branchAlias;
+            if ($timeStamp > $installData->time) {
+                if ($branchAlias != $this->app->version()) {
+                    echo 'Package have an update '.$branchAlias;
+                } else {
+                    echo 'Package have an update '.$version;
                 }
-                else {
-                    print "Package have an update ".$version;
-                }
+            } else {
+                echo 'There is no update.';
             }
-            else {
-                print "There is no update.";
-            }
-        }
-        else {
-            echo Colors::GREEN."\nChecking updates... ".Colors::WHITE." No internet!";
+        } else {
+            echo Colors::GREEN."\nChecking updates... ".Colors::WHITE.' No internet!';
         }
     }
 
@@ -109,22 +109,23 @@ class VersionCommand extends Command
     public function help()
     {
         $output = $this->getInfo().
-        Colors::YELLOW."Description:".PHP_EOL.
-        Colors::WHITE."  Displays version of the ironphp framework".PHP_EOL.
+        Colors::YELLOW.'Description:'.PHP_EOL.
+        Colors::WHITE.'  Displays version of the ironphp framework'.PHP_EOL.
         PHP_EOL.
-        Colors::YELLOW."Usage:".PHP_EOL.
-        Colors::WHITE."  version".PHP_EOL.
+        Colors::YELLOW.'Usage:'.PHP_EOL.
+        Colors::WHITE.'  version'.PHP_EOL.
         PHP_EOL.
-        Colors::YELLOW."Arguments:".PHP_EOL.
+        Colors::YELLOW.'Arguments:'.PHP_EOL.
         PHP_EOL.
-        Colors::YELLOW."Options:".PHP_EOL.
+        Colors::YELLOW.'Options:'.PHP_EOL.
         PHP_EOL.
-        Colors::YELLOW."Help:".PHP_EOL.
-        Colors::WHITE."  The ".Colors::GREEN."version".Colors::WHITE." display framework version:".PHP_EOL.
+        Colors::YELLOW.'Help:'.PHP_EOL.
+        Colors::WHITE.'  The '.Colors::GREEN.'version'.Colors::WHITE.' display framework version:'.PHP_EOL.
         PHP_EOL.
-        Colors::GREEN."    php jarvis version".PHP_EOL.
+        Colors::GREEN.'    php jarvis version'.PHP_EOL.
         PHP_EOL.
         Colors::BG_BLACK.Colors::WHITE;
+
         return $output;
     }
 }

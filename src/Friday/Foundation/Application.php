@@ -1,28 +1,29 @@
 <?php
 /**
  * IronPHP : PHP Development Framework
- * Copyright (c) IronPHP (https://github.com/IronPHP/IronPHP)
+ * Copyright (c) IronPHP (https://github.com/IronPHP/IronPHP).
  *
  * Licensed under The MIT License
  * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice.
  *
- * @package       IronPHP
  * @copyright     Copyright (c) IronPHP (https://github.com/IronPHP/IronPHP)
- * @link          
+ *
+ * @link
  * @since         1.0.0
+ *
  * @license       MIT License (https://opensource.org/licenses/mit-license.php)
  * @auther        GaurangKumar Parmar <gaurangkumarp@gmail.com>
  */
 
 namespace Friday\Foundation;
 
-use Friday\Foundation\Exceptions\Handler;
-use Friday\Http\FrontController;
-use Friday\Http\Route;
-use Friday\Helper\Session;
 use Dotenv\Dotenv;
 use Exception;
+use Friday\Foundation\Exceptions\Handler;
+use Friday\Helper\Session;
+use Friday\Http\FrontController;
+use Friday\Http\Route;
 
 /**
  * Runs an application invoking all the registered application.
@@ -67,35 +68,35 @@ class Application
     /**
      * Create a new Friday application instance.
      *
-     * @param  string|null  $basePath
+     * @param string|null $basePath
+     *
      * @return void
      */
     public function __construct($basePath = null)
     {
-		if ($basePath) {
+        if ($basePath) {
             $this->setBasePath($basePath);
         }
 
-        $this->config['basePath'] = $this->basePath(); 
+        $this->config['basePath'] = $this->basePath();
 
-		## Configurator
-        #enviro config
-        $dotenv = Dotenv::create( $this->basePath() );
+        //# Configurator
+        //enviro config
+        $dotenv = Dotenv::create($this->basePath());
         $dotenv->load();
 
-        #Set Exception Handler
-		$e = new Handler();
+        //Set Exception Handler
+        $e = new Handler();
         $e->register();
 
-        #set install config
-        if($this->getIntallTime(true) === false) {
+        //set install config
+        if ($this->getIntallTime(true) === false) {
             $this->setIntallTime();
-        }
-        elseif(empty(env('APP_KEY'))) {
-            echo "APP_KEY is not defined in .env file, define it by command: php jarvis key";
+        } elseif (empty(env('APP_KEY'))) {
+            echo 'APP_KEY is not defined in .env file, define it by command: php jarvis key';
         }
 
-        #load config
+        //load config
         $this->config['app'] = $this->requireFile(
             $this->basePath('config/app.php'), true
         );
@@ -104,29 +105,29 @@ class Application
         );
         define('CONFIG_LOADED', microtime(true));
 
-        #set locale-timezone
+        //set locale-timezone
         $this->setTimezone($this->config['app']['timezone']);
         $timezone = date_default_timezone_get();
-        if (strcmp($timezone, ini_get('date.timezone'))){
+        if (strcmp($timezone, ini_get('date.timezone'))) {
             ini_set('date.timezone', $timezone);
         }
 
-        #load session
+        //load session
         $this->session = new Session();
-        if(!$this->session->isRegistered()) {
+        if (!$this->session->isRegistered()) {
             $this->session->register();
         }
 
-        #frontcontroller
+        //frontcontroller
         $this->frontController = new FrontController();
 
-        #route
+        //route
         $this->route = $this->frontController->route();
 
         Route::$instance = $this->route;
         define('ROUTES_LOADED', microtime(true));
 
-        #load routes
+        //load routes
         $this->requireFile(
             $this->basePath('app/Route/web.php')
         );
@@ -146,7 +147,8 @@ class Application
     /**
      * Set the base path for the application.
      *
-     * @param  string  $basePath
+     * @param string $basePath
+     *
      * @return $this
      */
     public function setBasePath($basePath)
@@ -159,7 +161,8 @@ class Application
     /**
      * Get the base path of the IronPHP installation.
      *
-     * @param  string  $path Optionally, a path to append to the base path
+     * @param string $path Optionally, a path to append to the base path
+     *
      * @return string
      */
     public function basePath($path = '')
@@ -170,15 +173,15 @@ class Application
     /**
      * Find a file.
      *
-     * @param  string  $path
+     * @param string $path
+     *
      * @return bool
      */
     public function findFile($path)
     {
-        if(file_exists($path) && is_file($path)) {
+        if (file_exists($path) && is_file($path)) {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
@@ -186,18 +189,19 @@ class Application
     /**
      * Find a Model.
      *
-     * @param   string  $model
-     * @return  string  full model file path
-     * @throws  Exception
+     * @param string $model
+     *
+     * @throws Exception
+     *
+     * @return string full model file path
      */
     public function findModel($model)
     {
         $file = $this->basePath("app/Model/$model.php");
-        if($this->findFile($file)) {
+        if ($this->findFile($file)) {
             return $file;
-        }
-        else {
-            throw new Exception($file." Model file is missing.");
+        } else {
+            throw new Exception($file.' Model file is missing.');
             exit;
         }
     }
@@ -205,18 +209,19 @@ class Application
     /**
      * Find a View.
      *
-     * @param   string  $view
-     * @return  string  full view file path
-     * @throws  Exception
+     * @param string $view
+     *
+     * @throws Exception
+     *
+     * @return string full view file path
      */
     public function findView($view)
     {
         $file = $this->basePath("app/View/$view.php");
-        if($this->findFile($file)) {
+        if ($this->findFile($file)) {
             return $file;
-        }
-        else {
-            throw new Exception($file." View file is missing.");
+        } else {
+            throw new Exception($file.' View file is missing.');
             exit;
         }
     }
@@ -224,24 +229,23 @@ class Application
     /**
      * Find a Template.
      *
-     * @param   string  $template
-     * @return  string  full template file path
-     * @throws  Exception
+     * @param string $template
+     *
+     * @throws Exception
+     *
+     * @return string full template file path
      */
     public function findTemplate($template)
     {
         $file = $this->basePath("app/Template/$template");
-        if($this->findFile($file)) {
+        if ($this->findFile($file)) {
             return $file;
-        }
-        elseif($this->findFile($file.'.html')) {
+        } elseif ($this->findFile($file.'.html')) {
             return $file.'.html';
-        }
-        elseif($this->findFile($file.'.php')) {
+        } elseif ($this->findFile($file.'.php')) {
             return $file.'.php';
-        }
-        else {
-            throw new Exception($file." Template file is missing.");
+        } else {
+            throw new Exception($file.' Template file is missing.');
             exit;
         }
     }
@@ -249,18 +253,19 @@ class Application
     /**
      * Find a Controller.
      *
-     * @param   string  $controller
-     * @return  bool
-     * @throws  Exception
+     * @param string $controller
+     *
+     * @throws Exception
+     *
+     * @return bool
      */
     public function findController($controller)
     {
         $file = $this->basePath("app/Controller/$controller.php");
-        if($this->findFile($file)) {
+        if ($this->findFile($file)) {
             return true;
-        }
-        else {
-            throw new Exception($file." Controller file is missing.");
+        } else {
+            throw new Exception($file.' Controller file is missing.');
             exit;
         }
     }
@@ -268,18 +273,19 @@ class Application
     /**
      * Check if Controller has method or not.
      *
-     * @param   {App}\Controller\{Name}Controller  $controllerObj
-     * @param   string                             $method
-     * @return  bool
-     * @throws  Exception
+     * @param {App}\Controller\{Name}Controller $controllerObj
+     * @param string                            $method
+     *
+     * @throws Exception
+     *
+     * @return bool
      */
     public function hasMethod($controllerObj, $method)
     {
-        if(method_exists($controllerObj, $method)) {
+        if (method_exists($controllerObj, $method)) {
             return true;
-        }
-        else {
-            throw new Exception($method." method is missing in ".get_class($controllerObj)." Controller.");
+        } else {
+            throw new Exception($method.' method is missing in '.get_class($controllerObj).' Controller.');
             exit;
         }
     }
@@ -287,23 +293,23 @@ class Application
     /**
      * Require a file.
      *
-     * @param   string  $file
-     * @param   bool    $return
-     * @return  void
-     * @throws  Exception
+     * @param string $file
+     * @param bool   $return
+     *
+     * @throws Exception
+     *
+     * @return void
      */
     public function requireFile($file, $return = false)
     {
-        if($this->findFile($file)) {
-            if($return !== false) {
-                return require($file);
+        if ($this->findFile($file)) {
+            if ($return !== false) {
+                return require $file;
+            } else {
+                require $file;
             }
-            else {
-                require($file);
-            }
-        }
-        else {
-            throw new Exception($file." file is missing.");
+        } else {
+            throw new Exception($file.' file is missing.');
             exit;
         }
     }
@@ -316,17 +322,15 @@ class Application
     public function setIntallTime()
     {
         $file = $this->basePath('app/install');
-        if(!file_exists($file)) {
+        if (!file_exists($file)) {
             $content = json_encode(['time'=>time(), 'version' => $this->version()]);
             $byte = file_put_contents($file, $content);
-            if($byte) {
+            if ($byte) {
                 return true;
-            }
-            else {
+            } else {
                 return false;
             }
-        }
-        else {
+        } else {
             return true;
         }
     }
@@ -334,66 +338,68 @@ class Application
     /**
      * Get Installtion Time/Version to app/install file used for checking updates.
      *
-     * @param  bool       $checkSet
+     * @param bool $checkSet
+     *
      * @return bool|array
      */
     public function getIntallTime($checkSet = false)
     {
         $file = $this->basePath('app/install');
-        if(!file_exists($file)) {
+        if (!file_exists($file)) {
             return false;
-        }
-        else {
-            if($checkSet === true) {
+        } else {
+            if ($checkSet === true) {
                 return true;
             }
             $content = file_get_contents($file);
             $data = json_decode($content);
         }
+
         return $data;
     }
 
     /**
      * Set Application secret key.
      *
+     * @throws Exception
+     *
      * @return string
-     * @throws  Exception
      */
     public function setKey()
     {
-        if(trim(env('APP_KEY')) != '') {
+        if (trim(env('APP_KEY')) != '') {
             return true;
         }
-        $appKey='';
-        for($i=0;$i<32;$i++) {
-            $appKey.=chr(rand(0,255));
+        $appKey = '';
+        for ($i = 0; $i < 32; $i++) {
+            $appKey .= chr(rand(0, 255));
         }
         $appKey = 'base64:'.base64_encode($appKey);
         $file = $this->basePath('.env');
         $lines = $this->parseEnvFile($file);
         $flag = false;
-        foreach($lines as $i => $line) {
+        foreach ($lines as $i => $line) {
             $lines[$i] = trim($line);
             $lines[$i] = trim($line, "\n");
-            if(strpos($line, 'APP_KEY') !== false) {
+            if (strpos($line, 'APP_KEY') !== false) {
                 $data = explode('=', $line, 2);
-                if(!isset($data[1]) || trim($data[1]) == '') {
-                    $lines[$i] = "APP_KEY=".$appKey;
+                if (!isset($data[1]) || trim($data[1]) == '') {
+                    $lines[$i] = 'APP_KEY='.$appKey;
                     $flag = true;
                 }
             }
         }
-        if($flag == false) {
-            $lines = ["APP_KEY=".$appKey] + $lines;
+        if ($flag == false) {
+            $lines = ['APP_KEY='.$appKey] + $lines;
         }
         $data = implode("\n", $lines);
-        if(file_put_contents($file, $data)) {
+        if (file_put_contents($file, $data)) {
             putenv("APP_KEY=$appKey");
             $_ENV['APP_KEY'] = $appKey;
             $_SERVER['APP_KEY'] = $appKey;
+
             return true;
-        }
-        else {
+        } else {
             throw new Exception('Failed to write in .env file.');
         }
     }
@@ -401,7 +407,8 @@ class Application
     /**
      * Parse .env file gets its lines in array.
      *
-     * @param  string  $file
+     * @param string $file
+     *
      * @return array
      */
     public function parseEnvFile($file)
@@ -416,9 +423,11 @@ class Application
     /**
      * Ensures the given filePath is readable.
      *
-     * @param  string  $file
+     * @param string $file
+     *
+     * @throws Exception
+     *
      * @return void
-     * @throws  Exception
      */
     protected function ensureFileIsReadable($file)
     {
@@ -430,20 +439,20 @@ class Application
     /**
      * Find a Command.
      *
-     * @param  string  $command
-     * @param  bool    $system
+     * @param string $command
+     * @param bool   $system
+     *
      * @return bool
      */
     public function findCommand($command, $system = true)
     {
-        $file = dirname(__DIR__) . "/Console/Command/" . ucfirst($command) . "Command.php";
-        if($this->findFile($file)) {
+        $file = dirname(__DIR__).'/Console/Command/'.ucfirst($command).'Command.php';
+        if ($this->findFile($file)) {
             return true;
-        }
-        else {
+        } else {
             return false;
-            #throw new Exception($file." Command Class is missing.");
-            #exit;
+            //throw new Exception($file." Command Class is missing.");
+            //exit;
         }
     }
 
@@ -451,6 +460,7 @@ class Application
      * Set timezone.
      *
      * @param  string  default
+     *
      * @return bool
      */
     public function setTimezone($default)
@@ -459,34 +469,31 @@ class Application
         I'm sure I'm not the only one who is distressed by the recent default behavior change to E_NOTICE when the timezone isn't explicitly set in the program or in .ini.  I insure that the clock on the server IS correct, and I don't want to have to set it in two places (the system AND PHP).  So I want to read it from the system.  But PHP won't accept that answer, and insists on a call to this function
         Use it by calling it with a fallback default answer. It doesn't work on Windows.
         */
-        $timezone = "";
-    
+        $timezone = '';
+
         // On many systems (Mac, for instance) "/etc/localtime" is a symlink
         // to the file with the timezone info
-        if (is_link("/etc/localtime")) {
-        
+        if (is_link('/etc/localtime')) {
+
             // If it is, that file's name is actually the "Olsen" format timezone
-            $filename = readlink("/etc/localtime");
-        
-            $pos = strpos($filename, "zoneinfo");
+            $filename = readlink('/etc/localtime');
+
+            $pos = strpos($filename, 'zoneinfo');
             if ($pos) {
                 // When it is, it's in the "/usr/share/zoneinfo/" folder
-                $timezone = substr($filename, $pos + strlen("zoneinfo/"));
-            }
-            else {
+                $timezone = substr($filename, $pos + strlen('zoneinfo/'));
+            } else {
                 // If not, bail
                 $timezone = $default;
             }
-        }
-        elseif (is_link("/etc/timezone")) {
+        } elseif (is_link('/etc/timezone')) {
             // On other systems, like Ubuntu, there's file with the Olsen time
             // right inside it.
-            $timezone = file_get_contents("/etc/timezone");
+            $timezone = file_get_contents('/etc/timezone');
             if (!strlen($timezone)) {
                 $timezone = $default;
             }
-        }
-        else {
+        } else {
             $timezone = $default;
         }
         date_default_timezone_set($timezone);
@@ -496,6 +503,7 @@ class Application
      * Get specific or all Registered redirect routes.
      *
      * @param  string  uri
+     *
      * @return array
      */
     public function getRoutes($uri = null)
@@ -506,50 +514,52 @@ class Application
     /**
      * Find a Theme.
      *
-     * @param   string  $theme
-     * @param   string  $file   File to use for rendering
-     * @return  string
-     * @throws  Exception
+     * @param string $theme
+     * @param string $file  File to use for rendering
+     *
+     * @throws Exception
+     *
+     * @return string
      */
     public function findTheme($theme, $file = null)
     {
         $extMain = ['html', 'htm'];
-        if($file) {
+        if ($file) {
             $array = explode('.', $file);
             $ext = array_pop($array);
         } else {
             $ext = null;
         }
 
-        if(!in_array($ext, $extMain)) {
-            throw new Exception("Theme file must be HTML/HTM : ".$theme.DS.$file);
+        if (!in_array($ext, $extMain)) {
+            throw new Exception('Theme file must be HTML/HTM : '.$theme.DS.$file);
             exit;
         }
 
         $fileName = ltrim($file, '/\\');
         $allowedExt = ['html', 'htm', 'css', 'js', 'jpg', 'png', 'svg', 'eot', 'ttf', 'woff', 'woof2', 'scss', 'less'];
-        $dir = THEME . $theme . DS;
-        
-        if(!file_exists($dir) || is_file($dir)) {
-            throw new Exception($dir." Directory is missing.");
+        $dir = THEME.$theme.DS;
+
+        if (!file_exists($dir) || is_file($dir)) {
+            throw new Exception($dir.' Directory is missing.');
             exit;
         }
 
         $json = $dir.'/ironphp-theme.json';
-        if(!file_exists($json) || !is_file($json) || !filesize($json) || (round(fileatime($json)/10) < round(fileatime($dir)/10))) {
+        if (!file_exists($json) || !is_file($json) || !filesize($json) || (round(fileatime($json) / 10) < round(fileatime($dir) / 10))) {
             $themeFiles = $this->parseDir($dir, $allowedExt, $json, true);
-            if(!isset($themeFiles['html']) && isset($themeFiles['htm'])) {
-                throw new Exception("HTML/HTM files are missing in Theme: ".$theme);
+            if (!isset($themeFiles['html']) && isset($themeFiles['htm'])) {
+                throw new Exception('HTML/HTM files are missing in Theme: '.$theme);
                 exit;
             }
         } else {
             $themeFiles = json_decode(file_get_contents($json), true);
         }
 
-        if(in_array($fileName, $themeFiles[$ext])) {
+        if (in_array($fileName, $themeFiles[$ext])) {
             $themeFilepath = $themeFiles['theme_path'].$fileName;
         } else {
-            throw new Exception($fileName." is missing in Theme: ".$theme);
+            throw new Exception($fileName.' is missing in Theme: '.$theme);
             exit;
         }
         $this->installTheme($themeFiles, ['css', 'js', 'jpg', 'png', 'svg', 'eot', 'ttf', 'woff', 'woof2', 'scss', 'less']);
@@ -560,11 +570,12 @@ class Application
     /**
      * Parse files/dir in dir.
      *
-     * @param   string  $dir
-     * @param   array   $allowedExt
-     * @param   string  $json
-     * @param   bool    $byType
-     * @return  array
+     * @param string $dir
+     * @param array  $allowedExt
+     * @param string $json
+     * @param bool   $byType
+     *
+     * @return array
      */
     public function parseDir($dir, $allowedExt, $json, $byType = false)
     {
@@ -572,6 +583,7 @@ class Application
         $getList = $this->getList($dir, $allowedExt, [], $byType);
         fwrite($fp, json_encode($getList, JSON_PRETTY_PRINT));
         fclose($fp);
+
         return $getList;
     }
 
@@ -593,18 +605,19 @@ class Application
         $it = new \RecursiveDirectoryIterator($dir);
         foreach (new \RecursiveIteratorIterator($it) as $info => $file) {
             $basename = $file->getBasename();
-            if($basename== '.' || $basename == '..' || $basename[0] == '.') {
+            if ($basename == '.' || $basename == '..' || $basename[0] == '.') {
                 continue;
             }
             $relPath = str_ireplace($dir, '', $file->getRealPath());
             if (!in_array($it, $ignoreDir) && $types == [] || in_array(strtolower($file->getExtension()), $types)) {
-                if($byType) {
+                if ($byType) {
                     $files[$file->getExtension()][] = $relPath;
                 } else {
                     $files[] = $relPath;
                 }
             }
         }
+
         return $files;
     }
 
@@ -617,34 +630,34 @@ class Application
      */
     public function installTheme($jsonTheme, $allowExt)
     {
-        foreach($jsonTheme as $key => $val) {
-            if($key == 'theme_path') {
+        foreach ($jsonTheme as $key => $val) {
+            if ($key == 'theme_path') {
                 $theme_path = $val;
-            } elseif(in_array($key, $allowExt) ) {
-                foreach($val as $file) {
-                    if(file_exists($theme_path.$file) && is_file($theme_path.$file)) {
-                        if(file_exists(WEB_ROOT.$file) && is_file(WEB_ROOT.$file)) {
-                            if(filesize($theme_path.$file) === filesize(WEB_ROOT.$file)) {
-                                #file is already copied
+            } elseif (in_array($key, $allowExt)) {
+                foreach ($val as $file) {
+                    if (file_exists($theme_path.$file) && is_file($theme_path.$file)) {
+                        if (file_exists(WEB_ROOT.$file) && is_file(WEB_ROOT.$file)) {
+                            if (filesize($theme_path.$file) === filesize(WEB_ROOT.$file)) {
+                                //file is already copied
                             } else {
-                                throw new Exception("Different file with same name already exist: ".WEB_ROOT.$file);
+                                throw new Exception('Different file with same name already exist: '.WEB_ROOT.$file);
                                 exit;
                             }
                         } else {
                             $dirname = dirname(WEB_ROOT.$file);
                             $makedir = [];
-                            while(!file_exists($dirname) || !is_dir($dirname)) {
+                            while (!file_exists($dirname) || !is_dir($dirname)) {
                                 $makedir[] = $dirname;
                                 $dirname = dirname($dirname);
                             }
                             $makedir = array_reverse($makedir);
-                            foreach($makedir as $dir) {
+                            foreach ($makedir as $dir) {
                                 mkdir($dir);
                             }
                             copy($theme_path.$file, WEB_ROOT.$file);
                         }
                     } else {
-                        throw new Exception("File is not exist: ".$theme_path.$file);
+                        throw new Exception('File is not exist: '.$theme_path.$file);
                         exit;
                     }
                 }

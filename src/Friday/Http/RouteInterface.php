@@ -1,67 +1,71 @@
 <?php
 /**
  * IronPHP : PHP Development Framework
- * Copyright (c) IronPHP (https://github.com/IronPHP/IronPHP)
+ * Copyright (c) IronPHP (https://github.com/IronPHP/IronPHP).
  *
  * Licensed under The MIT License
  * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice.
  *
- * @package       IronPHP
  * @copyright     Copyright (c) IronPHP (https://github.com/IronPHP/IronPHP)
- * @link          
+ *
+ * @link
  * @since         1.0.0
+ *
  * @license       MIT License (https://opensource.org/licenses/mit-license.php)
  * @auther        GaurangKumar Parmar <gaurangkumarp@gmail.com>
  */
 
 namespace Friday\Http;
 
-interface RouteInterface {
-
+interface RouteInterface
+{
     /**
      * Create Route instance.
      *
      * @return void
      */
     public function __construct();
- 
+
     /**
      * register a GET method route.
      *
-     * @param  string           $route
-     * @param  string|callback  $mix
+     * @param string          $route
+     * @param string|callback $mix
+     *
      * @return bool
      */
-    static public function get($route, $mix);
+    public static function get($route, $mix);
 
     /**
      * register a POST method route.
      *
-     * @param  string           $route
-     * @param  string|callback  $mix
+     * @param string          $route
+     * @param string|callback $mix
+     *
      * @return bool
      */
-    static public function post($route, $mix);
-
+    public static function post($route, $mix);
 
     /**
      * register a GET method route with view.
      *
-     * @param  string                $route
-     * @param  string|null           $view
-     * @param  array                 $data
+     * @param string      $route
+     * @param string|null $view
+     * @param array       $data
+     *
      * @return bool
      */
-    static public function view($route, $view = null, array $data = []);
+    public static function view($route, $view = null, array $data = []);
 
     /**
      * register a route.
      *
-     * @param  string                $route
-     * @param  string|callback|null  $mix
-     * @param  string|null           $view
-     * @param  array                 $data
+     * @param string               $route
+     * @param string|callback|null $mix
+     * @param string|null          $view
+     * @param array                $data
+     *
      * @return void
      */
     public function register($method, $route, $mix = null, $view = null, $data = []);
@@ -76,26 +80,29 @@ interface RouteInterface {
     /**
      * Group routes by prefix.
      *
-     * @param  string  $prefix
+     * @param string $prefix
+     *
      * @return \Friday\Http\Route
      */
-    static public function prefix($prefix);
+    public static function prefix($prefix);
 
     /**
      * Registered group routes.
      *
-     * @param  \Closure  $closure
+     * @param \Closure $closure
+     *
      * @return void
      */
-    static public function group($closure);
+    public static function group($closure);
 
     /**
      * Registered redirect routes.
      *
-     * @param  string  $routeFrom
-     * @param  string  $routeTo
-     * @param  int     $http_response_code
+     * @param string $routeFrom
+     * @param string $routeTo
+     * @param int    $http_response_code
+     *
      * @return void
      */
-    static public function redirect($routeFrom, $routeTo, $http_response_code);
+    public static function redirect($routeFrom, $routeTo, $http_response_code);
 }

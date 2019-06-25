@@ -1,16 +1,17 @@
 <?php
 /**
  * IronPHP : PHP Development Framework
- * Copyright (c) IronPHP (https://github.com/IronPHP/IronPHP)
+ * Copyright (c) IronPHP (https://github.com/IronPHP/IronPHP).
  *
  * Licensed under The MIT License
  * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice.
  *
- * @package       IronPHP
  * @copyright     Copyright (c) IronPHP (https://github.com/IronPHP/IronPHP)
- * @link          
+ *
+ * @link
  * @since         1.0.0
+ *
  * @license       MIT License (https://opensource.org/licenses/mit-license.php)
  * @auther        GaurangKumar Parmar <gaurangkumarp@gmail.com>
  */
@@ -26,7 +27,7 @@ class Session
      */
     public function __construct()
     {
-        if(is_session_started() === false ) {
+        if (is_session_started() === false) {
             session_start();
         }
     }
@@ -34,7 +35,7 @@ class Session
     /**
      * Register the session.
      *
-     * @param integer $time
+     * @param int $time
      */
     public function register($time = 60)
     {
@@ -50,7 +51,7 @@ class Session
      */
     public function isRegistered()
     {
-        if (! empty($_SESSION['session_id'])) {
+        if (!empty($_SESSION['session_id'])) {
             return true;
         } else {
             return false;
@@ -60,8 +61,9 @@ class Session
     /**
      * Set key/value in session.
      *
-     * @param  mixed $key
-     * @param  mixed $value
+     * @param mixed $key
+     * @param mixed $value
+     *
      * @return void
      */
     public function set($key, $value)
@@ -103,7 +105,7 @@ class Session
      * Checks to see if the session is over based on the amount of time given.
      *
      * @return bool
-    */
+     */
     public function isExpired()
     {
         if ($_SESSION['session_start'] < $this->timeNow()) {
@@ -134,6 +136,7 @@ class Session
         $currentMon = date('m');
         $currentDay = date('d');
         $currentYear = date('y');
+
         return mktime($currentHour, $currentMin, $currentSec, $currentMon, $currentDay, $currentYear);
     }
 
@@ -150,6 +153,7 @@ class Session
         $currentMon = date('m');
         $currentDay = date('d');
         $currentYear = date('y');
+
         return mktime($currentHour, ($currentMin + $_SESSION['session_time']), $currentSec, $currentMon, $currentDay, $currentYear);
     }
 
@@ -161,7 +165,7 @@ class Session
     public function end()
     {
         session_destroy();
-        $_SESSION = array();
+        $_SESSION = [];
     }
 
     /**
@@ -172,17 +176,19 @@ class Session
     public function getToken()
     {
         $this->set('_token', base64_encode(openssl_random_pseudo_bytes(32)));
+
         return $this->get('_token');
-    }    
+    }
 
     /**
      * Check a token.
      *
-     * @param  string  $token
+     * @param string $token
+     *
      * @return bool
      */
     public function checkToken($token)
     {
         return isset($token) && $token === $token;
-    }    
+    }
 }

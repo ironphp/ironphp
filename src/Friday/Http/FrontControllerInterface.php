@@ -1,35 +1,37 @@
 <?php
 /**
  * IronPHP : PHP Development Framework
- * Copyright (c) IronPHP (https://github.com/IronPHP/IronPHP)
+ * Copyright (c) IronPHP (https://github.com/IronPHP/IronPHP).
  *
  * Licensed under The MIT License
  * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice.
  *
- * @package       IronPHP
  * @copyright     Copyright (c) IronPHP (https://github.com/IronPHP/IronPHP)
- * @link          
+ *
+ * @link
  * @since         1.0.0
+ *
  * @license       MIT License (https://opensource.org/licenses/mit-license.php)
  * @auther        Gaurang Parmar <gaurangkumarp@gmail.com>
  */
+
 namespace Friday\Http;
 
 /**
- * FrontController Interface
+ * FrontController Interface.
  */
 interface FrontControllerInterface
 {
     /**
      * Default controller.
      */
-    const DEFAULT_CONTROLLER = "IndexController";
+    const DEFAULT_CONTROLLER = 'IndexController';
 
     /**
      * Default method.
      */
-    const DEFAULT_ACTION = "index";
+    const DEFAULT_ACTION = 'index';
 
     /**
      * Create a new FrontController instance.
@@ -37,11 +39,12 @@ interface FrontControllerInterface
      * @return void
      */
     public function __construct();
-    
+
     /**
      * Create Responce instance.
      *
-     * @param  array  $parsedUrl
+     * @param array $parsedUrl
+     *
      * @return \Friday\Http\Request
      */
     public function request($parsedUrl);
@@ -70,7 +73,8 @@ interface FrontControllerInterface
     /**
      * Create Response instance.
      *
-     * @param  string  $serverProtocol
+     * @param string $serverProtocol
+     *
      * @return \Friday\Http\Response
      */
     public function response($serverProtocol);

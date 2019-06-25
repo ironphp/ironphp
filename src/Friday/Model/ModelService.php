@@ -1,16 +1,17 @@
 <?php
 /**
  * IronPHP : PHP Development Framework
- * Copyright (c) IronPHP (https://github.com/IronPHP/IronPHP)
+ * Copyright (c) IronPHP (https://github.com/IronPHP/IronPHP).
  *
  * Licensed under The MIT License
  * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice.
  *
- * @package       IronPHP
  * @copyright     Copyright (c) IronPHP (https://github.com/IronPHP/IronPHP)
- * @link          
+ *
+ * @link
  * @since         1.0.0
+ *
  * @license       MIT License (https://opensource.org/licenses/mit-license.php)
  * @auther        GaurangKumar Parmar <gaurangkumarp@gmail.com
  */
@@ -59,12 +60,13 @@ class ModelService
     /**
      * Initialize ModelService instance.
      *
-     * @param  \Friday\Foundation\Application  $app
+     * @param \Friday\Foundation\Application $app
+     *
      * @return void
      */
     public function initialize($app)
     {
-        if(self::$app === NULL) {
+        if (self::$app === null) {
             self::$app = $app;
         }
     }
@@ -72,7 +74,8 @@ class ModelService
     /**
      * Create Instance of Table.
      *
-     * @param  string  $tableName
+     * @param string $tableName
+     *
      * @return \Friday\Model\Table
      */
     public function table($tableName)
@@ -87,19 +90,21 @@ class ModelService
      */
     private function getPagination()
     {
-        if($this->pagination == null) {
+        if ($this->pagination == null) {
             $this->pagination = new \Friday\Helper\Pagination();
         }
+
         return $this->pagination;
     }
 
     /**
      * Get pagination html.
      *
-     * @param  string  $url
-     * @param  int     $style
-     * @param  array   $cssClass
-     * @param  bool    $replaceClass
+     * @param string $url
+     * @param int    $style
+     * @param array  $cssClass
+     * @param bool   $replaceClass
+     *
      * @return string|null
      */
     protected function getPaginationHtml($url = '?', $style = 0, $cssClass = null, $replaceClass = false)
@@ -114,10 +119,9 @@ class ModelService
      */
     protected function isLogged()
     {
-        if(self::$app->session->get('SESS_MEMBER_ID')) {
+        if (self::$app->session->get('SESS_MEMBER_ID')) {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
@@ -130,10 +134,9 @@ class ModelService
     protected function isAdmin()
     {
         $usertype = self::$app->session->get('SESS_USER_TYPE');
-        if($usertype === 'Master') {
+        if ($usertype === 'Master') {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
@@ -141,8 +144,9 @@ class ModelService
     /**
      * Function to sanitize values received from the form. Prevents SQL injection.
      *
-     * @param   mixed   $string
-     * @return  mixed
+     * @param mixed $string
+     *
+     * @return mixed
      */
     protected function sanitizeFormValue($string)
     {
@@ -168,6 +172,7 @@ class ModelService
     {
         $key = env('APP_KEY');
         $key = str_replace('base64:', '', $key);
+
         return base64_decode($key);
     }
 
@@ -198,9 +203,10 @@ class ModelService
      */
     private function getDataMapper()
     {
-        if($this->dataMapper == null) {
+        if ($this->dataMapper == null) {
             $this->dataMapper = new \Friday\Model\DataMapper(self::$app->config);
         }
+
         return $this->dataMapper;
     }
 }
