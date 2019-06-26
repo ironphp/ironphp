@@ -29,10 +29,12 @@
     },
     "require": {
         "php": ">=5.5",
+        "povils/phpmnd": "2.0",
         "psr/log": "1.1.0",
         "vlucas/phpdotenv": "^3.3"
     },
     "require-dev": {
+        "dephpend/dephpend": "@dev",
         "phpunit/phpunit": "^7.5"
     },
     "autoload": {
