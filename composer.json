@@ -39,6 +39,7 @@
         "behat/behat": "^3.5@dev",
         "designsecurity/progpilot": "dev-master",
         "kahlan/kahlan": "dev-master",
+        "phing/phing": "^3.0@dev",
         "phpunit/phpunit": "^7.5",
         "phpunit/phpunit-selenium": "@dev",
         "vimeo/psalm": "^3.0@dev"
