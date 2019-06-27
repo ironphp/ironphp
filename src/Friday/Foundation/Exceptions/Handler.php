@@ -54,7 +54,7 @@ class Handler implements HandlerInterface
     public static $LIST = [];
 
     /**
-     * @var integer|false
+     * @var int|false
      */
     private $sendHttpCode = 500;
 
