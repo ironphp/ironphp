@@ -66,6 +66,13 @@ class Application
     public $route;
 
     /**
+     * Instanse of Session.
+     *
+     * @var \Friday\Helper\Session
+     */
+    public $session;
+
+    /**
      * Create a new Friday application instance.
      *
      * @param string|null $basePath
@@ -300,7 +307,7 @@ class Application
      *
      * @throws Exception
      *
-     * @return void
+     * @return void|string
      */
     public function requireFile($file, $return = false)
     {
@@ -312,7 +319,7 @@ class Application
             }
         } else {
             throw new Exception($file.' file is missing.');
-            exit;
+            exit(0);
         }
     }
 

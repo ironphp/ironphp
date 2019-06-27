@@ -45,14 +45,14 @@ interface HandlerInterface
     /**
      * Registers this instance as an error handler.
      *
-     * @return Run
+     * @return $this
      */
     public function register();
 
     /**
      * Unregisters all handlers registered by this Whoops\Run instance.
      *
-     * @return Run
+     * @return $this
      */
     public function unregister();
 

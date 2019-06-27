@@ -27,7 +27,7 @@ use Friday\Foundation\Errors\Warning;
 class Handler implements HandlerInterface
 {
     /**
-     * @var Notifier
+     * @var string
      */
     private $notifier;
 
@@ -383,68 +383,6 @@ class Handler implements HandlerInterface
         // Propagate error to the next handler, allows error_get_last() to
         // work on silenced errors.
         return false;
-//
-        /**
-         * Exception handler callable.
-         *
-         * @since  1.0.1
-         *
-         * @param int    $errno  (severity)
-         * @param string $errstr (message)
-         * @param string $file
-         * @param int    $line
-         *
-         * @throws \ErrorException
-         *
-         * @return void
-         */
-        //function exception_error_handler($errno, $errstr, $file, $line) {
-        if (!(error_reporting() & $errno)) {
-            // This error code is not included in error_reporting, so let it fall
-            // through to the standard PHP error handler
-            return false;
-        }
-        switch ($errno) {
-            case E_USER_ERROR:
-                echo "<b>My ERROR</b> [$errno] $errstr<br>\n";
-                echo "  Fatal error on line $errline in file $errfile";
-                echo ', PHP '.PHP_VERSION.' ('.PHP_OS.")<br>\n";
-                echo "Aborting...<br>\n";
-                exit(1);
-                break;
-
-            case E_USER_WARNING:
-                echo "<b>My WARNING</b> [$errno] $errstr<br>\n";
-                break;
-
-            case E_USER_NOTICE:
-                echo "<b>My NOTICE</b> [$errno] $errstr<br>\n";
-                break;
-
-            default:
-                echo "<b>Error</b>: [$errno] $errstr<br>\n";
-                break;
-        }
-
-        /* Don't execute PHP internal error handler */
-        return true;
-
-        throw new ErrorException($errstr, 0, $errno, $file, $line);
-//
-        /*
-         * Error handler, passes flow over the
-         * exception logger with new ErrorException.
-         *
-         * @since  1.0.1
-         * @param  int      $errno (severity)
-         * @param  string   $errstr (message)
-         * @param  string   $errfile
-         * @param  int      $errline
-         * @return void
-         */
-        //function log_error( $errno, $errstr, $errfile, $errline, $context = null ) {
-        //print_r(func_get_args());exit;
-        log_exception(new ErrorException($errstr, 0, $errno, $errfile, $errline));
     }
 
     /**
@@ -488,10 +426,6 @@ class Handler implements HandlerInterface
                 $error['file'],
                 $error['line']
             );
-        }
-        if ($error['type'] != 0) {
-            //call_user_func($this->errorHandler,new ErrorException($error['message'], 0, $error['type'], $error['file'], $error['line']));
-            //log_error( $error["type"], $error["message"], $error["file"], $error["line"] );
         }
     }
 

@@ -63,13 +63,6 @@ class Server extends Application
     public $matchRoute;
 
     /**
-     * Instanse of Session.
-     *
-     * @var \Friday\Helper\Session
-     */
-    public $session;
-
-    /**
      * Headers to be sent.
      *
      * @var array
