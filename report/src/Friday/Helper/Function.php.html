@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+		<style type="text/css">
+			.codeline { font-family: monospace; white-space: pre; }
+		</style>
+		<title>PHP_Testability report</title>
+	</head>
+	<body>
+
+	<nav class="navbar navbar-default">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	      <a class="navbar-brand" href="index.html">
+	        PHP_Testability
+	      </a>
+	    </div>
+	  </div>
+	</nav>
+
+	<div class="row">
+		<div class="col-md-1"></div>
+		<div class="col-md-10">
+
+		<!--Content starts here-->
+
+<h4>src\Friday\Helper\Function.php </h4>
+
+<div>&nbsp;</div>
+
+<table class="table table-bordered table-hover table-condensed">
+	<tbody>
+		<tr>
+			<th>Procedures</th>
+			<th>Status</th>			
+		</tr>	
+
+		<tr>
+			<td><a href="#29">env</a></td>
+			<td>
+				<a href="#29" class="btn btn-danger btn-xs" role="button">
+				  Issues <span class="badge">3</span>
+				</a>
+
+			</td>
+		</tr>
+		<tr>
+			<td><a href="#100">value</a></td>
+			<td>
+				<a href="#100" class="btn btn-danger btn-xs" role="button">
+				  Issues <span class="badge">1</span>
+				</a>
+
+			</td>
+		</tr>
+		<tr>
+			<td><a href="#115">starts_with</a></td>
+			<td>
+
+				<a href="#115" class="btn btn-success btn-xs" role="button">Testable</a>
+			</td>
+		</tr>
+		<tr>
+			<td><a href="#136">ends_with</a></td>
+			<td>
+
+				<a href="#136" class="btn btn-success btn-xs" role="button">Testable</a>
+			</td>
+		</tr>
+		<tr>
+			<td><a href="#154">is_session_started</a></td>
+			<td>
+
+				<a href="#154" class="btn btn-success btn-xs" role="button">Testable</a>
+			</td>
+		</tr>
+		<tr>
+			<td><a href="#174">is_bot</a></td>
+			<td>
+				<a href="#174" class="btn btn-danger btn-xs" role="button">
+				  Issues <span class="badge">1</span>
+				</a>
+
+			</td>
+		</tr>
+		<tr>
+			<td><a href="#203">sqldate_to_timestamp</a></td>
+			<td>
+
+				<a href="#203" class="btn btn-success btn-xs" role="button">Testable</a>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+
+<div class="codeline"><a name="1" href="#1">1.</a>	&lt;?php</div>
+<div class="codeline"><a name="2" href="#2">2.</a>	/**</div>
+<div class="codeline"><a name="3" href="#3">3.</a>	 * IronPHP : PHP Development Framework</div>
+<div class="codeline"><a name="4" href="#4">4.</a>	 * Copyright (c) IronPHP (https://github.com/IronPHP/IronPHP).</div>
+<div class="codeline"><a name="5" href="#5">5.</a>	 *</div>
+<div class="codeline"><a name="6" href="#6">6.</a>	 * Licensed under The MIT License</div>
+<div class="codeline"><a name="7" href="#7">7.</a>	 * For full copyright and license information, please see the LICENSE.txt</div>
+<div class="codeline"><a name="8" href="#8">8.</a>	 * Redistributions of files must retain the above copyright notice.</div>
+<div class="codeline"><a name="9" href="#9">9.</a>	 *</div>
+<div class="codeline"><a name="10" href="#10">10.</a>	 * @copyright     Copyright (c) IronPHP (https://github.com/IronPHP/IronPHP)</div>
+<div class="codeline"><a name="11" href="#11">11.</a>	 *</div>
+<div class="codeline"><a name="12" href="#12">12.</a>	 * @link</div>
+<div class="codeline"><a name="13" href="#13">13.</a>	 * @since         1.0.0</div>
+<div class="codeline"><a name="14" href="#14">14.</a>	 *</div>
+<div class="codeline"><a name="15" href="#15">15.</a>	 * @license       MIT License (https://opensource.org/licenses/mit-license.php)</div>
+<div class="codeline"><a name="16" href="#16">16.</a>	 * @auther        GaurangKumar Parmar &lt;gaurangkumarp@gmail.com&gt;</div>
+<div class="codeline"><a name="17" href="#17">17.</a>	 */</div>
+<div class="codeline"><a name="18" href="#18">18.</a>	use Friday\Foundation\Application;</div>
+<div class="codeline"><a name="19" href="#19">19.</a>	</div>
+	<span class="label label-danger">
+		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+		Code on global space 
+	</span> &nbsp;
+	<span class="label label-danger">
+		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+		Code on global space 
+	</span> &nbsp;
+	<span class="label label-danger">
+		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+		Code on global space 
+	</span> &nbsp;
+	<span class="label label-danger">
+		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+		Code on global space 
+	</span> &nbsp;
+	<span class="label label-danger">
+		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+		Code on global space 
+	</span> &nbsp;
+<div class="codeline bg-danger bg-danger bg-danger bg-danger bg-danger"><a name="20" href="#20">20.</a>	if (!function_exists('env')) {</div>
+<div class="codeline"><a name="21" href="#21">21.</a>	    /**</div>
+<div class="codeline"><a name="22" href="#22">22.</a>	     * Gets the value of an environment variable. Supports boolean, empty and null.</div>
+<div class="codeline"><a name="23" href="#23">23.</a>	     *</div>
+<div class="codeline"><a name="24" href="#24">24.</a>	     * @param string $key</div>
+<div class="codeline"><a name="25" href="#25">25.</a>	     * @param mixed  $default</div>
+<div class="codeline"><a name="26" href="#26">26.</a>	     *</div>
+<div class="codeline"><a name="27" href="#27">27.</a>	     * @return mixed</div>
+<div class="codeline"><a name="28" href="#28">28.</a>	     */</div>
+<div class="codeline"><a name="29" href="#29">29.</a>	    function env($key, $default = null)</div>
+<div class="codeline"><a name="30" href="#30">30.</a>	    {</div>
+<div class="codeline"><a name="31" href="#31">31.</a>	        /*</div>
+<div class="codeline"><a name="32" href="#32">32.</a>	        if(func_num_args() == 1) {</div>
+<div class="codeline"><a name="33" href="#33">33.</a>	            $key = func_get_arg(0);</div>
+<div class="codeline"><a name="34" href="#34">34.</a>	            if(isset(Application::$env[$key])) {</div>
+<div class="codeline"><a name="35" href="#35">35.</a>	                $value = Application::$env[$key];</div>
+<div class="codeline"><a name="36" href="#36">36.</a>	            }</div>
+<div class="codeline"><a name="37" href="#37">37.</a>	            else {</div>
+<div class="codeline"><a name="38" href="#38">38.</a>	                echo &quot;$key not exist in env()&quot;;</div>
+<div class="codeline"><a name="39" href="#39">39.</a>	                exit;</div>
+<div class="codeline"><a name="40" href="#40">40.</a>	            }</div>
+<div class="codeline"><a name="41" href="#41">41.</a>	        }</div>
+<div class="codeline"><a name="42" href="#42">42.</a>	        elseif(func_num_args() == 2) {</div>
+<div class="codeline"><a name="43" href="#43">43.</a>	            $key = func_get_arg(0);</div>
+<div class="codeline"><a name="44" href="#44">44.</a>	            $val = func_get_arg(1);</div>
+<div class="codeline"><a name="45" href="#45">45.</a>	            $value = Application::$env[$key] = $val;</div>
+<div class="codeline"><a name="46" href="#46">46.</a>	        }</div>
+<div class="codeline"><a name="47" href="#47">47.</a>	        else {</div>
+<div class="codeline"><a name="48" href="#48">48.</a>	            echo &quot;invalid num of args in env()&quot;;</div>
+<div class="codeline"><a name="49" href="#49">49.</a>	            exit;</div>
+<div class="codeline"><a name="50" href="#50">50.</a>	        }</div>
+<div class="codeline"><a name="51" href="#51">51.</a>	        if($value === 'true') {</div>
+<div class="codeline"><a name="52" href="#52">52.</a>	            $value = true;</div>
+<div class="codeline"><a name="53" href="#53">53.</a>	        }</div>
+<div class="codeline"><a name="54" href="#54">54.</a>	        if($value === 'false') {</div>
+<div class="codeline"><a name="55" href="#55">55.</a>	            $value = false;</div>
+<div class="codeline"><a name="56" href="#56">56.</a>	        }</div>
+<div class="codeline"><a name="57" href="#57">57.</a>	        return $value;</div>
+<div class="codeline"><a name="58" href="#58">58.</a>	        */</div>
+<div class="codeline"><a name="59" href="#59">59.</a>	</div>
+<div class="codeline"><a name="60" href="#60">60.</a>	        $value = getenv($key);</div>
+<div class="codeline"><a name="61" href="#61">61.</a>	</div>
+<div class="codeline"><a name="62" href="#62">62.</a>	        if ($value === false) {</div>
+	<span class="label label-danger">
+		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+		Global function call (value)
+	</span> &nbsp;
+<div class="codeline bg-danger"><a name="63" href="#63">63.</a>	            return value($default);</div>
+<div class="codeline"><a name="64" href="#64">64.</a>	        }</div>
+<div class="codeline"><a name="65" href="#65">65.</a>	</div>
+<div class="codeline"><a name="66" href="#66">66.</a>	        switch (strtolower($value)) {</div>
+<div class="codeline"><a name="67" href="#67">67.</a>	            case 'true':</div>
+<div class="codeline"><a name="68" href="#68">68.</a>	            case '(true)':</div>
+<div class="codeline"><a name="69" href="#69">69.</a>	                return true;</div>
+<div class="codeline"><a name="70" href="#70">70.</a>	</div>
+<div class="codeline"><a name="71" href="#71">71.</a>	            case 'false':</div>
+<div class="codeline"><a name="72" href="#72">72.</a>	            case '(false)':</div>
+<div class="codeline"><a name="73" href="#73">73.</a>	                return false;</div>
+<div class="codeline"><a name="74" href="#74">74.</a>	</div>
+<div class="codeline"><a name="75" href="#75">75.</a>	            case 'empty':</div>
+<div class="codeline"><a name="76" href="#76">76.</a>	            case '(empty)':</div>
+<div class="codeline"><a name="77" href="#77">77.</a>	                return '';</div>
+<div class="codeline"><a name="78" href="#78">78.</a>	</div>
+<div class="codeline"><a name="79" href="#79">79.</a>	            case 'null':</div>
+<div class="codeline"><a name="80" href="#80">80.</a>	            case '(null)':</div>
+<div class="codeline"><a name="81" href="#81">81.</a>	                return;</div>
+<div class="codeline"><a name="82" href="#82">82.</a>	        }</div>
+<div class="codeline"><a name="83" href="#83">83.</a>	</div>
+	<span class="label label-danger">
+		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+		Global function call (starts_with)
+	</span> &nbsp;
+	<span class="label label-danger">
+		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+		Global function call (ends_with)
+	</span> &nbsp;
+<div class="codeline bg-danger bg-danger"><a name="84" href="#84">84.</a>	        if (strlen($value) &gt; 1 &amp;&amp; starts_with($value, '&quot;') &amp;&amp; ends_with($value, '&quot;')) {</div>
+<div class="codeline"><a name="85" href="#85">85.</a>	            return substr($value, 1, -1);</div>
+<div class="codeline"><a name="86" href="#86">86.</a>	        }</div>
+<div class="codeline"><a name="87" href="#87">87.</a>	</div>
+<div class="codeline"><a name="88" href="#88">88.</a>	        return $value;</div>
+<div class="codeline"><a name="89" href="#89">89.</a>	    }</div>
+<div class="codeline"><a name="90" href="#90">90.</a>	}</div>
+<div class="codeline"><a name="91" href="#91">91.</a>	</div>
+	<span class="label label-danger">
+		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+		Code on global space 
+	</span> &nbsp;
+	<span class="label label-danger">
+		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+		Code on global space 
+	</span> &nbsp;
+	<span class="label label-danger">
+		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+		Code on global space 
+	</span> &nbsp;
+	<span class="label label-danger">
+		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+		Code on global space 
+	</span> &nbsp;
+	<span class="label label-danger">
+		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+		Code on global space 
+	</span> &nbsp;
+<div class="codeline bg-danger bg-danger bg-danger bg-danger bg-danger"><a name="92" href="#92">92.</a>	if (!function_exists('value')) {</div>
+<div class="codeline"><a name="93" href="#93">93.</a>	    /**</div>
+<div class="codeline"><a name="94" href="#94">94.</a>	     * Return the default value of the given value.</div>
+<div class="codeline"><a name="95" href="#95">95.</a>	     *</div>
+<div class="codeline"><a name="96" href="#96">96.</a>	     * @param mixed $value</div>
+<div class="codeline"><a name="97" href="#97">97.</a>	     *</div>
+<div class="codeline"><a name="98" href="#98">98.</a>	     * @return mixed</div>
+<div class="codeline"><a name="99" href="#99">99.</a>	     */</div>
+<div class="codeline"><a name="100" href="#100">100.</a>	    function value($value)</div>
+<div class="codeline"><a name="101" href="#101">101.</a>	    {</div>
+	<span class="label label-danger">
+		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+		Global function call (&lt;variable&gt;)
+	</span> &nbsp;
+<div class="codeline bg-danger"><a name="102" href="#102">102.</a>	        return $value instanceof Closure ? $value() : $value;</div>
+<div class="codeline"><a name="103" href="#103">103.</a>	    }</div>
+<div class="codeline"><a name="104" href="#104">104.</a>	}</div>
+<div class="codeline"><a name="105" href="#105">105.</a>	</div>
+	<span class="label label-danger">
+		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+		Code on global space 
+	</span> &nbsp;
+	<span class="label label-danger">
+		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+		Code on global space 
+	</span> &nbsp;
+	<span class="label label-danger">
+		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+		Code on global space 
+	</span> &nbsp;
+	<span class="label label-danger">
+		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+		Code on global space 
+	</span> &nbsp;
+	<span class="label label-danger">
+		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+		Code on global space 
+	</span> &nbsp;
+<div class="codeline bg-danger bg-danger bg-danger bg-danger bg-danger"><a name="106" href="#106">106.</a>	if (!function_exists('starts_with')) {</div>
+<div class="codeline"><a name="107" href="#107">107.</a>	    /**</div>
+<div class="codeline"><a name="108" href="#108">108.</a>	     * Determine if a given string starts with a given substring.</div>
+<div class="codeline"><a name="109" href="#109">109.</a>	     *</div>
+<div class="codeline"><a name="110" href="#110">110.</a>	     * @param string       $haystack</div>
+<div class="codeline"><a name="111" href="#111">111.</a>	     * @param string|array $needles</div>
+<div class="codeline"><a name="112" href="#112">112.</a>	     *</div>
+<div class="codeline"><a name="113" href="#113">113.</a>	     * @return bool</div>
+<div class="codeline"><a name="114" href="#114">114.</a>	     */</div>
+<div class="codeline"><a name="115" href="#115">115.</a>	    function starts_with($haystack, $needles)</div>
+<div class="codeline"><a name="116" href="#116">116.</a>	    {</div>
+<div class="codeline"><a name="117" href="#117">117.</a>	        foreach ((array) $needles as $needle) {</div>
+<div class="codeline"><a name="118" href="#118">118.</a>	            if ($needle != '' &amp;&amp; substr($haystack, 0, strlen($needle)) === (string) $needle) {</div>
+<div class="codeline"><a name="119" href="#119">119.</a>	                return true;</div>
+<div class="codeline"><a name="120" href="#120">120.</a>	            }</div>
+<div class="codeline"><a name="121" href="#121">121.</a>	        }</div>
+<div class="codeline"><a name="122" href="#122">122.</a>	</div>
+<div class="codeline"><a name="123" href="#123">123.</a>	        return false;</div>
+<div class="codeline"><a name="124" href="#124">124.</a>	    }</div>
+<div class="codeline"><a name="125" href="#125">125.</a>	}</div>
+<div class="codeline"><a name="126" href="#126">126.</a>	</div>
+	<span class="label label-danger">
+		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+		Code on global space 
+	</span> &nbsp;
+	<span class="label label-danger">
+		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+		Code on global space 
+	</span> &nbsp;
+	<span class="label label-danger">
+		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+		Code on global space 
+	</span> &nbsp;
+	<span class="label label-danger">
+		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+		Code on global space 
+	</span> &nbsp;
+	<span class="label label-danger">
+		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+		Code on global space 
+	</span> &nbsp;
+<div class="codeline bg-danger bg-danger bg-danger bg-danger bg-danger"><a name="127" href="#127">127.</a>	if (!function_exists('ends_with')) {</div>
+<div class="codeline"><a name="128" href="#128">128.</a>	    /**</div>
+<div class="codeline"><a name="129" href="#129">129.</a>	     * Determine if a given string ends with a given substring.</div>
+<div class="codeline"><a name="130" href="#130">130.</a>	     *</div>
+<div class="codeline"><a name="131" href="#131">131.</a>	     * @param string       $haystack</div>
+<div class="codeline"><a name="132" href="#132">132.</a>	     * @param string|array $needles</div>
+<div class="codeline"><a name="133" href="#133">133.</a>	     *</div>
+<div class="codeline"><a name="134" href="#134">134.</a>	     * @return bool</div>
+<div class="codeline"><a name="135" href="#135">135.</a>	     */</div>
+<div class="codeline"><a name="136" href="#136">136.</a>	    function ends_with($haystack, $needles)</div>
+<div class="codeline"><a name="137" href="#137">137.</a>	    {</div>
+<div class="codeline"><a name="138" href="#138">138.</a>	        foreach ((array) $needles as $needle) {</div>
+<div class="codeline"><a name="139" href="#139">139.</a>	            if (substr($haystack, -strlen($needle)) === (string) $needle) {</div>
+<div class="codeline"><a name="140" href="#140">140.</a>	                return true;</div>
+<div class="codeline"><a name="141" href="#141">141.</a>	            }</div>
+<div class="codeline"><a name="142" href="#142">142.</a>	        }</div>
+<div class="codeline"><a name="143" href="#143">143.</a>	</div>
+<div class="codeline"><a name="144" href="#144">144.</a>	        return false;</div>
+<div class="codeline"><a name="145" href="#145">145.</a>	    }</div>
+<div class="codeline"><a name="146" href="#146">146.</a>	}</div>
+<div class="codeline"><a name="147" href="#147">147.</a>	</div>
+	<span class="label label-danger">
+		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+		Code on global space 
+	</span> &nbsp;
+	<span class="label label-danger">
+		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+		Code on global space 
+	</span> &nbsp;
+	<span class="label label-danger">
+		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+		Code on global space 
+	</span> &nbsp;
+	<span class="label label-danger">
+		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+		Code on global space 
+	</span> &nbsp;
+	<span class="label label-danger">
+		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+		Code on global space 
+	</span> &nbsp;
+<div class="codeline bg-danger bg-danger bg-danger bg-danger bg-danger"><a name="148" href="#148">148.</a>	if (!function_exists('is_session_started')) {</div>
+<div class="codeline"><a name="149" href="#149">149.</a>	    /**</div>
+<div class="codeline"><a name="150" href="#150">150.</a>	     * Check if session have been started.</div>
+<div class="codeline"><a name="151" href="#151">151.</a>	     *</div>
+<div class="codeline"><a name="152" href="#152">152.</a>	     * @return bool</div>
+<div class="codeline"><a name="153" href="#153">153.</a>	     */</div>
+<div class="codeline"><a name="154" href="#154">154.</a>	    function is_session_started()</div>
+<div class="codeline"><a name="155" href="#155">155.</a>	    {</div>
+<div class="codeline"><a name="156" href="#156">156.</a>	        if (PHP_SAPI !== 'cli') {</div>
+<div class="codeline"><a name="157" href="#157">157.</a>	            if (version_compare(PHP_VERSION, '5.4.0', '&gt;=')) {</div>
+<div class="codeline"><a name="158" href="#158">158.</a>	                return (session_status() === PHP_SESSION_ACTIVE) ? true : false;</div>
+<div class="codeline"><a name="159" href="#159">159.</a>	            } else {</div>
+<div class="codeline"><a name="160" href="#160">160.</a>	                return (session_id() === '') ? false : true;</div>
+<div class="codeline"><a name="161" href="#161">161.</a>	            }</div>
+<div class="codeline"><a name="162" href="#162">162.</a>	        }</div>
+<div class="codeline"><a name="163" href="#163">163.</a>	</div>
+<div class="codeline"><a name="164" href="#164">164.</a>	        return false;</div>
+<div class="codeline"><a name="165" href="#165">165.</a>	    }</div>
+<div class="codeline"><a name="166" href="#166">166.</a>	}</div>
+<div class="codeline"><a name="167" href="#167">167.</a>	</div>
+	<span class="label label-danger">
+		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+		Code on global space 
+	</span> &nbsp;
+	<span class="label label-danger">
+		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+		Code on global space 
+	</span> &nbsp;
+	<span class="label label-danger">
+		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+		Code on global space 
+	</span> &nbsp;
+	<span class="label label-danger">
+		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+		Code on global space 
+	</span> &nbsp;
+	<span class="label label-danger">
+		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+		Code on global space 
+	</span> &nbsp;
+<div class="codeline bg-danger bg-danger bg-danger bg-danger bg-danger"><a name="168" href="#168">168.</a>	if (!function_exists('is_bot')) {</div>
+<div class="codeline"><a name="169" href="#169">169.</a>	    /**</div>
+<div class="codeline"><a name="170" href="#170">170.</a>	     * Check whether the visitor is a search engine robot.</div>
+<div class="codeline"><a name="171" href="#171">171.</a>	     *</div>
+<div class="codeline"><a name="172" href="#172">172.</a>	     * @return bool</div>
+<div class="codeline"><a name="173" href="#173">173.</a>	     */</div>
+<div class="codeline"><a name="174" href="#174">174.</a>	    function is_bot()</div>
+<div class="codeline"><a name="175" href="#175">175.</a>	    {</div>
+<div class="codeline"><a name="176" href="#176">176.</a>	        $botlist = ['Teoma', 'alexa', 'froogle', 'Gigabot', 'inktomi',</div>
+<div class="codeline"><a name="177" href="#177">177.</a>	        'looksmart', 'URL_Spider_SQL', 'Firefly', 'NationalDirectory',</div>
+<div class="codeline"><a name="178" href="#178">178.</a>	        'Ask Jeeves', 'TECNOSEEK', 'InfoSeek', 'WebFindBot', 'girafabot',</div>
+<div class="codeline"><a name="179" href="#179">179.</a>	        'crawler', 'www.galaxy.com', 'Googlebot', 'Scooter', 'Slurp',</div>
+<div class="codeline"><a name="180" href="#180">180.</a>	        'msnbot', 'appie', 'FAST', 'WebBug', 'Spade', 'ZyBorg', 'rabaz',</div>
+<div class="codeline"><a name="181" href="#181">181.</a>	        'Baiduspider', 'Feedfetcher-Google', 'TechnoratiSnoop', 'Rankivabot',</div>
+<div class="codeline"><a name="182" href="#182">182.</a>	        'Mediapartners-Google', 'Sogou web spider', 'WebAlta Crawler', 'TweetmemeBot',</div>
+<div class="codeline"><a name="183" href="#183">183.</a>	        'Butterfly', 'Twitturls', 'Me.dium', 'Twiceler', ];</div>
+<div class="codeline"><a name="184" href="#184">184.</a>	</div>
+<div class="codeline"><a name="185" href="#185">185.</a>	        foreach ($botlist as $bot) {</div>
+	<span class="label label-danger">
+		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+		Super global access ($_SERVER)
+	</span> &nbsp;
+<div class="codeline bg-danger"><a name="186" href="#186">186.</a>	            if (strpos($_SERVER['HTTP_USER_AGENT'], $bot) !== false) {</div>
+<div class="codeline"><a name="187" href="#187">187.</a>	                return true;	// Is a bot</div>
+<div class="codeline"><a name="188" href="#188">188.</a>	            }</div>
+<div class="codeline"><a name="189" href="#189">189.</a>	        }</div>
+<div class="codeline"><a name="190" href="#190">190.</a>	</div>
+<div class="codeline"><a name="191" href="#191">191.</a>	        return false;	// Not a bot</div>
+<div class="codeline"><a name="192" href="#192">192.</a>	    }</div>
+<div class="codeline"><a name="193" href="#193">193.</a>	}</div>
+<div class="codeline"><a name="194" href="#194">194.</a>	</div>
+	<span class="label label-danger">
+		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+		Code on global space 
+	</span> &nbsp;
+	<span class="label label-danger">
+		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+		Code on global space 
+	</span> &nbsp;
+	<span class="label label-danger">
+		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+		Code on global space 
+	</span> &nbsp;
+	<span class="label label-danger">
+		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+		Code on global space 
+	</span> &nbsp;
+	<span class="label label-danger">
+		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+		Code on global space 
+	</span> &nbsp;
+<div class="codeline bg-danger bg-danger bg-danger bg-danger bg-danger"><a name="195" href="#195">195.</a>	if (!function_exists('sqldate_to_timestamp')) {</div>
+<div class="codeline"><a name="196" href="#196">196.</a>	    /**</div>
+<div class="codeline"><a name="197" href="#197">197.</a>	     * Get timestamp from SQL Format Date (yyyy-mm-dd hh:ii:ss).</div>
+<div class="codeline"><a name="198" href="#198">198.</a>	     *</div>
+<div class="codeline"><a name="199" href="#199">199.</a>	     * @param string $d yyyy-mm-dd</div>
+<div class="codeline"><a name="200" href="#200">200.</a>	     *</div>
+<div class="codeline"><a name="201" href="#201">201.</a>	     * @return int</div>
+<div class="codeline"><a name="202" href="#202">202.</a>	     */</div>
+<div class="codeline"><a name="203" href="#203">203.</a>	    function sqldate_to_timestamp($d)</div>
+<div class="codeline"><a name="204" href="#204">204.</a>	    {</div>
+<div class="codeline"><a name="205" href="#205">205.</a>	        $date_ary = date_parse($d);</div>
+<div class="codeline"><a name="206" href="#206">206.</a>	</div>
+<div class="codeline"><a name="207" href="#207">207.</a>	        return mktime($date_ary['hour'], $date_ary['minute'], $date_ary['second'], $date_ary['month'], $date_ary['day'], $date_ary['year']);</div>
+<div class="codeline"><a name="208" href="#208">208.</a>	    }</div>
+<div class="codeline"><a name="209" href="#209">209.</a>	}</div>
+<div class="codeline"><a name="210" href="#210">210.</a>	</div>
+<div class="codeline"><a name="211" href="#211">211.</a>	/*</div>
+<div class="codeline"><a name="212" href="#212">212.</a>	function moneyInWords($m){</div>
+<div class="codeline"><a name="213" href="#213">213.</a>	    if($m&gt;=1000){</div>
+<div class="codeline"><a name="214" href="#214">214.</a>	        if($m&gt;=100000){</div>
+<div class="codeline"><a name="215" href="#215">215.</a>	            if($m&gt;=10000000){</div>
+<div class="codeline"><a name="216" href="#216">216.</a>	                $m = $m/10000000;</div>
+<div class="codeline"><a name="217" href="#217">217.</a>	                $money = $m.' Cr.';</div>
+<div class="codeline"><a name="218" href="#218">218.</a>	            }else{</div>
+<div class="codeline"><a name="219" href="#219">219.</a>	                $m = $m/100000;</div>
+<div class="codeline"><a name="220" href="#220">220.</a>	                $money = $m.' Lacs';</div>
+<div class="codeline"><a name="221" href="#221">221.</a>	            }</div>
+<div class="codeline"><a name="222" href="#222">222.</a>	        }else{</div>
+<div class="codeline"><a name="223" href="#223">223.</a>	            $m = $m/1000;</div>
+<div class="codeline"><a name="224" href="#224">224.</a>	            $money = $m.' Th.';</div>
+<div class="codeline"><a name="225" href="#225">225.</a>	        }</div>
+<div class="codeline"><a name="226" href="#226">226.</a>	    }</div>
+<div class="codeline"><a name="227" href="#227">227.</a>	    else{</div>
+<div class="codeline"><a name="228" href="#228">228.</a>	        $money = $m;</div>
+<div class="codeline"><a name="229" href="#229">229.</a>	    }</div>
+<div class="codeline"><a name="230" href="#230">230.</a>	    return 'Rs. '.$money;</div>
+<div class="codeline"><a name="231" href="#231">231.</a>	}</div>
+<div class="codeline"><a name="232" href="#232">232.</a>	function sqlDateMDY($d){//$d = mm/dd/yyyy</div>
+<div class="codeline"><a name="233" href="#233">233.</a>	    $dt = explode('/',$d);</div>
+<div class="codeline"><a name="234" href="#234">234.</a>	    $d = &quot;{$dt[2]}/{$dt[0]}/{$dt[1]}&quot;; //yyyy/mm/dd</div>
+<div class="codeline"><a name="235" href="#235">235.</a>	    return date_create($d);</div>
+<div class="codeline"><a name="236" href="#236">236.</a>	    $date = date_format($datetime, DATE_ATOM);</div>
+<div class="codeline"><a name="237" href="#237">237.</a>	    return substr($date, 0, 10); //yyyy-mm-dd</div>
+<div class="codeline"><a name="238" href="#238">238.</a>	}</div>
+<div class="codeline"><a name="239" href="#239">239.</a>	function sqlDateDMY($d){//$d = dd/mm/yyyy</div>
+<div class="codeline"><a name="240" href="#240">240.</a>	    $dt=explode('/',$d);</div>
+<div class="codeline"><a name="241" href="#241">241.</a>	    $d=&quot;{$dt[2]}/{$dt[1]}/{$dt[0]}&quot;; //yyyy/mm/dd</div>
+<div class="codeline"><a name="242" href="#242">242.</a>	    $datetime = date_create($d);</div>
+<div class="codeline"><a name="243" href="#243">243.</a>	    $date = date_format($datetime, DATE_ATOM);</div>
+<div class="codeline"><a name="244" href="#244">244.</a>	    return substr($date, 0, 10); //yyyy-mm-dd</div>
+<div class="codeline"><a name="245" href="#245">245.</a>	}</div>
+<div class="codeline"><a name="246" href="#246">246.</a>	function DateYMD($d){</div>
+<div class="codeline"><a name="247" href="#247">247.</a>	    //$d = yyyy-mm-dd</div>
+<div class="codeline"><a name="248" href="#248">248.</a>	    $date_ary = date_parse($d);</div>
+<div class="codeline"><a name="249" href="#249">249.</a>	    $date = date('d/m/Y', mktime(0, 0, 0, $date_ary['month'], $date_ary['day'], $date_ary['year']));</div>
+<div class="codeline"><a name="250" href="#250">250.</a>	    return $date; //dd/mm/yyyy</div>
+<div class="codeline"><a name="251" href="#251">251.</a>	}</div>
+<div class="codeline"><a name="252" href="#252">252.</a>	function formatDate($d){</div>
+<div class="codeline"><a name="253" href="#253">253.</a>	    $d=strtotime($d);</div>
+<div class="codeline"><a name="254" href="#254">254.</a>	    return date('F j, Y',$d);</div>
+<div class="codeline"><a name="255" href="#255">255.</a>	}</div>
+<div class="codeline"><a name="256" href="#256">256.</a>	function formatBudget($b){</div>
+<div class="codeline"><a name="257" href="#257">257.</a>	    $a=explode('-',$b);</div>
+<div class="codeline"><a name="258" href="#258">258.</a>	    $a['min']=(int)$a[0];</div>
+<div class="codeline"><a name="259" href="#259">259.</a>	    $a['words_min']=moneyInWords($a['min']);</div>
+<div class="codeline"><a name="260" href="#260">260.</a>	    if(!empty($a[1])){</div>
+<div class="codeline"><a name="261" href="#261">261.</a>	        if($a[1]=='∞' || $a[1]=='&amp;infin;'){</div>
+<div class="codeline"><a name="262" href="#262">262.</a>	            $a['max']=$a['min']*2;</div>
+<div class="codeline"><a name="263" href="#263">263.</a>	            $a['words']='More than '.$a['words_min'];</div>
+<div class="codeline"><a name="264" href="#264">264.</a>	        }</div>
+<div class="codeline"><a name="265" href="#265">265.</a>	        else{</div>
+<div class="codeline"><a name="266" href="#266">266.</a>	            $a['max']=(int)$a[1];</div>
+<div class="codeline"><a name="267" href="#267">267.</a>	            $a['words_max']=moneyInWords($a['max']);</div>
+<div class="codeline"><a name="268" href="#268">268.</a>	            if($a['min']==0)</div>
+<div class="codeline"><a name="269" href="#269">269.</a>	                $a['words']='Less than '.$a['words_max'];</div>
+<div class="codeline"><a name="270" href="#270">270.</a>	            else</div>
+<div class="codeline"><a name="271" href="#271">271.</a>	                $a['words']=$a['words_min'].' to '.$a['words_max'];</div>
+<div class="codeline"><a name="272" href="#272">272.</a>	        }</div>
+<div class="codeline"><a name="273" href="#273">273.</a>	    }</div>
+<div class="codeline"><a name="274" href="#274">274.</a>	    else{</div>
+<div class="codeline"><a name="275" href="#275">275.</a>	        $a['words']=$a['words_min'];</div>
+<div class="codeline"><a name="276" href="#276">276.</a>	    }</div>
+<div class="codeline"><a name="277" href="#277">277.</a>	    return $a;</div>
+<div class="codeline"><a name="278" href="#278">278.</a>	}</div>
+<div class="codeline"><a name="279" href="#279">279.</a>	function qry_arg($arg,$conj){</div>
+<div class="codeline"><a name="280" href="#280">280.</a>	    //$conj='AND';</div>
+<div class="codeline"><a name="281" href="#281">281.</a>	    $conj=' '.$conj.' ';</div>
+<div class="codeline"><a name="282" href="#282">282.</a>	    //$arg=array(1,2,3);</div>
+<div class="codeline"><a name="283" href="#283">283.</a>	    $num_arg=count($arg);</div>
+<div class="codeline"><a name="284" href="#284">284.</a>	    if($num_arg==0){</div>
+<div class="codeline"><a name="285" href="#285">285.</a>	        $args='';</div>
+<div class="codeline"><a name="286" href="#286">286.</a>	    }</div>
+<div class="codeline"><a name="287" href="#287">287.</a>	    else{</div>
+<div class="codeline"><a name="288" href="#288">288.</a>	        $args=' WHERE';</div>
+<div class="codeline"><a name="289" href="#289">289.</a>	        if($num_arg==1){</div>
+<div class="codeline"><a name="290" href="#290">290.</a>	            $args.=$arg[0];</div>
+<div class="codeline"><a name="291" href="#291">291.</a>	        }</div>
+<div class="codeline"><a name="292" href="#292">292.</a>	        else{</div>
+<div class="codeline"><a name="293" href="#293">293.</a>	            $args.=' '.implode($conj,$arg);</div>
+<div class="codeline"><a name="294" href="#294">294.</a>	        }</div>
+<div class="codeline"><a name="295" href="#295">295.</a>	    }</div>
+<div class="codeline"><a name="296" href="#296">296.</a>	    return $args;</div>
+<div class="codeline"><a name="297" href="#297">297.</a>	}</div>
+<div class="codeline"><a name="298" href="#298">298.</a>	?&gt;</div>
+<div class="codeline"><a name="299" href="#299">299.</a>	&lt;script&gt;</div>
+<div class="codeline"><a name="300" href="#300">300.</a>	function setCookie(cookieName, cookieValue, expdays) {</div>
+<div class="codeline"><a name="301" href="#301">301.</a>	    var d = new Date();</div>
+<div class="codeline"><a name="302" href="#302">302.</a>	    d.setTime(d.getTime() + (expdays*24*60*60*1000));</div>
+<div class="codeline"><a name="303" href="#303">303.</a>	    var expires = &quot;expires=&quot;+d.toUTCString();</div>
+<div class="codeline"><a name="304" href="#304">304.</a>	    document.cookie = cookieName + &quot;=&quot; + cookieValue + &quot;; &quot; + expires;</div>
+<div class="codeline"><a name="305" href="#305">305.</a>	}</div>
+<div class="codeline"><a name="306" href="#306">306.</a>	function delCookie(cookieName) {</div>
+<div class="codeline"><a name="307" href="#307">307.</a>	    var cookieValue=&quot;&quot;;</div>
+<div class="codeline"><a name="308" href="#308">308.</a>	    var d = new Date();</div>
+<div class="codeline"><a name="309" href="#309">309.</a>	    d.setTime(d.getTime() - (1*24*60*60*1000));</div>
+<div class="codeline"><a name="310" href="#310">310.</a>	    var expires = &quot;expires=&quot;+d.toUTCString();</div>
+<div class="codeline"><a name="311" href="#311">311.</a>	    document.cookie = cookieName + &quot;=&quot; + cookieValue + &quot;; &quot; + expires;</div>
+<div class="codeline"><a name="312" href="#312">312.</a>	}</div>
+<div class="codeline"><a name="313" href="#313">313.</a>	function getCookie(cookieName) {</div>
+<div class="codeline"><a name="314" href="#314">314.</a>	    var name = cookieName + &quot;=&quot;;</div>
+<div class="codeline"><a name="315" href="#315">315.</a>	    var ca = document.cookie.split(';');</div>
+<div class="codeline"><a name="316" href="#316">316.</a>	    for(var i=0; i&lt;ca.length; i++) {</div>
+<div class="codeline"><a name="317" href="#317">317.</a>	        var c = ca[i];</div>
+<div class="codeline"><a name="318" href="#318">318.</a>	        while (c.charAt(0)==' ') c = c.substring(1);</div>
+<div class="codeline"><a name="319" href="#319">319.</a>	        if (c.indexOf(name) == 0) return c.substring(name.length, c.length);</div>
+<div class="codeline"><a name="320" href="#320">320.</a>	    }</div>
+<div class="codeline"><a name="321" href="#321">321.</a>	    return &quot;&quot;;</div>
+<div class="codeline"><a name="322" href="#322">322.</a>	}</div>
+<div class="codeline"><a name="323" href="#323">323.</a>	&lt;/script&gt;</div>
+<div class="codeline"><a name="324" href="#324">324.</a>	&lt;?php</div>
+<div class="codeline"><a name="325" href="#325">325.</a>	*/</div>
+	<span class="label label-danger">
+		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+		Code on global space 
+	</span> &nbsp;
+<div class="codeline bg-danger"><a name="" href="#">.</a>	</div>
+
+
+		<!--Content ends here-->
+
+		<div> &nbsp; </div>
+		<div>
+			Generated Wed, 26 Jun 2019 13:13:38 +0200 by <a href="https://github.com/edsonmedina/php_testability">PHP_Testability</a>
+		</div>
+
+		</div>
+		<div class="col-md-1"></div>
+	</div>
+
+	</body>
+</html>

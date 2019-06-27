@@ -189,7 +189,7 @@ class ModelService
     /**
      * Execute SQL Query.
      *
-     * @return mysqli_result
+     * @return resource
      */
     protected function runQuery($query)
     {

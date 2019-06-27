@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+		<style type="text/css">
+			.codeline { font-family: monospace; white-space: pre; }
+		</style>
+		<title>PHP_Testability report</title>
+	</head>
+	<body>
+
+	<nav class="navbar navbar-default">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	      <a class="navbar-brand" href="index.html">
+	        PHP_Testability
+	      </a>
+	    </div>
+	  </div>
+	</nav>
+
+	<div class="row">
+		<div class="col-md-1"></div>
+		<div class="col-md-10">
+
+		<!--Content starts here-->
+
+<h4>src\Friday\Foundation\Application.php </h4>
+
+<div>&nbsp;</div>
+
+<table class="table table-bordered table-hover table-condensed">
+	<tbody>
+		<tr>
+			<th>Procedures</th>
+			<th>Status</th>			
+		</tr>	
+
+		<tr>
+			<td><a href="#75">Application::__construct</a></td>
+			<td>
+				<a href="#75" class="btn btn-danger btn-xs" role="button">
+				  Issues <span class="badge">6</span>
+				</a>
+
+			</td>
+		</tr>
+		<tr>
+			<td><a href="#144">Application::version</a></td>
+			<td>
+				<a href="#144" class="btn btn-danger btn-xs" role="button">
+				  Issues <span class="badge">1</span>
+				</a>
+
+			</td>
+		</tr>
+		<tr>
+			<td><a href="#156">Application::setBasePath</a></td>
+			<td>
+
+				<a href="#156" class="btn btn-success btn-xs" role="button">Testable</a>
+			</td>
+		</tr>
+		<tr>
+			<td><a href="#170">Application::basePath</a></td>
+			<td>
+
+				<a href="#170" class="btn btn-success btn-xs" role="button">Testable</a>
+			</td>
+		</tr>
+		<tr>
+			<td><a href="#182">Application::findFile</a></td>
+			<td>
+
+				<a href="#182" class="btn btn-success btn-xs" role="button">Testable</a>
+			</td>
+		</tr>
+		<tr>
+			<td><a href="#200">Application::findModel</a></td>
+			<td>
+				<a href="#200" class="btn btn-danger btn-xs" role="button">
+				  Issues <span class="badge">1</span>
+				</a>
+
+			</td>
+		</tr>
+		<tr>
+			<td><a href="#220">Application::findView</a></td>
+			<td>
+				<a href="#220" class="btn btn-danger btn-xs" role="button">
+				  Issues <span class="badge">1</span>
+				</a>
+
+			</td>
+		</tr>
+		<tr>
+			<td><a href="#240">Application::findTemplate</a></td>
+			<td>
+				<a href="#240" class="btn btn-danger btn-xs" role="button">
+				  Issues <span class="badge">1</span>
+				</a>
+
+			</td>
+		</tr>
+		<tr>
+			<td><a href="#264">Application::findController</a></td>
+			<td>
+				<a href="#264" class="btn btn-danger btn-xs" role="button">
+				  Issues <span class="badge">1</span>
+				</a>
+
+			</td>
+		</tr>
+		<tr>
+			<td><a href="#285">Application::hasMethod</a></td>
+			<td>
+				<a href="#285" class="btn btn-danger btn-xs" role="button">
+				  Issues <span class="badge">1</span>
+				</a>
+
+			</td>
+		</tr>
+		<tr>
+			<td><a href="#305">Application::requireFile</a></td>
+			<td>
+				<a href="#305" class="btn btn-danger btn-xs" role="button">
+				  Issues <span class="badge">3</span>
+				</a>
+
+			</td>
+		</tr>
+		<tr>
+			<td><a href="#324">Application::setIntallTime</a></td>
+			<td>
+
+				<a href="#324" class="btn btn-success btn-xs" role="button">Testable</a>
+			</td>
+		</tr>
+		<tr>
+			<td><a href="#347">Application::getIntallTime</a></td>
+			<td>
+
+				<a href="#347" class="btn btn-success btn-xs" role="button">Testable</a>
+			</td>
+		</tr>
+		<tr>
+			<td><a href="#370">Application::setKey</a></td>
+			<td>
+				<a href="#370" class="btn btn-danger btn-xs" role="button">
+				  Issues <span class="badge">3</span>
+				</a>
+
+			</td>
+		</tr>
+		<tr>
+			<td><a href="#416">Application::parseEnvFile</a></td>
+			<td>
+
+				<a href="#416" class="btn btn-success btn-xs" role="button">Testable</a>
+			</td>
+		</tr>
+		<tr>
+			<td><a href="#434">Application::ensureFileIsReadable</a></td>
+			<td>
+				<a href="#434" class="btn btn-danger btn-xs" role="button">
+				  Issues <span class="badge">1</span>
+				</a>
+
+			</td>
+		</tr>
+		<tr>
+			<td><a href="#449">Application::findCommand</a></td>
+			<td>
+
+				<a href="#449" class="btn btn-success btn-xs" role="button">Testable</a>
+			</td>
+		</tr>
+		<tr>
+			<td><a href="#468">Application::setTimezone</a></td>
+			<td>
+
+				<a href="#468" class="btn btn-success btn-xs" role="button">Testable</a>
+			</td>
+		</tr>
+		<tr>
+			<td><a href="#511">Application::getRoutes</a></td>
+			<td>
+
+				<a href="#511" class="btn btn-success btn-xs" role="button">Testable</a>
+			</td>
+		</tr>
+		<tr>
+			<td><a href="#526">Application::findTheme</a></td>
+			<td>
+				<a href="#526" class="btn btn-danger btn-xs" role="button">
+				  Issues <span class="badge">4</span>
+				</a>
+
+			</td>
+		</tr>
+		<tr>
+			<td><a href="#582">Application::parseDir</a></td>
+			<td>
+
+				<a href="#582" class="btn btn-success btn-xs" role="button">Testable</a>
+			</td>
+		</tr>
+		<tr>
+			<td><a href="#604">Application::getList</a></td>
+			<td>
+
+				<a href="#604" class="btn btn-success btn-xs" role="button">Testable</a>
+			</td>
+		</tr>
+		<tr>
+			<td><a href="#633">Application::installTheme</a></td>
+			<td>
+				<a href="#633" class="btn btn-danger btn-xs" role="button">
+				  Issues <span class="badge">2</span>
+				</a>
+
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+
+<div class="codeline"><a name="1" href="#1">1.</a>	&lt;?php</div>
+<div class="codeline"><a name="2" href="#2">2.</a>	/**</div>
+<div class="codeline"><a name="3" href="#3">3.</a>	 * IronPHP : PHP Development Framework</div>
+<div class="codeline"><a name="4" href="#4">4.</a>	 * Copyright (c) IronPHP (https://github.com/IronPHP/IronPHP).</div>
+<div class="codeline"><a name="5" href="#5">5.</a>	 *</div>
+<div class="codeline"><a name="6" href="#6">6.</a>	 * Licensed under The MIT License</div>
+<div class="codeline"><a name="7" href="#7">7.</a>	 * For full copyright and license information, please see the LICENSE.txt</div>
+<div class="codeline"><a name="8" href="#8">8.</a>	 * Redistributions of files must retain the above copyright notice.</div>
+<div class="codeline"><a name="9" href="#9">9.</a>	 *</div>
+<div class="codeline"><a name="10" href="#10">10.</a>	 * @copyright     Copyright (c) IronPHP (https://github.com/IronPHP/IronPHP)</div>
+<div class="codeline"><a name="11" href="#11">11.</a>	 *</div>
+<div class="codeline"><a name="12" href="#12">12.</a>	 * @link</div>
+<div class="codeline"><a name="13" href="#13">13.</a>	 * @since         1.0.0</div>
+<div class="codeline"><a name="14" href="#14">14.</a>	 *</div>
+<div class="codeline"><a name="15" href="#15">15.</a>	 * @license       MIT License (https://opensource.org/licenses/mit-license.php)</div>
+<div class="codeline"><a name="16" href="#16">16.</a>	 * @auther        GaurangKumar Parmar &lt;gaurangkumarp@gmail.com&gt;</div>
+<div class="codeline"><a name="17" href="#17">17.</a>	 */</div>
+<div class="codeline"><a name="18" href="#18">18.</a>	</div>
+<div class="codeline"><a name="19" href="#19">19.</a>	namespace Friday\Foundation;</div>
+<div class="codeline"><a name="20" href="#20">20.</a>	</div>
+<div class="codeline"><a name="21" href="#21">21.</a>	use Dotenv\Dotenv;</div>
+<div class="codeline"><a name="22" href="#22">22.</a>	use Exception;</div>
+<div class="codeline"><a name="23" href="#23">23.</a>	use Friday\Foundation\Exceptions\Handler;</div>
+<div class="codeline"><a name="24" href="#24">24.</a>	use Friday\Helper\Session;</div>
+<div class="codeline"><a name="25" href="#25">25.</a>	use Friday\Http\FrontController;</div>
+<div class="codeline"><a name="26" href="#26">26.</a>	use Friday\Http\Route;</div>
+<div class="codeline"><a name="27" href="#27">27.</a>	</div>
+<div class="codeline"><a name="28" href="#28">28.</a>	/**</div>
+<div class="codeline"><a name="29" href="#29">29.</a>	 * Runs an application invoking all the registered application.</div>
+<div class="codeline"><a name="30" href="#30">30.</a>	 */</div>
+<div class="codeline"><a name="31" href="#31">31.</a>	class Application</div>
+<div class="codeline"><a name="32" href="#32">32.</a>	{</div>
+<div class="codeline"><a name="33" href="#33">33.</a>	    /**</div>
+<div class="codeline"><a name="34" href="#34">34.</a>	     * The IronPHP framework version.</div>
+<div class="codeline"><a name="35" href="#35">35.</a>	     *</div>
+<div class="codeline"><a name="36" href="#36">36.</a>	     * @var string</div>
+<div class="codeline"><a name="37" href="#37">37.</a>	     */</div>
+<div class="codeline"><a name="38" href="#38">38.</a>	    const VERSION = '1.0.5-alpha1';</div>
+<div class="codeline"><a name="39" href="#39">39.</a>	</div>
+<div class="codeline"><a name="40" href="#40">40.</a>	    /**</div>
+<div class="codeline"><a name="41" href="#41">41.</a>	     * The base path for the IronPHP installation.</div>
+<div class="codeline"><a name="42" href="#42">42.</a>	     *</div>
+<div class="codeline"><a name="43" href="#43">43.</a>	     * @var string</div>
+<div class="codeline"><a name="44" href="#44">44.</a>	     */</div>
+<div class="codeline"><a name="45" href="#45">45.</a>	    protected $basePath;</div>
+<div class="codeline"><a name="46" href="#46">46.</a>	</div>
+<div class="codeline"><a name="47" href="#47">47.</a>	    /**</div>
+<div class="codeline"><a name="48" href="#48">48.</a>	     * Configurations from /config/*.php.</div>
+<div class="codeline"><a name="49" href="#49">49.</a>	     *</div>
+<div class="codeline"><a name="50" href="#50">50.</a>	     * @var array</div>
+<div class="codeline"><a name="51" href="#51">51.</a>	     */</div>
+<div class="codeline"><a name="52" href="#52">52.</a>	    public $config;</div>
+<div class="codeline"><a name="53" href="#53">53.</a>	</div>
+<div class="codeline"><a name="54" href="#54">54.</a>	    /**</div>
+<div class="codeline"><a name="55" href="#55">55.</a>	     * FrontController instance.</div>
+<div class="codeline"><a name="56" href="#56">56.</a>	     *</div>
+<div class="codeline"><a name="57" href="#57">57.</a>	     * @var \Friday\Http\FrontController</div>
+<div class="codeline"><a name="58" href="#58">58.</a>	     */</div>
+<div class="codeline"><a name="59" href="#59">59.</a>	    public $frontController;</div>
+<div class="codeline"><a name="60" href="#60">60.</a>	</div>
+<div class="codeline"><a name="61" href="#61">61.</a>	    /**</div>
+<div class="codeline"><a name="62" href="#62">62.</a>	     * Route instance.</div>
+<div class="codeline"><a name="63" href="#63">63.</a>	     *</div>
+<div class="codeline"><a name="64" href="#64">64.</a>	     * @var \Friday\Http\Route</div>
+<div class="codeline"><a name="65" href="#65">65.</a>	     */</div>
+<div class="codeline"><a name="66" href="#66">66.</a>	    public $route;</div>
+<div class="codeline"><a name="67" href="#67">67.</a>	</div>
+<div class="codeline"><a name="68" href="#68">68.</a>	    /**</div>
+<div class="codeline"><a name="69" href="#69">69.</a>	     * Create a new Friday application instance.</div>
+<div class="codeline"><a name="70" href="#70">70.</a>	     *</div>
+<div class="codeline"><a name="71" href="#71">71.</a>	     * @param string|null $basePath</div>
+<div class="codeline"><a name="72" href="#72">72.</a>	     *</div>
+<div class="codeline"><a name="73" href="#73">73.</a>	     * @return void</div>
+<div class="codeline"><a name="74" href="#74">74.</a>	     */</div>
+<div class="codeline"><a name="75" href="#75">75.</a>	    public function __construct($basePath = null)</div>
+<div class="codeline"><a name="76" href="#76">76.</a>	    {</div>
+<div class="codeline"><a name="77" href="#77">77.</a>	        if ($basePath) {</div>
+<div class="codeline"><a name="78" href="#78">78.</a>	            $this-&gt;setBasePath($basePath);</div>
+<div class="codeline"><a name="79" href="#79">79.</a>	        }</div>
+<div class="codeline"><a name="80" href="#80">80.</a>	</div>
+<div class="codeline"><a name="81" href="#81">81.</a>	        $this-&gt;config['basePath'] = $this-&gt;basePath();</div>
+<div class="codeline"><a name="82" href="#82">82.</a>	</div>
+<div class="codeline"><a name="83" href="#83">83.</a>	        //# Configurator</div>
+<div class="codeline"><a name="84" href="#84">84.</a>	        //enviro config</div>
+	<span class="label label-danger">
+		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+		Static method call (Dotenv::create)
+	</span> &nbsp;
+<div class="codeline bg-danger"><a name="85" href="#85">85.</a>	        $dotenv = Dotenv::create($this-&gt;basePath());</div>
+<div class="codeline"><a name="86" href="#86">86.</a>	        $dotenv-&gt;load();</div>
+<div class="codeline"><a name="87" href="#87">87.</a>	</div>
+<div class="codeline"><a name="88" href="#88">88.</a>	        //Set Exception Handler</div>
+	<span class="label label-danger">
+		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+		New instance (Handler)
+	</span> &nbsp;
+<div class="codeline bg-danger"><a name="89" href="#89">89.</a>	        $e = new Handler();</div>
+<div class="codeline"><a name="90" href="#90">90.</a>	        $e-&gt;register();</div>
+<div class="codeline"><a name="91" href="#91">91.</a>	</div>
+<div class="codeline"><a name="92" href="#92">92.</a>	        //set install config</div>
+<div class="codeline"><a name="93" href="#93">93.</a>	        if ($this-&gt;getIntallTime(true) === false) {</div>
+<div class="codeline"><a name="94" href="#94">94.</a>	            $this-&gt;setIntallTime();</div>
+	<span class="label label-danger">
+		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+		Global function call (env)
+	</span> &nbsp;
+<div class="codeline bg-danger"><a name="95" href="#95">95.</a>	        } elseif (empty(env('APP_KEY'))) {</div>
+<div class="codeline"><a name="96" href="#96">96.</a>	            echo 'APP_KEY is not defined in .env file, define it by command: php jarvis key';</div>
+<div class="codeline"><a name="97" href="#97">97.</a>	        }</div>
+<div class="codeline"><a name="98" href="#98">98.</a>	</div>
+<div class="codeline"><a name="99" href="#99">99.</a>	        //load config</div>
+<div class="codeline"><a name="100" href="#100">100.</a>	        $this-&gt;config['app'] = $this-&gt;requireFile(</div>
+<div class="codeline"><a name="101" href="#101">101.</a>	            $this-&gt;basePath('config/app.php'),</div>
+<div class="codeline"><a name="102" href="#102">102.</a>	            true</div>
+<div class="codeline"><a name="103" href="#103">103.</a>	        );</div>
+<div class="codeline"><a name="104" href="#104">104.</a>	        $this-&gt;config['db'] = $this-&gt;requireFile(</div>
+<div class="codeline"><a name="105" href="#105">105.</a>	            $this-&gt;basePath('config/database.php'),</div>
+<div class="codeline"><a name="106" href="#106">106.</a>	            true</div>
+<div class="codeline"><a name="107" href="#107">107.</a>	        );</div>
+<div class="codeline"><a name="108" href="#108">108.</a>	        define('CONFIG_LOADED', microtime(true));</div>
+<div class="codeline"><a name="109" href="#109">109.</a>	</div>
+<div class="codeline"><a name="110" href="#110">110.</a>	        //set locale-timezone</div>
+<div class="codeline"><a name="111" href="#111">111.</a>	        $this-&gt;setTimezone($this-&gt;config['app']['timezone']);</div>
+<div class="codeline"><a name="112" href="#112">112.</a>	        $timezone = date_default_timezone_get();</div>
+<div class="codeline"><a name="113" href="#113">113.</a>	        if (strcmp($timezone, ini_get('date.timezone'))) {</div>
+<div class="codeline"><a name="114" href="#114">114.</a>	            ini_set('date.timezone', $timezone);</div>
+<div class="codeline"><a name="115" href="#115">115.</a>	        }</div>
+<div class="codeline"><a name="116" href="#116">116.</a>	</div>
+<div class="codeline"><a name="117" href="#117">117.</a>	        //load session</div>
+	<span class="label label-danger">
+		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+		New instance (Session)
+	</span> &nbsp;
+<div class="codeline bg-danger"><a name="118" href="#118">118.</a>	        $this-&gt;session = new Session();</div>
+<div class="codeline"><a name="119" href="#119">119.</a>	        if (!$this-&gt;session-&gt;isRegistered()) {</div>
+<div class="codeline"><a name="120" href="#120">120.</a>	            $this-&gt;session-&gt;register();</div>
+<div class="codeline"><a name="121" href="#121">121.</a>	        }</div>
+<div class="codeline"><a name="122" href="#122">122.</a>	</div>
+<div class="codeline"><a name="123" href="#123">123.</a>	        //frontcontroller</div>
+	<span class="label label-danger">
+		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+		New instance (FrontController)
+	</span> &nbsp;
+<div class="codeline bg-danger"><a name="124" href="#124">124.</a>	        $this-&gt;frontController = new FrontController();</div>
+<div class="codeline"><a name="125" href="#125">125.</a>	</div>
+<div class="codeline"><a name="126" href="#126">126.</a>	        //route</div>
+<div class="codeline"><a name="127" href="#127">127.</a>	        $this-&gt;route = $this-&gt;frontController-&gt;route();</div>
+<div class="codeline"><a name="128" href="#128">128.</a>	</div>
+	<span class="label label-danger">
+		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+		Static property fetch (Route::instance)
+	</span> &nbsp;
+<div class="codeline bg-danger"><a name="129" href="#129">129.</a>	        Route::$instance = $this-&gt;route;</div>
+<div class="codeline"><a name="130" href="#130">130.</a>	        define('ROUTES_LOADED', microtime(true));</div>
+<div class="codeline"><a name="131" href="#131">131.</a>	</div>
+<div class="codeline"><a name="132" href="#132">132.</a>	        //load routes</div>
+<div class="codeline"><a name="133" href="#133">133.</a>	        $this-&gt;requireFile(</div>
+<div class="codeline"><a name="134" href="#134">134.</a>	            $this-&gt;basePath('app/Route/web.php')</div>
+<div class="codeline"><a name="135" href="#135">135.</a>	        );</div>
+<div class="codeline"><a name="136" href="#136">136.</a>	        $this-&gt;route-&gt;sortRoute();</div>
+<div class="codeline"><a name="137" href="#137">137.</a>	    }</div>
+<div class="codeline"><a name="138" href="#138">138.</a>	</div>
+<div class="codeline"><a name="139" href="#139">139.</a>	    /**</div>
+<div class="codeline"><a name="140" href="#140">140.</a>	     * Get the version number of the application.</div>
+<div class="codeline"><a name="141" href="#141">141.</a>	     *</div>
+<div class="codeline"><a name="142" href="#142">142.</a>	     * @return string</div>
+<div class="codeline"><a name="143" href="#143">143.</a>	     */</div>
+<div class="codeline"><a name="144" href="#144">144.</a>	    public function version()</div>
+<div class="codeline"><a name="145" href="#145">145.</a>	    {</div>
+	<span class="label label-danger">
+		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+		External class constant fetch (static::VERSION)
+	</span> &nbsp;
+<div class="codeline bg-danger"><a name="146" href="#146">146.</a>	        return static::VERSION;</div>
+<div class="codeline"><a name="147" href="#147">147.</a>	    }</div>
+<div class="codeline"><a name="148" href="#148">148.</a>	</div>
+<div class="codeline"><a name="149" href="#149">149.</a>	    /**</div>
+<div class="codeline"><a name="150" href="#150">150.</a>	     * Set the base path for the application.</div>
+<div class="codeline"><a name="151" href="#151">151.</a>	     *</div>
+<div class="codeline"><a name="152" href="#152">152.</a>	     * @param string $basePath</div>
+<div class="codeline"><a name="153" href="#153">153.</a>	     *</div>
+<div class="codeline"><a name="154" href="#154">154.</a>	     * @return $this</div>
+<div class="codeline"><a name="155" href="#155">155.</a>	     */</div>
+<div class="codeline"><a name="156" href="#156">156.</a>	    public function setBasePath($basePath)</div>
+<div class="codeline"><a name="157" href="#157">157.</a>	    {</div>
+<div class="codeline"><a name="158" href="#158">158.</a>	        $this-&gt;basePath = rtrim($basePath, '\/');</div>
+<div class="codeline"><a name="159" href="#159">159.</a>	</div>
+<div class="codeline"><a name="160" href="#160">160.</a>	        return $this;</div>
+<div class="codeline"><a name="161" href="#161">161.</a>	    }</div>
+<div class="codeline"><a name="162" href="#162">162.</a>	</div>
+<div class="codeline"><a name="163" href="#163">163.</a>	    /**</div>
+<div class="codeline"><a name="164" href="#164">164.</a>	     * Get the base path of the IronPHP installation.</div>
+<div class="codeline"><a name="165" href="#165">165.</a>	     *</div>
+<div class="codeline"><a name="166" href="#166">166.</a>	     * @param string $path Optionally, a path to append to the base path</div>
+<div class="codeline"><a name="167" href="#167">167.</a>	     *</div>
+<div class="codeline"><a name="168" href="#168">168.</a>	     * @return string</div>
+<div class="codeline"><a name="169" href="#169">169.</a>	     */</div>
+<div class="codeline"><a name="170" href="#170">170.</a>	    public function basePath($path = '')</div>
+<div class="codeline"><a name="171" href="#171">171.</a>	    {</div>
+<div class="codeline"><a name="172" href="#172">172.</a>	        return $this-&gt;basePath.($path ? DS.$path : $path);</div>
+<div class="codeline"><a name="173" href="#173">173.</a>	    }</div>
+<div class="codeline"><a name="174" href="#174">174.</a>	</div>
+<div class="codeline"><a name="175" href="#175">175.</a>	    /**</div>
+<div class="codeline"><a name="176" href="#176">176.</a>	     * Find a file.</div>
+<div class="codeline"><a name="177" href="#177">177.</a>	     *</div>
+<div class="codeline"><a name="178" href="#178">178.</a>	     * @param string $path</div>
+<div class="codeline"><a name="179" href="#179">179.</a>	     *</div>
+<div class="codeline"><a name="180" href="#180">180.</a>	     * @return bool</div>
+<div class="codeline"><a name="181" href="#181">181.</a>	     */</div>
+<div class="codeline"><a name="182" href="#182">182.</a>	    public function findFile($path)</div>
+<div class="codeline"><a name="183" href="#183">183.</a>	    {</div>
+<div class="codeline"><a name="184" href="#184">184.</a>	        if (file_exists($path) &amp;&amp; is_file($path)) {</div>
+<div class="codeline"><a name="185" href="#185">185.</a>	            return true;</div>
+<div class="codeline"><a name="186" href="#186">186.</a>	        } else {</div>
+<div class="codeline"><a name="187" href="#187">187.</a>	            return false;</div>
+<div class="codeline"><a name="188" href="#188">188.</a>	        }</div>
+<div class="codeline"><a name="189" href="#189">189.</a>	    }</div>
+<div class="codeline"><a name="190" href="#190">190.</a>	</div>
+<div class="codeline"><a name="191" href="#191">191.</a>	    /**</div>
+<div class="codeline"><a name="192" href="#192">192.</a>	     * Find a Model.</div>
+<div class="codeline"><a name="193" href="#193">193.</a>	     *</div>
+<div class="codeline"><a name="194" href="#194">194.</a>	     * @param string $model</div>
+<div class="codeline"><a name="195" href="#195">195.</a>	     *</div>
+<div class="codeline"><a name="196" href="#196">196.</a>	     * @throws Exception</div>
+<div class="codeline"><a name="197" href="#197">197.</a>	     *</div>
+<div class="codeline"><a name="198" href="#198">198.</a>	     * @return string full model file path</div>
+<div class="codeline"><a name="199" href="#199">199.</a>	     */</div>
+<div class="codeline"><a name="200" href="#200">200.</a>	    public function findModel($model)</div>
+<div class="codeline"><a name="201" href="#201">201.</a>	    {</div>
+<div class="codeline"><a name="202" href="#202">202.</a>	        $file = $this-&gt;basePath(&quot;app/Model/$model.php&quot;);</div>
+<div class="codeline"><a name="203" href="#203">203.</a>	        if ($this-&gt;findFile($file)) {</div>
+<div class="codeline"><a name="204" href="#204">204.</a>	            return $file;</div>
+<div class="codeline"><a name="205" href="#205">205.</a>	        } else {</div>
+<div class="codeline"><a name="206" href="#206">206.</a>	            throw new Exception($file.' Model file is missing.');</div>
+	<span class="label label-danger">
+		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+		Exit 
+	</span> &nbsp;
+<div class="codeline bg-danger"><a name="207" href="#207">207.</a>	            exit;</div>
+<div class="codeline"><a name="208" href="#208">208.</a>	        }</div>
+<div class="codeline"><a name="209" href="#209">209.</a>	    }</div>
+<div class="codeline"><a name="210" href="#210">210.</a>	</div>
+<div class="codeline"><a name="211" href="#211">211.</a>	    /**</div>
+<div class="codeline"><a name="212" href="#212">212.</a>	     * Find a View.</div>
+<div class="codeline"><a name="213" href="#213">213.</a>	     *</div>
+<div class="codeline"><a name="214" href="#214">214.</a>	     * @param string $view</div>
+<div class="codeline"><a name="215" href="#215">215.</a>	     *</div>
+<div class="codeline"><a name="216" href="#216">216.</a>	     * @throws Exception</div>
+<div class="codeline"><a name="217" href="#217">217.</a>	     *</div>
+<div class="codeline"><a name="218" href="#218">218.</a>	     * @return string full view file path</div>
+<div class="codeline"><a name="219" href="#219">219.</a>	     */</div>
+<div class="codeline"><a name="220" href="#220">220.</a>	    public function findView($view)</div>
+<div class="codeline"><a name="221" href="#221">221.</a>	    {</div>
+<div class="codeline"><a name="222" href="#222">222.</a>	        $file = $this-&gt;basePath(&quot;app/View/$view.php&quot;);</div>
+<div class="codeline"><a name="223" href="#223">223.</a>	        if ($this-&gt;findFile($file)) {</div>
+<div class="codeline"><a name="224" href="#224">224.</a>	            return $file;</div>
+<div class="codeline"><a name="225" href="#225">225.</a>	        } else {</div>
+<div class="codeline"><a name="226" href="#226">226.</a>	            throw new Exception($file.' View file is missing.');</div>
+	<span class="label label-danger">
+		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+		Exit 
+	</span> &nbsp;
+<div class="codeline bg-danger"><a name="227" href="#227">227.</a>	            exit;</div>
+<div class="codeline"><a name="228" href="#228">228.</a>	        }</div>
+<div class="codeline"><a name="229" href="#229">229.</a>	    }</div>
+<div class="codeline"><a name="230" href="#230">230.</a>	</div>
+<div class="codeline"><a name="231" href="#231">231.</a>	    /**</div>
+<div class="codeline"><a name="232" href="#232">232.</a>	     * Find a Template.</div>
+<div class="codeline"><a name="233" href="#233">233.</a>	     *</div>
+<div class="codeline"><a name="234" href="#234">234.</a>	     * @param string $template</div>
+<div class="codeline"><a name="235" href="#235">235.</a>	     *</div>
+<div class="codeline"><a name="236" href="#236">236.</a>	     * @throws Exception</div>
+<div class="codeline"><a name="237" href="#237">237.</a>	     *</div>
+<div class="codeline"><a name="238" href="#238">238.</a>	     * @return string full template file path</div>
+<div class="codeline"><a name="239" href="#239">239.</a>	     */</div>
+<div class="codeline"><a name="240" href="#240">240.</a>	    public function findTemplate($template)</div>
+<div class="codeline"><a name="241" href="#241">241.</a>	    {</div>
+<div class="codeline"><a name="242" href="#242">242.</a>	        $file = $this-&gt;basePath(&quot;app/Template/$template&quot;);</div>
+<div class="codeline"><a name="243" href="#243">243.</a>	        if ($this-&gt;findFile($file)) {</div>
+<div class="codeline"><a name="244" href="#244">244.</a>	            return $file;</div>
+<div class="codeline"><a name="245" href="#245">245.</a>	        } elseif ($this-&gt;findFile($file.'.html')) {</div>
+<div class="codeline"><a name="246" href="#246">246.</a>	            return $file.'.html';</div>
+<div class="codeline"><a name="247" href="#247">247.</a>	        } elseif ($this-&gt;findFile($file.'.php')) {</div>
+<div class="codeline"><a name="248" href="#248">248.</a>	            return $file.'.php';</div>
+<div class="codeline"><a name="249" href="#249">249.</a>	        } else {</div>
+<div class="codeline"><a name="250" href="#250">250.</a>	            throw new Exception($file.' Template file is missing.');</div>
+	<span class="label label-danger">
+		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+		Exit 
+	</span> &nbsp;
+<div class="codeline bg-danger"><a name="251" href="#251">251.</a>	            exit;</div>
+<div class="codeline"><a name="252" href="#252">252.</a>	        }</div>
+<div class="codeline"><a name="253" href="#253">253.</a>	    }</div>
+<div class="codeline"><a name="254" href="#254">254.</a>	</div>
+<div class="codeline"><a name="255" href="#255">255.</a>	    /**</div>
+<div class="codeline"><a name="256" href="#256">256.</a>	     * Find a Controller.</div>
+<div class="codeline"><a name="257" href="#257">257.</a>	     *</div>
+<div class="codeline"><a name="258" href="#258">258.</a>	     * @param string $controller</div>
+<div class="codeline"><a name="259" href="#259">259.</a>	     *</div>
+<div class="codeline"><a name="260" href="#260">260.</a>	     * @throws Exception</div>
+<div class="codeline"><a name="261" href="#261">261.</a>	     *</div>
+<div class="codeline"><a name="262" href="#262">262.</a>	     * @return bool</div>
+<div class="codeline"><a name="263" href="#263">263.</a>	     */</div>
+<div class="codeline"><a name="264" href="#264">264.</a>	    public function findController($controller)</div>
+<div class="codeline"><a name="265" href="#265">265.</a>	    {</div>
+<div class="codeline"><a name="266" href="#266">266.</a>	        $file = $this-&gt;basePath(&quot;app/Controller/$controller.php&quot;);</div>
+<div class="codeline"><a name="267" href="#267">267.</a>	        if ($this-&gt;findFile($file)) {</div>
+<div class="codeline"><a name="268" href="#268">268.</a>	            return true;</div>
+<div class="codeline"><a name="269" href="#269">269.</a>	        } else {</div>
+<div class="codeline"><a name="270" href="#270">270.</a>	            throw new Exception($file.' Controller file is missing.');</div>
+	<span class="label label-danger">
+		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+		Exit 
+	</span> &nbsp;
+<div class="codeline bg-danger"><a name="271" href="#271">271.</a>	            exit;</div>
+<div class="codeline"><a name="272" href="#272">272.</a>	        }</div>
+<div class="codeline"><a name="273" href="#273">273.</a>	    }</div>
+<div class="codeline"><a name="274" href="#274">274.</a>	</div>
+<div class="codeline"><a name="275" href="#275">275.</a>	    /**</div>
+<div class="codeline"><a name="276" href="#276">276.</a>	     * Check if Controller has method or not.</div>
+<div class="codeline"><a name="277" href="#277">277.</a>	     *</div>
+<div class="codeline"><a name="278" href="#278">278.</a>	     * @param {App}\Controller\{Name}Controller $controllerObj</div>
+<div class="codeline"><a name="279" href="#279">279.</a>	     * @param string                            $method</div>
+<div class="codeline"><a name="280" href="#280">280.</a>	     *</div>
+<div class="codeline"><a name="281" href="#281">281.</a>	     * @throws Exception</div>
+<div class="codeline"><a name="282" href="#282">282.</a>	     *</div>
+<div class="codeline"><a name="283" href="#283">283.</a>	     * @return bool</div>
+<div class="codeline"><a name="284" href="#284">284.</a>	     */</div>
+<div class="codeline"><a name="285" href="#285">285.</a>	    public function hasMethod($controllerObj, $method)</div>
+<div class="codeline"><a name="286" href="#286">286.</a>	    {</div>
+<div class="codeline"><a name="287" href="#287">287.</a>	        if (method_exists($controllerObj, $method)) {</div>
+<div class="codeline"><a name="288" href="#288">288.</a>	            return true;</div>
+<div class="codeline"><a name="289" href="#289">289.</a>	        } else {</div>
+<div class="codeline"><a name="290" href="#290">290.</a>	            throw new Exception($method.' method is missing in '.get_class($controllerObj).' Controller.');</div>
+	<span class="label label-danger">
+		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+		Exit 
+	</span> &nbsp;
+<div class="codeline bg-danger"><a name="291" href="#291">291.</a>	            exit;</div>
+<div class="codeline"><a name="292" href="#292">292.</a>	        }</div>
+<div class="codeline"><a name="293" href="#293">293.</a>	    }</div>
+<div class="codeline"><a name="294" href="#294">294.</a>	</div>
+<div class="codeline"><a name="295" href="#295">295.</a>	    /**</div>
+<div class="codeline"><a name="296" href="#296">296.</a>	     * Require a file.</div>
+<div class="codeline"><a name="297" href="#297">297.</a>	     *</div>
+<div class="codeline"><a name="298" href="#298">298.</a>	     * @param string $file</div>
+<div class="codeline"><a name="299" href="#299">299.</a>	     * @param bool   $return</div>
+<div class="codeline"><a name="300" href="#300">300.</a>	     *</div>
+<div class="codeline"><a name="301" href="#301">301.</a>	     * @throws Exception</div>
+<div class="codeline"><a name="302" href="#302">302.</a>	     *</div>
+<div class="codeline"><a name="303" href="#303">303.</a>	     * @return void</div>
+<div class="codeline"><a name="304" href="#304">304.</a>	     */</div>
+<div class="codeline"><a name="305" href="#305">305.</a>	    public function requireFile($file, $return = false)</div>
+<div class="codeline"><a name="306" href="#306">306.</a>	    {</div>
+<div class="codeline"><a name="307" href="#307">307.</a>	        if ($this-&gt;findFile($file)) {</div>
+<div class="codeline"><a name="308" href="#308">308.</a>	            if ($return !== false) {</div>
+	<span class="label label-danger">
+		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+		Include 
+	</span> &nbsp;
+<div class="codeline bg-danger"><a name="309" href="#309">309.</a>	                return require $file;</div>
+<div class="codeline"><a name="310" href="#310">310.</a>	            } else {</div>
+	<span class="label label-danger">
+		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+		Include 
+	</span> &nbsp;
+<div class="codeline bg-danger"><a name="311" href="#311">311.</a>	                require $file;</div>
+<div class="codeline"><a name="312" href="#312">312.</a>	            }</div>
+<div class="codeline"><a name="313" href="#313">313.</a>	        } else {</div>
+<div class="codeline"><a name="314" href="#314">314.</a>	            throw new Exception($file.' file is missing.');</div>
+	<span class="label label-danger">
+		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+		Exit 
+	</span> &nbsp;
+<div class="codeline bg-danger"><a name="315" href="#315">315.</a>	            exit;</div>
+<div class="codeline"><a name="316" href="#316">316.</a>	        }</div>
+<div class="codeline"><a name="317" href="#317">317.</a>	    }</div>
+<div class="codeline"><a name="318" href="#318">318.</a>	</div>
+<div class="codeline"><a name="319" href="#319">319.</a>	    /**</div>
+<div class="codeline"><a name="320" href="#320">320.</a>	     * Set Installtion Time/Version to app/install file used for checking updates.</div>
+<div class="codeline"><a name="321" href="#321">321.</a>	     *</div>
+<div class="codeline"><a name="322" href="#322">322.</a>	     * @return bool</div>
+<div class="codeline"><a name="323" href="#323">323.</a>	     */</div>
+<div class="codeline"><a name="324" href="#324">324.</a>	    public function setIntallTime()</div>
+<div class="codeline"><a name="325" href="#325">325.</a>	    {</div>
+<div class="codeline"><a name="326" href="#326">326.</a>	        $file = $this-&gt;basePath('app/install');</div>
+<div class="codeline"><a name="327" href="#327">327.</a>	        if (!file_exists($file)) {</div>
+<div class="codeline"><a name="328" href="#328">328.</a>	            $content = json_encode(['time'=&gt;time(), 'version' =&gt; $this-&gt;version()]);</div>
+<div class="codeline"><a name="329" href="#329">329.</a>	            $byte = file_put_contents($file, $content);</div>
+<div class="codeline"><a name="330" href="#330">330.</a>	            if ($byte) {</div>
+<div class="codeline"><a name="331" href="#331">331.</a>	                return true;</div>
+<div class="codeline"><a name="332" href="#332">332.</a>	            } else {</div>
+<div class="codeline"><a name="333" href="#333">333.</a>	                return false;</div>
+<div class="codeline"><a name="334" href="#334">334.</a>	            }</div>
+<div class="codeline"><a name="335" href="#335">335.</a>	        } else {</div>
+<div class="codeline"><a name="336" href="#336">336.</a>	            return true;</div>
+<div class="codeline"><a name="337" href="#337">337.</a>	        }</div>
+<div class="codeline"><a name="338" href="#338">338.</a>	    }</div>
+<div class="codeline"><a name="339" href="#339">339.</a>	</div>
+<div class="codeline"><a name="340" href="#340">340.</a>	    /**</div>
+<div class="codeline"><a name="341" href="#341">341.</a>	     * Get Installtion Time/Version to app/install file used for checking updates.</div>
+<div class="codeline"><a name="342" href="#342">342.</a>	     *</div>
+<div class="codeline"><a name="343" href="#343">343.</a>	     * @param bool $checkSet</div>
+<div class="codeline"><a name="344" href="#344">344.</a>	     *</div>
+<div class="codeline"><a name="345" href="#345">345.</a>	     * @return bool|array</div>
+<div class="codeline"><a name="346" href="#346">346.</a>	     */</div>
+<div class="codeline"><a name="347" href="#347">347.</a>	    public function getIntallTime($checkSet = false)</div>
+<div class="codeline"><a name="348" href="#348">348.</a>	    {</div>
+<div class="codeline"><a name="349" href="#349">349.</a>	        $file = $this-&gt;basePath('app/install');</div>
+<div class="codeline"><a name="350" href="#350">350.</a>	        if (!file_exists($file)) {</div>
+<div class="codeline"><a name="351" href="#351">351.</a>	            return false;</div>
+<div class="codeline"><a name="352" href="#352">352.</a>	        } else {</div>
+<div class="codeline"><a name="353" href="#353">353.</a>	            if ($checkSet === true) {</div>
+<div class="codeline"><a name="354" href="#354">354.</a>	                return true;</div>
+<div class="codeline"><a name="355" href="#355">355.</a>	            }</div>
+<div class="codeline"><a name="356" href="#356">356.</a>	            $content = file_get_contents($file);</div>
+<div class="codeline"><a name="357" href="#357">357.</a>	            $data = json_decode($content);</div>
+<div class="codeline"><a name="358" href="#358">358.</a>	        }</div>
+<div class="codeline"><a name="359" href="#359">359.</a>	</div>
+<div class="codeline"><a name="360" href="#360">360.</a>	        return $data;</div>
+<div class="codeline"><a name="361" href="#361">361.</a>	    }</div>
+<div class="codeline"><a name="362" href="#362">362.</a>	</div>
+<div class="codeline"><a name="363" href="#363">363.</a>	    /**</div>
+<div class="codeline"><a name="364" href="#364">364.</a>	     * Set Application secret key.</div>
+<div class="codeline"><a name="365" href="#365">365.</a>	     *</div>
+<div class="codeline"><a name="366" href="#366">366.</a>	     * @throws Exception</div>
+<div class="codeline"><a name="367" href="#367">367.</a>	     *</div>
+<div class="codeline"><a name="368" href="#368">368.</a>	     * @return string</div>
+<div class="codeline"><a name="369" href="#369">369.</a>	     */</div>
+<div class="codeline"><a name="370" href="#370">370.</a>	    public function setKey()</div>
+<div class="codeline"><a name="371" href="#371">371.</a>	    {</div>
+	<span class="label label-danger">
+		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+		Global function call (env)
+	</span> &nbsp;
+<div class="codeline bg-danger"><a name="372" href="#372">372.</a>	        if (trim(env('APP_KEY')) != '') {</div>
+<div class="codeline"><a name="373" href="#373">373.</a>	            return true;</div>
+<div class="codeline"><a name="374" href="#374">374.</a>	        }</div>
+<div class="codeline"><a name="375" href="#375">375.</a>	        $appKey = '';</div>
+<div class="codeline"><a name="376" href="#376">376.</a>	        for ($i = 0; $i &lt; 32; $i++) {</div>
+<div class="codeline"><a name="377" href="#377">377.</a>	            $appKey .= chr(rand(0, 255));</div>
+<div class="codeline"><a name="378" href="#378">378.</a>	        }</div>
+<div class="codeline"><a name="379" href="#379">379.</a>	        $appKey = 'base64:'.base64_encode($appKey);</div>
+<div class="codeline"><a name="380" href="#380">380.</a>	        $file = $this-&gt;basePath('.env');</div>
+<div class="codeline"><a name="381" href="#381">381.</a>	        $lines = $this-&gt;parseEnvFile($file);</div>
+<div class="codeline"><a name="382" href="#382">382.</a>	        $flag = false;</div>
+<div class="codeline"><a name="383" href="#383">383.</a>	        foreach ($lines as $i =&gt; $line) {</div>
+<div class="codeline"><a name="384" href="#384">384.</a>	            $lines[$i] = trim($line);</div>
+<div class="codeline"><a name="385" href="#385">385.</a>	            $lines[$i] = trim($line, &quot;\n&quot;);</div>
+<div class="codeline"><a name="386" href="#386">386.</a>	            if (strpos($line, 'APP_KEY') !== false) {</div>
+<div class="codeline"><a name="387" href="#387">387.</a>	                $data = explode('=', $line, 2);</div>
+<div class="codeline"><a name="388" href="#388">388.</a>	                if (!isset($data[1]) || trim($data[1]) == '') {</div>
+<div class="codeline"><a name="389" href="#389">389.</a>	                    $lines[$i] = 'APP_KEY='.$appKey;</div>
+<div class="codeline"><a name="390" href="#390">390.</a>	                    $flag = true;</div>
+<div class="codeline"><a name="391" href="#391">391.</a>	                }</div>
+<div class="codeline"><a name="392" href="#392">392.</a>	            }</div>
+<div class="codeline"><a name="393" href="#393">393.</a>	        }</div>
+<div class="codeline"><a name="394" href="#394">394.</a>	        if ($flag == false) {</div>
+<div class="codeline"><a name="395" href="#395">395.</a>	            $lines = ['APP_KEY='.$appKey] + $lines;</div>
+<div class="codeline"><a name="396" href="#396">396.</a>	        }</div>
+<div class="codeline"><a name="397" href="#397">397.</a>	        $data = implode(&quot;\n&quot;, $lines);</div>
+<div class="codeline"><a name="398" href="#398">398.</a>	        if (file_put_contents($file, $data)) {</div>
+<div class="codeline"><a name="399" href="#399">399.</a>	            putenv(&quot;APP_KEY=$appKey&quot;);</div>
+	<span class="label label-danger">
+		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+		Super global access ($_ENV)
+	</span> &nbsp;
+<div class="codeline bg-danger"><a name="400" href="#400">400.</a>	            $_ENV['APP_KEY'] = $appKey;</div>
+	<span class="label label-danger">
+		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+		Super global access ($_SERVER)
+	</span> &nbsp;
+<div class="codeline bg-danger"><a name="401" href="#401">401.</a>	            $_SERVER['APP_KEY'] = $appKey;</div>
+<div class="codeline"><a name="402" href="#402">402.</a>	</div>
+<div class="codeline"><a name="403" href="#403">403.</a>	            return true;</div>
+<div class="codeline"><a name="404" href="#404">404.</a>	        } else {</div>
+<div class="codeline"><a name="405" href="#405">405.</a>	            throw new Exception('Failed to write in .env file.');</div>
+<div class="codeline"><a name="406" href="#406">406.</a>	        }</div>
+<div class="codeline"><a name="407" href="#407">407.</a>	    }</div>
+<div class="codeline"><a name="408" href="#408">408.</a>	</div>
+<div class="codeline"><a name="409" href="#409">409.</a>	    /**</div>
+<div class="codeline"><a name="410" href="#410">410.</a>	     * Parse .env file gets its lines in array.</div>
+<div class="codeline"><a name="411" href="#411">411.</a>	     *</div>
+<div class="codeline"><a name="412" href="#412">412.</a>	     * @param string $file</div>
+<div class="codeline"><a name="413" href="#413">413.</a>	     *</div>
+<div class="codeline"><a name="414" href="#414">414.</a>	     * @return array</div>
+<div class="codeline"><a name="415" href="#415">415.</a>	     */</div>
+<div class="codeline"><a name="416" href="#416">416.</a>	    public function parseEnvFile($file)</div>
+<div class="codeline"><a name="417" href="#417">417.</a>	    {</div>
+<div class="codeline"><a name="418" href="#418">418.</a>	        $this-&gt;ensureFileIsReadable($file);</div>
+<div class="codeline"><a name="419" href="#419">419.</a>	</div>
+<div class="codeline"><a name="420" href="#420">420.</a>	        $lines = file($file);</div>
+<div class="codeline"><a name="421" href="#421">421.</a>	</div>
+<div class="codeline"><a name="422" href="#422">422.</a>	        return $lines;</div>
+<div class="codeline"><a name="423" href="#423">423.</a>	    }</div>
+<div class="codeline"><a name="424" href="#424">424.</a>	</div>
+<div class="codeline"><a name="425" href="#425">425.</a>	    /**</div>
+<div class="codeline"><a name="426" href="#426">426.</a>	     * Ensures the given filePath is readable.</div>
+<div class="codeline"><a name="427" href="#427">427.</a>	     *</div>
+<div class="codeline"><a name="428" href="#428">428.</a>	     * @param string $file</div>
+<div class="codeline"><a name="429" href="#429">429.</a>	     *</div>
+<div class="codeline"><a name="430" href="#430">430.</a>	     * @throws Exception</div>
+<div class="codeline"><a name="431" href="#431">431.</a>	     *</div>
+<div class="codeline"><a name="432" href="#432">432.</a>	     * @return void</div>
+<div class="codeline"><a name="433" href="#433">433.</a>	     */</div>
+	<span class="label label-danger">
+		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+		Protected method declaration (ensureFileIsReadable)
+	</span> &nbsp;
+<div class="codeline bg-danger"><a name="434" href="#434">434.</a>	    protected function ensureFileIsReadable($file)</div>
+<div class="codeline"><a name="435" href="#435">435.</a>	    {</div>
+<div class="codeline"><a name="436" href="#436">436.</a>	        if (!is_readable($file) || !is_file($file)) {</div>
+<div class="codeline"><a name="437" href="#437">437.</a>	            throw new Exception(sprintf('Unable to read the environment file at %s.', $$file));</div>
+<div class="codeline"><a name="438" href="#438">438.</a>	        }</div>
+<div class="codeline"><a name="439" href="#439">439.</a>	    }</div>
+<div class="codeline"><a name="440" href="#440">440.</a>	</div>
+<div class="codeline"><a name="441" href="#441">441.</a>	    /**</div>
+<div class="codeline"><a name="442" href="#442">442.</a>	     * Find a Command.</div>
+<div class="codeline"><a name="443" href="#443">443.</a>	     *</div>
+<div class="codeline"><a name="444" href="#444">444.</a>	     * @param string $command</div>
+<div class="codeline"><a name="445" href="#445">445.</a>	     * @param bool   $system</div>
+<div class="codeline"><a name="446" href="#446">446.</a>	     *</div>
+<div class="codeline"><a name="447" href="#447">447.</a>	     * @return bool</div>
+<div class="codeline"><a name="448" href="#448">448.</a>	     */</div>
+<div class="codeline"><a name="449" href="#449">449.</a>	    public function findCommand($command, $system = true)</div>
+<div class="codeline"><a name="450" href="#450">450.</a>	    {</div>
+<div class="codeline"><a name="451" href="#451">451.</a>	        $file = dirname(__DIR__).'/Console/Command/'.ucfirst($command).'Command.php';</div>
+<div class="codeline"><a name="452" href="#452">452.</a>	        if ($this-&gt;findFile($file)) {</div>
+<div class="codeline"><a name="453" href="#453">453.</a>	            return true;</div>
+<div class="codeline"><a name="454" href="#454">454.</a>	        } else {</div>
+<div class="codeline"><a name="455" href="#455">455.</a>	            return false;</div>
+<div class="codeline"><a name="456" href="#456">456.</a>	            //throw new Exception($file.&quot; Command Class is missing.&quot;);</div>
+<div class="codeline"><a name="457" href="#457">457.</a>	            //exit;</div>
+<div class="codeline"><a name="458" href="#458">458.</a>	        }</div>
+<div class="codeline"><a name="459" href="#459">459.</a>	    }</div>
+<div class="codeline"><a name="460" href="#460">460.</a>	</div>
+<div class="codeline"><a name="461" href="#461">461.</a>	    /**</div>
+<div class="codeline"><a name="462" href="#462">462.</a>	     * Set timezone.</div>
+<div class="codeline"><a name="463" href="#463">463.</a>	     *</div>
+<div class="codeline"><a name="464" href="#464">464.</a>	     * @param  string  default</div>
+<div class="codeline"><a name="465" href="#465">465.</a>	     *</div>
+<div class="codeline"><a name="466" href="#466">466.</a>	     * @return bool</div>
+<div class="codeline"><a name="467" href="#467">467.</a>	     */</div>
+<div class="codeline"><a name="468" href="#468">468.</a>	    public function setTimezone($default)</div>
+<div class="codeline"><a name="469" href="#469">469.</a>	    {</div>
+<div class="codeline"><a name="470" href="#470">470.</a>	        /*</div>
+<div class="codeline"><a name="471" href="#471">471.</a>	        I'm sure I'm not the only one who is distressed by the recent default behavior change to E_NOTICE when the timezone isn't explicitly set in the program or in .ini.  I insure that the clock on the server IS correct, and I don't want to have to set it in two places (the system AND PHP).  So I want to read it from the system.  But PHP won't accept that answer, and insists on a call to this function</div>
+<div class="codeline"><a name="472" href="#472">472.</a>	        Use it by calling it with a fallback default answer. It doesn't work on Windows.</div>
+<div class="codeline"><a name="473" href="#473">473.</a>	        */</div>
+<div class="codeline"><a name="474" href="#474">474.</a>	        $timezone = '';</div>
+<div class="codeline"><a name="475" href="#475">475.</a>	</div>
+<div class="codeline"><a name="476" href="#476">476.</a>	        // On many systems (Mac, for instance) &quot;/etc/localtime&quot; is a symlink</div>
+<div class="codeline"><a name="477" href="#477">477.</a>	        // to the file with the timezone info</div>
+<div class="codeline"><a name="478" href="#478">478.</a>	        if (is_link('/etc/localtime')) {</div>
+<div class="codeline"><a name="479" href="#479">479.</a>	</div>
+<div class="codeline"><a name="480" href="#480">480.</a>	            // If it is, that file's name is actually the &quot;Olsen&quot; format timezone</div>
+<div class="codeline"><a name="481" href="#481">481.</a>	            $filename = readlink('/etc/localtime');</div>
+<div class="codeline"><a name="482" href="#482">482.</a>	</div>
+<div class="codeline"><a name="483" href="#483">483.</a>	            $pos = strpos($filename, 'zoneinfo');</div>
+<div class="codeline"><a name="484" href="#484">484.</a>	            if ($pos) {</div>
+<div class="codeline"><a name="485" href="#485">485.</a>	                // When it is, it's in the &quot;/usr/share/zoneinfo/&quot; folder</div>
+<div class="codeline"><a name="486" href="#486">486.</a>	                $timezone = substr($filename, $pos + strlen('zoneinfo/'));</div>
+<div class="codeline"><a name="487" href="#487">487.</a>	            } else {</div>
+<div class="codeline"><a name="488" href="#488">488.</a>	                // If not, bail</div>
+<div class="codeline"><a name="489" href="#489">489.</a>	                $timezone = $default;</div>
+<div class="codeline"><a name="490" href="#490">490.</a>	            }</div>
+<div class="codeline"><a name="491" href="#491">491.</a>	        } elseif (is_link('/etc/timezone')) {</div>
+<div class="codeline"><a name="492" href="#492">492.</a>	            // On other systems, like Ubuntu, there's file with the Olsen time</div>
+<div class="codeline"><a name="493" href="#493">493.</a>	            // right inside it.</div>
+<div class="codeline"><a name="494" href="#494">494.</a>	            $timezone = file_get_contents('/etc/timezone');</div>
+<div class="codeline"><a name="495" href="#495">495.</a>	            if (!strlen($timezone)) {</div>
+<div class="codeline"><a name="496" href="#496">496.</a>	                $timezone = $default;</div>
+<div class="codeline"><a name="497" href="#497">497.</a>	            }</div>
+<div class="codeline"><a name="498" href="#498">498.</a>	        } else {</div>
+<div class="codeline"><a name="499" href="#499">499.</a>	            $timezone = $default;</div>
+<div class="codeline"><a name="500" href="#500">500.</a>	        }</div>
+<div class="codeline"><a name="501" href="#501">501.</a>	        date_default_timezone_set($timezone);</div>
+<div class="codeline"><a name="502" href="#502">502.</a>	    }</div>
+<div class="codeline"><a name="503" href="#503">503.</a>	</div>
+<div class="codeline"><a name="504" href="#504">504.</a>	    /**</div>
+<div class="codeline"><a name="505" href="#505">505.</a>	     * Get specific or all Registered redirect routes.</div>
+<div class="codeline"><a name="506" href="#506">506.</a>	     *</div>
+<div class="codeline"><a name="507" href="#507">507.</a>	     * @param  string  uri</div>
+<div class="codeline"><a name="508" href="#508">508.</a>	     *</div>
+<div class="codeline"><a name="509" href="#509">509.</a>	     * @return array</div>
+<div class="codeline"><a name="510" href="#510">510.</a>	     */</div>
+<div class="codeline"><a name="511" href="#511">511.</a>	    public function getRoutes($uri = null)</div>
+<div class="codeline"><a name="512" href="#512">512.</a>	    {</div>
+<div class="codeline"><a name="513" href="#513">513.</a>	        return $this-&gt;route-&gt;getRoute($uri);</div>
+<div class="codeline"><a name="514" href="#514">514.</a>	    }</div>
+<div class="codeline"><a name="515" href="#515">515.</a>	</div>
+<div class="codeline"><a name="516" href="#516">516.</a>	    /**</div>
+<div class="codeline"><a name="517" href="#517">517.</a>	     * Find a Theme.</div>
+<div class="codeline"><a name="518" href="#518">518.</a>	     *</div>
+<div class="codeline"><a name="519" href="#519">519.</a>	     * @param string $theme</div>
+<div class="codeline"><a name="520" href="#520">520.</a>	     * @param string $file  File to use for rendering</div>
+<div class="codeline"><a name="521" href="#521">521.</a>	     *</div>
+<div class="codeline"><a name="522" href="#522">522.</a>	     * @throws Exception</div>
+<div class="codeline"><a name="523" href="#523">523.</a>	     *</div>
+<div class="codeline"><a name="524" href="#524">524.</a>	     * @return string</div>
+<div class="codeline"><a name="525" href="#525">525.</a>	     */</div>
+<div class="codeline"><a name="526" href="#526">526.</a>	    public function findTheme($theme, $file = null)</div>
+<div class="codeline"><a name="527" href="#527">527.</a>	    {</div>
+<div class="codeline"><a name="528" href="#528">528.</a>	        $extMain = ['html', 'htm'];</div>
+<div class="codeline"><a name="529" href="#529">529.</a>	        if ($file) {</div>
+<div class="codeline"><a name="530" href="#530">530.</a>	            $array = explode('.', $file);</div>
+<div class="codeline"><a name="531" href="#531">531.</a>	            $ext = array_pop($array);</div>
+<div class="codeline"><a name="532" href="#532">532.</a>	        } else {</div>
+<div class="codeline"><a name="533" href="#533">533.</a>	            $ext = null;</div>
+<div class="codeline"><a name="534" href="#534">534.</a>	        }</div>
+<div class="codeline"><a name="535" href="#535">535.</a>	</div>
+<div class="codeline"><a name="536" href="#536">536.</a>	        if (!in_array($ext, $extMain)) {</div>
+<div class="codeline"><a name="537" href="#537">537.</a>	            throw new Exception('Theme file must be HTML/HTM : '.$theme.DS.$file);</div>
+	<span class="label label-danger">
+		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+		Exit 
+	</span> &nbsp;
+<div class="codeline bg-danger"><a name="538" href="#538">538.</a>	            exit;</div>
+<div class="codeline"><a name="539" href="#539">539.</a>	        }</div>
+<div class="codeline"><a name="540" href="#540">540.</a>	</div>
+<div class="codeline"><a name="541" href="#541">541.</a>	        $fileName = ltrim($file, '/\\');</div>
+<div class="codeline"><a name="542" href="#542">542.</a>	        $allowedExt = ['html', 'htm', 'css', 'js', 'jpg', 'png', 'svg', 'eot', 'ttf', 'woff', 'woof2', 'scss', 'less'];</div>
+<div class="codeline"><a name="543" href="#543">543.</a>	        $dir = THEME.$theme.DS;</div>
+<div class="codeline"><a name="544" href="#544">544.</a>	</div>
+<div class="codeline"><a name="545" href="#545">545.</a>	        if (!file_exists($dir) || is_file($dir)) {</div>
+<div class="codeline"><a name="546" href="#546">546.</a>	            throw new Exception($dir.' Directory is missing.');</div>
+	<span class="label label-danger">
+		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+		Exit 
+	</span> &nbsp;
+<div class="codeline bg-danger"><a name="547" href="#547">547.</a>	            exit;</div>
+<div class="codeline"><a name="548" href="#548">548.</a>	        }</div>
+<div class="codeline"><a name="549" href="#549">549.</a>	</div>
+<div class="codeline"><a name="550" href="#550">550.</a>	        $json = $dir.'/ironphp-theme.json';</div>
+<div class="codeline"><a name="551" href="#551">551.</a>	        if (!file_exists($json) || !is_file($json) || !filesize($json) || (round(fileatime($json) / 10) &lt; round(fileatime($dir) / 10))) {</div>
+<div class="codeline"><a name="552" href="#552">552.</a>	            $themeFiles = $this-&gt;parseDir($dir, $allowedExt, $json, true);</div>
+<div class="codeline"><a name="553" href="#553">553.</a>	            if (!isset($themeFiles['html']) &amp;&amp; isset($themeFiles['htm'])) {</div>
+<div class="codeline"><a name="554" href="#554">554.</a>	                throw new Exception('HTML/HTM files are missing in Theme: '.$theme);</div>
+	<span class="label label-danger">
+		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+		Exit 
+	</span> &nbsp;
+<div class="codeline bg-danger"><a name="555" href="#555">555.</a>	                exit;</div>
+<div class="codeline"><a name="556" href="#556">556.</a>	            }</div>
+<div class="codeline"><a name="557" href="#557">557.</a>	        } else {</div>
+<div class="codeline"><a name="558" href="#558">558.</a>	            $themeFiles = json_decode(file_get_contents($json), true);</div>
+<div class="codeline"><a name="559" href="#559">559.</a>	        }</div>
+<div class="codeline"><a name="560" href="#560">560.</a>	</div>
+<div class="codeline"><a name="561" href="#561">561.</a>	        if (in_array($fileName, $themeFiles[$ext])) {</div>
+<div class="codeline"><a name="562" href="#562">562.</a>	            $themeFilepath = $themeFiles['theme_path'].$fileName;</div>
+<div class="codeline"><a name="563" href="#563">563.</a>	        } else {</div>
+<div class="codeline"><a name="564" href="#564">564.</a>	            throw new Exception($fileName.' is missing in Theme: '.$theme);</div>
+	<span class="label label-danger">
+		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+		Exit 
+	</span> &nbsp;
+<div class="codeline bg-danger"><a name="565" href="#565">565.</a>	            exit;</div>
+<div class="codeline"><a name="566" href="#566">566.</a>	        }</div>
+<div class="codeline"><a name="567" href="#567">567.</a>	        $this-&gt;installTheme($themeFiles, ['css', 'js', 'jpg', 'png', 'svg', 'eot', 'ttf', 'woff', 'woof2', 'scss', 'less']);</div>
+<div class="codeline"><a name="568" href="#568">568.</a>	</div>
+<div class="codeline"><a name="569" href="#569">569.</a>	        return ['themeName' =&gt; $theme, 'themePath' =&gt; $dir, 'themeFilePath' =&gt; $themeFilepath];</div>
+<div class="codeline"><a name="570" href="#570">570.</a>	    }</div>
+<div class="codeline"><a name="571" href="#571">571.</a>	</div>
+<div class="codeline"><a name="572" href="#572">572.</a>	    /**</div>
+<div class="codeline"><a name="573" href="#573">573.</a>	     * Parse files/dir in dir.</div>
+<div class="codeline"><a name="574" href="#574">574.</a>	     *</div>
+<div class="codeline"><a name="575" href="#575">575.</a>	     * @param string $dir</div>
+<div class="codeline"><a name="576" href="#576">576.</a>	     * @param array  $allowedExt</div>
+<div class="codeline"><a name="577" href="#577">577.</a>	     * @param string $json</div>
+<div class="codeline"><a name="578" href="#578">578.</a>	     * @param bool   $byType</div>
+<div class="codeline"><a name="579" href="#579">579.</a>	     *</div>
+<div class="codeline"><a name="580" href="#580">580.</a>	     * @return array</div>
+<div class="codeline"><a name="581" href="#581">581.</a>	     */</div>
+<div class="codeline"><a name="582" href="#582">582.</a>	    public function parseDir($dir, $allowedExt, $json, $byType = false)</div>
+<div class="codeline"><a name="583" href="#583">583.</a>	    {</div>
+<div class="codeline"><a name="584" href="#584">584.</a>	        $fp = fopen($json, 'w');</div>
+<div class="codeline"><a name="585" href="#585">585.</a>	        $getList = $this-&gt;getList($dir, $allowedExt, [], $byType);</div>
+<div class="codeline"><a name="586" href="#586">586.</a>	        fwrite($fp, json_encode($getList, JSON_PRETTY_PRINT));</div>
+<div class="codeline"><a name="587" href="#587">587.</a>	        fclose($fp);</div>
+<div class="codeline"><a name="588" href="#588">588.</a>	</div>
+<div class="codeline"><a name="589" href="#589">589.</a>	        return $getList;</div>
+<div class="codeline"><a name="590" href="#590">590.</a>	    }</div>
+<div class="codeline"><a name="591" href="#591">591.</a>	</div>
+<div class="codeline"><a name="592" href="#592">592.</a>	    /*</div>
+<div class="codeline"><a name="593" href="#593">593.</a>	     * Get files-dir by RecursiveDirectoryIterator</div>
+<div class="codeline"><a name="594" href="#594">594.</a>	     *</div>
+<div class="codeline"><a name="595" href="#595">595.</a>	     * @param   array  $dir</div>
+<div class="codeline"><a name="596" href="#596">596.</a>	     * @param   array  $types</div>
+<div class="codeline"><a name="597" href="#597">597.</a>	     * @param   array  $ignoreDir</div>
+<div class="codeline"><a name="598" href="#598">598.</a>	     * @param   bool   $byType</div>
+<div class="codeline"><a name="599" href="#599">599.</a>	     * @abstract Recursively iterates over specified directory</div>
+<div class="codeline"><a name="600" href="#600">600.</a>	     *           populating array based on array of file extensions</div>
+<div class="codeline"><a name="601" href="#601">601.</a>	     *           while ignoring directories specified in ignoreDir</div>
+<div class="codeline"><a name="602" href="#602">602.</a>	     * @return  array</div>
+<div class="codeline"><a name="603" href="#603">603.</a>	     */</div>
+<div class="codeline"><a name="604" href="#604">604.</a>	    public function getList($dir, $types, $ignoreDir, $byType = false)</div>
+<div class="codeline"><a name="605" href="#605">605.</a>	    {</div>
+<div class="codeline"><a name="606" href="#606">606.</a>	        $files['theme_path'] = $dir;</div>
+<div class="codeline"><a name="607" href="#607">607.</a>	        $it = new \RecursiveDirectoryIterator($dir);</div>
+<div class="codeline"><a name="608" href="#608">608.</a>	        foreach (new \RecursiveIteratorIterator($it) as $info =&gt; $file) {</div>
+<div class="codeline"><a name="609" href="#609">609.</a>	            $basename = $file-&gt;getBasename();</div>
+<div class="codeline"><a name="610" href="#610">610.</a>	            if ($basename == '.' || $basename == '..' || $basename[0] == '.') {</div>
+<div class="codeline"><a name="611" href="#611">611.</a>	                continue;</div>
+<div class="codeline"><a name="612" href="#612">612.</a>	            }</div>
+<div class="codeline"><a name="613" href="#613">613.</a>	            $relPath = str_ireplace($dir, '', $file-&gt;getRealPath());</div>
+<div class="codeline"><a name="614" href="#614">614.</a>	            if (!in_array($it, $ignoreDir) &amp;&amp; $types == [] || in_array(strtolower($file-&gt;getExtension()), $types)) {</div>
+<div class="codeline"><a name="615" href="#615">615.</a>	                if ($byType) {</div>
+<div class="codeline"><a name="616" href="#616">616.</a>	                    $files[$file-&gt;getExtension()][] = $relPath;</div>
+<div class="codeline"><a name="617" href="#617">617.</a>	                } else {</div>
+<div class="codeline"><a name="618" href="#618">618.</a>	                    $files[] = $relPath;</div>
+<div class="codeline"><a name="619" href="#619">619.</a>	                }</div>
+<div class="codeline"><a name="620" href="#620">620.</a>	            }</div>
+<div class="codeline"><a name="621" href="#621">621.</a>	        }</div>
+<div class="codeline"><a name="622" href="#622">622.</a>	</div>
+<div class="codeline"><a name="623" href="#623">623.</a>	        return $files;</div>
+<div class="codeline"><a name="624" href="#624">624.</a>	    }</div>
+<div class="codeline"><a name="625" href="#625">625.</a>	</div>
+<div class="codeline"><a name="626" href="#626">626.</a>	    /*</div>
+<div class="codeline"><a name="627" href="#627">627.</a>	     * Copy theme files into public dir.</div>
+<div class="codeline"><a name="628" href="#628">628.</a>	     *</div>
+<div class="codeline"><a name="629" href="#629">629.</a>	     * @param   string  $jsonTheme</div>
+<div class="codeline"><a name="630" href="#630">630.</a>	     * @param   array   $allowExt</div>
+<div class="codeline"><a name="631" href="#631">631.</a>	     * @return  void</div>
+<div class="codeline"><a name="632" href="#632">632.</a>	     */</div>
+<div class="codeline"><a name="633" href="#633">633.</a>	    public function installTheme($jsonTheme, $allowExt)</div>
+<div class="codeline"><a name="634" href="#634">634.</a>	    {</div>
+<div class="codeline"><a name="635" href="#635">635.</a>	        foreach ($jsonTheme as $key =&gt; $val) {</div>
+<div class="codeline"><a name="636" href="#636">636.</a>	            if ($key == 'theme_path') {</div>
+<div class="codeline"><a name="637" href="#637">637.</a>	                $theme_path = $val;</div>
+<div class="codeline"><a name="638" href="#638">638.</a>	            } elseif (in_array($key, $allowExt)) {</div>
+<div class="codeline"><a name="639" href="#639">639.</a>	                foreach ($val as $file) {</div>
+<div class="codeline"><a name="640" href="#640">640.</a>	                    if (file_exists($theme_path.$file) &amp;&amp; is_file($theme_path.$file)) {</div>
+<div class="codeline"><a name="641" href="#641">641.</a>	                        if (file_exists(WEB_ROOT.$file) &amp;&amp; is_file(WEB_ROOT.$file)) {</div>
+<div class="codeline"><a name="642" href="#642">642.</a>	                            if (filesize($theme_path.$file) === filesize(WEB_ROOT.$file)) {</div>
+<div class="codeline"><a name="643" href="#643">643.</a>	                                //file is already copied</div>
+<div class="codeline"><a name="644" href="#644">644.</a>	                            } else {</div>
+<div class="codeline"><a name="645" href="#645">645.</a>	                                throw new Exception('Different file with same name already exist: '.WEB_ROOT.$file);</div>
+	<span class="label label-danger">
+		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+		Exit 
+	</span> &nbsp;
+<div class="codeline bg-danger"><a name="646" href="#646">646.</a>	                                exit;</div>
+<div class="codeline"><a name="647" href="#647">647.</a>	                            }</div>
+<div class="codeline"><a name="648" href="#648">648.</a>	                        } else {</div>
+<div class="codeline"><a name="649" href="#649">649.</a>	                            $dirname = dirname(WEB_ROOT.$file);</div>
+<div class="codeline"><a name="650" href="#650">650.</a>	                            $makedir = [];</div>
+<div class="codeline"><a name="651" href="#651">651.</a>	                            while (!file_exists($dirname) || !is_dir($dirname)) {</div>
+<div class="codeline"><a name="652" href="#652">652.</a>	                                $makedir[] = $dirname;</div>
+<div class="codeline"><a name="653" href="#653">653.</a>	                                $dirname = dirname($dirname);</div>
+<div class="codeline"><a name="654" href="#654">654.</a>	                            }</div>
+<div class="codeline"><a name="655" href="#655">655.</a>	                            $makedir = array_reverse($makedir);</div>
+<div class="codeline"><a name="656" href="#656">656.</a>	                            foreach ($makedir as $dir) {</div>
+<div class="codeline"><a name="657" href="#657">657.</a>	                                mkdir($dir);</div>
+<div class="codeline"><a name="658" href="#658">658.</a>	                            }</div>
+<div class="codeline"><a name="659" href="#659">659.</a>	                            copy($theme_path.$file, WEB_ROOT.$file);</div>
+<div class="codeline"><a name="660" href="#660">660.</a>	                        }</div>
+<div class="codeline"><a name="661" href="#661">661.</a>	                    } else {</div>
+<div class="codeline"><a name="662" href="#662">662.</a>	                        throw new Exception('File is not exist: '.$theme_path.$file);</div>
+	<span class="label label-danger">
+		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+		Exit 
+	</span> &nbsp;
+<div class="codeline bg-danger"><a name="663" href="#663">663.</a>	                        exit;</div>
+<div class="codeline"><a name="664" href="#664">664.</a>	                    }</div>
+<div class="codeline"><a name="665" href="#665">665.</a>	                }</div>
+<div class="codeline"><a name="666" href="#666">666.</a>	            }</div>
+<div class="codeline"><a name="667" href="#667">667.</a>	        }</div>
+<div class="codeline"><a name="668" href="#668">668.</a>	    }</div>
+<div class="codeline"><a name="669" href="#669">669.</a>	}</div>
+
+
+		<!--Content ends here-->
+
+		<div> &nbsp; </div>
+		<div>
+			Generated Wed, 26 Jun 2019 13:13:37 +0200 by <a href="https://github.com/edsonmedina/php_testability">PHP_Testability</a>
+		</div>
+
+		</div>
+		<div class="col-md-1"></div>
+	</div>
+
+	</body>
+</html>

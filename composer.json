@@ -29,13 +29,19 @@
     },
     "require": {
         "php": ">=5.5",
+        "edsonmedina/php_testability": "@dev",
         "povils/phpmnd": "2.0",
         "psr/log": "1.1.0",
         "vlucas/phpdotenv": "^3.3"
     },
     "require-dev": {
+        "atoum/atoum": "^3.0@dev",
+        "behat/behat": "^3.5@dev",
         "dephpend/dephpend": "@dev",
-        "phpunit/phpunit": "^7.5"
+        "designsecurity/progpilot": "dev-master",
+        "kahlan/kahlan": "dev-master",
+        "phpunit/phpunit": "^7.5",
+        "phpunit/phpunit-selenium": "@dev"
     },
     "autoload": {
         "psr-4": {

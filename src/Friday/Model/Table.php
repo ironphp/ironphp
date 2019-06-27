@@ -18,14 +18,14 @@
 
 namespace Friday\Model;
 
-use MySQLi;
+use mysqli;
 
 class Table
 {
     /**
-     * Instance of MYSQLi.
+     * Instance of mysqli.
      *
-     * @var \MYSQLi
+     * @var \mysqli
      */
     private $connection;
 
@@ -67,14 +67,14 @@ class Table
     /**
      * WHERE clause.
      *
-     * @var string
+     * @var string|null
      */
     private $where;
 
     /**
      * ORDER BY clause.
      *
-     * @var array
+     * @var array|null
      */
     private $order;
 
@@ -88,21 +88,21 @@ class Table
     /**
      * LIMIT clause.
      *
-     * @var string
+     * @var string|null
      */
     private $limit = null;
 
     /**
      * ON DUPLICATE KEY UPDATE clause.
      *
-     * @var string
+     * @var string|null
      */
     private $duplicateUpdate = null;
 
     /**
      * Full builded query.
      *
-     * @var string
+     * @var string|null
      */
     private $query = null;
 
@@ -111,11 +111,11 @@ class Table
      *
      * @param array $config
      *
-     * @return \MySQLi
+     * @return \mysqli
      */
     public function __construct(array $config = [])
     {
-        $mysqli = new MySQLi($config['host'], $config['username'], $config['password'], $config['database'], $config['port']);
+        $mysqli = new mysqli($config['host'], $config['username'], $config['password'], $config['database'], $config['port']);
 
         if (version_compare(PHP_VERSION, '5.2.9', '<=') && version_compare(PHP_VERSION, '5.3.0', '>=')) {
             /*
@@ -175,9 +175,8 @@ class Table
     /**
      * Get field from table.
      *
-     * @param array|null  $field
-     * @param string|null $sqlQuery
-     * @rturn  array
+     * @param  string|null $sqlQuery
+     * @return int
      */
     public function num_rows($sqlQuery = false)
     {
@@ -193,7 +192,7 @@ class Table
     /**
      * Get field from table.
      *
-     * @param array|null  $field
+     * @param array|null  $fields
      * @param string|null $sqlQuery
      * @rturn  array
      */
@@ -212,7 +211,7 @@ class Table
     /**
      * Get all fields from table.
      *
-     * @param array|null  $field
+     * @param array|null  $fields
      * @param string|null $sqlQuery
      * @rturn  array
      */
@@ -279,7 +278,6 @@ class Table
     /**
      * Update data to table.
      *
-     * @param string|null $field
      * @param string|null $sqlQuery
      * @rturn  bool
      */
@@ -420,11 +418,9 @@ class Table
     }
 
     /**
-     * Create LIMIT clause.
+     * Create ON DUPLICATE clause.
      *
-     * @param int $start
-     * @param int $limit
-     *
+     * @param array $fields
      * @return $this
      */
     public function onDuplicateUpdate($fields)
@@ -433,7 +429,7 @@ class Table
             foreach ($fields as $field => $value) {
                 $array[] = " `$field` = ".((is_string($value) ? "'$value'" : $value));
             }
-            $this->duplicateUpdate = ' ON DUPLICATE KEY UPDATE '.implode(" $glue", $array);
+            $this->duplicateUpdate = ' ON DUPLICATE KEY UPDATE '.implode(" ,", $array);
         } elseif (is_string($fields) && trim($fields) != '') {
             $fields = trim($fields);
             //$where = trim($where, 'WHERE ');
@@ -526,7 +522,7 @@ class Table
      *
      * @param string $sql
      *
-     * @return mysqli_result
+     * @return resource
      */
     public function executeQuery($sql)
     {

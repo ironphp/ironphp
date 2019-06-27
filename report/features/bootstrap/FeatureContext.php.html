@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+		<style type="text/css">
+			.codeline { font-family: monospace; white-space: pre; }
+		</style>
+		<title>PHP_Testability report</title>
+	</head>
+	<body>
+
+	<nav class="navbar navbar-default">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	      <a class="navbar-brand" href="index.html">
+	        PHP_Testability
+	      </a>
+	    </div>
+	  </div>
+	</nav>
+
+	<div class="row">
+		<div class="col-md-1"></div>
+		<div class="col-md-10">
+
+		<!--Content starts here-->
+
+<h4>features\bootstrap\FeatureContext.php </h4>
+
+<div>&nbsp;</div>
+
+<table class="table table-bordered table-hover table-condensed">
+	<tbody>
+		<tr>
+			<th>Procedures</th>
+			<th>Status</th>			
+		</tr>	
+
+		<tr>
+			<td><a href="#19">FeatureContext::__construct</a></td>
+			<td>
+
+				<a href="#19" class="btn btn-success btn-xs" role="button">Testable</a>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+
+<div class="codeline"><a name="1" href="#1">1.</a>	&lt;?php</div>
+<div class="codeline"><a name="2" href="#2">2.</a>	</div>
+<div class="codeline"><a name="3" href="#3">3.</a>	use Behat\Behat\Context\Context;</div>
+<div class="codeline"><a name="4" href="#4">4.</a>	use Behat\Gherkin\Node\PyStringNode;</div>
+<div class="codeline"><a name="5" href="#5">5.</a>	use Behat\Gherkin\Node\TableNode;</div>
+<div class="codeline"><a name="6" href="#6">6.</a>	</div>
+<div class="codeline"><a name="7" href="#7">7.</a>	/**</div>
+<div class="codeline"><a name="8" href="#8">8.</a>	 * Defines application features from the specific context.</div>
+<div class="codeline"><a name="9" href="#9">9.</a>	 */</div>
+<div class="codeline"><a name="10" href="#10">10.</a>	class FeatureContext implements Context</div>
+<div class="codeline"><a name="11" href="#11">11.</a>	{</div>
+<div class="codeline"><a name="12" href="#12">12.</a>	    /**</div>
+<div class="codeline"><a name="13" href="#13">13.</a>	     * Initializes context.</div>
+<div class="codeline"><a name="14" href="#14">14.</a>	     *</div>
+<div class="codeline"><a name="15" href="#15">15.</a>	     * Every scenario gets its own context instance.</div>
+<div class="codeline"><a name="16" href="#16">16.</a>	     * You can also pass arbitrary arguments to the</div>
+<div class="codeline"><a name="17" href="#17">17.</a>	     * context constructor through behat.yml.</div>
+<div class="codeline"><a name="18" href="#18">18.</a>	     */</div>
+<div class="codeline"><a name="19" href="#19">19.</a>	    public function __construct()</div>
+<div class="codeline"><a name="20" href="#20">20.</a>	    {</div>
+<div class="codeline"><a name="21" href="#21">21.</a>	    }</div>
+<div class="codeline"><a name="22" href="#22">22.</a>	}</div>
+
+
+		<!--Content ends here-->
+
+		<div> &nbsp; </div>
+		<div>
+			Generated Wed, 26 Jun 2019 13:13:36 +0200 by <a href="https://github.com/edsonmedina/php_testability">PHP_Testability</a>
+		</div>
+
+		</div>
+		<div class="col-md-1"></div>
+	</div>
+
+	</body>
+</html>
