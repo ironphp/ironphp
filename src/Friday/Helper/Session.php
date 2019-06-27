@@ -94,7 +94,7 @@ class Session
     /**
      * Gets the id for the current session.
      *
-     * @return integer
+     * @return int
      */
     public function getSessionId()
     {
@@ -126,7 +126,7 @@ class Session
     /**
      * Returns the current time.
      *
-     * @return integer
+     * @return int
      */
     private function timeNow()
     {
@@ -143,7 +143,7 @@ class Session
     /**
      * Generates new time.
      *
-     * @return integer
+     * @return int
      */
     private function newTime()
     {
