@@ -175,7 +175,8 @@ class Table
     /**
      * Get field from table.
      *
-     * @param  string|null $sqlQuery
+     * @param string|null $sqlQuery
+     *
      * @return int
      */
     public function num_rows($sqlQuery = false)
@@ -421,6 +422,7 @@ class Table
      * Create ON DUPLICATE clause.
      *
      * @param array $fields
+     *
      * @return $this
      */
     public function onDuplicateUpdate($fields)
@@ -429,7 +431,7 @@ class Table
             foreach ($fields as $field => $value) {
                 $array[] = " `$field` = ".((is_string($value) ? "'$value'" : $value));
             }
-            $this->duplicateUpdate = ' ON DUPLICATE KEY UPDATE '.implode(" ,", $array);
+            $this->duplicateUpdate = ' ON DUPLICATE KEY UPDATE '.implode(' ,', $array);
         } elseif (is_string($fields) && trim($fields) != '') {
             $fields = trim($fields);
             //$where = trim($where, 'WHERE ');
