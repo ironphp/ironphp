@@ -10,7 +10,10 @@
         <img alt="AppVeyor Build status" src="https://ci.appveyor.com/api/projects/status/njmsgijb6bnr8y5y?svg=true">
     </a>
     <a href="https://github.styleci.io/repos/147162023">
-        <img src="https://github.styleci.io/repos/147162023/shield?branch=master" alt="StyleCI">
+        <img alt="StyleCI" src="https://github.styleci.io/repos/147162023/shield?branch=master">
+    </a>
+    <a href="https://travis-ci.org/ironphp/ironphp">
+        <img alt="TravisCI" src="https://travis-ci.org/ironphp/ironphp.svg">
     </a>
     <a href="https://packagist.org/packages/ironphp/ironphp" target="_blank">
         <img alt="Latest Stable Version" src="https://poser.pugx.org/ironphp/ironphp/v/stable.svg">
