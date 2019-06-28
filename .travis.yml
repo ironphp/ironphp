@@ -24,4 +24,4 @@ before_script:
   - if [ "$deps" == "low" ]; then composer update --prefer-dist --prefer-lowest --prefer-stable; fi
   - if [ "$deps" != "low" ]; then composer install --prefer-dist; fi
 
-script: php jarvis
+script: vendor/bin/phpunit
