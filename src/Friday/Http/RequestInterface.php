@@ -60,8 +60,8 @@ interface RequestInterface
     /**
      * Set parameters.
      *
-     * @param string            $key
-     * @param string|Closure    $value
+     * @param string         $key
+     * @param string|Closure $value
      *
      * @return $this
      */

@@ -18,9 +18,9 @@
 
 namespace Friday\Http;
 
+use Closure;
 use Exception;
 use ReflectionFunction;
-use Closure;
 
 class Dispatcher
 {
@@ -38,7 +38,7 @@ class Dispatcher
      *
      * @throw  Exception
      *
-     * @param array               $route
+     * @param array                $route
      * @param \Friday\Http\Request $request
      *
      * @return void

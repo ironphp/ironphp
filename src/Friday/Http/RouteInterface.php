@@ -32,9 +32,9 @@ interface RouteInterface
     /**
      * register a GET method route.
      *
-     * @param string               $route
-     * @param string|null          $mix
-     * @param string|null          $view
+     * @param string      $route
+     * @param string|null $mix
+     * @param string|null $view
      *
      * @return bool
      */
@@ -43,9 +43,9 @@ interface RouteInterface
     /**
      * register a POST method route.
      *
-     * @param string               $route
-     * @param string|Closure|null  $mix
-     * @param string|null          $view
+     * @param string              $route
+     * @param string|Closure|null $mix
+     * @param string|null         $view
      *
      * @return bool
      */
@@ -65,11 +65,11 @@ interface RouteInterface
     /**
      * register a route.
      *
-     * @param string               $method
-     * @param string               $route
-     * @param string|Closure|null  $mix
-     * @param string|null          $view
-     * @param array                $data
+     * @param string              $method
+     * @param string              $route
+     * @param string|Closure|null $mix
+     * @param string|null         $view
+     * @param array               $data
      *
      * @return void
      */
@@ -123,9 +123,9 @@ interface RouteInterface
     /**
      * register a PUT method route.
      *
-     * @param string               $route
-     * @param string|Closure|null  $mix
-     * @param string|null          $view
+     * @param string              $route
+     * @param string|Closure|null $mix
+     * @param string|null         $view
      *
      * @return bool
      */
@@ -134,9 +134,9 @@ interface RouteInterface
     /**
      * register a DELETE method route.
      *
-     * @param string               $route
-     * @param string|Closure|null  $mix
-     * @param string|null          $view
+     * @param string              $route
+     * @param string|Closure|null $mix
+     * @param string|null         $view
      *
      * @return bool
      */

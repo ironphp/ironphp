@@ -57,9 +57,9 @@ class Route implements RouteInterface
     /**
      * register a GET method route.
      *
-     * @param string               $route
-     * @param string|Closure|null  $mix
-     * @param string|null          $view
+     * @param string              $route
+     * @param string|Closure|null $mix
+     * @param string|null         $view
      *
      * @return bool
      */
@@ -71,9 +71,9 @@ class Route implements RouteInterface
     /**
      * register a POST method route.
      *
-     * @param string               $route
-     * @param string|null          $mix
-     * @param string|null          $view
+     * @param string      $route
+     * @param string|null $mix
+     * @param string|null $view
      *
      * @return bool
      */
@@ -85,9 +85,9 @@ class Route implements RouteInterface
     /**
      * register a GET method route with view.
      *
-     * @param string      $route
-     * @param string|Closure|null  $mix
-     * @param array       $data
+     * @param string              $route
+     * @param string|Closure|null $mix
+     * @param array               $data
      *
      * @return bool
      */
@@ -99,11 +99,11 @@ class Route implements RouteInterface
     /**
      * register a route.
      *
-     * @param string               $method
-     * @param string               $route
-     * @param string|Closure|null  $mix
-     * @param string|null          $view
-     * @param array                $data
+     * @param string              $method
+     * @param string              $route
+     * @param string|Closure|null $mix
+     * @param string|null         $view
+     * @param array               $data
      *
      * @return void
      */
@@ -255,9 +255,9 @@ class Route implements RouteInterface
     /**
      * register a PUT method route.
      *
-     * @param string               $route
-     * @param string|Closure|null  $mix
-     * @param string|null          $view
+     * @param string              $route
+     * @param string|Closure|null $mix
+     * @param string|null         $view
      *
      * @return bool
      */
@@ -269,9 +269,9 @@ class Route implements RouteInterface
     /**
      * register a DELETE method route.
      *
-     * @param string               $route
-     * @param string|Closure|null  $mix
-     * @param string|null          $view
+     * @param string              $route
+     * @param string|Closure|null $mix
+     * @param string|null         $view
      *
      * @return bool
      */
