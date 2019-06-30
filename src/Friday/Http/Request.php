@@ -19,7 +19,6 @@
 namespace Friday\Http;
 
 use Closure;
-
 use InvalidArgumentException;
 
 /**
@@ -130,8 +129,8 @@ class Request implements RequestInterface
     /**
      * Set parameters.
      *
-     * @param string           $key
-     * @param string|Closure   $value
+     * @param string         $key
+     * @param string|Closure $value
      *
      * @return $this
      */
