@@ -18,6 +18,8 @@
 
 namespace Friday\Http;
 
+use Closure;
+
 interface RouteInterface
 {
     /**
@@ -30,22 +32,24 @@ interface RouteInterface
     /**
      * register a GET method route.
      *
-     * @param string          $route
-     * @param string|callback $mix
+     * @param string               $route
+     * @param string|null          $mix
+     * @param string|null          $view
      *
      * @return bool
      */
-    public static function get($route, $mix);
+    public static function get($route, $mix, $view = null);
 
     /**
      * register a POST method route.
      *
-     * @param string          $route
-     * @param string|callback $mix
+     * @param string               $route
+     * @param string|Closure|null  $mix
+     * @param string|null          $view
      *
      * @return bool
      */
-    public static function post($route, $mix);
+    public static function post($route, $mix = null, $view = null);
 
     /**
      * register a GET method route with view.
@@ -61,8 +65,9 @@ interface RouteInterface
     /**
      * register a route.
      *
+     * @param string               $method
      * @param string               $route
-     * @param string|callback|null $mix
+     * @param string|Closure|null  $mix
      * @param string|null          $view
      * @param array                $data
      *
@@ -105,4 +110,45 @@ interface RouteInterface
      * @return void
      */
     public static function redirect($routeFrom, $routeTo, $http_response_code);
+
+    /**
+     * Get specific or all Registered redirect routes.
+     *
+     * @param  string  uri
+     *
+     * @return array
+     */
+    public static function getRoute($uri = null);
+
+    /**
+     * register a PUT method route.
+     *
+     * @param string               $route
+     * @param string|Closure|null  $mix
+     * @param string|null          $view
+     *
+     * @return bool
+     */
+    public static function put($route, $mix = null, $view = null);
+
+    /**
+     * register a DELETE method route.
+     *
+     * @param string               $route
+     * @param string|Closure|null  $mix
+     * @param string|null          $view
+     *
+     * @return bool
+     */
+    public static function delete($route, $mix = null, $view = null);
+
+    /**
+     * register a resource CRUD route.
+     *
+     * @param string      $route
+     * @param string|null $controller
+     *
+     * @return bool
+     */
+    public static function resource($route, $controller = null);
 }

@@ -44,7 +44,7 @@ class Router
      *
      * @param array  $allRoute
      * @param string $uriRoute
-     * @param enum   $httpMethod GET/POST
+     * @param string   $httpMethod GET/POST
      *
      * @throws Exception,
      *                    OutOfRangeException
@@ -76,7 +76,7 @@ class Router
             }
         }
         foreach ($allRoute as $route) {
-            if ($this->match($route, $uriRoute, $httpMethod, true)) {
+            if ($this->match($route, $uriRoute, true)) {
                 return $route;
             }
         }

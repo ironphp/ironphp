@@ -7,9 +7,9 @@
  * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright (c) IronPHP (https://github.com/IronPHP/IronPHP)
+ * @copyright     Copyright (c) IronPHP
  *
- * @link
+ * @link          https://github.com/IronPHP/IronPHP
  * @since         1.0.0
  *
  * @license       MIT License (https://opensource.org/licenses/mit-license.php)
@@ -17,6 +17,8 @@
  */
 
 namespace Friday\Http;
+
+use Closure;
 
 interface RequestInterface
 {
@@ -27,7 +29,7 @@ interface RequestInterface
      * @param string $host
      * @param string $ip
      * @param array  $params
-     * @param enum   $method (GET, POST)
+     * @param string $method (GET, POST)
      * @param bool   $https
      *
      * @return void
@@ -58,8 +60,8 @@ interface RequestInterface
     /**
      * Set parameters.
      *
-     * @param string $key
-     * @param mix    $value
+     * @param string            $key
+     * @param string|Closure    $value
      *
      * @return $this
      */
@@ -68,7 +70,7 @@ interface RequestInterface
     /**
      * Get specific parameter.
      *
-     * @return mix
+     * @return string|Closure
      */
     public function getParam($key);
 

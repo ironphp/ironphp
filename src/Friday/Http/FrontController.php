@@ -18,11 +18,34 @@
 
 namespace Friday\Http;
 
+use Closure;
+
 /**
  * Runs a Front Controller.
  */
 class FrontController implements FrontControllerInterface
 {
+    /**
+     * Controller name.
+     *
+     * @var string
+     */
+    private $controller;
+
+    /**
+     * Action.
+     *
+     * @var string|Closure
+     */
+    private $action;
+
+    /**
+     * Parameters.
+     *
+     * @var array
+     */
+    private $params;
+
     /*
     protected $controller = self::DEFAULT_CONTROLLER;
     protected $action = self::DEFAULT_ACTION;
