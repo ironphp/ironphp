@@ -99,6 +99,8 @@ class Pagination
             return;
         }
 
+        $ul_class = $li_class = $a_class = null;
+
         if ($cssClass == null) {
             $ul_class = 'pagination';
             $li_class = ['page-item', 'page-item', 'page-item active'];

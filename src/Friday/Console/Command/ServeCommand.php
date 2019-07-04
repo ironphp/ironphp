@@ -39,6 +39,8 @@ class ServeCommand extends Command
      */
     public function __construct($option = [])
     {
+        //parent::__construct();
+
         $this->option = $option;
     }
 

@@ -54,7 +54,7 @@ class Controller
     /**
      * Instance of the Controller.
      *
-     * @var \App\Controller\{Name}Controller
+     * @var \Friday\Controller\Controller
      */
     public $controller;
 
@@ -244,7 +244,7 @@ class Controller
      * @param string $controller
      * @param string $method
      *
-     * @return mix
+     * @return null|string
      */
     public function handleController($controller, $method)
     {
