@@ -177,6 +177,7 @@ class View
     public function addRenderTags($tags)
     {
         $i[0] = 0;
+        $temp = [];
         foreach ($tags as $tag => $text) {
             if (is_array($text)) {
                 $i[1] = 0;
@@ -206,6 +207,7 @@ class View
      */
     public function createTag($tag, $attr = null, $content = null, $isCloseTag = null)
     {
+        $args = [];
         if (empty($tag) || !is_string($tag)) {
             throw new Exception('Tags name can not be null or non-string');
             exit;
@@ -241,7 +243,7 @@ class View
                     }
                 }
             }
-            unset($attr);
+            // unset($attr); // ???
             foreach ($args as $key => $val) {
                 $attr[] = $key.($val == null ? '' : "=\"$val\"");
             }

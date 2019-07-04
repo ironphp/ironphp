@@ -109,6 +109,7 @@ class Route implements RouteInterface
      */
     public function register($method, $route, $mix = null, $view = null, $data = [])
     {
+        $args = [];
         if ($mix == null && $view == null) {
             $mix = 'IndexController@index';
         }

@@ -218,6 +218,7 @@ class Table
      */
     public function getAll($fields = null, $sqlQuery = false)
     {
+        $data = [];
         $sql = $this->buildQuery('select', $fields);
         if ($sqlQuery === true) {
             return $this->getQuery();
@@ -339,6 +340,7 @@ class Table
     public function where($where, $glue = 'AND')
     {
         if (is_array($where) && count($where) != 0) {
+            $array = [];
             foreach ($where as $field => $value) {
                 $array[] = " `$field` = ".((is_string($value) ? "'$value'" : $value));
             }
@@ -364,6 +366,7 @@ class Table
     public function like($where, $glue = 'AND')
     {
         if (is_array($where) && count($where) != 0) {
+            $array = [];
             foreach ($where as $field => $value) {
                 $array[] = " `$field` LIKE ".((is_string($value) ? "'$value'" : $value));
             }
@@ -428,6 +431,7 @@ class Table
     public function onDuplicateUpdate($fields)
     {
         if (is_array($fields) && count($fields) != 0) {
+            $array = [];
             foreach ($fields as $field => $value) {
                 $array[] = " `$field` = ".((is_string($value) ? "'$value'" : $value));
             }
@@ -452,6 +456,8 @@ class Table
      */
     public function buildQuery($type, $field = null, $extra = null)
     {
+        $values = [];
+        $sql = null;
         if ($type == 'select') {
             if ($field == null) {
                 $field = '*';
@@ -479,6 +485,7 @@ class Table
                 $sql = "SELECT $field FROM `".$this->getTable().'` '.$this->where.$this->order.$this->limit;
             }
         } elseif ($type == 'insert') {
+            $values = [];
             if (is_array($field)) {
                 $keys = array_keys($field);
                 if ($keys[0] === 0) {
