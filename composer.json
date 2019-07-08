@@ -29,7 +29,6 @@
     },
     "require": {
         "php": ">=5.5",
-        "edsonmedina/php_testability": "@dev",
         "povils/phpmnd": "2.0",
         "psr/log": "1.1.0",
         "vlucas/phpdotenv": "^3.3"
