@@ -283,25 +283,15 @@ class Table
      * @param string|null $sqlQuery
      * @rturn  bool
      */
-    public function update($sqlQuery = false)
+    public function delete($sqlQuery = false)
     {
-        $field = func_get_args();
-        if (func_num_args() == 0) {
-            echo 'no data to save'; //no argument
-            exit;
-        } elseif (func_num_args() == 1) {
-            if (is_array($field[0])) {
-                $data = $field[0]; //single array with all data
-            } else {
-                $data = $field[0]; //sql fraction
-            }
-        } else {
-            echo 'invalid data';
+        if (func_num_args() != 0) {
+            echo 'invalid';
             exit;
         }
-        $sql = $this->buildQuery('update', $data);
+        $sql = $this->buildQuery('delete');
         if ($sqlQuery === true) {
-            return $this->getQuery();
+            return $sql;
         }
         $result = $this->executeQuery($sql);
 
