@@ -280,18 +280,21 @@ class Table
     /**
      * Update data to table.
      *
-     * @param string|null $sqlQuery
+     * @param string|array|null $field
+     * @param string|null       $sqlQuery
      * @rturn  bool
      */
-    public function delete($sqlQuery = false)
+    public function update($field = null, $sqlQuery = false)
     {
-        if (func_num_args() != 0) {
-            echo 'invalid';
+        if(empty($field)) {
+            echo 'No data to save'; //no argument
             exit;
         }
-        $sql = $this->buildQuery('delete');
+
+        $sql = $this->buildQuery('update', $field);
+
         if ($sqlQuery === true) {
-            return $sql;
+            return $this->getQuery();
         }
         $result = $this->executeQuery($sql);
 
@@ -312,7 +315,7 @@ class Table
         }
         $sql = $this->buildQuery('delete');
         if ($sqlQuery === true) {
-            return $this->getQuery();
+            return $sql;
         }
         $result = $this->executeQuery($sql);
 
