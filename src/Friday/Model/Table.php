@@ -203,8 +203,8 @@ class Table
     /**
      * Get field from table.
      *
-     * @param  array|null  $fields
-     * @param  string|null $sqlQuery
+     * @param array|null  $fields
+     * @param string|null $sqlQuery
      * @rturn  array
      */
     public function get($fields = null, $sqlQuery = false)
@@ -215,6 +215,7 @@ class Table
         }
         $result = $this->executeQuery();
         $this->num_rows = $result->num_rows;
+
         return $result->fetch_array(MYSQLI_ASSOC);
     }
 
@@ -284,19 +285,20 @@ class Table
         if ($sqlQuery === true) {
             return $this->getQuery();
         }
+
         return $this->executeQuery();
     }
 
     /**
      * Update data to table.
      *
-     * @param  string|array|null $field
-     * @param  string|null       $sqlQuery
+     * @param string|array|null $field
+     * @param string|null       $sqlQuery
      * @rturn  bool
      */
     public function update($field = null, $sqlQuery = false)
     {
-        if(empty($field)) {
+        if (empty($field)) {
             echo 'No data to save'; //no argument
             exit;
         }
@@ -308,6 +310,7 @@ class Table
         }
         $result = $this->executeQuery();
         $this->num_rows = $result->num_rows;
+
         return $result;
     }
 
@@ -329,6 +332,7 @@ class Table
         }
         $result = $this->executeQuery();
         $this->num_rows = 0;
+
         return $result;
     }
 
