@@ -107,6 +107,13 @@ class Table
     private $query = null;
 
     /**
+     * Number of affected rows.
+     *
+     * @var string|null
+     */
+    private $num_rows = null;
+
+    /**
      * Create a new Table instance.
      *
      * @param array $config
@@ -131,6 +138,7 @@ class Table
              */
             $this->connect_error = mysqli_connect_error();
         }
+
         $this->connect_errno = $mysqli->connect_errno;
         if ($this->connect_errno) {
             die('Connect Error ['.$this->connect_errno.']: '.$this->connect_error);
@@ -155,6 +163,7 @@ class Table
         $this->query = null;
         $this->pagination = $pagination;
         $this->table = $table;
+        $this->num_rows = false;
 
         return $this;
     }
@@ -162,11 +171,12 @@ class Table
     /**
      * Returns the database table name.
      *
-     * @return string
+     * @return string|bool
      */
     public function getTable()
     {
         if ($this->table === null) {
+            return false;
         }
 
         return $this->table;
@@ -181,11 +191,11 @@ class Table
      */
     public function num_rows($sqlQuery = false)
     {
-        $sql = $this->buildQuery('select');
+        $this->buildQuery('select');
         if ($sqlQuery === true) {
             return $this->getQuery();
         }
-        $result = $this->executeQuery($sql);
+        $result = $this->executeQuery();
 
         return $result->num_rows;
     }
@@ -193,20 +203,19 @@ class Table
     /**
      * Get field from table.
      *
-     * @param array|null  $fields
-     * @param string|null $sqlQuery
+     * @param  array|null  $fields
+     * @param  string|null $sqlQuery
      * @rturn  array
      */
     public function get($fields = null, $sqlQuery = false)
     {
-        $sql = $this->buildQuery('select', $fields);
+        $this->buildQuery('select', $fields);
         if ($sqlQuery === true) {
             return $this->getQuery();
         }
-        $result = $this->executeQuery($sql);
-        $data = $result->fetch_array(MYSQLI_ASSOC);
-
-        return $data;
+        $result = $this->executeQuery();
+        $this->num_rows = $result->num_rows;
+        return $result->fetch_array(MYSQLI_ASSOC);
     }
 
     /**
@@ -219,11 +228,12 @@ class Table
     public function getAll($fields = null, $sqlQuery = false)
     {
         $data = [];
-        $sql = $this->buildQuery('select', $fields);
+        $this->buildQuery('select', $fields);
         if ($sqlQuery === true) {
             return $this->getQuery();
         }
-        $result = $this->executeQuery($sql);
+        $result = $this->executeQuery();
+        $this->num_rows = $result->num_rows;
         if ($result->num_rows == 0) {
             return [];
         }
@@ -243,8 +253,9 @@ class Table
      */
     public function getPaginated($limit = 1, $fields = null, $sqlQuery = false)
     {
-        $sql = $this->buildQuery('select', $fields, ['count'=>null, 'field'=>'num']);
-        $result = $this->executeQuery($sql);
+        $this->buildQuery('select', $fields, ['count'=>null, 'field'=>'num']);
+        $result = $this->executeQuery();
+        $this->num_rows = $result->num_rows;
         $row = $result->fetch_array(MYSQLI_ASSOC);
         $total = $row['num'];
         if ($total == 0 && $sqlQuery == false) {
@@ -268,20 +279,19 @@ class Table
             echo 'no data to save'; //no argument
             exit;
         }
-        $sql = $this->buildQuery('insert', $data);
+        $this->buildQuery('insert', $data);
+        $this->num_rows = 0;
         if ($sqlQuery === true) {
             return $this->getQuery();
         }
-        $result = $this->executeQuery($sql);
-
-        return $result;
+        return $this->executeQuery();
     }
 
     /**
      * Update data to table.
      *
-     * @param string|array|null $field
-     * @param string|null       $sqlQuery
+     * @param  string|array|null $field
+     * @param  string|null       $sqlQuery
      * @rturn  bool
      */
     public function update($field = null, $sqlQuery = false)
@@ -291,13 +301,13 @@ class Table
             exit;
         }
 
-        $sql = $this->buildQuery('update', $field);
+        $this->buildQuery('update', $field);
 
         if ($sqlQuery === true) {
             return $this->getQuery();
         }
-        $result = $this->executeQuery($sql);
-
+        $result = $this->executeQuery();
+        $this->num_rows = $result->num_rows;
         return $result;
     }
 
@@ -313,12 +323,12 @@ class Table
             echo 'invalid';
             exit;
         }
-        $sql = $this->buildQuery('delete');
+        $this->buildQuery('delete');
         if ($sqlQuery === true) {
-            return $sql;
+            return $this->getQuery();
         }
-        $result = $this->executeQuery($sql);
-
+        $result = $this->executeQuery();
+        $this->num_rows = 0;
         return $result;
     }
 
@@ -522,13 +532,11 @@ class Table
     /**
      * Run sql query.
      *
-     * @param string $sql
-     *
      * @return resource
      */
-    public function executeQuery($sql)
+    public function executeQuery()
     {
-        $result = $this->connection->query($sql);
+        $result = $this->connection->query($this->query);
         $this->errno = $this->connection->errno;
         $this->error = $this->connection->error;
         if ($this->connection->errno) {
