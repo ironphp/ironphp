@@ -39,6 +39,7 @@
         "designsecurity/progpilot": "dev-master",
         "kahlan/kahlan": "dev-master",
         "phing/phing": "^3.0@dev",
+        "phpstan/phpstan": "^0.12.0@dev",
         "phpunit/phpunit": "^7.5",
         "phpunit/phpunit-selenium": "@dev",
         "vimeo/psalm": "^3.0@dev"

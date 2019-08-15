@@ -544,7 +544,7 @@ class Table
         $this->errno = $this->connection->errno;
         $this->error = $this->connection->error;
         if ($this->connection->errno) {
-            echo 'Query Error ['.$this->errno.'] : '.$this->error.' : '.$sql;
+            echo 'Query Error ['.$this->errno.'] : '.$this->error.' : '.$this->query;
         }
         if ($this->errno == 1054) {
             echo 'Table not set properly in query';
