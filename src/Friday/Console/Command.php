@@ -69,7 +69,8 @@ class Command
         self::$console = $console;
         $tokens = $console->getToken();
         $default = 'list';
-        // Run commands
+
+		// Run commands
         switch (\count($tokens)) {
             // php jarvis
             case 0:
@@ -143,37 +144,38 @@ class Command
                 }
                 break;
         }
-        /*
-                    if(isset($this->short[$command])) {
-                        $command = $this->short[$command];
-                        if($command == 'help') {
-                            $options = (array)$tokens[0];
-                        }
-                        else {
-                            $options = $tokens;
-                        }
-                    }
-                    if($console->findCommand($command)) {
-                        if($command != 'help') {
-                            if(isset($this->short[$tokens[0]])) {
-                                $option = $this->short[$tokens[0]];
-                                if($option == 'help') {
-                                    $options = (array)$command;
-                                    $command = $option;
-                                }
-                                else {
-                                    $options = $tokens;
-                                }
-                            }
-                            else {
-                                $options = (array)$options[0];
-                            }
-                        }
-                        $this->execute($command, $tokens);
-                    }
-                    else {
-                        $this->output = $console->commandError("Command \"".$command."\" is not defined.");
-                    }
+
+		/*
+		if(isset($this->short[$command])) {
+			$command = $this->short[$command];
+			if($command == 'help') {
+				$options = (array)$tokens[0];
+			}
+			else {
+				$options = $tokens;
+			}
+		}
+		if($console->findCommand($command)) {
+			if($command != 'help') {
+				if(isset($this->short[$tokens[0]])) {
+					$option = $this->short[$tokens[0]];
+					if($option == 'help') {
+						$options = (array)$command;
+						$command = $option;
+					}
+					else {
+						$options = $tokens;
+					}
+				}
+				else {
+					$options = (array)$options[0];
+				}
+			}
+			$this->execute($command, $tokens);
+		}
+		else {
+			$this->output = $console->commandError("Command \"".$command."\" is not defined.");
+		}
         */
         $this->getOutput();
         define('CMD_RUN', microtime(true));

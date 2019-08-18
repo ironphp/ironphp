@@ -94,7 +94,7 @@ class ServeCommand extends Command
     /**
      * Help for this Commands.
      *
-     * @return void
+     * @return string
      */
     public function help()
     {

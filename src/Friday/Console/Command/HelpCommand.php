@@ -63,7 +63,7 @@ class HelpCommand extends Command
      *
      * @param string $command
      *
-     * @return void
+     * @return string
      */
     public function help($command = 'help')
     {
