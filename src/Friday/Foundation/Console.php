@@ -74,12 +74,12 @@ class Console extends Application
 
         $default = 'list';
 
-		// Run commands
+        // Run commands
         switch (\count($tokens)) {
             // php jarvis
             case 0:
                 $command = $default;
-				$this->findExecute($command);
+                $this->findExecute($command);
                 break;
 
             // php jarvis cmd
@@ -90,7 +90,7 @@ class Console extends Application
                 } elseif ($command[0] == '-') {
                     if (isset($this->short[$command])) {
                         $command = $this->short[$command];
-						$this->findExecute($command, $tokens[0]);
+                        $this->findExecute($command, $tokens[0]);
                     } else {
                         $this->output = $this->commandError('Option "'.$tokens[0].'" is not defined.');
                     }
@@ -127,7 +127,7 @@ class Console extends Application
                 elseif ($command[0] == '-') {
                     if (isset($this->short[$command])) {
                         $command = $this->short[$command];
-						$this->findExecute($command, $tokens[0], $tokens);
+                        $this->findExecute($command, $tokens[0], $tokens);
                     } else {
                         $this->output = $this->commandError('Option "'.$tokens[0].'" is not defined.');
                     }
@@ -165,7 +165,7 @@ class Console extends Application
         return $output;
     }
 
-	/**
+    /**
      * Execute command.
      *
      * @param string $command
@@ -196,21 +196,21 @@ class Console extends Application
         return $cmd->help();
     }
 
-	/**
-	 * Find and Execute command.
-	 *
-	 * @param string      $command
-	 * @param string|null $option
-	 * @param array  $tokens
-	 *
-	 * @return void
-	 */
-	public function findExecute($command, $option = null, $tokens = [])
-	{
-		if ($this->findCommand($command)) {
-			$this->execute($command, $tokens);
-		} else {
-			$this->output = $this->commandError(($option==null?'Command '.$command:'Option'.$option)."  is not defined.");
-		}
-	}
+    /**
+     * Find and Execute command.
+     *
+     * @param string      $command
+     * @param string|null $option
+     * @param array       $tokens
+     *
+     * @return void
+     */
+    public function findExecute($command, $option = null, $tokens = [])
+    {
+        if ($this->findCommand($command)) {
+            $this->execute($command, $tokens);
+        } else {
+            $this->output = $this->commandError(($option == null ? 'Command '.$command : 'Option'.$option).'  is not defined.');
+        }
+    }
 }
