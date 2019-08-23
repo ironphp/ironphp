@@ -212,7 +212,6 @@ class Console extends Application
         return $cmd->help();
     }
 
-<<<<<<< HEAD
 	/**
 	 * Find and Execute command.
 	 *
@@ -253,23 +252,5 @@ class Console extends Application
     public function getOutput()
     {
         echo $this->output;
-=======
-    /**
-     * Find and Execute command.
-     *
-     * @param string      $command
-     * @param string|null $option
-     * @param array       $tokens
-     *
-     * @return void
-     */
-    public function findExecute($command, $option = null, $tokens = [])
-    {
-        if ($this->findCommand($command)) {
-            $this->execute($command, $tokens);
-        } else {
-            $this->output = $this->commandError(($option == null ? 'Command '.$command : 'Option'.$option).'  is not defined.');
-        }
->>>>>>> 42f87ba7df336ef369a84a5d1d06c72637df904a
     }
 }

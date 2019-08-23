@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?php
 /**
  * IronPHP : PHP Development Framework
@@ -8,65 +7,9 @@
  * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright (c) IronPHP (https://github.com/IronPHP/IronPHP)
+ * @copyright     Copyright (c) IronPHP ()
  *
- * @link
- * @since         1.0.0
- *
- * @license       MIT License (https://opensource.org/licenses/mit-license.php)
- * @auther        GaurangKumar Parmar <gaurangkumarp@gmail.com>
- */
-
-namespace Friday\Console\Command;
-
-use Friday\Console\Colors;
-use Friday\Console\Command;
-use Friday\Foundation\Application;
-
-class VersionCommand extends Command
-{
-    /**
-     * Command options.
-     *
-     * @var array
-     */
-    private $option;
-
-    /**
-     * Create a List Commands instance.
-     *
-     * @param \Friday\Foundation\Console  $console
-     * @param array $option
-     *
-     * @return void
-     */
-    public function __construct($console, $option = [])
-    {
-        parent::__construct($console);
-
-        $this->option = $option;
-    }
-
-    /**
-     * Execute Commands.
-     *
-     * @return string
-     */
-    public function run()
-    {
-=======
-<?php
-/**
- * IronPHP : PHP Development Framework
- * Copyright (c) IronPHP (https://github.com/IronPHP/IronPHP).
- *
- * Licensed under The MIT License
- * For full copyright and license information, please see the LICENSE.txt
- * Redistributions of files must retain the above copyright notice.
- *
- * @copyright     Copyright (c) IronPHP (https://github.com/IronPHP/IronPHP)
- *
- * @link
+ * @link		  https://github.com/IronPHP/IronPHP
  * @since         1.0.0
  *
  * @license       MIT License (https://opensource.org/licenses/mit-license.php)
@@ -97,7 +40,7 @@ class VersionCommand extends Command
      */
     public function __construct($option = [])
     {
-        //parent::__construct();
+        parent::__construct($console);
 
         $this->option = $option;
     }
@@ -109,7 +52,6 @@ class VersionCommand extends Command
      */
     public function run()
     {
->>>>>>> 42f87ba7df336ef369a84a5d1d06c72637df904a
         $output = Colors::RED.Colors::BG_BLACK."
   _______                  ____  __   ______
  /__  __/_____ ___  ____  / __ \/ /  / / __ \
