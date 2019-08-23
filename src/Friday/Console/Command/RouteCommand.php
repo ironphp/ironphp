@@ -33,8 +33,8 @@ class RouteCommand extends Command
     /**
      * Create a List Commands instance.
      *
-     * @param \Friday\Foundation\Console  $console
-     * @param array $option
+     * @param \Friday\Foundation\Console $console
+     * @param array                      $option
      *
      * @return void
      */
