@@ -127,7 +127,7 @@ class Server extends Application
         define('DISPATCHER_INIT', microtime(true));
 
         //dispatch process
-		$output = null;
+        $output = null;
         $appController = new Controller();
         $appController->initialize($this);
         if (isset($action['output'])) {
