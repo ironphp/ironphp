@@ -78,7 +78,7 @@ class Console extends Application
 
         $tokens = $_SERVER['argv'];
 
-		// Strip the application name
+        // Strip the application name
         array_shift($tokens);
 
         $this->tokens = $tokens;
@@ -150,10 +150,10 @@ class Console extends Application
                 break;
         }
 
-		echo $this->getOutput();
+        echo $this->getOutput();
 
-		define('CMD_RUN', microtime(true));
-	}
+        define('CMD_RUN', microtime(true));
+    }
 
     /**
      * Get Token.
@@ -192,9 +192,9 @@ class Console extends Application
      */
     public function execute($command, $option = [])
     {
-		$cmd = $this->getCommand($command, $option);
+        $cmd = $this->getCommand($command, $option);
 
-		$this->output = $cmd->run();
+        $this->output = $cmd->run();
     }
 
     /**
@@ -207,42 +207,43 @@ class Console extends Application
      */
     public function executeHelp($command, $option = [])
     {
-		$cmd = $this->getCommand($command, $option);
+        $cmd = $this->getCommand($command, $option);
 
         return $cmd->help();
     }
 
-	/**
-	 * Find and Execute command.
-	 *
-	 * @param string      $command
-	 * @param string|null $option
-	 * @param array  $tokens
-	 *
-	 * @return void
-	 */
-	public function findExecute($command, $option = null, $tokens = [])
-	{
-		if ($this->findCommand($command)) {
-			$this->execute($command, $tokens);
-		} else {
-			$this->output = $this->commandError(($option==null?'Command '.$command:'Option'.$option)."  is not defined.");
-		}
-	}
+    /**
+     * Find and Execute command.
+     *
+     * @param string      $command
+     * @param string|null $option
+     * @param array       $tokens
+     *
+     * @return void
+     */
+    public function findExecute($command, $option = null, $tokens = [])
+    {
+        if ($this->findCommand($command)) {
+            $this->execute($command, $tokens);
+        } else {
+            $this->output = $this->commandError(($option == null ? 'Command '.$command : 'Option'.$option).'  is not defined.');
+        }
+    }
 
-	/**
-	 * Get command instance.
-	 *
-	 * @param string      $command
-	 * @param string|null $option
-	 *
-	 * @return Object
-	 */
-	public function getCommand($command, $option = null)
-	{
+    /**
+     * Get command instance.
+     *
+     * @param string      $command
+     * @param string|null $option
+     *
+     * @return object
+     */
+    public function getCommand($command, $option = null)
+    {
         $commandClass = '\\Friday\\Console\\Command\\'.ucfirst($command).'Command';
+
         return new $commandClass($this, $option);
-	}
+    }
 
     /**
      * Display Output of command execution.

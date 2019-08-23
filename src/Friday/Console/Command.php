@@ -46,7 +46,7 @@ class Command
     /**
      * Create a new Command instance.
      *
-     * @param \Friday\Foundation\Console  $console
+     * @param \Friday\Foundation\Console $console
      *
      * @return void
      */
@@ -125,7 +125,7 @@ class Command
         Colors::LIGHT_BLUE.str_repeat('-', 73).PHP_EOL;
     }
 
-	/**
+    /**
      * Execute Help command.
      *
      * @param string $command
