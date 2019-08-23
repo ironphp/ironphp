@@ -52,6 +52,20 @@ class Console extends Application
     protected $command;
 
     /**
+     * Short Commands.
+     *
+     * @array
+     */
+    protected $short = ['-h' => 'help', '--help' => 'help', '-V' => 'version', '--version' => 'version'];
+
+    /**
+     * Output to display.
+     *
+     * @string
+     */
+    protected $output;
+
+    /**
      * Create a new Friday application instance.
      *
      * @param string|null $basePath
@@ -64,13 +78,12 @@ class Console extends Application
 
         $tokens = $_SERVER['argv'];
 
-        // Strip the application name
+		// Strip the application name
         array_shift($tokens);
 
         $this->tokens = $tokens;
 
         define('APP_INIT', microtime(true));
-        $this->command = new Command($this);
 
         $default = 'list';
 
@@ -136,7 +149,11 @@ class Console extends Application
                 }
                 break;
         }
-    }
+
+		echo $this->getOutput();
+
+		define('CMD_RUN', microtime(true));
+	}
 
     /**
      * Get Token.
@@ -175,9 +192,9 @@ class Console extends Application
      */
     public function execute($command, $option = [])
     {
-        $commandClass = '\\Friday\\Console\\Command\\'.ucfirst($command).'Command';
-        $cmd = new $commandClass($option);
-        $this->output = $cmd->run();
+		$cmd = $this->getCommand($command, $option);
+
+		$this->output = $cmd->run();
     }
 
     /**
@@ -190,8 +207,7 @@ class Console extends Application
      */
     public function executeHelp($command, $option = [])
     {
-        $commandClass = '\\Friday\\Console\\Command\\'.ucfirst($command).'Command';
-        $cmd = new $commandClass($option);
+		$cmd = $this->getCommand($command, $option);
 
         return $cmd->help();
     }
@@ -213,4 +229,28 @@ class Console extends Application
 			$this->output = $this->commandError(($option==null?'Command '.$command:'Option'.$option)."  is not defined.");
 		}
 	}
+
+	/**
+	 * Get command instance.
+	 *
+	 * @param string      $command
+	 * @param string|null $option
+	 *
+	 * @return Object
+	 */
+	public function getCommand($command, $option = null)
+	{
+        $commandClass = '\\Friday\\Console\\Command\\'.ucfirst($command).'Command';
+        return new $commandClass($this, $option);
+	}
+
+    /**
+     * Display Output of command execution.
+     *
+     * @return string
+     */
+    public function getOutput()
+    {
+        echo $this->output;
+    }
 }

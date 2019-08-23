@@ -7,9 +7,9 @@
  * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright (c) IronPHP (https://github.com/IronPHP/IronPHP)
+ * @copyright     Copyright (c) IronPHP
  *
- * @link
+ * @link		  https://github.com/IronPHP/IronPHP
  * @since         1.0.0
  *
  * @license       MIT License (https://opensource.org/licenses/mit-license.php)
@@ -33,13 +33,14 @@ class ListCommand extends Command
     /**
      * Create a List Commands instance.
      *
+     * @param \Friday\Foundation\Console  $console
      * @param array $option
      *
      * @return void
      */
-    public function __construct($option = [])
+    public function __construct($console, $option = [])
     {
-        //parent::__construct();
+        parent::__construct($console);
 
         $this->option = $option;
     }
@@ -47,7 +48,7 @@ class ListCommand extends Command
     /**
      * Execute Commands.
      *
-     * @return void
+     * @return string
      */
     public function run()
     {

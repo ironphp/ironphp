@@ -33,13 +33,14 @@ class RouteCommand extends Command
     /**
      * Create a List Commands instance.
      *
+     * @param \Friday\Foundation\Console  $console
      * @param array $option
      *
      * @return void
      */
-    public function __construct($option = [])
+    public function __construct($console, $option = [])
     {
-        //parent::__construct();
+        parent::__construct($console);
 
         $this->option = $option;
     }
@@ -47,7 +48,7 @@ class RouteCommand extends Command
     /**
      * Execute Commands.
      *
-     * @return void
+     * @return string
      */
     public function run()
     {

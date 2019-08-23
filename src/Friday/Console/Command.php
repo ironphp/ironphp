@@ -37,13 +37,6 @@ class Command
     protected static $console;
 
     /**
-     * Short Commands.
-     *
-     * @array
-     */
-    protected $short = ['-h' => 'help', '--help' => 'help', '-V' => 'version', '--version' => 'version'];
-
-    /**
      * Default Command.
      *
      * @string
@@ -51,16 +44,9 @@ class Command
     protected $default;
 
     /**
-     * Output to display.
-     *
-     * @string
-     */
-    protected $output;
-
-    /**
      * Create a new Command instance.
      *
-     * @param \Friday\Foundation\Console
+     * @param \Friday\Foundation\Console  $console
      *
      * @return void
      */
@@ -100,18 +86,7 @@ class Command
 			$this->output = $console->commandError("Command \"".$command."\" is not defined.");
 		}
         */
-        $this->getOutput();
-        define('CMD_RUN', microtime(true));
-    }
-
-    /**
-     * Display Output of command execution.
-     *
-     * @return string
-     */
-    public function getOutput()
-    {
-        echo $this->output;
+        //$this->getOutput();
     }
 
     /**
@@ -148,5 +123,18 @@ class Command
         Colors::WHITE.'Welcome to '.Colors::GREEN.'IronPHP'.Colors::WHITE.' Framework '.
         Colors::YELLOW.''.Application::VERSION.Colors::WHITE.' (env: '.Colors::YELLOW.(env('APP_ENV') === 'dev' ? 'development' : 'production').Colors::WHITE.', debug: '.Colors::YELLOW.(env('APP_DEBUG') ? 'true' : 'false').Colors::WHITE.')'.PHP_EOL.
         Colors::LIGHT_BLUE.str_repeat('-', 73).PHP_EOL;
+    }
+
+	/**
+     * Execute Help command.
+     *
+     * @param string $command
+     * @param  array   option
+     *
+     * @return string
+     */
+    public function executeHelp($command, $option = [])
+    {
+        return self::$console->executeHelp($command, $option);
     }
 }
