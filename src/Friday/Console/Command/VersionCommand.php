@@ -7,7 +7,7 @@
  * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright (c) IronPHP ()
+ * @copyright     Copyright (c) IronPHP
  *
  * @link		  https://github.com/IronPHP/IronPHP
  * @since         1.0.0
@@ -35,7 +35,6 @@ class VersionCommand extends Command
      * Create a List Commands instance.
      *
      * @param array $option
-     *
      * @return void
      */
     public function __construct($option = [])
@@ -48,7 +47,7 @@ class VersionCommand extends Command
     /**
      * Execute Commands.
      *
-     * @return void
+     * @return string
      */
     public function run()
     {
@@ -68,7 +67,7 @@ class VersionCommand extends Command
     /**
      * Check application update.
      *
-     * @return bool
+     * @return void
      */
     public function checkUpdate()
     {
