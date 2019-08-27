@@ -84,6 +84,7 @@ class VersionCommand extends Command
             $parsedTime = date_parse($time);
             $timeStamp = mktime($parsedTime['hour'], $parsedTime['minute'], $parsedTime['second'], $parsedTime['month'], $parsedTime['day'], $parsedTime['year']);
         }
+/*
         $installData = $this->app->getIntallTime();
 
         if ($packagistJson === true) {
@@ -101,6 +102,7 @@ class VersionCommand extends Command
         } else {
             echo Colors::GREEN."\nChecking updates... ".Colors::WHITE.' No internet!';
         }
+*/
     }
 
     /**
