@@ -60,7 +60,7 @@ class KeyCommand extends Command
     /**
      * Generate new key.
      *
-     * @return void
+     * @return string
      */
     public function key()
     {
