@@ -35,7 +35,8 @@ class VersionCommand extends Command
      * Create a List Commands instance.
      *
      * @param \Friday\Foundation\Console $console
-     * @param array $option
+     * @param array                      $option
+     *
      * @return void
      */
     public function __construct($console, $option = [])
@@ -84,25 +85,25 @@ class VersionCommand extends Command
             $parsedTime = date_parse($time);
             $timeStamp = mktime($parsedTime['hour'], $parsedTime['minute'], $parsedTime['second'], $parsedTime['month'], $parsedTime['day'], $parsedTime['year']);
         }
-/*
-        $installData = $this->app->getIntallTime();
-
-        if ($packagistJson === true) {
-            echo Colors::WHITE.' '.str_replace('T', ' ', substr(date(DATE_ATOM, $timeStamp), 0, 19));
-            echo Colors::GREEN."\nChecking updates... ".Colors::WHITE;
-            if ($timeStamp > $installData->time) {
-                if ($branchAlias != $this->app->version()) {
-                    echo 'Package have an update '.$branchAlias;
+        /*
+                $installData = $this->app->getIntallTime();
+        
+                if ($packagistJson === true) {
+                    echo Colors::WHITE.' '.str_replace('T', ' ', substr(date(DATE_ATOM, $timeStamp), 0, 19));
+                    echo Colors::GREEN."\nChecking updates... ".Colors::WHITE;
+                    if ($timeStamp > $installData->time) {
+                        if ($branchAlias != $this->app->version()) {
+                            echo 'Package have an update '.$branchAlias;
+                        } else {
+                            echo 'Package have an update '.$version;
+                        }
+                    } else {
+                        echo 'There is no update.';
+                    }
                 } else {
-                    echo 'Package have an update '.$version;
+                    echo Colors::GREEN."\nChecking updates... ".Colors::WHITE.' No internet!';
                 }
-            } else {
-                echo 'There is no update.';
-            }
-        } else {
-            echo Colors::GREEN."\nChecking updates... ".Colors::WHITE.' No internet!';
-        }
-*/
+        */
     }
 
     /**
