@@ -239,7 +239,8 @@ class Controller
      */
     public function handleController($controller, $method)
     {
-        $this->setName($controller);
+        $return = $output = null;
+		$this->setName($controller);
         if ($this->app->findController($controller)) {
             $controllerClass = 'App\\Controller\\'.$controller;
             $this->controller = new $controllerClass();
@@ -307,8 +308,7 @@ class Controller
                         imagepng($img, null, 100);
                         break;
                 }
-                if (!$img) {
-                } else {
+                if (isset($img) && !empty($img)) {
                     imagedestroy($img);
                 }
                 $headers[] = "Content-Type: $mime_type";
