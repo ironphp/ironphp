@@ -7,9 +7,9 @@
  * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright (c) IronPHP (https://github.com/IronPHP/IronPHP)
+ * @copyright     Copyright (c) IronPHP
  *
- * @link
+ * @link		  https://github.com/IronPHP/IronPHP
  * @since         1.0.0
  *
  * @license       MIT License (https://opensource.org/licenses/mit-license.php)
@@ -102,7 +102,6 @@ class Controller
      * the constructor and call parent.
      *
      * @param \Friday\Foundation\Application $app
-     *
      * @return void
      */
     public function initialize($app)
@@ -115,7 +114,6 @@ class Controller
      * Returns the controller name.
      *
      * @return string
-     *
      * @since 0.0.0
      */
     public function getName()
@@ -129,7 +127,6 @@ class Controller
      * @param string $name Controller name.
      *
      * @return $this
-     *
      * @since 0.0.0
      */
     public function setName($name)
@@ -145,7 +142,6 @@ class Controller
      * @param string|null $view
      * @param string      $data
      * @param string|null $layout
-     *
      * @return void.
      */
     public function renderView($viewPath = null, $data = [], $layout = null)
@@ -166,7 +162,6 @@ class Controller
      * @param string|null $view
      * @param string      $data
      * @param string|null $layout
-     *
      * @return void.
      */
     public function renderTemplate($templatePath = null, $data = [])
@@ -185,7 +180,6 @@ class Controller
      * Create Instance of Model.
      *
      * @param string $model View to use for rendering
-     *
      * @return \{App}\Model\{Name}Model
      */
     public function model($model)
@@ -209,7 +203,6 @@ class Controller
      *
      * @param string $view View to use for rendering
      * @param string $data Arguments to use
-     *
      * @return void
      */
     public function view($view, $data = [])
@@ -226,7 +219,6 @@ class Controller
      *
      * @param string $view Template to use for rendering
      * @param string $data Arguments to use
-     *
      * @return void
      */
     public function template($template, $data = [])
@@ -243,7 +235,6 @@ class Controller
      *
      * @param string $controller
      * @param string $method
-     *
      * @return null|string
      */
     public function handleController($controller, $method)
@@ -287,7 +278,6 @@ class Controller
      *
      * @param string $file
      * @param string $name
-     *
      * @return bool
      */
     protected function downloadFile($file, $name = null)
@@ -354,7 +344,6 @@ class Controller
      * @param string $theme Theme to use for rendering
      * @param string $data  Arguments to use
      * @param string $file  File to use for rendering
-     *
      * @return void
      */
     protected function theme($theme, $data = [], $file = null)
@@ -371,7 +360,6 @@ class Controller
      *
      * @param array  $themeInfo
      * @param string $data
-     *
      * @return void
      */
     public function renderTheme($themeInfo, $data = [])
