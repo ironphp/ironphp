@@ -34,10 +34,11 @@ class VersionCommand extends Command
     /**
      * Create a List Commands instance.
      *
+     * @param \Friday\Foundation\Console $console
      * @param array $option
      * @return void
      */
-    public function __construct($option = [])
+    public function __construct($console, $option = [])
     {
         parent::__construct($console);
 

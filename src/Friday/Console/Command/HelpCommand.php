@@ -7,9 +7,9 @@
  * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright (c) IronPHP (https://github.com/IronPHP/IronPHP)
+ * @copyright     Copyright (c) IronPHP
  *
- * @link
+ * @link		  https://github.com/IronPHP/IronPHP
  * @since         1.0.0
  *
  * @license       MIT License (https://opensource.org/licenses/mit-license.php)
@@ -35,7 +35,6 @@ class HelpCommand extends Command
      *
      * @param \Friday\Foundation\Console $console
      * @param array                      $option
-     *
      * @return void
      */
     public function __construct($console, $option = [])
@@ -63,7 +62,6 @@ class HelpCommand extends Command
      * Help for this Commands.
      *
      * @param string $command
-     *
      * @return string
      */
     public function help($command = 'help')
