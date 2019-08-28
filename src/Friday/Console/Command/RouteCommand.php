@@ -62,7 +62,7 @@ class RouteCommand extends Command
     /**
      * Return list of routes.
      *
-     * @param  string|null  route
+     * @param  string|null  $route
      *
      * @return string
      */
