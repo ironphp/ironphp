@@ -7,9 +7,9 @@
  * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright (c) IronPHP (https://github.com/IronPHP/IronPHP)
+ * @copyright     Copyright (c) IronPHP
  *
- * @link
+ * @link		  https://github.com/IronPHP/IronPHP
  * @since         1.0.0
  *
  * @license       MIT License (https://opensource.org/licenses/mit-license.php)
@@ -25,21 +25,21 @@ class Command
     /**
      * Argv Inputs from console parameters.
      *
-     * @var
+     * @var  array
      */
     protected $argvInput;
 
     /**
      * Console instance.
      *
-     * @var
+     * @var  \Friday\Foundation\Console
      */
     protected static $console;
 
     /**
      * Default Command.
      *
-     * @string
+     * @var  string
      */
     protected $default;
 
@@ -129,7 +129,7 @@ class Command
      * Execute Help command.
      *
      * @param string $command
-     * @param  array   option
+     * @param array  $option
      *
      * @return string
      */
