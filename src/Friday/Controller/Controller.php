@@ -146,7 +146,7 @@ class Controller
      * @param array       $data
      * @param string|null $layout
      *
-     * @return void.
+     * @return string
      */
     public function renderView($viewPath = null, $data = [], $layout = null)
     {
