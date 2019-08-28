@@ -7,9 +7,9 @@
  * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright (c) IronPHP (https://github.com/IronPHP/IronPHP)
+ * @copyright     Copyright (c) IronPHP
  *
- * @link
+ * @link		  https://github.com/IronPHP/IronPHP
  * @since         1.0.0
  *
  * @license       MIT License (https://opensource.org/licenses/mit-license.php)
@@ -643,6 +643,7 @@ class Application
             if ($key == 'theme_path') {
                 $theme_path = $val;
             } elseif (in_array($key, $allowExt)) {
+				$theme_path = $val;
                 foreach ($val as $file) {
                     if (file_exists($theme_path.$file) && is_file($theme_path.$file)) {
                         if (file_exists(WEB_ROOT.$file) && is_file(WEB_ROOT.$file)) {
