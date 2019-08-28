@@ -68,7 +68,7 @@ class Controller
     /**
      * Instance of the Model.
      *
-     * @var \{App}\Model\{Name}Model
+     * @var \Friday\Model\ModelService
      */
     public $model;
 
@@ -129,8 +129,7 @@ class Controller
      * @param string $name Controller name.
      *
      * @return $this
-     *
-     * @since 0.0.0
+     * @since 0.0.1
      */
     public function setName($name)
     {
@@ -142,8 +141,8 @@ class Controller
     /**
      * Renders view for given data, template file and layout.
      *
-     * @param string|null $view
-     * @param string      $data
+     * @param string|null $viewPath
+     * @param array       $data
      * @param string|null $layout
      *
      * @return void.
