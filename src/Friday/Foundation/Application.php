@@ -643,7 +643,7 @@ class Application
             if ($key == 'theme_path') {
                 $theme_path = $val;
             } elseif (in_array($key, $allowExt)) {
-				$theme_path = $val;
+                $theme_path = $val;
                 foreach ($val as $file) {
                     if (file_exists($theme_path.$file) && is_file($theme_path.$file)) {
                         if (file_exists(WEB_ROOT.$file) && is_file(WEB_ROOT.$file)) {

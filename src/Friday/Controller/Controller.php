@@ -129,6 +129,7 @@ class Controller
      * @param string $name Controller name.
      *
      * @return $this
+     *
      * @since 0.0.1
      */
     public function setName($name)
