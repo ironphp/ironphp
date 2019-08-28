@@ -285,8 +285,9 @@ class Application
      * @param \Friday\Controller\Controller $controllerObj
      * @param string                        $method
      *
-     * @return bool
      * @throws Exception
+     *
+     * @return bool
      */
     public function hasMethod($controllerObj, $method)
     {
@@ -467,7 +468,7 @@ class Application
     /**
      * Set timezone.
      *
-     * @param  string  $default
+     * @param string $default
      *
      * @return bool
      */
@@ -510,7 +511,7 @@ class Application
     /**
      * Get specific or all Registered redirect routes.
      *
-     * @param  string|null  $uri
+     * @param string|null $uri
      *
      * @return array
      */
