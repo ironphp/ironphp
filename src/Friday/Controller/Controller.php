@@ -224,7 +224,7 @@ class Controller
      * Display Template.
      *
      * @param string $template Template to use for rendering
-     * @param array  $data Arguments to use
+     * @param array  $data     Arguments to use
      *
      * @return void
      */
@@ -350,9 +350,9 @@ class Controller
     /**
      * Display Theme.
      *
-     * @param string 	    $theme Theme to use for rendering
-     * @param array  		$data  Arguments to use
-     * @param string|null 	$file  File to use for rendering
+     * @param string      $theme Theme to use for rendering
+     * @param array       $data  Arguments to use
+     * @param string|null $file  File to use for rendering
      *
      * @return void
      */
@@ -368,8 +368,8 @@ class Controller
     /**
      * Renders theme for given data.
      *
-     * @param array  $themeInfo
-     * @param array  $data
+     * @param array $themeInfo
+     * @param array $data
      *
      * @return void
      */
