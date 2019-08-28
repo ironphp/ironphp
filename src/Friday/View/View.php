@@ -7,9 +7,9 @@
  * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright (c) IronPHP (https://github.com/IronPHP/IronPHP)
+ * @copyright     Copyright (c) IronPHP
  *
- * @link
+ * @link		  https://github.com/IronPHP/IronPHP
  * @since         1.0.0
  *
  * @license       MIT License (https://opensource.org/licenses/mit-license.php)
@@ -123,15 +123,6 @@ class View
      * @var string
      */
     public $name;
-
-    /**
-     * Current passed params. Passed to View from the creating Controller for convenience.
-     *
-     * @var array
-     *
-     * @deprecated 0.0.0 Use `$this->request->getParam('pass')` instead.
-     */
-    public $passedArgs = [];
 
     /**
      * The name of the subfolder containing templates for this View.
@@ -251,7 +242,7 @@ class View
             $args = array_unique($attr);
             $args = implode(' ', $args);
         }
-        $temp .= isset($args) ? ' '.$args.'>' : '>';
+        $temp .= !empty($args) ? ' '.$args.'>' : '>';
         if ($content != null) {
             if (!is_array($content)) {
                 $content = explode("\n", $content);
