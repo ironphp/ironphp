@@ -35,6 +35,7 @@ class RouteCommand extends Command
      *
      * @param \Friday\Foundation\Console $console
      * @param array                      $option
+     *
      * @return void
      */
     public function __construct($console, $option = [])
@@ -62,6 +63,7 @@ class RouteCommand extends Command
      * Return list of routes.
      *
      * @param  string|null  route
+     *
      * @return string
      */
     public function getRoute($route = null)
