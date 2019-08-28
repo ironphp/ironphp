@@ -169,7 +169,7 @@ class Handler implements HandlerInterface
     public function handleException($exception)
     {
         $severity = 0;
-		//$this->system->startOutputBuffering();
+        //$this->system->startOutputBuffering();
         //$willQuit = $handlerResponse == Handler::QUIT && $this->allowQuit();
         //$output = $this->system->cleanOutputBuffer();
         /*

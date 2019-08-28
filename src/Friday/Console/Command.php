@@ -25,21 +25,21 @@ class Command
     /**
      * Argv Inputs from console parameters.
      *
-     * @var  array
+     * @var array
      */
     protected $argvInput;
 
     /**
      * Console instance.
      *
-     * @var  \Friday\Foundation\Console
+     * @var \Friday\Foundation\Console
      */
     protected static $console;
 
     /**
      * Default Command.
      *
-     * @var  string
+     * @var string
      */
     protected $default;
 
