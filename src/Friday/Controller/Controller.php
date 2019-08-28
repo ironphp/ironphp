@@ -163,9 +163,8 @@ class Controller
     /**
      * Renders view for given data, template file and layout.
      *
-     * @param string|null $view
-     * @param string      $data
-     * @param string|null $layout
+     * @param string|null $templatePath
+     * @param array       $data
      *
      * @return void.
      */
@@ -186,7 +185,7 @@ class Controller
      *
      * @param string $model View to use for rendering
      *
-     * @return \{App}\Model\{Name}Model
+     * @return \Friday\Model\ModelService
      */
     public function model($model)
     {
@@ -208,7 +207,7 @@ class Controller
      * Display View.
      *
      * @param string $view View to use for rendering
-     * @param string $data Arguments to use
+     * @param array  $data Arguments to use
      *
      * @return void
      */
@@ -224,8 +223,8 @@ class Controller
     /**
      * Display Template.
      *
-     * @param string $view Template to use for rendering
-     * @param string $data Arguments to use
+     * @param string $template Template to use for rendering
+     * @param array  $data Arguments to use
      *
      * @return void
      */
@@ -351,9 +350,9 @@ class Controller
     /**
      * Display Theme.
      *
-     * @param string $theme Theme to use for rendering
-     * @param string $data  Arguments to use
-     * @param string $file  File to use for rendering
+     * @param string 	    $theme Theme to use for rendering
+     * @param array  		$data  Arguments to use
+     * @param string|null 	$file  File to use for rendering
      *
      * @return void
      */
@@ -370,7 +369,7 @@ class Controller
      * Renders theme for given data.
      *
      * @param array  $themeInfo
-     * @param string $data
+     * @param array  $data
      *
      * @return void
      */
