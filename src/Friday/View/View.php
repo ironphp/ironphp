@@ -277,7 +277,7 @@ class View
      * Renders View for given data, template file and layout.
      *
      * @param string      $viewPath
-     * @param string      $data
+     * @param array       $data
      * @param string|null $layout
      *
      * @return string
@@ -306,7 +306,7 @@ class View
      * Renders Template for given data, template file.
      *
      * @param string $templatePath
-     * @param string $data
+     * @param array $data
      *
      * @throws \Exception
      *
@@ -375,12 +375,12 @@ class View
     /**
      * Renders Theme for given data.
      *
-     * @param array  $themeInfo
-     * @param string $data
+     * @param array $themeInfo
+     * @param array $data
      *
      * @throws \Exception
      *
-     * @return $templateData
+     * @return string
      */
     public function renderTheme($themeInfo, $data = [])
     {
@@ -415,7 +415,7 @@ class View
     /**
      * Convert HTML tags string to array.
      *
-     * @param   string  html
+     * @param  string  $html
      *
      * @return array
      */
@@ -672,7 +672,7 @@ class View
      * Put value from given data in template.
      *
      * @param string $templateData
-     * @param string $data
+     * @param array $data
      *
      * @throws \Exception
      *
