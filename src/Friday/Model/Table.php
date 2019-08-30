@@ -195,6 +195,7 @@ class Table
         if ($sqlQuery === true) {
             return $this->getQuery();
         }
+
         return $this->executeQuery()->num_rows;
     }
 

@@ -306,7 +306,7 @@ class View
      * Renders Template for given data, template file.
      *
      * @param string $templatePath
-     * @param array $data
+     * @param array  $data
      *
      * @throws \Exception
      *
@@ -415,7 +415,7 @@ class View
     /**
      * Convert HTML tags string to array.
      *
-     * @param  string  $html
+     * @param string $html
      *
      * @return array
      */
@@ -672,7 +672,7 @@ class View
      * Put value from given data in template.
      *
      * @param string $templateData
-     * @param array $data
+     * @param array  $data
      *
      * @throws \Exception
      *
