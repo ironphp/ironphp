@@ -43,7 +43,7 @@ class System
             $types = E_ALL | E_STRICT;
         }
         //set_error_handler([$this, 'onError'], error_reporting());
-        return set_error_handler()($handler, $types);
+        return set_error_handler($handler, $types);
     }
 
     /**

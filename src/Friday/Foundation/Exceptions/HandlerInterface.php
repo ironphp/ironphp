@@ -86,7 +86,7 @@ interface HandlerInterface
      * @param string|null $file
      * @param int|null    $line
      *
-     * @throws ErrorException
+     * @throws \ErrorException
      *
      * @return bool
      */
