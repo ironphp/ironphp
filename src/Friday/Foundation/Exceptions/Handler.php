@@ -72,7 +72,7 @@ class Handler implements HandlerInterface
     /**
      * Create a new exception handler instance.
      *
-     * @param  System|null $system
+     * @param System|null $system
      *
      * @return void
      */
