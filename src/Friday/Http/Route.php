@@ -7,9 +7,9 @@
  * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright (c) IronPHP (https://github.com/IronPHP/IronPHP)
+ * @copyright     Copyright (c) IronPHP
  *
- * @link
+ * @link		  https://github.com/IronPHP/IronPHP
  * @since         1.0.0
  *
  * @license       MIT License (https://opensource.org/licenses/mit-license.php)
@@ -86,7 +86,7 @@ class Route implements RouteInterface
      * register a GET method route with view.
      *
      * @param string              $route
-     * @param string|Closure|null $mix
+     * @param string|Closure|null $view
      * @param array               $data
      *
      * @return bool
@@ -228,7 +228,7 @@ class Route implements RouteInterface
     /**
      * Get specific or all Registered redirect routes.
      *
-     * @param  string  uri
+     * @param  string|null  $uri
      *
      * @return array
      */

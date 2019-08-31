@@ -88,7 +88,7 @@ class Router
     /**
      * match uri, http method to routes.
      *
-     * @param array  $allRoute
+     * @param array  $route
      * @param string $uriRoute
      * @param bool   $parameterized
      *
