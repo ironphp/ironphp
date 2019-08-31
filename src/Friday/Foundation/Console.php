@@ -186,7 +186,7 @@ class Console extends Application
      * Execute command.
      *
      * @param string $command
-     * @param  array   $option
+     * @param array  $option
      *
      * @return void
      */
@@ -201,7 +201,7 @@ class Console extends Application
      * Execute Help command.
      *
      * @param string $command
-     * @param  array   $option
+     * @param array  $option
      *
      * @return string
      */
