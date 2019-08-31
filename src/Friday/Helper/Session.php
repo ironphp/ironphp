@@ -74,7 +74,9 @@ class Session
     /**
      * Retrieve value stored in session by key.
      *
-     * @param mixed
+     * @param mixed $key
+     *
+     * @return string|bool
      */
     public function get($key)
     {
