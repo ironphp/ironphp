@@ -31,8 +31,8 @@ class System
     }
 
     /**
-     * @param callable $handler
-     * @param int|string      $types
+     * @param callable   $handler
+     * @param int|string $types
      *
      * @return callable|null
      */

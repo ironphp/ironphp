@@ -27,7 +27,7 @@ interface HandlerInterface
     /**
      * Create a new exception handler instance.
      *
-     * @param  System|null  $system
+     * @param System|null $system
      *
      * @return void
      */
@@ -81,8 +81,8 @@ interface HandlerInterface
      *
      * This method MUST be compatible with set_error_handler.
      *
-     * @param int    $level
-     * @param string $message
+     * @param int         $level
+     * @param string      $message
      * @param string|null $file
      * @param int|null    $line
      *
