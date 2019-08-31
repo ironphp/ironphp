@@ -7,9 +7,9 @@
  * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright (c) IronPHP (https://github.com/IronPHP/IronPHP)
+ * @copyright     Copyright (c) IronPHP
  *
- * @link
+ * @link		  https://github.com/IronPHP/IronPHP
  * @since         1.0.1
  *
  * @license       MIT License (https://opensource.org/licenses/mit-license.php)
@@ -32,7 +32,7 @@ class System
 
     /**
      * @param callable $handler
-     * @param int      $types
+     * @param int|string      $types
      *
      * @return callable|null
      */
@@ -43,7 +43,7 @@ class System
             $types = E_ALL | E_STRICT;
         }
         //set_error_handler([$this, 'onError'], error_reporting());
-        return set_error_handler($handler, $types);
+        return set_error_handler()($handler, $types);
     }
 
     /**
