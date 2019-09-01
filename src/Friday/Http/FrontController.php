@@ -46,6 +46,13 @@ class FrontController implements FrontControllerInterface
      */
     private $params;
 
+    /**
+     * Argument Parameters.
+     *
+     * @var array
+     */
+    public $args;
+
     /*
     protected $controller = self::DEFAULT_CONTROLLER;
     protected $action = self::DEFAULT_ACTION;
