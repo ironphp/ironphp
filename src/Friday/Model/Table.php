@@ -493,9 +493,9 @@ class Table
                         $ex .= ' as `'.$v.'`';
                     }
                 }
-                $sql = "SELECT $ex FROM `".$this->getTable()."` ".$this->where;
+                $sql = "SELECT $ex FROM `".$this->getTable().'` '.$this->where;
             } else {
-                $sql = "SELECT $field FROM `".$this->getTable()."` ".$this->where.$this->order.$this->limit;
+                $sql = "SELECT $field FROM `".$this->getTable().'` '.$this->where.$this->order.$this->limit;
             }
         } elseif ($type == 'insert') {
             $values = [];
