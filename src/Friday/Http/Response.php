@@ -49,7 +49,7 @@ class Response implements ResponseInterface
     /**
      * Header for redirect.
      *
-     * @var string
+     * @var array
      */
     public static $redirectHeader;
 
