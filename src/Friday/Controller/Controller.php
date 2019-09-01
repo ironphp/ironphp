@@ -75,7 +75,7 @@ class Controller
     /**
      * Instance of the Controller.
      *
-     * @var \Friday\Controller\Controller
+     * @var \Friday\Controller\Controller|null
      */
     private static $instance;
 
