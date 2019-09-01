@@ -163,7 +163,7 @@ class Table
         $this->query = null;
         $this->pagination = $pagination;
         $this->table = $table;
-        $this->num_rows = false;
+        $this->num_rows = null;
 
         return $this;
     }
