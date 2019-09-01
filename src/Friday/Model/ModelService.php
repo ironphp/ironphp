@@ -129,7 +129,7 @@ class ModelService
     /**
      * Is user superadmin or not.
      *
-     * @return string
+     * @return bool
      */
     protected function isAdmin()
     {
