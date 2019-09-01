@@ -101,6 +101,13 @@ class Application
     public $response;
 
     /**
+     * Headers to be sent.
+     *
+     * @var array
+     */
+    public $headers = [];
+
+    /**
      * Create a new Friday application instance.
      *
      * @param string|null $basePath

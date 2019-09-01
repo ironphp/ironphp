@@ -35,13 +35,6 @@ class Server extends Application
     public $matchRoute;
 
     /**
-     * Headers to be sent.
-     *
-     * @var array
-     */
-    public $headers = [];
-
-    /**
      * Instanse of Cookie.
      *
      * @var \Friday\Helper\Cookie
