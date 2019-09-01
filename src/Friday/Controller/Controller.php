@@ -155,6 +155,7 @@ class Controller
         }
         $_token = $this->app->session->getToken();
         $data['_token'] = $_token;
+
         return $this->view->renderView($viewPath, $data, $layout);
     }
 
@@ -173,6 +174,7 @@ class Controller
         }
         $_token = $this->app->session->getToken();
         $data['_token'] = $_token;
+
         return $this->view->renderTemplate($templatePath, $data);
     }
 
@@ -359,9 +361,9 @@ class Controller
         }
         $themeInfo = self::$instance->app->findTheme($theme, $file);
         $output = self::$instance->renderTheme($themeInfo, $data);
-		if($output) {
-			echo $output;
-		}
+        if ($output) {
+            echo $output;
+        }
     }
 
     /**
