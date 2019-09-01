@@ -267,7 +267,7 @@ class Controller
     /**
      * Get value from route->args.
      *
-     * @return bool
+     * @return bool|array
      */
     protected function getParam()
     {
