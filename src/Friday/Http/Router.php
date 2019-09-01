@@ -92,7 +92,7 @@ class Router
      * @param string $uriRoute
      * @param bool   $parameterized
      *
-     * @return object Route
+     * @return bool
      */
     public function match($route, $uriRoute, $parameterized = false)
     {
