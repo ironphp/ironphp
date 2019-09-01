@@ -115,7 +115,7 @@ class ModelService
     /**
      * Is user logged or not.
      *
-     * @return string
+     * @return bool
      */
     protected function isLogged()
     {
