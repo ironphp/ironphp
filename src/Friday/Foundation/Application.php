@@ -82,7 +82,7 @@ class Application
     /**
      * Router instance.
      *
-     * @var \Friday\Http\FrontController
+     * @var Friday\Http\Router
      */
     public $router;
 
