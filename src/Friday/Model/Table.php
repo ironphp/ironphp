@@ -202,9 +202,10 @@ class Table
     /**
      * Get field from table.
      *
-     * @param array|null  $fields
-     * @param bool $sqlQuery
-     * @return  array
+     * @param array|null $fields
+     * @param bool       $sqlQuery
+     *
+     * @return array
      */
     public function get($fields = null, $sqlQuery = false)
     {
@@ -221,9 +222,10 @@ class Table
     /**
      * Get all fields from table.
      *
-     * @param array|null  $fields
-     * @param bool $sqlQuery
-     * @return  array
+     * @param array|null $fields
+     * @param bool       $sqlQuery
+     *
+     * @return array
      */
     public function getAll($fields = null, $sqlQuery = false)
     {
@@ -249,7 +251,8 @@ class Table
      *
      * @param array|null  $limit
      * @param string|null $sqlQuery
-     * @return  array
+     *
+     * @return array
      */
     public function getPaginated($limit = 1, $fields = null, $sqlQuery = false)
     {
@@ -271,7 +274,8 @@ class Table
      *
      * @param string|null $data
      * @param string|null $sqlQuery
-     * @return  bool
+     *
+     * @return bool
      */
     public function add($data, $sqlQuery = false)
     {
@@ -293,7 +297,8 @@ class Table
      *
      * @param string|array|null $field
      * @param string|null       $sqlQuery
-     * @return  bool
+     *
+     * @return bool
      */
     public function update($field = null, $sqlQuery = false)
     {
@@ -317,7 +322,8 @@ class Table
      * Delete data from table.
      *
      * @param string|null $sqlQuery
-     * @return  bool
+     *
+     * @return bool
      */
     public function delete($sqlQuery = false)
     {
@@ -541,10 +547,10 @@ class Table
      */
     public function executeQuery($query = null)
     {
-        if($query != null) {
-			$this->query = $query;
-		}
-		$result = $this->connection->query($this->query);
+        if ($query != null) {
+            $this->query = $query;
+        }
+        $result = $this->connection->query($this->query);
         $this->errno = $this->connection->errno;
         $this->error = $this->connection->error;
         if ($this->connection->errno) {
