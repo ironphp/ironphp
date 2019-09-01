@@ -30,7 +30,7 @@ class Server extends Application
     /**
      * Matched Route to uri.
      *
-     * @var array
+     * @var \Friday\Http\Route
      */
     public $matchRoute;
 
