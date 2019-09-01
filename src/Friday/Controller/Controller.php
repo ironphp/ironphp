@@ -350,7 +350,7 @@ class Controller
      * @param array       $data  Arguments to use
      * @param string|null $file  File to use for rendering
      *
-     * @return void
+     * @return void|bool
      */
     protected function theme($theme, $data = [], $file = null)
     {
