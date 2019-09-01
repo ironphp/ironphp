@@ -39,7 +39,7 @@ class Route implements RouteInterface
     /**
      * Route prefix name.
      *
-     * @var string
+     * @var string|null
      */
     public $prefix = null;
 
