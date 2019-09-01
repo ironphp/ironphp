@@ -123,16 +123,6 @@ class Server extends Application
     }
 
     /**
-     * Get parameter passed in route.
-     *
-     * @return array
-     */
-    public function getRouteParam()
-    {
-        return $this->router->args;
-    }
-
-    /**
      * Parse Uri and get path uri, params, server method.
      *
      * @return array
