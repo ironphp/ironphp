@@ -96,7 +96,7 @@ class Pagination
     public function getPaginationHtml($url, $style = 0, $cssClass = null, $replaceClass = false)
     {
         if ($this->total == null) {
-            return;
+            return null;
         }
 
         $ul_class = $li_class = $a_class = null;
