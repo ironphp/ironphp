@@ -249,8 +249,9 @@ class Table
     /**
      * Get paginated fields from table.
      *
-     * @param array|null  $limit
-     * @param string|null $sqlQuery
+     * @param int        $limit
+     * @param array|null $fields
+     * @param bool       $sqlQuery
      *
      * @return array
      */
@@ -272,8 +273,8 @@ class Table
     /**
      * Add data to table.
      *
-     * @param string|null $data
-     * @param string|null $sqlQuery
+     * @param array $data
+     * @param bool  $sqlQuery
      *
      * @return bool
      */
@@ -296,7 +297,7 @@ class Table
      * Update data to table.
      *
      * @param string|array|null $field
-     * @param string|null       $sqlQuery
+     * @param bool              $sqlQuery
      *
      * @return bool
      */
@@ -321,7 +322,7 @@ class Table
     /**
      * Delete data from table.
      *
-     * @param string|null $sqlQuery
+     * @param bool $sqlQuery
      *
      * @return bool
      */
@@ -492,9 +493,9 @@ class Table
                         $ex .= ' as `'.$v.'`';
                     }
                 }
-                $sql = "SELECT $ex FROM `".$this->getTable().'` '.$this->where;
+                $sql = "SELECT $ex FROM `".$this->getTable()."` ".$this->where;
             } else {
-                $sql = "SELECT $field FROM `".$this->getTable().'` '.$this->where.$this->order.$this->limit;
+                $sql = "SELECT $field FROM `".$this->getTable()."` ".$this->where.$this->order.$this->limit;
             }
         } elseif ($type == 'insert') {
             $values = [];
