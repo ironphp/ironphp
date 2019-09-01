@@ -82,21 +82,21 @@ class Application
     /**
      * Router instance.
      *
-     * @var Friday\Http\Router
+     * @var \Friday\Http\Router
      */
     public $router;
 
     /**
      * Dispatcher instance.
      *
-     * @var Friday\Http\Dispatcher
+     * @var \Friday\Http\Dispatcher
      */
     public $dispatcher;
 
     /**
      * Response instance.
      *
-     * @var \Friday\Http\FrontController
+     * @var \Friday\Http\Response
      */
     public $response;
 
