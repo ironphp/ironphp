@@ -187,7 +187,7 @@ class Table
      *
      * @param bool $sqlQuery
      *
-     * @return int
+     * @return int|string
      */
     public function num_rows($sqlQuery = false)
     {
