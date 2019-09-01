@@ -535,11 +535,16 @@ class Table
     /**
      * Run sql query.
      *
+     * @param string|null $query
+     *
      * @return resource
      */
-    public function executeQuery()
+    public function executeQuery($query = null)
     {
-        $result = $this->connection->query($this->query);
+        if($query != null) {
+			$this->query = $query;
+		}
+		$result = $this->connection->query($this->query);
         $this->errno = $this->connection->errno;
         $this->error = $this->connection->error;
         if ($this->connection->errno) {
