@@ -332,7 +332,7 @@ class Controller
     /**
      * Get Request instance.
      *
-     * @return \Friday\Http\Request
+     * @return \Friday\Http\Request|bool
      */
     protected function getRequest()
     {
