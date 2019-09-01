@@ -114,7 +114,7 @@ interface RouteInterface
     /**
      * Get specific or all Registered redirect routes.
      *
-     * @param  string  $uri
+     * @param string $uri
      *
      * @return array
      */

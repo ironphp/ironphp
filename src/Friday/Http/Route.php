@@ -228,7 +228,7 @@ class Route implements RouteInterface
     /**
      * Get specific or all Registered redirect routes.
      *
-     * @param  string|null  $uri
+     * @param string|null $uri
      *
      * @return array
      */
