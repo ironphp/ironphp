@@ -146,7 +146,7 @@ class Controller
      * @param array       $data
      * @param string|null $layout
      *
-     * @return string
+     * @return string|bool
      */
     public function renderView($viewPath = null, $data = [], $layout = null)
     {
@@ -155,9 +155,7 @@ class Controller
         }
         $_token = $this->app->session->getToken();
         $data['_token'] = $_token;
-        $renderedView = $this->view->renderView($viewPath, $data, $layout);
-
-        return $renderedView;
+        return $this->view->renderView($viewPath, $data, $layout);
     }
 
     /**
@@ -166,7 +164,7 @@ class Controller
      * @param string|null $templatePath
      * @param array       $data
      *
-     * @return void.
+     * @return string|bool
      */
     public function renderTemplate($templatePath = null, $data = [])
     {
@@ -175,9 +173,7 @@ class Controller
         }
         $_token = $this->app->session->getToken();
         $data['_token'] = $_token;
-        $renderedTemplate = $this->view->renderTemplate($templatePath, $data);
-
-        return $renderedTemplate;
+        return $this->view->renderTemplate($templatePath, $data);
     }
 
     /**
