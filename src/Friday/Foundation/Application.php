@@ -89,7 +89,7 @@ class Application
     /**
      * Dispatcher instance.
      *
-     * @var \Friday\Http\FrontController
+     * @var Friday\Http\Dispatcher
      */
     public $dispatcher;
 
