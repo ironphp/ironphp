@@ -205,7 +205,7 @@ class Controller
      * @param string $view View to use for rendering
      * @param array  $data Arguments to use
      *
-     * @return void
+     * @return void|bool
      */
     public function view($view, $data = [])
     {
