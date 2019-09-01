@@ -358,7 +358,10 @@ class Controller
             return false;
         }
         $themeInfo = self::$instance->app->findTheme($theme, $file);
-        echo self::$instance->renderTheme($themeInfo, $data);
+        $output = self::$instance->renderTheme($themeInfo, $data);
+		if($output) {
+			echo $output;
+		}
     }
 
     /**
@@ -367,7 +370,7 @@ class Controller
      * @param array $themeInfo
      * @param array $data
      *
-     * @return void
+     * @return string|bool
      */
     public function renderTheme($themeInfo, $data = [])
     {
