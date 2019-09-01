@@ -181,7 +181,7 @@ class Controller
      *
      * @param string $model View to use for rendering
      *
-     * @return \Friday\Model\ModelService
+     * @return \Friday\Model\ModelService|bool
      */
     public function model($model)
     {
