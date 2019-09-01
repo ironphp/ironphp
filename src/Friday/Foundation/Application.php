@@ -407,7 +407,7 @@ class Application
      *
      * @throws Exception
      *
-     * @return string
+     * @return string|bool
      */
     public function setKey()
     {
