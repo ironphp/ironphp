@@ -28,34 +28,6 @@ use Friday\Helper\Cookie;
 class Server extends Application
 {
     /**
-     * Request instance.
-     *
-     * @var \Friday\Http\Request
-     */
-    public $request;
-
-    /**
-     * Router instance.
-     *
-     * @var \Friday\Http\FrontController
-     */
-    public $router;
-
-    /**
-     * Dispatcher instance.
-     *
-     * @var \Friday\Http\FrontController
-     */
-    public $dispatcher;
-
-    /**
-     * Response instance.
-     *
-     * @var \Friday\Http\FrontController
-     */
-    public $response;
-
-    /**
      * Matched Route to uri.
      *
      * @var array

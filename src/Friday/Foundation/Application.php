@@ -73,6 +73,34 @@ class Application
     public $session;
 
     /**
+     * Request instance.
+     *
+     * @var \Friday\Http\Request
+     */
+    public $request;
+
+    /**
+     * Router instance.
+     *
+     * @var \Friday\Http\FrontController
+     */
+    public $router;
+
+    /**
+     * Dispatcher instance.
+     *
+     * @var \Friday\Http\FrontController
+     */
+    public $dispatcher;
+
+    /**
+     * Response instance.
+     *
+     * @var \Friday\Http\FrontController
+     */
+    public $response;
+
+    /**
      * Create a new Friday application instance.
      *
      * @param string|null $basePath
