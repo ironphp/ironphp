@@ -222,7 +222,7 @@ class Controller
      * @param string $template Template to use for rendering
      * @param array  $data     Arguments to use
      *
-     * @return void
+     * @return void|bool
      */
     public function template($template, $data = [])
     {
