@@ -563,7 +563,7 @@ class Application
      *
      * @throws Exception
      *
-     * @return string
+     * @return array
      */
     public function findTheme($theme, $file = null)
     {
