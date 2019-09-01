@@ -203,8 +203,8 @@ class Table
      * Get field from table.
      *
      * @param array|null  $fields
-     * @param string|null $sqlQuery
-     * @rturn  array
+     * @param bool $sqlQuery
+     * @return  array
      */
     public function get($fields = null, $sqlQuery = false)
     {
@@ -222,8 +222,8 @@ class Table
      * Get all fields from table.
      *
      * @param array|null  $fields
-     * @param string|null $sqlQuery
-     * @rturn  array
+     * @param bool $sqlQuery
+     * @return  array
      */
     public function getAll($fields = null, $sqlQuery = false)
     {
@@ -249,7 +249,7 @@ class Table
      *
      * @param array|null  $limit
      * @param string|null $sqlQuery
-     * @rturn  array
+     * @return  array
      */
     public function getPaginated($limit = 1, $fields = null, $sqlQuery = false)
     {
@@ -271,7 +271,7 @@ class Table
      *
      * @param string|null $data
      * @param string|null $sqlQuery
-     * @rturn  bool
+     * @return  bool
      */
     public function add($data, $sqlQuery = false)
     {
@@ -293,7 +293,7 @@ class Table
      *
      * @param string|array|null $field
      * @param string|null       $sqlQuery
-     * @rturn  bool
+     * @return  bool
      */
     public function update($field = null, $sqlQuery = false)
     {
@@ -317,7 +317,7 @@ class Table
      * Delete data from table.
      *
      * @param string|null $sqlQuery
-     * @rturn  bool
+     * @return  bool
      */
     public function delete($sqlQuery = false)
     {
