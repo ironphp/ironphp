@@ -30,7 +30,7 @@ class DataMapper
     /**
      * The Database connection.
      *
-     * @var array
+     * @var \Friday\Model\Table
      */
     protected $connection;
 
