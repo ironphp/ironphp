@@ -299,7 +299,7 @@ class Table
      * @param string|array|null $field
      * @param bool              $sqlQuery
      *
-     * @return bool
+     * @return bool|string
      */
     public function update($field = null, $sqlQuery = false)
     {
