@@ -109,7 +109,7 @@ class Table
     /**
      * Number of affected rows.
      *
-     * @var string|null
+     * @var int|null
      */
     private $num_rows = null;
 
