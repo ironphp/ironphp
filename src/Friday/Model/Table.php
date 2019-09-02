@@ -276,7 +276,7 @@ class Table
      * @param array $data
      * @param bool  $sqlQuery
      *
-     * @return bool
+     * @return bool|string
      */
     public function add($data, $sqlQuery = false)
     {
