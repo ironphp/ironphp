@@ -225,7 +225,7 @@ class Table
      * @param array|null $fields
      * @param bool       $sqlQuery
      *
-     * @return array
+     * @return array|string
      */
     public function getAll($fields = null, $sqlQuery = false)
     {
