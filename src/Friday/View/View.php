@@ -534,6 +534,7 @@ class View
                         }
                         foreach ($val1 as $key2 => $val2) {
                             $children[] = $this->arrayToHtml([$key2=>$val2]);
+							/*
                             if (!is_array($val2)) {
                                 //$tag = $key;
                                 if ($key2 === 'body' || $key2 === '#text') {
@@ -563,6 +564,7 @@ class View
                                     }
                                 }
                             }
+							*/
                         }
                     }
                 }

@@ -91,12 +91,12 @@ class Pagination
      * @param array  $cssClass
      * @param bool   $replaceClass
      *
-     * @return string|null
+     * @return string|null|bool
      */
     public function getPaginationHtml($url, $style = 0, $cssClass = null, $replaceClass = false)
     {
         if ($this->total == null) {
-            return;
+            return false;
         }
 
         $ul_class = $li_class = $a_class = null;

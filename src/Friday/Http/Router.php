@@ -46,8 +46,7 @@ class Router
      * @param string $uriRoute
      * @param string $httpMethod GET/POST
      *
-     * @throws Exception,
-     *                    OutOfRangeException
+     * @throws Exception|OutOfRangeException
      *
      * @return \Friday\Http\Route
      */
