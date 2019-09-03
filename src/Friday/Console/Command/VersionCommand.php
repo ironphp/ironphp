@@ -75,7 +75,7 @@ class VersionCommand extends Command
     {
         $url = 'https://repo.packagist.org/p/ironphp/ironphp.json';
         $packagistJson = @file_get_contents($url);
-        if ($packagistJson === true) {
+        if ($packagistJson) {
             $packagistArray = json_decode($packagistJson, true);
             $packagistData = $packagistArray['packages']['ironphp/ironphp']['dev-master'];
             $time = $packagistData['time'];
