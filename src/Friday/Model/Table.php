@@ -74,7 +74,7 @@ class Table
     /**
      * ORDER BY clause.
      *
-     * @var array|null
+     * @var string|null
      */
     private $order;
 
