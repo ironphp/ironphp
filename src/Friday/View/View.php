@@ -496,7 +496,7 @@ class View
      *
      * @param array $tagArray
      *
-     * @return string
+     * @return string|bool
      */
     public function arrayToHtml($tagArray)
     {
