@@ -194,7 +194,7 @@ class View
      *
      * @throws \Exception
      *
-     * @return array
+     * @return string
      */
     public function createTag($tag, $attr = null, $content = null, $isCloseTag = null)
     {
