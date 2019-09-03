@@ -638,7 +638,7 @@ class View
      *
      * @throws \Exception
      *
-     * @return array
+     * @return string
      */
     public function createElement($element, $attr = null, $content = null, $isCloseTag = null)
     {
