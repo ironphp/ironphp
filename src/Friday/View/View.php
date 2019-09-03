@@ -590,7 +590,7 @@ class View
      *
      * @param array $tagArray
      *
-     * @return array
+     * @return \RecursiveArrayIterator
      */
     public function getChildrenIterator($tagArray)
     {
