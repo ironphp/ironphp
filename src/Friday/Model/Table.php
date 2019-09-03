@@ -324,7 +324,7 @@ class Table
      *
      * @param bool $sqlQuery
      *
-     * @return bool
+     * @return bool|string
      */
     public function delete($sqlQuery = false)
     {
