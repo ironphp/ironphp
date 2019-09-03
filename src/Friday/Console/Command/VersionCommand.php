@@ -87,7 +87,7 @@ class VersionCommand extends Command
         }
         /*
                 $installData = $this->app->getIntallTime();
-        
+
                 if ($packagistJson === true) {
                     echo Colors::WHITE.' '.str_replace('T', ' ', substr(date(DATE_ATOM, $timeStamp), 0, 19));
                     echo Colors::GREEN."\nChecking updates... ".Colors::WHITE;
