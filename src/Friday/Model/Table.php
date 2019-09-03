@@ -544,7 +544,7 @@ class Table
      *
      * @param string|null $query
      *
-     * @return resource
+     * @return bool|mysqli_result
      */
     public function executeQuery($query = null)
     {
