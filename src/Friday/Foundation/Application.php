@@ -674,9 +674,9 @@ class Application
      */
     public function installTheme($jsonTheme, $allowExt)
     {
-		$theme_path = $jsonTheme['theme_path'];
+        $theme_path = $jsonTheme['theme_path'];
 
-		foreach ($jsonTheme as $key => $val) {
+        foreach ($jsonTheme as $key => $val) {
             if (in_array($key, $allowExt)) {
                 foreach ($val as $file) {
                     if (file_exists($theme_path.$file) && is_file($theme_path.$file)) {
