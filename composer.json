@@ -29,11 +29,11 @@
     },
     "require": {
         "php": ">=5.5",
-        "povils/phpmnd": "2.0",
         "psr/log": "1.1.0",
         "vlucas/phpdotenv": "^3.3"
     },
     "require-dev": {
+        "povils/phpmnd": "2.0",
         "atoum/atoum": "^3.0@dev",
         "behat/behat": "^3.5@dev",
         "designsecurity/progpilot": "dev-master",
