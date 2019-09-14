@@ -102,11 +102,11 @@ class Handler implements HandlerInterface
 		$this->logger = new Logger('iron_logger');
 
 		// Now add some handlers
-		$logger->pushHandler(new StreamHandler(__DIR__.'/my_app.log', Logger::DEBUG));
-		$logger->pushHandler(new FirePHPHandler());
+		$this->logger->pushHandler(new StreamHandler(__DIR__.'/my_app.log', Logger::DEBUG));
+		$this->logger->pushHandler(new FirePHPHandler());
 
 		// You can now use your logger
-		$logger->info('My logger is now ready');
+		$this->logger->info('My logger is now ready');
 
 		$this->system = $system ?: new System();
         if (env('APP_DEBUG') === true) {
