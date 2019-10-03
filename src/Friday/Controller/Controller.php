@@ -87,15 +87,6 @@ class Controller
     public $modelService;
 
     /**
-     * Create a new Controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-    }
-
-    /**
      * Initialization hook method.
      *
      * Implement this method to avoid having to overwrite

@@ -49,15 +49,6 @@ class ModelService
     private $pagination = null;
 
     /**
-     * Create a new ModelService instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-    }
-
-    /**
      * Initialize ModelService instance.
      *
      * @param \Friday\Foundation\Application $app
