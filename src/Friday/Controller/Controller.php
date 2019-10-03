@@ -190,7 +190,7 @@ class Controller
         if (self::$instance == null) {
             return false;
         }
-        //$model = ucfirst($model).'Model';
+		$model = ucfirst(strtolower($model)).'Model';
         $modelPath = self::$instance->app->findModel($model);
         $modelClass = 'App\\Model\\'.$model;
         $this->model = new $modelClass();
