@@ -23,9 +23,9 @@ use Friday\Foundation\Errors\Error;
 use Friday\Foundation\Errors\Fatal;
 use Friday\Foundation\Errors\Notice;
 use Friday\Foundation\Errors\Warning;
-use Monolog\Logger;
-use Monolog\Handler\StreamHandler;
 use Monolog\Handler\FirePHPHandler;
+use Monolog\Handler\StreamHandler;
+use Monolog\Logger;
 
 class Handler implements HandlerInterface
 {
@@ -98,17 +98,17 @@ class Handler implements HandlerInterface
      */
     public function __construct(System $system = null)
     {
-		// Create the logger
-		$this->logger = new Logger('iron_logger');
+        // Create the logger
+        $this->logger = new Logger('iron_logger');
 
-		// Now add some handlers
-		$this->logger->pushHandler(new StreamHandler(LOGS.'/app.log', Logger::DEBUG));
-		$this->logger->pushHandler(new FirePHPHandler());
+        // Now add some handlers
+        $this->logger->pushHandler(new StreamHandler(LOGS.'/app.log', Logger::DEBUG));
+        $this->logger->pushHandler(new FirePHPHandler());
 
-		// You can now use your logger
-		$this->logger->info('My logger is now ready');
+        // You can now use your logger
+        $this->logger->info('My logger is now ready');
 
-		$this->system = $system ?: new System();
+        $this->system = $system ?: new System();
         if (env('APP_DEBUG') === true) {
             ini_set('display_errors', 'on');
             error_reporting(E_ALL);
