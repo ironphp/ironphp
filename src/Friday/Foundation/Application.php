@@ -116,7 +116,7 @@ class Application
      */
     public function __construct($basePath = null)
     {
-        $this->requireFile(__DIR__.'/../Helper/PathConstant.php');
+        $this->requireFile(dirname(__DIR__).'/Helper/PathConstant.php');
 
         if ($basePath) {
             $this->setBasePath($basePath);
