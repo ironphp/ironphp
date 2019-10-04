@@ -24,7 +24,7 @@
  * The full path to the directory which holds "app", WITHOUT a trailing DS.
  */
 if (!defined('ROOT')) {
-	define('ROOT', dirname(__DIR__));
+    define('ROOT', dirname(__DIR__));
 }
 
 /*
