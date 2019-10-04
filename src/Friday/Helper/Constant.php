@@ -27,7 +27,7 @@ if (!defined('LINEBREAK')) {
     define('LINEBREAK', "\r\n");
 }
 
-/**
+/*
  * Use the DS to separate the directories in other defines.
  */
 if (!defined('DS')) {
