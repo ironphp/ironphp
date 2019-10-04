@@ -118,7 +118,7 @@ class Application
     {
         $this->requireFile(__DIR__.'/../Helper/PathConstant.php');
 
-		if ($basePath) {
+        if ($basePath) {
             $this->setBasePath($basePath);
         }
 
