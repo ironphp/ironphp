@@ -180,7 +180,9 @@ class ModelService
     /**
      * Execute SQL Query.
      *
-     * @return resource
+     * @param string $query
+     *
+     * @return bool|mysqli_result
      */
     protected function runQuery($query)
     {
