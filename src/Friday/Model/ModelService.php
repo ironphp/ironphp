@@ -182,7 +182,7 @@ class ModelService
      *
      * @param string $query
      *
-     * @return bool|mysqli_result
+     * @return bool|\mysqli_result
      */
     protected function runQuery($query)
     {
