@@ -40,7 +40,7 @@ if (!defined('DS')) {
 if (!defined('ROOT')) {
 	define('ROOT', dirname(__DIR__));
 }
-
+echo "1\n";//exit;
 /*
  * The actual directory name for the application directory. Normally
  * named 'app'.

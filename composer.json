@@ -34,14 +34,15 @@
         "vlucas/phpdotenv": "^3.6"
     },
     "require-dev": {
-        "povils/phpmnd": "2.0",
         "atoum/atoum": "^3.0@dev",
         "behat/behat": "^3.5@dev",
         "designsecurity/progpilot": "dev-master",
         "kahlan/kahlan": "dev-master",
         "phing/phing": "^3.0@dev",
+        "phpstan/phpstan": "@dev",
         "phpunit/phpunit": "^7.5",
         "phpunit/phpunit-selenium": "@dev",
+        "povils/phpmnd": "2.0",
         "vimeo/psalm": "^3.0@dev"
     },
     "autoload": {
