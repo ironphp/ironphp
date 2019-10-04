@@ -118,8 +118,8 @@ class Application
     {
         $this->requireFile(__DIR__.'/../Helper/PathConstant.php');
 
-		if ($basePath) {
-            $this->setBasePath($basePath);
+        if ($basePath) {
+			$this->setBasePath($basePath);
         }
 
         $this->config['basePath'] = $this->basePath();
