@@ -29,13 +29,13 @@
     },
     "require": {
         "php": ">=5.5",
-        "datasift/storyplayer": "@dev",
         "monolog/monolog": "^2.0",
-        "phpspec/phpspec": "^6.0",
         "psr/log": "^1.1",
         "vlucas/phpdotenv": "^3.6"
     },
     "require-dev": {
+        "datasift/storyplayer": "@dev",
+        "phpspec/phpspec": "^6.0",
         "atoum/atoum": "^3.3",
         "behat/behat": "^3.5",
         "codeception/codeception": "4.0.x-dev",
