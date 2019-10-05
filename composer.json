@@ -38,7 +38,6 @@
         "behat/behat": "^3.5",
         "designsecurity/progpilot": "^0.6",
         "kahlan/kahlan": "^4.6",
-        "phpunit/phpunit-selenium": "^7.0",
         "vimeo/psalm": "^3.5",
         "phing/phing": "^2.16",
         "povils/phpmnd": "^2.1",
