@@ -29,20 +29,23 @@
     },
     "require": {
         "php": ">=5.5",
+        "datasift/storyplayer": "@dev",
         "monolog/monolog": "^2.0",
+        "phpspec/phpspec": "^6.0",
         "psr/log": "^1.1",
         "vlucas/phpdotenv": "^3.6"
     },
     "require-dev": {
         "atoum/atoum": "^3.3",
         "behat/behat": "^3.5",
+        "codeception/codeception": "4.0.x-dev",
         "designsecurity/progpilot": "^0.6",
         "kahlan/kahlan": "^4.6",
-        "vimeo/psalm": "^3.5",
         "phing/phing": "^2.16",
-        "povils/phpmnd": "^2.1",
         "phpstan/phpstan": "^0.11",
-        "phpunit/phpunit": "^8.4"
+        "phpunit/phpunit": "^8.4",
+        "povils/phpmnd": "^2.1",
+        "vimeo/psalm": "^3.5"
     },
     "autoload": {
         "psr-4": {
