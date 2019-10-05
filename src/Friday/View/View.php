@@ -245,8 +245,8 @@ class View
         $temp .= !empty($args) ? ' '.$args.'>' : '>';
         if ($content != null) {
             $content = explode("\n", $content);
-            
-			array_walk($content, function (&$val, $key) {
+
+            array_walk($content, function (&$val, $key) {
                 $val = trim($val);
             }); //5.3
             $content = implode("\n", $content);
