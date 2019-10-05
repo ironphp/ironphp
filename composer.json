@@ -30,20 +30,20 @@
     "require": {
         "php": ">=5.5",
         "monolog/monolog": "^2.0",
-        "psr/log": "1.1.0",
+        "psr/log": "^1.1",
         "vlucas/phpdotenv": "^3.6"
     },
     "require-dev": {
-        "atoum/atoum": "^3.0@dev",
-        "behat/behat": "^3.5@dev",
-        "designsecurity/progpilot": "dev-master",
-        "kahlan/kahlan": "dev-master",
-        "phing/phing": "^3.0@dev",
-        "phpstan/phpstan": "@dev",
-        "phpunit/phpunit-selenium": "@dev",
-        "povils/phpmnd": "2.0",
-        "vimeo/psalm": "^3.0@dev",
-        "phpunit/phpunit": "^8.3"
+        "atoum/atoum": "^3.3",
+        "behat/behat": "^3.5",
+        "designsecurity/progpilot": "^0.6",
+        "kahlan/kahlan": "^4.6",
+        "phpunit/phpunit-selenium": "^7.0",
+        "vimeo/psalm": "^3.5",
+        "phing/phing": "^2.16",
+        "povils/phpmnd": "^2.1",
+        "phpstan/phpstan": "^0.11",
+        "phpunit/phpunit": "^8.4"
     },
     "autoload": {
         "psr-4": {
