@@ -88,7 +88,7 @@ class Pagination
      *
      * @param string $url
      * @param int    $style
-     * @param array  $cssClass
+     * @param array|null  $cssClass
      * @param bool   $replaceClass
      *
      * @return string|null|bool
@@ -99,27 +99,7 @@ class Pagination
             return false;
         }
 
-        $ul_class = $li_class = $a_class = null;
-
-        if ($cssClass == null) {
-            $ul_class = 'pagination';
-            $li_class = ['page-item', 'page-item', 'page-item active'];
-            $a_class = 'page-link';
-        } else {
-            if (isset($cssClass['ul']) && trim($cssClass['ul']) != '') {
-                $ul_class = $replaceClass ? $cssClass['ul'] : $ul_class.' '.$cssClass['ul'];
-            }
-            if (isset($cssClass['li']) && is_array($cssClass['li'])) {
-                foreach ($cssClass['li'] as $i => $li) {
-                    if (isset($li) && trim($li) != '') {
-                        $li_class[$i] = $replaceClass ? $li : $li_class[$i].' '.$li;
-                    }
-                }
-            }
-            if (isset($cssClass['a']) && trim($cssClass['a']) != '') {
-                $a_class = $replaceClass ? $cssClass['a'] : $a_class.' '.$cssClass['a'];
-            }
-        }
+        list($ul_class, $li_class, $a_class) = $this->parseData($cssClass, $replaceClass);
 
         $adjacents = '2';
 
@@ -193,4 +173,39 @@ class Pagination
 
         return $pagination;
     }
+
+	/**
+     * Parse css classes.
+     *
+     * @param array|null  $cssClass
+     * @param bool   $replaceClass
+     *
+     * @return string|null|bool
+     * @since 1.0.6
+     */
+    public function getPaginationHtml($cssClass, $replaceClass)
+    {
+		$ul_class = $li_class = $a_class = null;
+
+        if ($cssClass == null) {
+            $ul_class = 'pagination';
+            $li_class = ['page-item', 'page-item', 'page-item active'];
+            $a_class = 'page-link';
+        } else {
+            if (isset($cssClass['ul']) && trim($cssClass['ul']) != '') {
+                $ul_class = $replaceClass ? $cssClass['ul'] : $ul_class.' '.$cssClass['ul'];
+            }
+            if (isset($cssClass['li']) && is_array($cssClass['li'])) {
+                foreach ($cssClass['li'] as $i => $li) {
+                    if (isset($li) && trim($li) != '') {
+                        $li_class[$i] = $replaceClass ? $li : $li_class[$i].' '.$li;
+                    }
+                }
+            }
+            if (isset($cssClass['a']) && trim($cssClass['a']) != '') {
+                $a_class = $replaceClass ? $cssClass['a'] : $a_class.' '.$cssClass['a'];
+            }
+        }
+		return [$ul_class, $li_class, $a_class];
+	}
 }

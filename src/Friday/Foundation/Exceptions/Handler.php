@@ -481,6 +481,7 @@ class Handler implements HandlerInterface
      * @param int $severityCode
      *
      * @return string
+     * @since 1.0.6
      */
     public function getSeverity($severityCode)
     {
