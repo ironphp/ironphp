@@ -86,10 +86,10 @@ class Pagination
     /**
      * Get pagination html.
      *
-     * @param string $url
-     * @param int    $style
-     * @param array|null  $cssClass
-     * @param bool   $replaceClass
+     * @param string     $url
+     * @param int        $style
+     * @param array|null $cssClass
+     * @param bool       $replaceClass
      *
      * @return string|null|bool
      */
@@ -174,18 +174,19 @@ class Pagination
         return $pagination;
     }
 
-	/**
+    /**
      * Parse css classes.
      *
-     * @param array|null  $cssClass
-     * @param bool   $replaceClass
+     * @param array|null $cssClass
+     * @param bool       $replaceClass
      *
      * @return array
+     *
      * @since 1.0.6
      */
     public function parseData($cssClass, $replaceClass)
     {
-		$ul_class = $li_class = $a_class = null;
+        $ul_class = $li_class = $a_class = null;
 
         if ($cssClass == null) {
             $ul_class = 'pagination';
@@ -206,6 +207,7 @@ class Pagination
                 $a_class = $replaceClass ? $cssClass['a'] : $a_class.' '.$cssClass['a'];
             }
         }
-		return [$ul_class, $li_class, $a_class];
-	}
+
+        return [$ul_class, $li_class, $a_class];
+    }
 }
