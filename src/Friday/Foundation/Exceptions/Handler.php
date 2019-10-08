@@ -282,8 +282,8 @@ class Handler implements HandlerInterface
             }
         }
         if (env('APP_DEBUG') === true) {
-			if(isset($argv)) {
-            $output = '
+            if (isset($argv)) {
+                $output = '
 				<!DOCTYPE html>
 				<html lang="en">
 					<head>
@@ -336,15 +336,14 @@ class Handler implements HandlerInterface
 					</body>
 				</html>
 			';
-				}
-			else {
-				$output = "
+            } else {
+                $output = "
 +-----------------------------------------------+
 | Type\t\t|".get_class($exception)."\t\t\t|
 +-----------------------------------------------+
 | Code\t\t| ".$exception->getCode()."\t\t\t\t|
 +-----------------------------------------------+".(isset($severityCode) ? "
-| Severity\t| ".$severityCode." - ".$severity."\t\t|": "")."
+| Severity\t| ".$severityCode.' - '.$severity."\t\t|" : '')."
 +-----------------------------------------------+
 | Message\t| ".$exception->getMessage()."\t\t\t\t|
 +-----------------------------------------------+
@@ -353,8 +352,8 @@ class Handler implements HandlerInterface
 | Line\t\t| ".$exception->getLine()."\t\t\t\t|
 +-----------------------------------------------+
 ";
-			}
-			echo $output;
+            }
+            echo $output;
         } else {
             $message = 'Type: '.get_class($exception)."; Message: {$exception->getMessage()}; File: {$exception->getFile()}; Line: {$exception->getLine()};";
             if (!file_exists(LOGS.'/debug.log') || !is_file(LOGS.'/debug.log')) {
