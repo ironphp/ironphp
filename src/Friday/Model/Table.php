@@ -621,6 +621,6 @@ class Table
      */
     public function getQuotedString($value)
     {
-        return is_string($value) ? "'$value'" : $value);
+        return is_string($value) ? "'$value'" : $value;
     }
 }
