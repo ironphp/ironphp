@@ -162,7 +162,7 @@ class Pagination
                         if ($counter == $page) {
                             $pagination .= "<li class=\"$li_class[2]\"><a class=\"$a_class\">$counter</a></li>";
                         } else {
-                            $pagination .= "<li class=\"$li_class[1]\"><a class=\"$a_class\" href='{$url}page=$counter'>$counter</a></li>";
+                            $pagination .= $this->getListItem($li_class[1], $a_class, "{$url}page=$counter", $counter);
                         }
                     }
                     //$pagination.= "<li class=\"$li_class[1]\"><a class=\"$a_class\" href='{$url}page=$lastpage'>&raquo;</a></li>";
@@ -209,5 +209,22 @@ class Pagination
         }
 
         return [$ul_class, $li_class, $a_class];
+    }
+
+    /**
+     * Get li tag filled with data.
+     *
+     * @param string $li_class
+     * @param string $a_class
+     * @param string $href
+     * @param int    $counter
+     *
+     * @return string
+     *
+     * @since 1.0.6
+     */
+    public function getListItem($li_class, $a_class, $href, $counter)
+    {
+        return "<li class=\"$li_class\"><a class=\"$a_class\" href='{$href}'>$counter</a></li>";
     }
 }
