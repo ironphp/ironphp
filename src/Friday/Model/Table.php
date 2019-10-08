@@ -514,7 +514,7 @@ class Table
                 }
                 $values = array_values($field);
                 foreach ($values as $i => $val) {
-                    $values[$i] = is_string($val) ? "'$val'" : $val;
+                    $values[$i] = $this->getQuotedString($val);
                 }
                 $values = implode(' ,', $values);
             } else {
@@ -528,7 +528,7 @@ class Table
         elseif ($type == 'update') {
             if (is_array($field)) {
                 foreach ($field as $key => $value) {
-                    $values[] = " `$key` = ".(is_string($value) ? "'$value'" : $value);
+                    $values[] = " `$key` = ".$this->getQuotedString($value);
                 }
                 $values = implode(' ,', $values);
             } else {
@@ -608,5 +608,19 @@ class Table
     public function sqlValue($value)
     {
         return '`'.trim($value).'`';
+    }
+
+    /**
+     * Get quoted string.
+     *
+     * @param string      $value
+     *
+     * @return string
+     *
+     * @since 1.0.6
+     */
+    public function getQuotedString($value)
+    {
+        return is_string($value) ? "'$value'" : $value);
     }
 }
