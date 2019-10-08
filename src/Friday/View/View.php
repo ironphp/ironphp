@@ -275,7 +275,7 @@ class View
     /**
      * Renders View for given data, template file and layout.
      *
-     * @param string|null      $viewPath
+     * @param string|null $viewPath
      * @param array       $data
      * @param string|null $layout
      *
