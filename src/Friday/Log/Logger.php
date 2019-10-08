@@ -190,7 +190,7 @@ class Logger implements LoggerInterface
     /**
      * Get the underlying logger implementation.
      *
-     * @return \Psr\Log\LoggerInterface
+     * @return \Psr\Log\LoggerInterface|null
      */
     public function getLogger()
     {
