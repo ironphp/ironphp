@@ -476,11 +476,13 @@ class Table
                 $field = '*';
             } elseif (is_array($field)) {
                 foreach ($field as $i => $value) {
-                    $field[$i] = '`'.trim($value).'`';
+                    $field[$i] = $this->sqlValue($value);
                 }
                 $field = trim(implode(' ,', $field));
             }
+
             $ex = '';
+
             if ($extra != null && is_array($extra)) {
                 foreach ($extra as $i => $v) {
                     if ($i == 'count') {
@@ -497,7 +499,8 @@ class Table
             } else {
                 $sql = "SELECT $field FROM `".$this->getTable().'` '.$this->where.$this->order.$this->limit;
             }
-        } elseif ($type == 'insert') {
+        }
+        elseif ($type == 'insert') {
             $values = [];
             if (is_array($field)) {
                 $keys = array_keys($field);
@@ -505,7 +508,7 @@ class Table
                     $keys = '';
                 } else {
                     foreach ($keys as $i => $key) {
-                        $keys[$i] = ' `'.trim($key).'`';
+                        $keys[$i] = ' '.$this->sqlValue($key);
                     }
                     $keys = implode(',', $keys);
                 }
@@ -521,7 +524,8 @@ class Table
             $values = "($values)";
             $keys = ($keys !== '') ? "($keys)" : '';
             $sql = 'INSERT INTO `'.$this->getTable()."` $keys VALUES $values".$this->duplicateUpdate;
-        } elseif ($type == 'update') {
+        }
+        elseif ($type == 'update') {
             if (is_array($field)) {
                 foreach ($field as $key => $value) {
                     $values[] = " `$key` = ".(is_string($value) ? "'$value'" : $value);
@@ -531,7 +535,8 @@ class Table
                 $values = trim($field);
             }
             $sql = 'UPDATE `'.$this->getTable()."` SET $values ".$this->where;
-        } elseif ($type == 'delete') {
+        }
+        elseif ($type == 'delete') {
             $sql = 'DELETE FROM `'.$this->getTable().'` '.$this->where;
         }
         $this->query = $sql;
@@ -589,5 +594,19 @@ class Table
         }
 
         return $this->connection->real_escape_string($str);
+    }
+
+    /**
+     * Create sql query.
+     *
+     * @param string      $value
+     *
+     * @return string
+     *
+     * @since 1.0.6
+     */
+    public function sqlValue($value)
+    {
+        return '`'.trim($value).'`';
     }
 }
