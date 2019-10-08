@@ -281,8 +281,9 @@ class Handler implements HandlerInterface
                     break;
             }
         }
-        if (env('APP_DEBUG') === true) {
-            if (isset($argv)) {
+
+		if (env('APP_DEBUG') === true) {
+            if (!isset($argv) || count($argv)) {
                 $output = '
 				<!DOCTYPE html>
 				<html lang="en">
@@ -310,7 +311,7 @@ class Handler implements HandlerInterface
 									</tr>
         							<tr style="background-color:rgb(240,240,240)">
 										<th>Trace</th>
-										<td>'.trim(str_replace('#', '<br>#', $exception->getTraceAsString()), '<br>').'</td>
+										<td>'.trim(str_replace('#', '<br>#', str_replace(ROOT, '', $exception->getTraceAsString())), '<br>').'</td>
 									</tr>'.
                                         (isset($severityCode) ? '
         							<tr style="background-color:rgb(240,240,240)">
