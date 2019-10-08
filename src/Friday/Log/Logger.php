@@ -25,7 +25,7 @@ class Logger implements LoggerInterface
     /**
      * The underlying logger implementation.
      *
-     * @var \Psr\Log\LoggerInterface
+     * @var \Psr\Log\LoggerInterface|null
      */
     private $logger;
 
