@@ -183,7 +183,7 @@ class Pagination
      * @return string|null|bool
      * @since 1.0.6
      */
-    public function getPaginationHtml($cssClass, $replaceClass)
+    public function parseData($cssClass, $replaceClass)
     {
 		$ul_class = $li_class = $a_class = null;
 
