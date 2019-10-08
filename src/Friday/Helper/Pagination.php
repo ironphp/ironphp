@@ -194,11 +194,11 @@ class Pagination
     /**
      * Get li tag filled with data.
      *
-     * @param string $li_class
-     * @param string $a_class
+     * @param string      $li_class
+     * @param string      $a_class
      * @param string|null $href
-     * @param int    $counter
-     * @param bool    $span
+     * @param int         $counter
+     * @param bool        $span
      *
      * @return string
      *
@@ -206,17 +206,17 @@ class Pagination
      */
     public function getListItem($li_class, $a_class, $href, $counter, $span = false)
     {
-        return "<li class=\"$li_class\"><".($span ? 'span' : 'a')." class=\"$a_class\" ".($href == null ? "" : "href='{$href}'").">$counter</".($span ? 'span' : 'a')."></li>";
+        return "<li class=\"$li_class\"><".($span ? 'span' : 'a')." class=\"$a_class\" ".($href == null ? '' : "href='{$href}'").">$counter</".($span ? 'span' : 'a').'></li>';
     }
 
     /**
      * Get Pagination Fraction.
      *
-     * @param int $page
-     * @param array $li_class
-     * @param string $a_class
+     * @param int         $page
+     * @param array       $li_class
+     * @param string      $a_class
      * @param string|null $href
-     * @param int    $counter
+     * @param int         $counter
      *
      * @return string
      *
