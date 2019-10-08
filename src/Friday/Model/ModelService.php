@@ -96,7 +96,7 @@ class ModelService
      * @param array  $cssClass
      * @param bool   $replaceClass
      *
-     * @return string|null
+     * @return bool|string|null
      */
     protected function getPaginationHtml($url = '?', $style = 0, $cssClass = null, $replaceClass = false)
     {
