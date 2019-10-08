@@ -180,7 +180,7 @@ class Pagination
      * @param array|null  $cssClass
      * @param bool   $replaceClass
      *
-     * @return string|null|bool
+     * @return array
      * @since 1.0.6
      */
     public function parseData($cssClass, $replaceClass)
