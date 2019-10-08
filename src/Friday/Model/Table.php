@@ -499,8 +499,7 @@ class Table
             } else {
                 $sql = "SELECT $field FROM `".$this->getTable().'` '.$this->where.$this->order.$this->limit;
             }
-        }
-        elseif ($type == 'insert') {
+        } elseif ($type == 'insert') {
             $values = [];
             if (is_array($field)) {
                 $keys = array_keys($field);
@@ -524,8 +523,7 @@ class Table
             $values = "($values)";
             $keys = ($keys !== '') ? "($keys)" : '';
             $sql = 'INSERT INTO `'.$this->getTable()."` $keys VALUES $values".$this->duplicateUpdate;
-        }
-        elseif ($type == 'update') {
+        } elseif ($type == 'update') {
             if (is_array($field)) {
                 foreach ($field as $key => $value) {
                     $values[] = " `$key` = ".$this->getQuotedString($value);
@@ -535,8 +533,7 @@ class Table
                 $values = trim($field);
             }
             $sql = 'UPDATE `'.$this->getTable()."` SET $values ".$this->where;
-        }
-        elseif ($type == 'delete') {
+        } elseif ($type == 'delete') {
             $sql = 'DELETE FROM `'.$this->getTable().'` '.$this->where;
         }
         $this->query = $sql;
@@ -599,7 +596,7 @@ class Table
     /**
      * Create sql query.
      *
-     * @param string      $value
+     * @param string $value
      *
      * @return string
      *
@@ -613,7 +610,7 @@ class Table
     /**
      * Get quoted string.
      *
-     * @param string      $value
+     * @param string $value
      *
      * @return string
      *
