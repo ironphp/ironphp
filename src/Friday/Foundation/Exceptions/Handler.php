@@ -227,10 +227,10 @@ class Handler implements HandlerInterface
         //return $output;
         if (method_exists($exception, 'getSeverity')) {
             $severityCode = $exception->getSeverity();
-			$severity = $this->getSeverity($severityCode);
+            $severity = $this->getSeverity($severityCode);
         }
 
-		if (env('APP_DEBUG') === true) {
+        if (env('APP_DEBUG') === true) {
             if (!isset($argv) || count($argv)) {
                 $output = '
 				<!DOCTYPE html>
@@ -475,7 +475,7 @@ class Handler implements HandlerInterface
         return ($level & $errors) > 0;
     }
 
-	/**
+    /**
      * Get severity name by severity code.
      *
      * @param int $severityCode
@@ -484,58 +484,58 @@ class Handler implements HandlerInterface
      */
     public function getSeverity($severityCode)
     {
-		switch ($severityCode) {
-			case E_ERROR: // 1 //
-				return 'E_ERROR';
-				break;
-			case E_WARNING: // 2 //
-				return 'E_WARNING';
-				break;
-			case E_PARSE: // 4 //
-				return 'E_PARSE';
-				break;
-			case E_NOTICE: // 8 //
-				return 'E_NOTICE';
-				break;
-			case E_CORE_ERROR: // 16 //
-				return 'E_CORE_ERROR';
-				break;
-			case E_CORE_WARNING: // 32 //
-				return 'E_CORE_WARNING';
-				break;
-			case E_COMPILE_ERROR: // 64 //
-				return 'E_COMPILE_ERROR';
-				break;
-			case E_COMPILE_WARNING: // 128 //
-				return 'E_COMPILE_WARNING';
-				break;
-			case E_USER_ERROR: // 256 //
-				return 'E_USER_ERROR';
-				break;
-			case E_USER_WARNING: // 512 //
-				return 'E_USER_WARNING';
-				break;
-			case E_USER_NOTICE: // 1024 //
-				return 'E_USER_NOTICE';
-				break;
-			case E_STRICT: // 2048 //
-				return 'E_STRICT';
-				break;
-			case E_RECOVERABLE_ERROR: // 4096 //
-				return 'E_RECOVERABLE_ERROR';
-				break;
-			case E_DEPRECATED: // 8192 //
-				return 'E_DEPRECATED';
-				break;
-			case E_USER_DEPRECATED: // 16384 //
-				return 'E_USER_DEPRECATED';
-				break;
-			case E_ALL: // 32767 //
-				return 'E_ALL';
-				break;
-			default:
-				return 'UNKOWN';
-				break;
-		}
-	}
+        switch ($severityCode) {
+            case E_ERROR: // 1 //
+                return 'E_ERROR';
+                break;
+            case E_WARNING: // 2 //
+                return 'E_WARNING';
+                break;
+            case E_PARSE: // 4 //
+                return 'E_PARSE';
+                break;
+            case E_NOTICE: // 8 //
+                return 'E_NOTICE';
+                break;
+            case E_CORE_ERROR: // 16 //
+                return 'E_CORE_ERROR';
+                break;
+            case E_CORE_WARNING: // 32 //
+                return 'E_CORE_WARNING';
+                break;
+            case E_COMPILE_ERROR: // 64 //
+                return 'E_COMPILE_ERROR';
+                break;
+            case E_COMPILE_WARNING: // 128 //
+                return 'E_COMPILE_WARNING';
+                break;
+            case E_USER_ERROR: // 256 //
+                return 'E_USER_ERROR';
+                break;
+            case E_USER_WARNING: // 512 //
+                return 'E_USER_WARNING';
+                break;
+            case E_USER_NOTICE: // 1024 //
+                return 'E_USER_NOTICE';
+                break;
+            case E_STRICT: // 2048 //
+                return 'E_STRICT';
+                break;
+            case E_RECOVERABLE_ERROR: // 4096 //
+                return 'E_RECOVERABLE_ERROR';
+                break;
+            case E_DEPRECATED: // 8192 //
+                return 'E_DEPRECATED';
+                break;
+            case E_USER_DEPRECATED: // 16384 //
+                return 'E_USER_DEPRECATED';
+                break;
+            case E_ALL: // 32767 //
+                return 'E_ALL';
+                break;
+            default:
+                return 'UNKOWN';
+                break;
+        }
+    }
 }
