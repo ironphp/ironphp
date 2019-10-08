@@ -304,7 +304,7 @@ class View
     /**
      * Renders Template for given data, template file.
      *
-     * @param string $templatePath
+     * @param string|null $templatePath
      * @param array  $data
      *
      * @throws \Exception
