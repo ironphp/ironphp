@@ -115,56 +115,35 @@ class Pagination
         if ($lastpage >= 1) {
             $pagination .= "<ul class=\"$ul_class\">\n";
             if ($style == 0) {
-                $pagination .= "\t<li class=\"$li_class[0]\"><span class=\"$a_class\">$page/$lastpage</span></li>\n";
+                $pagination .= $this->getListItem($li_class[0], $a_class, "{$url}page=$lastpage", "$page/$lastpage", true);
             }
 
             if ($lastpage < 2 + ($adjacents * 2)) { // $lastpage < 6
                 for ($counter = 1; $counter <= $lastpage; $counter++) {
-                    $pagination .= $this->getPaginationFraction();
-                    if ($counter == $page) {
-                        $pagination .= "\t".$this->getListItem($li_class[2], $a_class, null, $counter)."\n";
-                    } else {
-                        $pagination .= "\t".$this->getListItem($li_class[1], $a_class, "{$url}page=$counter", $counter)."\n";
-                    }
+                    $pagination .= $this->getPaginationFraction($page, $li_class, $a_class, "{$url}page=$counter", $counter);
                 }
             } elseif ($lastpage > 2 + ($adjacents * 2)) { // $lastpage > 6
                 if ($page < 0 + ($adjacents * 2)) { // $page < 4
                     for ($counter = 1; $counter < 2 + ($adjacents * 2); $counter++) {
-                        if ($counter == $page) {
-                            $pagination .= "\t".$this->getListItem($li_class[2], $a_class, null, $counter)."\n";
-                        } else {
-                            $pagination .= "\t".$this->getListItem($li_class[1], $a_class, "{$url}page=$counter", $counter)."\n";
-                        }
+                        $pagination .= $this->getPaginationFraction($page, $li_class, $a_class, "{$url}page=$counter", $counter);
                     }
                     $pagination .= "\t".$this->getListItem($li_class[1], $a_class, "{$url}page=$lastpage", '&raquo;')."\n";
                 } elseif ($lastpage - ($adjacents * 1) > $page && $page > ($adjacents * 1)) { // $lastpage - 2 > $page && $page > 3
                     $pagination .= $this->getListItem($li_class[1], $a_class, "{$url}page=1", '&laquo;')."\n";
                     for ($counter = $page - $adjacents; $counter <= $page + $adjacents; $counter++) {
-                        if ($counter == $page) {
-                            $pagination .= "\t".$this->getListItem($li_class[2], $a_class, null, $counter)."\n";
-                        } else {
-                            $pagination .= "\t".$this->getListItem($li_class[1], $a_class, "{$url}page=$counter", $counter)."\n";
-                        }
+                        $pagination .= $this->getPaginationFraction($page, $li_class, $a_class, "{$url}page=$counter", $counter);
                     }
                     $pagination .= "\t".$this->getListItem($li_class[1], $a_class, "{$url}page=$lastpage", '&raquo;')."\n";
                 } else {
                     $pagination .= "\t<li class=\"$li_class[1]\"><a class=\"$a_class\" href='{$url}page=1'>&laquo;</a></li>\n";
                     for ($counter = $lastpage - ($adjacents * 2); $counter <= $lastpage; $counter++) {
-                        if ($counter == $page) {
-                            $pagination .= "\t".$this->getListItem($li_class[2], $a_class, null, $counter)."\n";
-                        } else {
-                            $pagination .= "\t".$this->getListItem($li_class[1], $a_class, "{$url}page=$counter", $counter)."\n";
-                        }
+                        $pagination .= $this->getPaginationFraction($page, $li_class, $a_class, "{$url}page=$counter", $counter);
                     }
                 }
             } else {
                 if ($page <= 1 + ($adjacents * 2)) {
                     for ($counter = 1; $counter < 2 + ($adjacents * 2); $counter++) {
-                        if ($counter == $page) {
-                            $pagination .= "\t".$this->getListItem($li_class[2], $a_class, null, $counter)."\n";
-                        } else {
-                            $pagination .= "\t".$this->getListItem($li_class[1], $a_class, "{$url}page=$counter", $counter)."\n";
-                        }
+                        $pagination .= $this->getPaginationFraction($page, $li_class, $a_class, "{$url}page=$counter", $counter);
                     }
                     //$pagination.= "<li class=\"$li_class[1]\"><a class=\"$a_class\" href='{$url}page=$lastpage'>&raquo;</a></li>";
                 }
@@ -219,21 +198,22 @@ class Pagination
      * @param string $a_class
      * @param string|null $href
      * @param int    $counter
+     * @param bool    $span
      *
      * @return string
      *
      * @since 1.0.6
      */
-    public function getListItem($li_class, $a_class, $href, $counter)
+    public function getListItem($li_class, $a_class, $href, $counter, $span = false)
     {
-        return "<li class=\"$li_class\"><a class=\"$a_class\" ".($href == null ? "" : "href='{$href}'").">$counter</a></li>";
+        return "<li class=\"$li_class\"><".($span ? 'span' : 'a')." class=\"$a_class\" ".($href == null ? "" : "href='{$href}'").">$counter</".($span ? 'span' : 'a')."></li>";
     }
 
     /**
      * Get Pagination Fraction.
      *
      * @param int $page
-     * @param string $li_class
+     * @param array $li_class
      * @param string $a_class
      * @param string|null $href
      * @param int    $counter
@@ -245,9 +225,9 @@ class Pagination
     public function getPaginationFraction($page, $li_class, $a_class, $href, $counter)
     {
         if ($counter == $page) {
-            $pagination .= "\t".$this->getListItem($li_class[2], $a_class, null, $counter)."\n";
+            return "\t".$this->getListItem($li_class[2], $a_class, null, $counter)."\n";
         } else {
-            $pagination .= "\t".$this->getListItem($li_class[1], $a_class, "{$url}page=$counter", $counter)."\n";
+            return "\t".$this->getListItem($li_class[1], $a_class, $href, $counter)."\n";
         }
     }
 }
