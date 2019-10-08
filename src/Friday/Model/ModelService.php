@@ -157,7 +157,7 @@ class ModelService
     /**
      * Get APP_KEY value.
      *
-     * @return string
+     * @return string|false
      */
     protected function getAppKey()
     {
