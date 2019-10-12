@@ -280,6 +280,7 @@ class View
      * @param string|null $layout
      *
      * @return string
+     * @exception \Exception
      */
     public function renderView($viewPath, $data = [], $layout = null)
     {
@@ -288,6 +289,10 @@ class View
         require $viewPath;
         $viewData = ob_get_contents();
         ob_end_clean();
+        if($viewData === false) {
+            throw new Exception('Output buffering is not active.');
+            exit;
+        }
         foreach ($data as $key => $val) {
             if (is_array($val)) {
                 if ($key == 'meta') {

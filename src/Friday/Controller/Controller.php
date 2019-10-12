@@ -137,13 +137,10 @@ class Controller
      * @param array       $data
      * @param string|null $layout
      *
-     * @return string|bool
+     * @return string
      */
     public function renderView($viewPath = null, $data = [], $layout = null)
     {
-        if (self::$instance == null) {
-            return false;
-        }
         $_token = $this->app->session->getToken();
         $data['_token'] = $_token;
 
