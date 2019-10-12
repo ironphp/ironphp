@@ -46,8 +46,6 @@ class Router
      * @param string $uriRoute
      * @param string $httpMethod GET/POST
      *
-     * @throws Exception|OutOfRangeException
-     *
      * @return \Friday\Http\Route
      */
     public function route($allRoute, $uriRoute, $httpMethod)
@@ -80,8 +78,9 @@ class Router
             }
         }
         // need a 404 route
+        Route::view('*', '404');
         //$response->addHeader("404 Page Not Found")->send();
-        throw new OutOfRangeException('No route matched the given URI : '.$uriRoute);
+        //throw new OutOfRangeException('No route matched the given URI : '.$uriRoute);
     }
 
     /**

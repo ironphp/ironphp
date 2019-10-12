@@ -76,8 +76,6 @@ class FrontController implements FrontControllerInterface
      */
     public function request($parsedUrl)
     {
-        //if (empty($options)) {
-        //}
         /*
         else {
             if (isset($options["controller"])) {
