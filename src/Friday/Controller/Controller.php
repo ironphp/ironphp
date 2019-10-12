@@ -285,6 +285,7 @@ class Controller
             return false;
         }
         if (file_exists($file) && is_file($file) && is_readable($file)) {
+            //TODO replace mime_content_type with FileInfo
             $mime_type = mime_content_type($file);
             if (in_array($mime_type, ['image/gif', 'image/jpeg', 'image/png'])) {
                 $exif_type = exif_imagetype($file);
