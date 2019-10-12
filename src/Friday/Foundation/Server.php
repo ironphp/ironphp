@@ -106,7 +106,7 @@ class Server extends Application
             $data = $action['view'][1];
             $viewPath = $this->findView($view);
             $output = $appController->renderView($viewPath, $data);
-            if($output === false) {
+            if ($output === false) {
                 throw new Exception('Can not render view.');
                 exit;
             }

@@ -289,7 +289,7 @@ class View
         require $viewPath;
         $viewData = ob_get_contents();
         ob_end_clean();
-        if($viewData === false) {
+        if ($viewData === false) {
             throw new Exception('Output buffering is not active.');
             exit;
         }
