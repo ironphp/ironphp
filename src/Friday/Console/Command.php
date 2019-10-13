@@ -19,8 +19,9 @@
 namespace Friday\Console;
 
 use Friday\Foundation\Application;
+use Friday\Contracts\Console\Command as CommandInterface;
 
-class Command
+class Command implements CommandInterface
 {
     /**
      * Argv Inputs from console parameters.

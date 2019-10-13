@@ -1,0 +1,38 @@
+{
+    "name": "friday/contracts",
+    "description": "The IronPHP Friday Contracts package.",
+    "license": "MIT",
+    "type": "library",
+    "homepage": "https://github.com/ironphp/ironphp",
+    "support": {
+        "email": "gaurangkumarp@gmail.com",
+        "forum": "https://www.facebook.com/IronPHP-Framwork-325690624644002",
+        "issues": "https://github.com/ironphp/ironphp/issues",
+        "source": "https://github.com/ironphp/ironphp"
+    },
+    "authors": [
+        {
+            "name": "GaurangKumar Parmar",
+            "email": "gaurangkumarp@gmail.com",
+            "homepage": "https://twitter.com/gaurangkumarp",
+            "role": "Founder and Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.5",
+    },
+    "autoload": {
+        "psr-4": {
+            "Friday\\Contracts\\": ""
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev"
+}
