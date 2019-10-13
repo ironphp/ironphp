@@ -10,13 +10,13 @@
  * @copyright     Copyright (c) IronPHP
  *
  * @link		  https://github.com/IronPHP/IronPHP
- * @since         1.0.0
+ * @since         1.0.6
  *
  * @license       MIT License (https://opensource.org/licenses/mit-license.php)
  * @auther        GaurangKumar Parmar <gaurangkumarp@gmail.com>
  */
 
-namespace Friday\Foundation;
+namespace Friday\Contracts\Foundation;
 
 use Dotenv\Dotenv;
 use Exception;
@@ -24,13 +24,12 @@ use Friday\Foundation\Exceptions\Handler;
 use Friday\Helper\Session;
 use Friday\Http\FrontController;
 use Friday\Http\Route;
-use Friday\Contracts\Console\Application as ApplicationInterface;
 
 /**
  * Runs an application invoking all the registered application.
  */
 
-class Application implements ApplicationInterface
+interface Application
 {
     /**
      * The IronPHP framework version.

@@ -16,7 +16,7 @@
  * @auther        GaurangKumar Parmar <gaurangkumarp@gmail.com>
  */
 
-namespace Friday\Contracts\Console;
+namespace Friday\Contracts\Controller;
 
 use Friday\Model\ModelService;
 use Friday\View\View;

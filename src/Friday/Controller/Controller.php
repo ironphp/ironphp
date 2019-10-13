@@ -20,7 +20,7 @@ namespace Friday\Controller;
 
 use Friday\Model\ModelService;
 use Friday\View\View;
-use Friday\Contracts\Console\Controller as ControllerInterface;
+use Friday\Contracts\Controller\Controller as ControllerInterface;
 
 class Controller implements ControllerInterface
 {

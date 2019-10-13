@@ -43,7 +43,6 @@
         "designsecurity/progpilot": "^0.6",
         "kahlan/kahlan": "^4.6",
         "phing/phing": "^2.16",
-        "phpspec/phpspec": "^5.1",
         "phpstan/phpstan": "^0.11",
         "povils/phpmnd": "^2.1",
         "vimeo/psalm": "^3.5"
