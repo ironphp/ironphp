@@ -20,7 +20,7 @@ namespace Friday\Http;
 
 use Exception;
 
-class Router
+class Router implements RouterInterface
 {
     /**
      * Closure arguments of matched route.
