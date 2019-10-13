@@ -19,7 +19,6 @@
 namespace Friday\Http;
 
 use Exception;
-use OutOfRangeException;
 
 class Router
 {
@@ -46,13 +45,15 @@ class Router
      * @param string $uriRoute
      * @param string $httpMethod GET/POST
      *
-     * @return \Friday\Http\Route
+     * @return \Friday\Http\Route|bool
+     * @exception \Exception
      */
     public function route($allRoute, $uriRoute, $httpMethod)
     {
         if (is_null($allRoute) || (is_array($allRoute) && !count($allRoute))) {
             throw new Exception('No routes. Define them at /app/Route/web.php');
         }
+
         $route = trim($uriRoute, '/ ');
         $array = $route === '' ? [] : explode('/', $route);
         $size = count($array);
@@ -77,8 +78,7 @@ class Router
                 return $route;
             }
         }
-        // need a 404 route
-        Route::view('*', '404');
+        return false;
         //$response->addHeader("404 Page Not Found")->send();
         //throw new OutOfRangeException('No route matched the given URI : '.$uriRoute);
     }
