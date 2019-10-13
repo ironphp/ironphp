@@ -20,8 +20,9 @@ namespace Friday\Controller;
 
 use Friday\Model\ModelService;
 use Friday\View\View;
+use Friday\Contracts\Console\Controller as ControllerInterface;
 
-class Controller
+class Controller implements ControllerInterface
 {
     /**
      * The name of this controller. Controller names are plural, named after the model they manipulate.
