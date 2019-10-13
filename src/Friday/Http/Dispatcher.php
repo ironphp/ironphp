@@ -22,7 +22,7 @@ use Closure;
 use Exception;
 use ReflectionFunction;
 
-class Dispatcher
+class Dispatcher implements DispatcherInterface
 {
     /**
      * Create new Dispatcher instance.
@@ -45,7 +45,7 @@ class Dispatcher
     public function dispatch($route, $request)
     {
         $request->setParam('Closure', $route[4]);
-var_dump($route);exit;
+
         if (isset($route[3]) && is_string($route[3])) {
             $view = $route[3];
             $data = $route[4];
