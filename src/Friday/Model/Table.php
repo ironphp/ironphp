@@ -600,7 +600,7 @@ class Table
      *
      * @return string
      *
-     * @since 1.0.6
+     * @since 1.0.5
      */
     public function sqlValue($value)
     {
@@ -614,7 +614,7 @@ class Table
      *
      * @return string
      *
-     * @since 1.0.6
+     * @since 1.0.5
      */
     public function getQuotedString($value)
     {
