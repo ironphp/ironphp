@@ -16,7 +16,6 @@
  * @auther        GaurangKumar Parmar <gaurangkumarp@gmail.com>
  */
 
-
 namespace Friday\Contracts\Console;
 
 interface Colors

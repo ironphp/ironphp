@@ -18,9 +18,9 @@
 
 namespace Friday\Controller;
 
+use Friday\Contracts\Controller\Controller as ControllerInterface;
 use Friday\Model\ModelService;
 use Friday\View\View;
-use Friday\Contracts\Controller\Controller as ControllerInterface;
 
 class Controller implements ControllerInterface
 {

@@ -18,8 +18,8 @@
 
 namespace Friday\Console;
 
-use Friday\Foundation\Application;
 use Friday\Contracts\Console\Command as CommandInterface;
+use Friday\Foundation\Application;
 
 class Command implements CommandInterface
 {
