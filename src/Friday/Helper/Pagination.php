@@ -162,7 +162,7 @@ class Pagination
      *
      * @return array
      *
-     * @since 1.0.6
+     * @since 1.0.5
      */
     public function parseData($cssClass, $replaceClass)
     {
@@ -202,7 +202,7 @@ class Pagination
      *
      * @return string
      *
-     * @since 1.0.6
+     * @since 1.0.5
      */
     public function getListItem($li_class, $a_class, $href, $counter, $span = false)
     {
@@ -220,7 +220,7 @@ class Pagination
      *
      * @return string
      *
-     * @since 1.0.6
+     * @since 1.0.5
      */
     public function getPaginationFraction($page, $li_class, $a_class, $href, $counter)
     {
