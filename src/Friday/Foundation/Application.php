@@ -20,16 +20,15 @@ namespace Friday\Foundation;
 
 use Dotenv\Dotenv;
 use Exception;
+use Friday\Contracts\Console\Application as ApplicationInterface;
 use Friday\Foundation\Exceptions\Handler;
 use Friday\Helper\Session;
 use Friday\Http\FrontController;
 use Friday\Http\Route;
-use Friday\Contracts\Console\Application as ApplicationInterface;
 
 /**
  * Runs an application invoking all the registered application.
  */
-
 class Application implements ApplicationInterface
 {
     /**

@@ -18,17 +18,12 @@
 
 namespace Friday\Contracts\Foundation;
 
-use Dotenv\Dotenv;
 use Exception;
-use Friday\Foundation\Exceptions\Handler;
-use Friday\Helper\Session;
-use Friday\Http\FrontController;
 use Friday\Http\Route;
 
 /**
  * Runs an application invoking all the registered application.
  */
-
 interface Application
 {
     /**

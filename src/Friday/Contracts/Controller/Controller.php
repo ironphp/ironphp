@@ -18,7 +18,6 @@
 
 namespace Friday\Contracts\Controller;
 
-use Friday\Model\ModelService;
 use Friday\View\View;
 
 interface Controller
