@@ -34,16 +34,16 @@
         "vlucas/phpdotenv": "^3.6"
     },
     "require-dev": {
-        "phpunit/phpunit": "^7.5",
-        "datasift/storyplayer": "@dev",
-        "phpspec/phpspec": "^5.1",
-        "atoum/atoum": "^3.3",
+        "atoum/atoum": "^3.0@dev",
         "behat/behat": "^3.5",
         "codeception/codeception": "4.0.x-dev",
+        "datasift/storyplayer": "@dev",
         "designsecurity/progpilot": "^0.6",
         "kahlan/kahlan": "^4.6",
         "phing/phing": "^2.16",
+        "phpspec/phpspec": "^5.1",
         "phpstan/phpstan": "^0.11",
+        "phpunit/phpunit": "^7.5",
         "povils/phpmnd": "^2.1",
         "vimeo/psalm": "^3.5"
     },
