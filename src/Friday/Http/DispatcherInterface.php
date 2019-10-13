@@ -18,9 +18,7 @@
 
 namespace Friday\Http;
 
-use Closure;
 use Exception;
-use ReflectionFunction;
 
 interface DispatcherInterface
 {

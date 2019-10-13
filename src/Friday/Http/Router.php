@@ -78,6 +78,7 @@ class Router implements RouterInterface
                 return $route;
             }
         }
+
         return false;
         //$response->addHeader("404 Page Not Found")->send();
         //throw new OutOfRangeException('No route matched the given URI : '.$uriRoute);
