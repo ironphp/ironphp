@@ -40,7 +40,6 @@
         "atoum/atoum": "^3.3",	
         "behat/behat": "^3.5",
         "codeception/codeception": "4.0.x-dev",
-        "datasift/storyplayer": "@dev",
         "designsecurity/progpilot": "^0.6",
         "kahlan/kahlan": "^4.6",
         "phing/phing": "^2.16",
