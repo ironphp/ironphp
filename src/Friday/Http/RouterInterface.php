@@ -20,7 +20,7 @@ namespace Friday\Http;
 
 use Exception;
 
-interface RouteInterface
+interface RouterInterface
 {
     /**
      * Create a new Router instance.
