@@ -106,8 +106,6 @@ class Controller
      * Returns the controller name.
      *
      * @return string
-     *
-     * @since 0.0.0
      */
     public function getName()
     {
@@ -120,8 +118,6 @@ class Controller
      * @param string $name Controller name.
      *
      * @return $this
-     *
-     * @since 0.0.1
      */
     public function setName($name)
     {
