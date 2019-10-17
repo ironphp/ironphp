@@ -20,7 +20,7 @@ namespace Friday\Foundation;
 
 use Dotenv\Dotenv;
 use Exception;
-use Friday\Contracts\Console\Application as ApplicationInterface;
+use Friday\Contracts\Foundation\Application as ApplicationInterface;
 use Friday\Foundation\Exceptions\Handler;
 use Friday\Helper\Session;
 use Friday\Http\FrontController;
@@ -31,13 +31,6 @@ use Friday\Http\Route;
  */
 class Application implements ApplicationInterface
 {
-    /**
-     * The IronPHP framework version.
-     *
-     * @var string
-     */
-    const VERSION = '1.0.6-alpha1';
-
     /**
      * The base path for the IronPHP installation.
      *
@@ -476,7 +469,7 @@ class Application implements ApplicationInterface
      *
      * @return void
      */
-    protected function ensureFileIsReadable($file)
+    public function ensureFileIsReadable($file)
     {
         if (!is_readable($file) || !is_file($file)) {
             throw new Exception(sprintf('Unable to read the environment file at %s.', $$file));

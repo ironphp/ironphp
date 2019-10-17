@@ -187,7 +187,7 @@ interface Application
      *
      * @return void
      */
-    protected function ensureFileIsReadable($file);
+    public function ensureFileIsReadable($file);
 
     /**
      * Find a Command.

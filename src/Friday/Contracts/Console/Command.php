@@ -16,7 +16,7 @@
  * @auther        GaurangKumar Parmar <gaurangkumarp@gmail.com>
  */
 
-namespace Friday\Console;
+namespace Friday\Contracts\Console;
 
 use Friday\Foundation\Application;
 
