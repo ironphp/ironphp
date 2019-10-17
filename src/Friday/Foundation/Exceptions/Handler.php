@@ -231,7 +231,7 @@ class Handler implements HandlerInterface
         }
 
         if (env('APP_DEBUG') === true) {
-            if ( $_SERVER['SESSIONNAME'] != 'Console' ) {
+            if ($_SERVER['SESSIONNAME'] != 'Console') {
                 $output = '
 				<!DOCTYPE html>
 				<html lang="en">
