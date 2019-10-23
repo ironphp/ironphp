@@ -111,41 +111,6 @@ interface Controller
     public function handleController($controller, $method);
 
     /**
-     * Get value from route->args.
-     *
-     * @return bool|array
-     */
-    protected function getParam();
-
-    /**
-     * Download a file.
-     *
-     * @param string $file
-     * @param string $name
-     *
-     * @return bool
-     */
-    protected function downloadFile($file, $name = null);
-
-    /**
-     * Get Request instance.
-     *
-     * @return \Friday\Http\Request|bool
-     */
-    protected function getRequest();
-
-    /**
-     * Display Theme.
-     *
-     * @param string      $theme Theme to use for rendering
-     * @param array       $data  Arguments to use
-     * @param string|null $file  File to use for rendering
-     *
-     * @return void|bool
-     */
-    protected function theme($theme, $data = [], $file = null);
-
-    /**
      * Renders theme for given data.
      *
      * @param array $themeInfo
