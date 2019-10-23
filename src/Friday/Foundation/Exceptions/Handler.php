@@ -231,7 +231,7 @@ class Handler implements HandlerInterface
         }
 
         if (env('APP_DEBUG') === true) {
-            if ($_SERVER['SESSIONNAME'] != 'Console') {
+            if ($this->isCommandLineInterface() == false) {
                 $output = '
 				<!DOCTYPE html>
 				<html lang="en">
@@ -540,4 +540,9 @@ class Handler implements HandlerInterface
                 break;
         }
     }
+
+	function isCommandLineInterface()
+	{
+		return (php_sapi_name() === 'cli');
+	}
 }
