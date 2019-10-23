@@ -541,8 +541,8 @@ class Handler implements HandlerInterface
         }
     }
 
-	function isCommandLineInterface()
-	{
-		return (php_sapi_name() === 'cli');
-	}
+    public function isCommandLineInterface()
+    {
+        return php_sapi_name() === 'cli';
+    }
 }
