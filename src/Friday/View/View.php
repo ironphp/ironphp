@@ -19,8 +19,9 @@
 namespace Friday\View;
 
 use Exception;
+use Friday\Contracts\View\View as ViewInterface;
 
-class View
+class View implements ViewInterface
 {
     /**
      * Instance of the Friday Application.
