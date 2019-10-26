@@ -1,0 +1,14 @@
+{
+  "name": "girlhdwall",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/ironphp/app",
+  "author": "Gaurang Kumar <gaurangkumarp@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.8.1",
+    "bootstrap": "4.3.1",
+    "jquery": "^3.3.1"
+  }
+}
