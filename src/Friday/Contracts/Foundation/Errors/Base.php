@@ -10,45 +10,26 @@
  * @copyright     Copyright (c) IronPHP (https://github.com/IronPHP/IronPHP)
  *
  * @link
- * @since         1.0.1
+ * @since         1.0.6
  *
  * @license       MIT License (https://opensource.org/licenses/mit-license.php)
  * @auther        GaurangKumar Parmar <gaurangkumarp@gmail.com>
  */
 
-namespace Friday\Foundation\Errors;
+namespace Friday\Contracts\Foundation\Errors;
 
 /**
  * Error wrapper that mimics Exception API. For internal usage.
  */
-class Base
+interface Base
 {
-    private $message;
-    private $trace;
+    public function __construct($message, $trace = []);
 
-    public function __construct($message, $trace = [])
-    {
-        $this->message = $message;
-        $this->trace = $trace;
-    }
+    public function getMessage();
 
-    public function getMessage()
-    {
-        return $this->message;
-    }
+    public function getFile();
 
-    public function getFile()
-    {
-        return '';
-    }
+    public function getLine();
 
-    public function getLine()
-    {
-        return 0;
-    }
-
-    public function getTrace()
-    {
-        return $this->trace;
-    }
+    public function getTrace();
 }

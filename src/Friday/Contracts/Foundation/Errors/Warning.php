@@ -10,14 +10,14 @@
  * @copyright     Copyright (c) IronPHP (https://github.com/IronPHP/IronPHP)
  *
  * @link
- * @since         1.0.1
+ * @since         1.0.6
  *
  * @license       MIT License (https://opensource.org/licenses/mit-license.php)
  * @auther        GaurangKumar Parmar <gaurangkumarp@gmail.com>
  */
 
-namespace Friday\Foundation\Errors;
+namespace Friday\Contracts\Foundation\Errors;
 
-class Warning extends Base
+interface Warning extends Base
 {
 }
