@@ -20,7 +20,7 @@ namespace Friday\Contracts\Log;
 
 use Psr\Log\LoggerInterface;
 
-interface LoggerInterface
+interface Logger
 {
     /**
      * Create a new log writer instance.
@@ -29,7 +29,7 @@ interface LoggerInterface
      *
      * @return void
      */
-    public function __construct(LoggerInterface $logger = null);
+    public function __construct(self $logger = null);
 
     /**
      * Log an alert message to the logs.
