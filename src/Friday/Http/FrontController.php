@@ -19,6 +19,7 @@
 namespace Friday\Http;
 
 use Closure;
+use Friday\Contracts\Console\FrontControllerInterface;
 
 /**
  * Runs a Front Controller.

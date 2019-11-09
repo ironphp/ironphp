@@ -21,6 +21,7 @@ namespace Friday\Http;
 use Closure;
 use Exception;
 use ReflectionFunction;
+use Friday\Contracts\Console\DispatcherInterface;
 
 class Dispatcher implements DispatcherInterface
 {
