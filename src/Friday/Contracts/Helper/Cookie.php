@@ -42,60 +42,6 @@ interface Cookie
     public function _invalid();
 
     /**
-     * _ip.
-     *
-     * Returns the client's IP address, either directly, or whichever was
-     * forwarded by the detected load balancer.
-     *
-     * @return string
-     */
-    protected function _ip();
-
-    /**
-     * _setup.
-     *
-     * @return void
-     */
-    protected function _setup();
-
-    /**
-     * _sign.
-     *
-     * Generates a signature by appending the <stamp> method response with
-     * the a secret. This signature is hashed before being returned.
-     *
-     * @param string $sid
-     *
-     * @return string
-     */
-    protected function _sign($sid);
-
-    /**
-     * _stamp.
-     *
-     * Returns a stamp to aid in securing a server, by concatenating the
-     * user agent and IP of the client.
-     *
-     * @note    decoupled from <_sign> to allow for customizing the stamp
-     *
-     * @return string
-     */
-    protected function _stamp();
-
-    /**
-     * _valid.
-     *
-     * Checks whether the session is valid (eg. hasn't been tampered with)
-     * by regenerating the signature and comparing it to what was passed.
-     *
-     * @param string $sid
-     * @param string $signature
-     *
-     * @return bool
-     */
-    protected function _valid($sid, $signature);
-
-    /**
      * destroy.
      *
      * @return void
