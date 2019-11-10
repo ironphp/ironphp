@@ -134,17 +134,6 @@ interface Logger
     public function write($level, $message, array $context = []);
 
     /**
-     * Write a message to the log.
-     *
-     * @param string $level
-     * @param string $message
-     * @param array  $context
-     *
-     * @return void
-     */
-    protected function writeLog($level, $message, $context);
-
-    /**
      * Get the underlying logger implementation.
      *
      * @return \Psr\Log\LoggerInterface|null
