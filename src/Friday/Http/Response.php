@@ -19,7 +19,7 @@
 namespace Friday\Http;
 
 use Exception;
-use Friday\Contracts\Console\ResponseInterface;
+use Friday\Contracts\Http\ResponseInterface;
 
 /**
  * Send Responce to client.

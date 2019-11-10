@@ -20,7 +20,7 @@ namespace Friday\Http;
 
 use Closure;
 use InvalidArgumentException;
-use Friday\Contracts\Console\RequestInterface;
+use Friday\Contracts\Http\RequestInterface;
 
 /**
  * Get HTTP Server Request.

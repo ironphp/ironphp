@@ -19,7 +19,7 @@
 namespace Friday\Http;
 
 use Closure;
-use Friday\Contracts\Console\RouteInterface;
+use Friday\Contracts\Http\RouteInterface;
 
 class Route implements RouteInterface
 {

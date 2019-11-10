@@ -19,7 +19,7 @@
 namespace Friday\Http;
 
 use Exception;
-use Friday\Contracts\Console\RouterInterface;
+use Friday\Contracts\Http\RouterInterface;
 
 class Router implements RouterInterface
 {

@@ -16,7 +16,7 @@
  * @auther        GaurangKumar Parmar <gaurangkumarp@gmail.com>
  */
 
-namespace Friday\Http;
+namespace Friday\Contracts\Http;
 
 use Closure;
 
