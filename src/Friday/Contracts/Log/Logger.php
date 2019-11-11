@@ -18,8 +18,6 @@
 
 namespace Friday\Contracts\Log;
 
-use Psr\Log\LoggerInterface;
-
 interface Logger
 {
     /**

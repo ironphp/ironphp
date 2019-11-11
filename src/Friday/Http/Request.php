@@ -19,8 +19,8 @@
 namespace Friday\Http;
 
 use Closure;
-use InvalidArgumentException;
 use Friday\Contracts\Http\RequestInterface;
+use InvalidArgumentException;
 
 /**
  * Get HTTP Server Request.
