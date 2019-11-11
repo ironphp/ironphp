@@ -20,8 +20,8 @@ namespace Friday\Http;
 
 use Closure;
 use Exception;
-use ReflectionFunction;
 use Friday\Contracts\Http\DispatcherInterface;
+use ReflectionFunction;
 
 class Dispatcher implements DispatcherInterface
 {
