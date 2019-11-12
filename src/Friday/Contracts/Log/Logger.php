@@ -18,12 +18,14 @@
 
 namespace Friday\Contracts\Log;
 
-interface Logger
+use Psr\Log\LoggerInterface;
+
+interface Logger extends LoggerInterface
 {
     /**
      * Create a new log writer instance.
      *
-     * @param \Psr\Log\LoggerInterface $logger
+     * @param \Friday\Contracts\Log\Logger|null $logger
      *
      * @return void
      */
