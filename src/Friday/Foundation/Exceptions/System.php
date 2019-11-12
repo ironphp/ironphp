@@ -31,8 +31,8 @@ class System
     }
 
     /**
-     * @param callable   $handler
-     * @param int $types
+     * @param callable $handler
+     * @param int      $types
      *
      * @return callable|null
      */
@@ -130,7 +130,7 @@ class System
     /**
      * @param int $httpCode
      *
-	 * @returns bool|int
+     * @returns bool|int
      */
     public function setHttpResponseCode($httpCode)
     {
