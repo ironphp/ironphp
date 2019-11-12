@@ -18,6 +18,8 @@
 
 namespace Friday\Foundation\Exceptions;
 
+use Friday\Contracts\Foundation\Exceptions\HandlerInterface;
+
 use ErrorException;
 use Friday\Foundation\Errors\Error;
 use Friday\Foundation\Errors\Fatal;
