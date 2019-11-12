@@ -18,12 +18,17 @@
 
 namespace Friday\Contracts\Foundation\Exceptions;
 
-interface HandlerInterface
-{
-    const EXCEPTION_HANDLER = 'handleException';
-    const ERROR_HANDLER = 'handleError';
-    const SHUTDOWN_HANDLER = 'handleShutdown';
+use ErrorException;
+use Friday\Foundation\Errors\Error;
+use Friday\Foundation\Errors\Fatal;
+use Friday\Foundation\Errors\Notice;
+use Friday\Foundation\Errors\Warning;
+use Monolog\Handler\FirePHPHandler;
+use Monolog\Handler\StreamHandler;
+use Monolog\Logger;
 
+interface Handler
+{
     /**
      * Create a new exception handler instance.
      *
@@ -81,12 +86,12 @@ interface HandlerInterface
      *
      * This method MUST be compatible with set_error_handler.
      *
-     * @param int         $level
-     * @param string      $message
-     * @param string|null $file
-     * @param int|null    $line
+     * @param int    $level
+     * @param string $message
+     * @param string $file
+     * @param int    $line
      *
-     * @throws \ErrorException
+     * @throws ErrorException
      *
      * @return bool
      */
@@ -94,6 +99,46 @@ interface HandlerInterface
 
     /**
      * Special case to deal with Fatal errors and the like.
+     *
+     * @return void
      */
     public function handleShutdown();
+
+    /**
+     * Builds Airbrake notice from exception.
+     *
+     * @param \Throwable|\Exception $exc Exception or class that implements similar interface.
+     *
+     * @return array Airbrake notice
+     */
+    public function buildNotice($exc);
+
+    /**
+     * Determine if an error level is fatal (halts execution).
+     *
+     * @param int $level
+     *
+     * @return bool
+     */
+    public static function isLevelFatal($level);
+
+    /**
+     * Get severity name by severity code.
+     *
+     * @param int $severityCode
+     *
+     * @return string
+     *
+     * @since 1.0.6
+     */
+    public function getSeverity($severityCode);
+
+    /**
+     * check if interface is CLI or not.
+     *
+     * @return bool
+     *
+     * @since 1.0.6
+     */
+    public function isCommandLineInterface();
 }

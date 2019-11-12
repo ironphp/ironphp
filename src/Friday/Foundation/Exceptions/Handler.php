@@ -18,7 +18,7 @@
 
 namespace Friday\Foundation\Exceptions;
 
-use Friday\Contracts\Foundation\Exceptions\HandlerInterface;
+use Friday\Contracts\Foundation\Exceptions\Handler as HandlerInterface;
 
 use ErrorException;
 use Friday\Foundation\Errors\Error;
@@ -543,6 +543,13 @@ class Handler implements HandlerInterface
         }
     }
 
+    /**
+     * check if interface is CLI or not.
+     *
+     * @return bool
+     *
+     * @since 1.0.6
+     */
     public function isCommandLineInterface()
     {
         return php_sapi_name() === 'cli';
