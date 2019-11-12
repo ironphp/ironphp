@@ -18,7 +18,9 @@
 
 namespace Friday\Helper;
 
-class Session
+use Friday\Contracts\Helper\Session as SessionInterface;
+
+class Session implements SessionInterface
 {
     /**
      * Create a new Session instance.
