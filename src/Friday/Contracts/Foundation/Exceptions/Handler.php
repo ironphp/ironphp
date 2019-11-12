@@ -19,6 +19,7 @@
 namespace Friday\Contracts\Foundation\Exceptions;
 
 use ErrorException;
+use Friday\Foundation\Exceptions\System;
 use Friday\Foundation\Errors\Error;
 use Friday\Foundation\Errors\Fatal;
 use Friday\Foundation\Errors\Notice;
@@ -29,7 +30,11 @@ use Monolog\Logger;
 
 interface Handler
 {
-    /**
+	const EXCEPTION_HANDLER = 'handleException';
+	const ERROR_HANDLER = 'handleError';
+	const SHUTDOWN_HANDLER = 'handleShutdown';
+
+	/**
      * Create a new exception handler instance.
      *
      * @param System|null $system
