@@ -32,16 +32,13 @@ class System
 
     /**
      * @param callable   $handler
-     * @param int|string $types
+     * @param int $types
      *
      * @return callable|null
      */
-    public function setErrorHandler(callable $handler, $types = 'use-php-defaults')
+    public function setErrorHandler(callable $handler, $types = 32767)
     {
-        // Workaround for PHP 5.5
-        if ($types === 'use-php-defaults') {
-            $types = E_ALL | E_STRICT;
-        }
+        // Workaround for PHP 5.5 / $types = E_ALL | E_STRICT
         //set_error_handler([$this, 'onError'], error_reporting());
         return set_error_handler($handler, $types);
     }
@@ -133,7 +130,7 @@ class System
     /**
      * @param int $httpCode
      *
-     * @return int
+	 * @returns bool|int
      */
     public function setHttpResponseCode($httpCode)
     {
