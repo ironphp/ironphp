@@ -18,9 +18,8 @@
 
 namespace Friday\Foundation\Exceptions;
 
-use Friday\Contracts\Foundation\Exceptions\Handler as HandlerInterface;
-
 use ErrorException;
+use Friday\Contracts\Foundation\Exceptions\Handler as HandlerInterface;
 use Friday\Foundation\Errors\Error;
 use Friday\Foundation\Errors\Fatal;
 use Friday\Foundation\Errors\Notice;
