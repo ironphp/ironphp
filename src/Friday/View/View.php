@@ -407,7 +407,7 @@ class View implements ViewInterface
         $pos = strpos($body, '</html>');
         $body = substr($body, 0, $pos);
         */
-        $tagArray = $this->htmlToArray($themeInfo['themeFilePath'], true, true);
+        $tagArray = (array) $this->htmlToArray($themeInfo['themeFilePath'], true, true);
         $html = $this->arrayToHtml($tagArray);
 
         if (!is_array($data) && $data !== null) {
@@ -506,9 +506,11 @@ class View implements ViewInterface
     public function arrayToHtml($tagArray)
     {
         $html = '';
+/*
         if (!is_array($tagArray) && !is_object($tagArray)) {
             return false;
         }
+*/
 
         $children = $attr = [];
         $key = $key1 = $key2 = $key3 = null;
