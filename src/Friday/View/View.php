@@ -506,11 +506,11 @@ class View implements ViewInterface
     public function arrayToHtml($tagArray)
     {
         $html = '';
-/*
-        if (!is_array($tagArray) && !is_object($tagArray)) {
-            return false;
-        }
-*/
+        /*
+                if (!is_array($tagArray) && !is_object($tagArray)) {
+                    return false;
+                }
+        */
 
         $children = $attr = [];
         $key = $key1 = $key2 = $key3 = null;
@@ -588,9 +588,9 @@ class View implements ViewInterface
             if ($tag == '#document') {
                 $tag = '!doctype';
             }
-			if($tag !== null) {
-				$html = $this->createTag($tag, $attr, implode('', $children));
-			}
+            if ($tag !== null) {
+                $html = $this->createTag($tag, $attr, implode('', $children));
+            }
         }
 
         return $html;
@@ -616,7 +616,7 @@ class View implements ViewInterface
      *
      * @return array
      */
-    public function childrenIterate($tagArray, $name = "")
+    public function childrenIterate($tagArray, $name = '')
     {
         $tag = $name;
         $iterator = $this->getChildrenIterator($tagArray);
