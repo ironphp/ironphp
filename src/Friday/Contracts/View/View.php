@@ -158,12 +158,12 @@ interface View
     /**
      * Iterate children of RecursiveIterator.
      *
-     * @param string $name
      * @param array  $tagArray
+     * @param string $name
      *
      * @return array
      */
-    public function childrenIterate($tagArray, $name = null);
+    public function childrenIterate($tagArray, $name = "");
 
     /**
      * Renders HTML element.
