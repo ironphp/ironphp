@@ -586,7 +586,9 @@ class View implements ViewInterface
             if ($tag == '#document') {
                 $tag = '!doctype';
             }
-            $html = $this->createTag($tag, $attr, $children);
+			if($tag !== null) {
+				$html = $this->createTag($tag, $attr, implode('', $children));
+			}
         }
 
         return $html;
