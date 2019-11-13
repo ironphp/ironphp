@@ -163,7 +163,7 @@ interface View
      *
      * @return array
      */
-    public function childrenIterate($tagArray, $name = "");
+    public function childrenIterate($tagArray, $name = '');
 
     /**
      * Renders HTML element.
