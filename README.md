@@ -24,6 +24,9 @@
     <a href="https://opensource.org/licenses/MIT" target="_blank">
         <img alt="Software License" src="https://poser.pugx.org/ironphp/ironphp/license.svg">
     </a>
+    <a href="http://hits.dwyl.io/ironphp/ironphp/ironphp" target="_blank">
+        <img alt="HitCount" src="http://hits.dwyl.io/ironphp/ironphp/ironphp.svg">
+    </a>
 </p>
 
 ## About IronPHP
