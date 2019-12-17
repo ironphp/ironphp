@@ -563,7 +563,7 @@ class Application implements ApplicationInterface
      */
     public function findTheme($theme, $file = null)
     {
-        $extMain = ['html', 'htm'];
+		$extMain = ['html', 'htm'];
         if ($file) {
             $array = explode('.', $file);
             $ext = array_pop($array);
@@ -578,7 +578,7 @@ class Application implements ApplicationInterface
 
         $fileName = ltrim($file, '/\\');
         $allowedExt = ['html', 'htm', 'css', 'js', 'jpg', 'png', 'svg', 'eot', 'ttf', 'woff', 'woof2', 'scss', 'less'];
-        $dir = APP.DS.'Template'.DS.$theme.DS;
+        $dir = APP.'Template'.DS.$theme.DS;
 
         if (!file_exists($dir) || is_file($dir)) {
             throw new Exception($dir.' Directory is missing.');

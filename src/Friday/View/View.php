@@ -691,6 +691,26 @@ class View implements ViewInterface
      */
     public function putData($templateData, $data = [])
     {
+		$start = 0;
+		while(true) {
+			$findStart = strpos($templateData, "@include(", $start);
+			if ($findStart !== false) {
+				$findStart = $findStart + 9;
+				$findEnd = strpos($templateData, ")", $findStart);
+				if ($findEnd !== false) {
+					$substr = substr($templateData, $findStart, ($findEnd - $findStart));
+					$file = $this->getThemePath()."layout\\$substr.html";
+					if(file_exists($file) && is_file($file)) {
+						$templateData = str_replace("@include($substr)", file_get_contents($file), $templateData);
+					} else {
+						$templateData = str_replace("@include($substr)", "", $templateData);
+					}
+				}
+				$start = $findEnd;
+			} else {
+				break;
+			}
+		}
         foreach ($data as $key => $val) {
             if (is_array($val)) {
                 $findStart = strpos($templateData, '{{'.$key.':}}');
@@ -726,5 +746,33 @@ class View implements ViewInterface
         }
 
         return $templateData;
+    }
+
+    /**
+     * Get the current view theme path.
+     *
+     * @return string|null
+     */
+    public function getThemePath()
+    {
+        return $this->templatePath;
+    }
+
+    /**
+     * Set the view theme path.
+     *
+     * @param string $theme Theme name.
+     *
+     * @throws \Exception
+     *
+     * @return void
+     */
+    public function setThemePath($themePath)
+    {
+        if (empty($themePath)) {
+            throw new Exception('ThemePath can not be null');
+            exit;
+        }
+        $this->templatePath = $themePath;
     }
 }
