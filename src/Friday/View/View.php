@@ -691,26 +691,26 @@ class View implements ViewInterface
      */
     public function putData($templateData, $data = [])
     {
-		$start = 0;
-		while(true) {
-			$findStart = strpos($templateData, "@include(", $start);
-			if ($findStart !== false) {
-				$findStart = $findStart + 9;
-				$findEnd = strpos($templateData, ")", $findStart);
-				if ($findEnd !== false) {
-					$substr = substr($templateData, $findStart, ($findEnd - $findStart));
-					$file = $this->getThemePath()."layout\\$substr.html";
-					if(file_exists($file) && is_file($file)) {
-						$templateData = str_replace("@include($substr)", file_get_contents($file), $templateData);
-					} else {
-						$templateData = str_replace("@include($substr)", "", $templateData);
-					}
-				}
-				$start = $findEnd;
-			} else {
-				break;
-			}
-		}
+        $start = 0;
+        while (true) {
+            $findStart = strpos($templateData, '@include(', $start);
+            if ($findStart !== false) {
+                $findStart = $findStart + 9;
+                $findEnd = strpos($templateData, ')', $findStart);
+                if ($findEnd !== false) {
+                    $substr = substr($templateData, $findStart, ($findEnd - $findStart));
+                    $file = $this->getThemePath()."layout\\$substr.html";
+                    if (file_exists($file) && is_file($file)) {
+                        $templateData = str_replace("@include($substr)", file_get_contents($file), $templateData);
+                    } else {
+                        $templateData = str_replace("@include($substr)", '', $templateData);
+                    }
+                }
+                $start = $findEnd;
+            } else {
+                break;
+            }
+        }
         foreach ($data as $key => $val) {
             if (is_array($val)) {
                 $findStart = strpos($templateData, '{{'.$key.':}}');
