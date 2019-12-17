@@ -376,6 +376,7 @@ class Controller implements ControllerInterface
 
         $this->view->setTheme($themeInfo['themeName']);
         $this->view->setThemePath($themeInfo['themePath']);
+
         return $this->view->renderTheme($themeInfo, $data);
     }
 }

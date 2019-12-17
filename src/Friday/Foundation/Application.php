@@ -563,7 +563,7 @@ class Application implements ApplicationInterface
      */
     public function findTheme($theme, $file = null)
     {
-		$extMain = ['html', 'htm'];
+        $extMain = ['html', 'htm'];
         if ($file) {
             $array = explode('.', $file);
             $ext = array_pop($array);
