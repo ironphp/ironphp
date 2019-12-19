@@ -752,7 +752,7 @@ class View implements ViewInterface
      * Get the current view theme path.
      *
      * @return string|null
-     * @return void
+     * @since 1.0.7
      */
     public function getThemePath()
     {
