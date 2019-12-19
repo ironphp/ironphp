@@ -752,6 +752,7 @@ class View implements ViewInterface
      * Get the current view theme path.
      *
      * @return string|null
+     *
      * @since 1.0.7
      */
     public function getThemePath()
@@ -767,6 +768,7 @@ class View implements ViewInterface
      * @throws \Exception
      *
      * @return void
+     *
      * @since 1.0.7
      */
     public function setThemePath($themePath)
