@@ -31,7 +31,7 @@ interface Application
      *
      * @var string
      */
-    const VERSION = '1.0.6-alpha1';
+    const VERSION = '1.0.7-alpha1';
 
     /**
      * Create a new Friday application instance.
