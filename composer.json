@@ -39,6 +39,14 @@
         "vlucas/phpdotenv": "@stable"
     },
     "require-dev": {
+        "atoum/atoum": "@stable",
+        "codeception/codeception": "@stable",
+        "datasift/storyplayer": "@stable",
+        "designsecurity/progpilot": "@stable",
+        "kahlan/kahlan": "@stable",
+        "phing/phing": "@stable",
+        "phpspec/phpspec": "@stable",
+        "phpstan/phpstan": "@stable",
         "phpunit/phpunit": "@stable"
     },
     "autoload": {
