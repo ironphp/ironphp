@@ -28,24 +28,18 @@
         "source": "https://github.com/ironphp/ironphp"
     },
     "require": {
-        "php": ">=5.5",
-        "monolog/monolog": "^2.0",
-        "psr/log": "^1.1",
-        "vlucas/phpdotenv": "^3.6"
+        "php": ">=4.0",
+        "egulias/email-validator": "@stable",
+        "erusev/parsedown": "@stable",
+        "league/flysystem": "@stable",
+        "monolog/monolog": "@stable",
+        "moontoast/math": "@stable",
+        "psr/log": "@stable",
+        "swiftmailer/swiftmailer": "@stable",
+        "vlucas/phpdotenv": "@stable"
     },
     "require-dev": {
-        "phpunit/phpunit": "^7.5",
-        "datasift/storyplayer": "@dev",	
-        "phpspec/phpspec": "^5.1",	
-        "atoum/atoum": "^3.3",	
-        "behat/behat": "^3.5",
-        "codeception/codeception": "4.0.x-dev",
-        "designsecurity/progpilot": "^0.6",
-        "kahlan/kahlan": "^4.6",
-        "phing/phing": "^2.16",
-        "phpstan/phpstan": "^0.11",
-        "povils/phpmnd": "^2.1",
-        "vimeo/psalm": "^3.5"
+        "phpunit/phpunit": "@stable"
     },
     "autoload": {
         "psr-4": {
