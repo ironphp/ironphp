@@ -56,8 +56,8 @@ if (!function_exists('env')) {
         }
         return $value;
         */
-print_r(getenv());
-		exit;
+        print_r(getenv());
+        exit;
         $value = getenv($key);
 
         if ($value === false) {
