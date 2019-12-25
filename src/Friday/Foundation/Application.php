@@ -19,6 +19,9 @@
 namespace Friday\Foundation;
 
 use Dotenv\Dotenv;
+use Dotenv\Repository\Adapter\EnvConstAdapter;
+use Dotenv\Repository\Adapter\ServerConstAdapter;
+use Dotenv\Repository\RepositoryBuilder;
 use Exception;
 use Friday\Contracts\Foundation\Application as ApplicationInterface;
 use Friday\Foundation\Exceptions\Handler;
@@ -119,9 +122,23 @@ class Application implements ApplicationInterface
         $this->config['basePath'] = $this->basePath();
 
         //# Configurator
-        //enviro config
-        $dotenv = Dotenv::create($this->basePath());
-        $dotenv->load();
+        //enviro config-Updating to otenv/Dotenv-4.1
+		$adapters = [
+			new EnvConstAdapter(),
+			new ServerConstAdapter(),
+		];
+		$repository = RepositoryBuilder::create()
+			->withReaders($adapters)
+			->withWriters($adapters)
+			->immutable()
+			->make();
+		$dotenv  = Dotenv::create($repository, $this->basePath(), null);
+		$dotenv->load();
+
+		//$_ENV = $variables;
+		//$_SERVER = array_merge($_SERVER, $variables);
+print_r($dotenv->required('APP_KEY'));
+exit;
 
         //Set Exception Handler
         $e = new Handler();
