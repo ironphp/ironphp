@@ -123,22 +123,22 @@ class Application implements ApplicationInterface
 
         //# Configurator
         //enviro config-Updating to otenv/Dotenv-4.1
-		$adapters = [
-			new EnvConstAdapter(),
-			new ServerConstAdapter(),
-		];
-		$repository = RepositoryBuilder::create()
-			->withReaders($adapters)
-			->withWriters($adapters)
-			->immutable()
-			->make();
-		$dotenv  = Dotenv::create($repository, $this->basePath(), null);
-		$dotenv->load();
+        $adapters = [
+            new EnvConstAdapter(),
+            new ServerConstAdapter(),
+        ];
+        $repository = RepositoryBuilder::create()
+            ->withReaders($adapters)
+            ->withWriters($adapters)
+            ->immutable()
+            ->make();
+        $dotenv = Dotenv::create($repository, $this->basePath(), null);
+        $dotenv->load();
 
-		//$_ENV = $variables;
-		//$_SERVER = array_merge($_SERVER, $variables);
-print_r($dotenv->required('APP_KEY'));
-exit;
+        //$_ENV = $variables;
+        //$_SERVER = array_merge($_SERVER, $variables);
+        print_r($dotenv->required('APP_KEY'));
+        exit;
 
         //Set Exception Handler
         $e = new Handler();
