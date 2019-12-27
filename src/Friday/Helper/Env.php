@@ -15,6 +15,7 @@
  * @license       MIT License (https://opensource.org/licenses/mit-license.php)
  * @auther        GaurangKumar Parmar <gaurangkumarp@gmail.com>
  */
+
 namespace Friday\Helper;
 
 use Dotenv\Dotenv;
@@ -23,8 +24,8 @@ use Dotenv\Repository\Adapter\EnvConstAdapter;
 use Dotenv\Repository\Adapter\PutenvAdapter;
 use Dotenv\Repository\Adapter\ServerConstAdapter;
 use Dotenv\Repository\RepositoryBuilder;
-use PhpOption\Option;
 use Friday\Foundation\Application;
+use PhpOption\Option;
 
 class Env
 {
@@ -42,7 +43,7 @@ class Env
      */
     protected static $factory;
 
-	/**
+    /**
      * The environment variables instance.
      *
      * @var \Dotenv\Environment\VariablesInterface|null
@@ -59,7 +60,8 @@ class Env
     /**
      * Bootstrap the given application.
      *
-     * @param  \Friday\Contracts\Foundation\Application  $app
+     * @param \Friday\Contracts\Foundation\Application $app
+     *
      * @return void
      */
     public function bootstrap(Application $app)
@@ -74,8 +76,9 @@ class Env
     /**
      * Load a custom environment file.
      *
-     * @param  \Friday\Contracts\Foundation\Application  $app
-     * @param  string  $file
+     * @param \Friday\Contracts\Foundation\Application $app
+     * @param string                                   $file
+     *
      * @return bool
      */
     protected function setEnvironmentFilePath($app, $file)
@@ -92,13 +95,14 @@ class Env
     /**
      * Create a Dotenv instance.
      *
-     * @param  \Friday\Contracts\Foundation\Application  $app
+     * @param \Friday\Contracts\Foundation\Application $app
+     *
      * @return \Dotenv\Dotenv
      */
     protected function createDotenv($app)
     {
         return Dotenv::create(
-            Env::getRepository(),
+            self::getRepository(),
             $app->environmentPath(),
             $app->environmentFile()
         );
@@ -107,12 +111,13 @@ class Env
     /**
      * Write the error information to the screen and exit.
      *
-     * @param  \Dotenv\Exception\InvalidFileException  $e
+     * @param \Dotenv\Exception\InvalidFileException $e
+     *
      * @return void
      */
     protected function writeErrorAndDie(InvalidFileException $e)
     {
-        $output = (new ConsoleOutput)->getErrorOutput();
+        $output = (new ConsoleOutput())->getErrorOutput();
 
         $output->writeln('The environment file is invalid!');
         $output->writeln($e->getMessage());
@@ -151,8 +156,8 @@ class Env
     {
         if (static::$repository === null) {
             $adapters = array_merge(
-                [new EnvConstAdapter, new ServerConstAdapter],
-                static::$putenv ? [new PutenvAdapter] : []
+                [new EnvConstAdapter(), new ServerConstAdapter()],
+                static::$putenv ? [new PutenvAdapter()] : []
             );
 
             static::$repository = RepositoryBuilder::create()
@@ -168,8 +173,9 @@ class Env
     /**
      * Gets the value of an environment variable.
      *
-     * @param  string  $key
-     * @param  mixed  $default
+     * @param string $key
+     * @param mixed  $default
+     *
      * @return mixed
      */
     public static function get($key, $default = null)

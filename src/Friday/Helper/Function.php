@@ -59,8 +59,8 @@ if (!function_exists('env')) {
         return $value;
         */
 
-		/*
-		$value = getenv($key);
+        /*
+        $value = getenv($key);
 
         if ($value === false) {
             return value($default);
@@ -89,7 +89,7 @@ if (!function_exists('env')) {
         }
 
         return $value;
-		*/
+        */
     }
 }
 
