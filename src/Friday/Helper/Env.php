@@ -59,7 +59,7 @@ class Env
     /**
      * Bootstrap the given application.
      *
-     * @param  \Illuminate\Contracts\Foundation\Application  $app
+     * @param  \Friday\Contracts\Foundation\Application  $app
      * @return void
      */
     public function bootstrap(Application $app)
@@ -74,7 +74,7 @@ class Env
     /**
      * Load a custom environment file.
      *
-     * @param  \Illuminate\Contracts\Foundation\Application  $app
+     * @param  \Friday\Contracts\Foundation\Application  $app
      * @param  string  $file
      * @return bool
      */
@@ -92,7 +92,7 @@ class Env
     /**
      * Create a Dotenv instance.
      *
-     * @param  \Illuminate\Contracts\Foundation\Application  $app
+     * @param  \Friday\Contracts\Foundation\Application  $app
      * @return \Dotenv\Dotenv
      */
     protected function createDotenv($app)
