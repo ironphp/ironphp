@@ -268,6 +268,7 @@ interface Application
      * Get the path to the environment file directory.
      *
      * @return string
+     *
      * @since 1.0.7
      */
     public function environmentPath();
@@ -275,8 +276,10 @@ interface Application
     /**
      * Set the directory for the environment file.
      *
-     * @param  string  $path
+     * @param string $path
+     *
      * @return $this
+     *
      * @since 1.0.7
      */
     public function setEnvironmentPath($path);
@@ -284,8 +287,10 @@ interface Application
     /**
      * Set the environment file to be loaded during bootstrapping.
      *
-     * @param  string  $file
+     * @param string $file
+     *
      * @return $this
+     *
      * @since 1.0.7
      */
     public function loadEnvironmentFrom($file);
@@ -294,6 +299,7 @@ interface Application
      * Get the environment file the application is using.
      *
      * @return string
+     *
      * @since 1.0.7
      */
     public function environmentFile();

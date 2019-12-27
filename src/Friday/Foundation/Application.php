@@ -19,16 +19,13 @@
 namespace Friday\Foundation;
 
 use Dotenv\Dotenv;
-use Dotenv\Repository\Adapter\EnvConstAdapter;
-use Dotenv\Repository\Adapter\ServerConstAdapter;
-use Dotenv\Repository\RepositoryBuilder;
 use Exception;
 use Friday\Contracts\Foundation\Application as ApplicationInterface;
 use Friday\Foundation\Exceptions\Handler;
+use Friday\Helper\Env;
 use Friday\Helper\Session;
 use Friday\Http\FrontController;
 use Friday\Http\Route;
-use Friday\Helper\Env;
 
 /**
  * Runs an application invoking all the registered application.
@@ -145,7 +142,7 @@ class Application implements ApplicationInterface
 
         //# Configurator
         //enviro config-Updating to Dotenv-4.1
-        (new Env)->bootstrap($this);
+        (new Env())->bootstrap($this);
 
         //Set Exception Handler
         $e = new Handler();
@@ -743,6 +740,7 @@ class Application implements ApplicationInterface
      * Get the path to the environment file directory.
      *
      * @return string
+     *
      * @since 1.0.7
      */
     public function environmentPath()
@@ -753,8 +751,10 @@ class Application implements ApplicationInterface
     /**
      * Set the directory for the environment file.
      *
-     * @param  string  $path
+     * @param string $path
+     *
      * @return $this
+     *
      * @since 1.0.7
      */
     public function setEnvironmentPath($path)
@@ -767,8 +767,10 @@ class Application implements ApplicationInterface
     /**
      * Set the environment file to be loaded during bootstrapping.
      *
-     * @param  string  $file
+     * @param string $file
+     *
      * @return $this
+     *
      * @since 1.0.7
      */
     public function loadEnvironmentFrom($file)
@@ -782,11 +784,11 @@ class Application implements ApplicationInterface
      * Get the environment file the application is using.
      *
      * @return string
+     *
      * @since 1.0.7
      */
     public function environmentFile()
     {
         return $this->environmentFile ?: '.env';
     }
-
 }
