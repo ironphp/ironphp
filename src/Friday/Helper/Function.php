@@ -16,6 +16,7 @@
  * @auther        GaurangKumar Parmar <gaurangkumarp@gmail.com>
  */
 use Friday\Foundation\Application;
+use Friday\Helper\Env;
 
 if (!function_exists('env')) {
     /**
@@ -28,6 +29,7 @@ if (!function_exists('env')) {
      */
     function env($key, $default = null)
     {
+        return Env::get($key, $default);
         /*
         if(func_num_args() == 1) {
             $key = func_get_arg(0);
@@ -56,9 +58,9 @@ if (!function_exists('env')) {
         }
         return $value;
         */
-        print_r(getenv());
-        exit;
-        $value = getenv($key);
+
+		/*
+		$value = getenv($key);
 
         if ($value === false) {
             return value($default);
@@ -87,6 +89,7 @@ if (!function_exists('env')) {
         }
 
         return $value;
+		*/
     }
 }
 

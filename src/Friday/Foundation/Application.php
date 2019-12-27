@@ -28,12 +28,20 @@ use Friday\Foundation\Exceptions\Handler;
 use Friday\Helper\Session;
 use Friday\Http\FrontController;
 use Friday\Http\Route;
+use Friday\Helper\Env;
 
 /**
  * Runs an application invoking all the registered application.
  */
 class Application implements ApplicationInterface
 {
+    /**
+     * The IronPHP framework version.
+     *
+     * @var string
+     */
+    const VERSION = '1.0.7-alpha1';
+
     /**
      * The base path for the IronPHP installation.
      *
@@ -105,6 +113,20 @@ class Application implements ApplicationInterface
     public $headers = [];
 
     /**
+     * The custom environment path defined by the developer.
+     *
+     * @var string
+     */
+    protected $environmentPath;
+
+    /**
+     * The environment file to load during bootstrapping.
+     *
+     * @var string
+     */
+    protected $environmentFile = '.env';
+
+    /**
      * Create a new Friday application instance.
      *
      * @param string|null $basePath
@@ -122,23 +144,8 @@ class Application implements ApplicationInterface
         $this->config['basePath'] = $this->basePath();
 
         //# Configurator
-        //enviro config-Updating to otenv/Dotenv-4.1
-        $adapters = [
-            new EnvConstAdapter(),
-            new ServerConstAdapter(),
-        ];
-        $repository = RepositoryBuilder::create()
-            ->withReaders($adapters)
-            ->withWriters($adapters)
-            ->immutable()
-            ->make();
-        $dotenv = Dotenv::create($repository, $this->basePath(), null);
-        $dotenv->load();
-
-        //$_ENV = $variables;
-        //$_SERVER = array_merge($_SERVER, $variables);
-        print_r($dotenv->required('APP_KEY'));
-        exit;
+        //enviro config-Updating to Dotenv-4.1
+        (new Env)->bootstrap($this);
 
         //Set Exception Handler
         $e = new Handler();
@@ -731,4 +738,55 @@ class Application implements ApplicationInterface
     {
         return $this->router->args;
     }
+
+    /**
+     * Get the path to the environment file directory.
+     *
+     * @return string
+     * @since 1.0.7
+     */
+    public function environmentPath()
+    {
+        return $this->environmentPath ?: $this->basePath;
+    }
+
+    /**
+     * Set the directory for the environment file.
+     *
+     * @param  string  $path
+     * @return $this
+     * @since 1.0.7
+     */
+    public function setEnvironmentPath($path)
+    {
+        $this->environmentPath = $path;
+
+        return $this;
+    }
+
+    /**
+     * Set the environment file to be loaded during bootstrapping.
+     *
+     * @param  string  $file
+     * @return $this
+     * @since 1.0.7
+     */
+    public function loadEnvironmentFrom($file)
+    {
+        $this->environmentFile = $file;
+
+        return $this;
+    }
+
+    /**
+     * Get the environment file the application is using.
+     *
+     * @return string
+     * @since 1.0.7
+     */
+    public function environmentFile()
+    {
+        return $this->environmentFile ?: '.env';
+    }
+
 }

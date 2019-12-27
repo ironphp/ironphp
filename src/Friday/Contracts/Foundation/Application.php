@@ -27,13 +27,6 @@ use Friday\Http\Route;
 interface Application
 {
     /**
-     * The IronPHP framework version.
-     *
-     * @var string
-     */
-    const VERSION = '1.0.7-alpha1';
-
-    /**
      * Create a new Friday application instance.
      *
      * @param string|null $basePath
@@ -270,4 +263,38 @@ interface Application
      * @return array
      */
     public function getRouteParam();
+
+    /**
+     * Get the path to the environment file directory.
+     *
+     * @return string
+     * @since 1.0.7
+     */
+    public function environmentPath();
+
+    /**
+     * Set the directory for the environment file.
+     *
+     * @param  string  $path
+     * @return $this
+     * @since 1.0.7
+     */
+    public function setEnvironmentPath($path);
+
+    /**
+     * Set the environment file to be loaded during bootstrapping.
+     *
+     * @param  string  $file
+     * @return $this
+     * @since 1.0.7
+     */
+    public function loadEnvironmentFrom($file);
+
+    /**
+     * Get the environment file the application is using.
+     *
+     * @return string
+     * @since 1.0.7
+     */
+    public function environmentFile();
 }
