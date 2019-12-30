@@ -586,9 +586,12 @@ class Table
     public function sanitizeFormValue($str)
     {
         $str = trim($str);
+/*
+		Function get_magic_quotes_gpc() is deprecated in PHP 7.4
         if (get_magic_quotes_gpc()) {
             $str = stripslashes($str);
         }
+*/
 
         return $this->connection->real_escape_string($str);
     }
