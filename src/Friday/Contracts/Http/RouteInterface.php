@@ -158,6 +158,7 @@ interface RouteInterface
      * @param string $name
      *
      * @return void
+     *
      * @since 1.0.7
      */
     public static function name($name);
