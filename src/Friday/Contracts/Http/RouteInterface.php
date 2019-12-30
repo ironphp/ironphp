@@ -36,7 +36,7 @@ interface RouteInterface
      * @param string|null $mix
      * @param string|null $view
      *
-     * @return bool
+     * @return \Friday\Http\Route
      */
     public static function get($route, $mix, $view = null);
 
@@ -47,7 +47,7 @@ interface RouteInterface
      * @param string|Closure|null $mix
      * @param string|null         $view
      *
-     * @return bool
+     * @return \Friday\Http\Route
      */
     public static function post($route, $mix = null, $view = null);
 
@@ -58,7 +58,7 @@ interface RouteInterface
      * @param string|null $view
      * @param array       $data
      *
-     * @return bool
+     * @return \Friday\Http\Route
      */
     public static function view($route, $view = null, array $data = []);
 
@@ -71,7 +71,7 @@ interface RouteInterface
      * @param string|null         $view
      * @param array               $data
      *
-     * @return void
+     * @return \Friday\Http\Route
      */
     public function register($method, $route, $mix = null, $view = null, $data = []);
 
@@ -127,7 +127,7 @@ interface RouteInterface
      * @param string|Closure|null $mix
      * @param string|null         $view
      *
-     * @return bool
+     * @return \Friday\Http\Route
      */
     public static function put($route, $mix = null, $view = null);
 
@@ -138,7 +138,7 @@ interface RouteInterface
      * @param string|Closure|null $mix
      * @param string|null         $view
      *
-     * @return bool
+     * @return \Friday\Http\Route
      */
     public static function delete($route, $mix = null, $view = null);
 
@@ -151,4 +151,14 @@ interface RouteInterface
      * @return bool
      */
     public static function resource($route, $controller = null);
+
+    /**
+     * name routes.
+     *
+     * @param string $name
+     *
+     * @return void
+     * @since 1.0.7
+     */
+    public static function name($name);
 }

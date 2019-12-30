@@ -45,6 +45,13 @@ class Route implements RouteInterface
     public $prefix = null;
 
     /**
+     * Current Route count.
+     *
+     * @var int
+     */
+    public static $routeCount = 0;
+
+    /**
      * Create Route instance.
      *
      * @return void
@@ -62,11 +69,11 @@ class Route implements RouteInterface
      * @param string|Closure|null $mix
      * @param string|null         $view
      *
-     * @return bool
+     * @return \Friday\Http\Route
      */
     public static function get($route, $mix = null, $view = null)
     {
-        self::$instance->register('GET', $route, $mix, $view);
+        return self::$instance->register('GET', $route, $mix, $view);
     }
 
     /**
@@ -76,11 +83,11 @@ class Route implements RouteInterface
      * @param string|null $mix
      * @param string|null $view
      *
-     * @return bool
+     * @return \Friday\Http\Route
      */
     public static function post($route, $mix = null, $view = null)
     {
-        self::$instance->register('POST', $route, $mix, $view);
+        return self::$instance->register('POST', $route, $mix, $view);
     }
 
     /**
@@ -90,11 +97,11 @@ class Route implements RouteInterface
      * @param string|Closure|null $view
      * @param array               $data
      *
-     * @return bool
+     * @return \Friday\Http\Route
      */
     public static function view($route, $view = null, array $data = [])
     {
-        self::$instance->register('GET', $route, null, $view, $data);
+        return self::$instance->register('GET', $route, null, $view, $data);
     }
 
     /**
@@ -106,7 +113,7 @@ class Route implements RouteInterface
      * @param string|null         $view
      * @param array               $data
      *
-     * @return void
+     * @return \Friday\Http\Route
      */
     public function register($method, $route, $mix = null, $view = null, $data = [])
     {
@@ -156,8 +163,12 @@ class Route implements RouteInterface
         if (trim($base_route) === '') {
             $base_route = '/';
         }
+		
+		self::$routeCount = count(self::$instance->routes);
         self::$instance->routes[] = [$method, $route, $mix, $view, $data, $args, $size, $base_size, $param];
-    }
+
+        return self::$instance;
+	}
 
     /**
      * sort registered routes by there base uri.
@@ -261,11 +272,11 @@ class Route implements RouteInterface
      * @param string|Closure|null $mix
      * @param string|null         $view
      *
-     * @return bool
+     * @return \Friday\Http\Route
      */
     public static function put($route, $mix = null, $view = null)
     {
-        self::$instance->register('PUT', $route, $mix, $view);
+        return self::$instance->register('PUT', $route, $mix, $view);
     }
 
     /**
@@ -275,11 +286,11 @@ class Route implements RouteInterface
      * @param string|Closure|null $mix
      * @param string|null         $view
      *
-     * @return bool
+     * @return \Friday\Http\Route
      */
     public static function delete($route, $mix = null, $view = null)
     {
-        self::$instance->register('DELETE', $route, $mix, $view);
+        return self::$instance->register('DELETE', $route, $mix, $view);
     }
 
     /**
@@ -316,5 +327,19 @@ class Route implements RouteInterface
 
         //show
         self::$instance->register('DELETE', $route.'/{id}', "$controller@destroy");
+    }
+
+    /**
+     * name routes.
+     *
+     * @param string $name
+     *
+     * @return void
+     * @since 1.0.7
+     */
+    public static function name($name)
+    {
+		self::$instance->routes[$name] = self::$instance->routes[self::$routeCount];
+		unset(self::$instance->routes[self::$routeCount]); 
     }
 }
