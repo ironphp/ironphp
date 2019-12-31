@@ -163,12 +163,12 @@ class Route implements RouteInterface
         if (trim($base_route) === '') {
             $base_route = '/';
         }
-		
-		self::$routeCount = count(self::$instance->routes);
+
+        self::$routeCount = count(self::$instance->routes);
         self::$instance->routes[] = [$method, $route, $mix, $view, $data, $args, $size, $base_size, $param];
 
         return self::$instance;
-	}
+    }
 
     /**
      * sort registered routes by there base uri.
@@ -335,11 +335,12 @@ class Route implements RouteInterface
      * @param string $name
      *
      * @return void
+     *
      * @since 1.0.7
      */
     public static function name($name)
     {
-		self::$instance->routes[$name] = self::$instance->routes[self::$routeCount];
-		unset(self::$instance->routes[self::$routeCount]); 
+        self::$instance->routes[$name] = self::$instance->routes[self::$routeCount];
+        unset(self::$instance->routes[self::$routeCount]);
     }
 }
