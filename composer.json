@@ -33,7 +33,6 @@
         "erusev/parsedown": "@stable",
         "league/flysystem": "@stable",
         "monolog/monolog": "@stable",
-        "moontoast/math": "@stable",
         "psr/log": "@stable",
         "swiftmailer/swiftmailer": "@stable",
         "vlucas/phpdotenv": "@stable"
