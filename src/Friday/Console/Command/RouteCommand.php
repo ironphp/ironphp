@@ -72,8 +72,9 @@ class RouteCommand extends Command
         $l1 = 10;
         $l2 = 10;
         $l3 = 10;
+        $l4 = 10;
         $list = '';
-        foreach ($routes as $route) {
+        foreach ($routes as $i => $route) {
             if ($l1 < strlen($route[1])) {
                 $l1 = strlen($route[1]);
             }
@@ -83,18 +84,22 @@ class RouteCommand extends Command
             if ($l3 < strlen($route[2])) {
                 $l3 = strlen($route[2]);
             }
+            if ($l4 < strlen($i)) {
+                $l4 = strlen($i);
+            }
         }
-        foreach ($routes as $route) {
+        foreach ($routes as $i => $route) {
             $list .=
-"| $route[1]".str_repeat(' ', $l1 - strlen($route[1]))." | $route[0]".str_repeat(' ', $l2 - strlen($route[0]))." | $route[2]".str_repeat(' ', $l3 - strlen($route[2])).' |
-+'.str_repeat('-', $l1 + 2).'+'.str_repeat('-', $l2 + 2).'+'.str_repeat('-', $l3 + 2).'+
+"| $route[1]".str_repeat(' ', $l1 - strlen($route[1]))." | $route[0]".str_repeat(' ', $l2 - strlen($route[0]))." | $route[2]".str_repeat(' ', $l3 - strlen($route[2]))." | ".(is_numeric($i)?str_repeat(' ', strlen($i)):$i).str_repeat(' ', $l4 - strlen($i)).' |
++'.str_repeat('-', $l1 + 2).'+'.str_repeat('-', $l2 + 2).'+'.str_repeat('-', $l3 + 2).'+'.str_repeat('-', $l4 + 2).'+
 ';
         }
         $list = '
-+'.str_repeat('-', $l1 + 2).'+'.str_repeat('-', $l2 + 2).'+'.str_repeat('-', $l3 + 2).'+
-| '.Colors::GREEN.Colors::BG_BLACK.'URI'.Colors::WHITE.Colors::BG_BLACK.str_repeat(' ', $l1 - strlen('URI')).' | '.Colors::GREEN.Colors::BG_BLACK.'Method'.Colors::WHITE.Colors::BG_BLACK.str_repeat(' ', $l2 - strlen('Method')).' | '.Colors::GREEN.Colors::BG_BLACK.'Action'.Colors::WHITE.Colors::BG_BLACK.str_repeat(' ', $l3 - strlen('Action')).' |
-+'.str_repeat('-', $l1 + 2).'+'.str_repeat('-', $l2 + 2).'+'.str_repeat('-', $l3 + 2).'+
++'.str_repeat('-', $l1 + 2).'+'.str_repeat('-', $l2 + 2).'+'.str_repeat('-', $l3 + 2).'+'.str_repeat('-', $l4 + 2).'+
+| '.Colors::GREEN.Colors::BG_BLACK.'URI'.Colors::WHITE.Colors::BG_BLACK.str_repeat(' ', $l1 - strlen('URI')).' | '.Colors::GREEN.Colors::BG_BLACK.'Method'.Colors::WHITE.Colors::BG_BLACK.str_repeat(' ', $l2 - strlen('Method')).' | '.Colors::GREEN.Colors::BG_BLACK.'Action'.Colors::WHITE.Colors::BG_BLACK.str_repeat(' ', $l3 - strlen('Action')).' | '.Colors::GREEN.Colors::BG_BLACK.'Name'.Colors::WHITE.Colors::BG_BLACK.str_repeat(' ', $l4 - strlen('Name')).' |
++'.str_repeat('-', $l1 + 2).'+'.str_repeat('-', $l2 + 2).'+'.str_repeat('-', $l3 + 2).'+'.str_repeat('-', $l4 + 2).'+
 '.$list;
+		print_r($list);exit;
 
         return $list;
     }
