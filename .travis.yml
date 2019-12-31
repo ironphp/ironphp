@@ -4,33 +4,24 @@ sudo: false
 dist: trusty
 
 php:
-  - 7.0
   - 7.1
   - 7.2
   - 7.3
-
-matrix:
-  include:
-    - php: 7.0
-    - php: 7.1
-    - php: 7.2
-    - php: 7.3
-    - php: 7.4
 
 cache:
   directories:
     - $HOME/.composer/cache
 
-services:
-  - mysql
+matrix:
+    include:
+        - php: 7.1
+          env: deps=low
+    fast_finish: true
 
 before_script:
-  - phpenv config-rm xdebug.ini || true
-  - travis_retry composer self-update
-  - mysql -e 'CREATE DATABASE ironman;'
-
-install:
-  - if [[ $SETUP = 'stable' ]]; then travis_retry composer update --prefer-dist --no-interaction --prefer-stable --no-suggest; fi
-  - if [[ $SETUP = 'lowest' ]]; then travis_retry composer update --prefer-dist --no-interaction --prefer-lowest --prefer-stable --no-suggest; fi
+  - echo "extension = redis.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+  - echo "extension = mongodb.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+  - if [ "$deps" == "low" ]; then composer update --prefer-dist --prefer-lowest --prefer-stable; fi
+  - if [ "$deps" != "low" ]; then composer install --prefer-dist; fi
 
 script: vendor/bin/phpunit

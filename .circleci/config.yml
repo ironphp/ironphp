@@ -7,8 +7,8 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/php:7.0-browsers
-
+      - image: circleci/php:7.1-browsers
+      
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
@@ -18,30 +18,20 @@ jobs:
 
     steps:
       - checkout
-      - run: sudo apt install -y bcmath
-      - run: composer self-update
+
       # Download and cache dependencies
       - restore_cache:
           keys:
           - v1-dependencies-{{ checksum "composer.json" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
-            - composer-v1-{{ checksum "composer.json" }}
-            - composer-v1-
-      - run: composer install -n --prefer-dist
-      - run: composer install
-      - save_cache:
-          key: v1-dependencies-{{ checksum "composer.json" }}
-          key: composer-v1-{{ checksum "composer.json" }}
-          paths:
-            - vendor
-            - ./vendor
-      ##- run: phpunit
-      - run: php vendor/bin/phpunit
 
-      - run: sudo apt-get install -y bcmath
-      - run: composer install -n --ignore-platform-reqs
-      - run: vendor/bin/phpunit
+      - run: composer install -n --prefer-dist
+
+      - save_cache:
+          paths:
+            - ./vendor
+          key: v1-dependencies-{{ checksum "composer.json" }}
         
       # run tests!
-	  
+      ##- run: phpunit
