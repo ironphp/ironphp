@@ -94,12 +94,12 @@ class RouteCommand extends Command
 +'.str_repeat('-', $l1 + 2).'+'.str_repeat('-', $l2 + 2).'+'.str_repeat('-', $l3 + 2).'+'.str_repeat('-', $l4 + 2).'+
 ';
         }
-        $list = '
+
+		$list = '
 +'.str_repeat('-', $l1 + 2).'+'.str_repeat('-', $l2 + 2).'+'.str_repeat('-', $l3 + 2).'+'.str_repeat('-', $l4 + 2).'+
 | '.Colors::GREEN.Colors::BG_BLACK.'URI'.Colors::WHITE.Colors::BG_BLACK.str_repeat(' ', $l1 - strlen('URI')).' | '.Colors::GREEN.Colors::BG_BLACK.'Method'.Colors::WHITE.Colors::BG_BLACK.str_repeat(' ', $l2 - strlen('Method')).' | '.Colors::GREEN.Colors::BG_BLACK.'Action'.Colors::WHITE.Colors::BG_BLACK.str_repeat(' ', $l3 - strlen('Action')).' | '.Colors::GREEN.Colors::BG_BLACK.'Name'.Colors::WHITE.Colors::BG_BLACK.str_repeat(' ', $l4 - strlen('Name')).' |
 +'.str_repeat('-', $l1 + 2).'+'.str_repeat('-', $l2 + 2).'+'.str_repeat('-', $l3 + 2).'+'.str_repeat('-', $l4 + 2).'+
 '.$list;
-		print_r($list);exit;
 
         return $list;
     }
