@@ -194,9 +194,11 @@ interface View
     /**
      * Add a piece of shared data.
      *
-     * @param  array|string  $key
-     * @param  mixed|null  $value
+     * @param array|string $key
+     * @param mixed|null   $value
+     *
      * @return mixed
+     *
      * @since 1.0.7
      */
     //static function share($key, $value = null);
