@@ -790,22 +790,25 @@ class View implements ViewInterface
     /**
      * Add a piece of shared data.
      *
-     * @param  array|string  $key
-     * @param  mixed|null  $value
+     * @param array|string $key
+     * @param mixed|null   $value
+     *
      * @return mixed
+     *
      * @since 1.0.7
-    public function shar($key, $value = null)
-    {
-        $keys = is_array($key) ? $key : [$key => $value];
-
-        foreach ($keys as $key => $value) {
-            $this->shared[$key] = $value;
-        }
-
-        return $value;
-    }
+     * public function shar($key, $value = null)
+     * {
+     * $keys = is_array($key) ? $key : [$key => $value];
+     *
+     * foreach ($keys as $key => $value) {
+     * $this->shared[$key] = $value;
+     * }
+     *
+     * return $value;
+     * }
      */
-    public static function __callStatic($method, $parameters) {
-		print_r([$method, $parameters]);
-	}
+    public static function __callStatic($method, $parameters)
+    {
+        print_r([$method, $parameters]);
+    }
 }
