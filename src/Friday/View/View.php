@@ -92,13 +92,13 @@ class View implements ViewInterface
         '!doctype' => ['html' => null],
         'html'     => ['lang' => 'en'],
         'meta'     => ['charset' => 'utf-8', 'name' => [
-                'content' => [
-                    'description' => 'IronPHP Application',
-                    'keywords'    => 'IronPHP, framework',
-                    'author'      => 'Gaurang Kumar',
-                    'viewport'    => 'width=device-width, initial-scale=1.0',
-                ],
+            'content' => [
+                'description' => 'IronPHP Application',
+                'keywords'    => 'IronPHP, framework',
+                'author'      => 'Gaurang Kumar',
+                'viewport'    => 'width=device-width, initial-scale=1.0',
             ],
+        ],
         ],
         'base' => ['target' => '_blank'],
         'link' => ['rel' => 'stylesheet', 'type' => 'text/css'],
