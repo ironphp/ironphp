@@ -155,6 +155,20 @@ class View implements ViewInterface
     protected $shared = [];
 
     /**
+     * Instance of the View.
+     *
+     * @var \Friday\View\View|null
+     */
+    private static $instance;
+
+    /**
+     * The view factory instance.
+     *
+     * @var \Friday\View\Factory
+     */
+    private $factory;
+
+    /**
      * Create a new View instance.
      *
      * @param \Friday\Foundation\Application $app
@@ -164,6 +178,8 @@ class View implements ViewInterface
     public function __construct($app)
     {
         $this->app = $app;
+        $this->factory = new Factory;
+		self::$instance = $this;
     }
 
     /**
@@ -788,27 +804,23 @@ class View implements ViewInterface
     }
 
     /**
-     * Add a piece of shared data.
+     * Dynamically bind parameters to the view.
      *
-     * @param array|string $key
-     * @param mixed|null   $value
+     * @param  string  $method
+     * @param  array  $parameters
+     * @return \Illuminate\View\View
      *
-     * @return mixed
-     *
+     * @throws \BadMethodCallException
      * @since 1.0.7
-     * public function shar($key, $value = null)
-     * {
-     * $keys = is_array($key) ? $key : [$key => $value];
-     *
-     * foreach ($keys as $key => $value) {
-     * $this->shared[$key] = $value;
-     * }
-     *
-     * return $value;
-     * }
      */
     public static function __callStatic($method, $parameters)
     {
-        print_r([$method, $parameters]);
+		if(!method_exists(self::$instance->factory, $method)) {
+            throw new BadMethodCallException(sprintf(
+                'Method %s::%s does not exist.', static::class, $method
+            ));
+		}
+
+		call_user_func_array(array(self::$instance->factory, $method), $parameters);
     }
 }

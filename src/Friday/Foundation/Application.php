@@ -132,7 +132,7 @@ class Application implements ApplicationInterface
      */
     public function __construct($basePath = null)
     {
-        $this->requireFile(dirname(__DIR__).'/Helper/PathConstant.php');
+		$this->requireFile(dirname(__DIR__).'/Helper/PathConstant.php');
 
         if ($basePath) {
             $this->setBasePath($basePath);
