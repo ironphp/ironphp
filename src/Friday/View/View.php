@@ -178,8 +178,8 @@ class View implements ViewInterface
     public function __construct($app)
     {
         $this->app = $app;
-        $this->factory = new Factory;
-		self::$instance = $this;
+        $this->factory = new Factory();
+        self::$instance = $this;
     }
 
     /**
@@ -806,21 +806,23 @@ class View implements ViewInterface
     /**
      * Dynamically bind parameters to the view.
      *
-     * @param  string  $method
-     * @param  array  $parameters
-     * @return \Illuminate\View\View
+     * @param string $method
+     * @param array  $parameters
      *
      * @throws \BadMethodCallException
+     *
+     * @return \Illuminate\View\View
+     *
      * @since 1.0.7
      */
     public static function __callStatic($method, $parameters)
     {
-		if(!method_exists(self::$instance->factory, $method)) {
+        if (!method_exists(self::$instance->factory, $method)) {
             throw new BadMethodCallException(sprintf(
                 'Method %s::%s does not exist.', static::class, $method
             ));
-		}
+        }
 
-		call_user_func_array(array(self::$instance->factory, $method), $parameters);
+        call_user_func_array([self::$instance->factory, $method], $parameters);
     }
 }

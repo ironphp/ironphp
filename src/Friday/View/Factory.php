@@ -18,8 +18,6 @@
 
 namespace Friday\View;
 
-use InvalidArgumentException;
-use Exception;
 use Friday\Contracts\View\Factory as FactoryInterface;
 
 class Factory implements FactoryInterface
@@ -44,8 +42,9 @@ class Factory implements FactoryInterface
     /**
      * Add a piece of shared data to the environment.
      *
-     * @param  array|string  $key
-     * @param  mixed|null  $value
+     * @param array|string $key
+     * @param mixed|null   $value
+     *
      * @return mixed
      */
     public function share($key, $value = null)
@@ -62,17 +61,18 @@ class Factory implements FactoryInterface
     /**
      * Get an item from the shared data.
      *
-     * @param  string  $key
-     * @param  mixed  $default
+     * @param string $key
+     * @param mixed  $default
+     *
      * @return mixed
      */
     public function shared($key, $default = null)
     {
-		if(!isset($this->shared[$key])) {
-			return $default;
-		} else {
-			return $this->shared[$key];
-		}
+        if (!isset($this->shared[$key])) {
+            return $default;
+        } else {
+            return $this->shared[$key];
+        }
     }
 
     /**
