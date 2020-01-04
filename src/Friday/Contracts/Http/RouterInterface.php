@@ -51,4 +51,12 @@ interface RouterInterface
      * @return bool
      */
     public function match($route, $uriRoute, $parameterized = false);
+
+    /**
+     * Get the current route name.
+     *
+     * @return string|null
+     * @since 1.0.7
+     */
+    public function currentRouteName();
 }

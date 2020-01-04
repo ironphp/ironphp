@@ -74,11 +74,13 @@ class Server extends Application
 
         //router
         $this->router = $this->frontController->router();
-        $this->matchRoute = $this->router->route(
+        $this->matchRoute = $this->router->findRoute(
             $this->route->routes,
             $this->request->uri,
             $this->request->serverRequestMethod
         );
+var_dump([\Friday\Http\Route::$currentRoute, \Friday\Http\Route::$instance]);exit;
+
         $this->request->setParam('Closure', $this->router->args);
 
         define('ROUTE_MATCHED', microtime(true));

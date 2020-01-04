@@ -19,6 +19,7 @@
 namespace Friday\Contracts\Http;
 
 use Closure;
+use Friday\Http\Router;
 
 interface RouteInterface
 {
@@ -162,4 +163,21 @@ interface RouteInterface
      * @since 1.0.7
      */
     public static function name($name);
+
+    /**
+     * Set the router instance on the route.
+     *
+     * @param  \Friday\Http\Router  $router
+     * @return $this
+     * @since 1.0.7
+     */
+    public function setRouter(Router $router);
+
+    /**
+     * Get the router instance.
+     *
+     * @return \Friday\Http\Router
+     * @since 1.0.7
+     */
+    public function getRouter();
 }

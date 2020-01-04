@@ -20,6 +20,8 @@ namespace Friday\Http;
 
 use Closure;
 use Friday\Contracts\Http\RouteInterface;
+use Friday\Http\Router;
+use BadMethodCallException;
 
 class Route implements RouteInterface
 {
@@ -33,9 +35,9 @@ class Route implements RouteInterface
     /**
      * Route instance.
      *
-     * @var Route
+     * @var Route|null
      */
-    public static $instance;
+    public static $instance = null;
 
     /**
      * Route prefix name.
@@ -52,12 +54,27 @@ class Route implements RouteInterface
     public static $routeCount = 0;
 
     /**
+     * Current Route.
+     *
+     * @var array
+     */
+    public static $currentRoute;
+
+    /**
+     * The view factory instance.
+     *
+     * @var \Friday\Http\Router
+     */
+    private $router;
+
+    /**
      * Create Route instance.
      *
      * @return void
      */
     public function __construct(/*$path, $controllerClass*/)
     {
+        self::$instance = $this->setRouter(new Router());
         //$this->path = $path;
         //$this->controllerClass = $controllerClass;
     }
@@ -342,5 +359,57 @@ class Route implements RouteInterface
     {
         self::$instance->routes[$name] = self::$instance->routes[self::$routeCount];
         unset(self::$instance->routes[self::$routeCount]);
+    }
+
+    /**
+     * Set the router instance on the route.
+     *
+     * @param  \Friday\Http\Router  $router
+     * @return $this
+     * @since 1.0.7
+     */
+    public function setRouter(Router $router)
+    {
+        $this->router = $router;
+
+        return $this;
+    }
+
+    /**
+     * Get the router instance.
+     *
+     * @return \Friday\Http\Router
+     * @since 1.0.7
+     */
+    public function getRouter()
+    {
+        if($this->router != null) {
+			return $this->router;
+		} else {
+			return new Router();
+		}
+    }
+
+	/**
+     * Dynamically bind parameters to the view.
+     *
+     * @param string $method
+     * @param array  $parameters
+     *
+     * @throws \BadMethodCallException
+     *
+     * @return \Illuminate\View\View
+     *
+     * @since 1.0.7
+     */
+    public static function __callStatic($method, $parameters)
+    {
+        if (!method_exists(self::$instance->router, $method)) {
+            throw new BadMethodCallException(sprintf(
+                'Method %s::%s does not exist.', static::class, $method
+            ));
+        }
+
+        call_user_func_array([self::$instance->router, $method], $parameters);
     }
 }

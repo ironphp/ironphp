@@ -20,6 +20,7 @@ namespace Friday\Http;
 
 use Closure;
 use Friday\Contracts\Http\FrontControllerInterface;
+use Friday\Http\Route;
 
 /**
  * Runs a Front Controller.
@@ -110,7 +111,11 @@ class FrontController implements FrontControllerInterface
      */
     public function router()
     {
-        return new Router();
+        if(Route::$instance != null) {
+			return Route::$instance->getRouter();
+		} else {
+			return new Router();
+		}
     }
 
     /**
