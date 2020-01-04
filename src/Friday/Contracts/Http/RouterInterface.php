@@ -60,4 +60,17 @@ interface RouterInterface
      * @since 1.0.7
      */
     public function currentRouteName();
+
+    /**
+     * Find the route matching a given request.
+     *
+     * @param array  $allRoute
+     * @param string $uriRoute
+     * @param string $httpMethod
+     *
+     * @return array|bool
+     *
+     * @since 1.0.7
+     */
+    public function findRoute($allRoute, $uriRoute, $httpMethod);
 }

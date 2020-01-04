@@ -412,6 +412,6 @@ class Route implements RouteInterface
             ));
         }
 
-        call_user_func_array([self::$instance->router, $method], $parameters);
+        return call_user_func_array([self::$instance->router, $method], $parameters);
     }
 }

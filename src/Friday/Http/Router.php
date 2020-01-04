@@ -149,12 +149,12 @@ class Router implements RouterInterface
      * @param string $httpMethod
      *
      * @return array|bool
+     *
+     * @since 1.0.7
      */
-    protected function findRoute($allRoute, $uriRoute, $httpMethod)
+    public function findRoute($allRoute, $uriRoute, $httpMethod)
     {
-        print_r(__FILE__);
-        exit;
-        $this->current = $route = $this->routes->route($request);
+        Route::$currentRoute = $route = $this->route($allRoute, $uriRoute, $httpMethod);
 
         return $route;
     }
