@@ -18,9 +18,9 @@
 
 namespace Friday\View;
 
+use BadMethodCallException;
 use Exception;
 use Friday\Contracts\View\View as ViewInterface;
-use BadMethodCallException;
 
 class View implements ViewInterface
 {

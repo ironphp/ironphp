@@ -20,7 +20,6 @@ namespace Friday\Http;
 
 use Exception;
 use Friday\Contracts\Http\RouterInterface;
-use Friday\Http\Route;
 
 class Router implements RouterInterface
 {
@@ -134,6 +133,7 @@ class Router implements RouterInterface
      * Get the current route name.
      *
      * @return string|null
+     *
      * @since 1.0.7
      */
     public function currentRouteName()
@@ -147,11 +147,13 @@ class Router implements RouterInterface
      * @param array  $allRoute
      * @param string $uriRoute
      * @param string $httpMethod
+     *
      * @return array|bool
      */
     protected function findRoute($allRoute, $uriRoute, $httpMethod)
     {
-		print_r(__FILE__);exit;
+        print_r(__FILE__);
+        exit;
         $this->current = $route = $this->routes->route($request);
 
         return $route;
