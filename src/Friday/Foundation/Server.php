@@ -79,7 +79,8 @@ class Server extends Application
             $this->request->uri,
             $this->request->serverRequestMethod
         );
-var_dump([\Friday\Http\Route::$currentRoute, \Friday\Http\Route::$instance]);exit;
+        var_dump([\Friday\Http\Route::$currentRoute, \Friday\Http\Route::$instance]);
+        exit;
 
         $this->request->setParam('Closure', $this->router->args);
 

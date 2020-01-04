@@ -56,6 +56,7 @@ interface RouterInterface
      * Get the current route name.
      *
      * @return string|null
+     *
      * @since 1.0.7
      */
     public function currentRouteName();

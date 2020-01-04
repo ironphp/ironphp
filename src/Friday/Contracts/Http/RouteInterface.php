@@ -167,8 +167,10 @@ interface RouteInterface
     /**
      * Set the router instance on the route.
      *
-     * @param  \Friday\Http\Router  $router
+     * @param \Friday\Http\Router $router
+     *
      * @return $this
+     *
      * @since 1.0.7
      */
     public function setRouter(Router $router);
@@ -177,6 +179,7 @@ interface RouteInterface
      * Get the router instance.
      *
      * @return \Friday\Http\Router
+     *
      * @since 1.0.7
      */
     public function getRouter();

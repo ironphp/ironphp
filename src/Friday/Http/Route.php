@@ -18,10 +18,9 @@
 
 namespace Friday\Http;
 
+use BadMethodCallException;
 use Closure;
 use Friday\Contracts\Http\RouteInterface;
-use Friday\Http\Router;
-use BadMethodCallException;
 
 class Route implements RouteInterface
 {
@@ -364,8 +363,10 @@ class Route implements RouteInterface
     /**
      * Set the router instance on the route.
      *
-     * @param  \Friday\Http\Router  $router
+     * @param \Friday\Http\Router $router
+     *
      * @return $this
+     *
      * @since 1.0.7
      */
     public function setRouter(Router $router)
@@ -379,18 +380,19 @@ class Route implements RouteInterface
      * Get the router instance.
      *
      * @return \Friday\Http\Router
+     *
      * @since 1.0.7
      */
     public function getRouter()
     {
-        if($this->router != null) {
-			return $this->router;
-		} else {
-			return new Router();
-		}
+        if ($this->router != null) {
+            return $this->router;
+        } else {
+            return new Router();
+        }
     }
 
-	/**
+    /**
      * Dynamically bind parameters to the view.
      *
      * @param string $method
