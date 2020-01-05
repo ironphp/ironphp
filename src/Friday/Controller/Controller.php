@@ -101,6 +101,9 @@ class Controller implements ControllerInterface
     {
         $this->app = $app;
         $this->view = new View($app);
+
+		$this->modelService = new ModelService();
+        $this->modelService->initialize($app);
     }
 
     /**
@@ -179,8 +182,6 @@ class Controller implements ControllerInterface
         $modelPath = self::$instance->app->findModel($model);
         $modelClass = 'App\\Model\\'.$model;
         $this->model = new $modelClass();
-        self::$instance->modelService = new ModelService();
-        self::$instance->modelService->initialize(self::$instance->app);
 
         return $this->model;
         //$appModel->handleModel($controller, $method);

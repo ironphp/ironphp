@@ -18,6 +18,8 @@
 
 namespace Friday\Model;
 
+use Friday\Helper\Inflector;
+
 class ModelService
 {
     /**
@@ -49,6 +51,13 @@ class ModelService
     private $pagination = null;
 
     /**
+     * Instance of the ModelService.
+     *
+     * @var \Friday\Model\ModelService|null
+     */
+    private static $instance;
+
+    /**
      * Initialize ModelService instance.
      *
      * @param \Friday\Foundation\Application $app
@@ -57,6 +66,7 @@ class ModelService
      */
     public function initialize($app)
     {
+		self::$instance = $this;
         if (self::$app === null) {
             self::$app = $app;
         }
@@ -66,12 +76,13 @@ class ModelService
      * Create Instance of Table.
      *
      * @param string $tableName
+     * @param bool $pagination
      *
      * @return \Friday\Model\Table
      */
-    public function table($tableName)
+    public function table($tableName, $pagination = true)
     {
-        return $this->getDataMapper()->getTable($tableName, $this->getPagination());
+        return $this->getDataMapper()->getTable($tableName, $pagination ? $this->getPagination() : null);
     }
 
     /**
@@ -141,7 +152,7 @@ class ModelService
      */
     protected function sanitizeFormValue($string)
     {
-        return $this->getDataMapper()->getConnection()->sanitizeFormValue($string);
+        return $this->getConnection()->sanitizeFormValue($string);
     }
 
     /**
@@ -186,7 +197,7 @@ class ModelService
      */
     protected function runQuery($query)
     {
-        return $this->getDataMapper()->getConnection()->executeQuery($query);
+        return $this->getConnection()->executeQuery($query);
     }
 
     /**
@@ -202,4 +213,51 @@ class ModelService
 
         return $this->dataMapper;
     }
+
+    /**
+     * Dynamically bind parameters to the view.
+     *
+     * @param string $method
+     * @param array  $parameters
+     *
+     * @throws \BadMethodCallException
+     *
+     * @return \Illuminate\View\View
+     *
+     * @since 1.0.7
+     */
+    public static function __callStatic($method, $parameters)
+    {
+		$called_class = get_called_class();
+		$table = self::$instance->parseTable($called_class);
+		self::$instance->table($table);
+
+		if (!method_exists(self::$instance->getConnection(), $method)) {
+            throw new BadMethodCallException(sprintf(
+                'Method %s::%s does not exist.', static::class, $method
+            ));
+        }
+
+        return call_user_func_array([self::$instance->getConnection(), $method], $parameters);
+    }
+
+    /**
+     * Get Table instance.
+     *
+     * @return \Friday\Model\Table
+     */
+    private function getConnection() {
+		return $this->getDataMapper()->getConnection();
+	}
+
+    /**
+     * Get Table from Class name.
+     *
+     * @param string $class
+     *
+     * @return string
+     */
+    private function parseTable($class) {
+		return Inflector::pluralize( strtolower(basename($class)) );
+	}
 }

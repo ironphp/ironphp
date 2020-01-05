@@ -81,7 +81,7 @@ class Table
     /**
      * Instance of the Pagination.
      *
-     * @var \Friday\Helper\Pagination
+     * @var \Friday\Helper\Pagination|null
      */
     private $pagination = null;
 
@@ -150,7 +150,7 @@ class Table
      * Sets the database table name.
      *
      * @param string                    $table
-     * @param \Friday\Helper\Pagination $pagination
+     * @param \Friday\Helper\Pagination|null $pagination
      *
      * @return $this
      */
@@ -257,7 +257,10 @@ class Table
      */
     public function getPaginated($limit = 1, $fields = null, $sqlQuery = false)
     {
-        $this->buildQuery('select', $fields, ['count'=>null, 'field'=>'num']);
+        if($this->pagination === null) {
+			
+		}
+		$this->buildQuery('select', $fields, ['count'=>null, 'field'=>'num']);
         $result = $this->executeQuery();
         $this->num_rows = $result->num_rows;
         $row = $result->fetch_array(MYSQLI_ASSOC);
@@ -622,5 +625,21 @@ class Table
     public function getQuotedString($value)
     {
         return is_string($value) ? "'$value'" : $value;
+    }
+
+    /**
+     * Get all of the models from the database.
+     *
+     * @param  array|mixed|null  $columns
+     * @return array
+     *
+     * @since 1.0.7
+     */
+    public function all($columns = null)
+    {
+print_r($this->getAll());exit;
+        return static::query()->get(
+            is_array($columns) ? $columns : func_get_args()
+        );
     }
 }

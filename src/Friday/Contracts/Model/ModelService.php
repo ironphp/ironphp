@@ -33,8 +33,9 @@ interface ModelService
      * Create Instance of Table.
      *
      * @param string $tableName
+     * @param bool $pagination
      *
      * @return \Friday\Model\Table
      */
-    public function table($tableName);
+    public function table($tableName, $pagination = false);
 }

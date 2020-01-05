@@ -215,4 +215,14 @@ interface Table
      * @since 1.0.5
      */
     public function getQuotedString($value);
+
+    /**
+     * Get all of the models from the database.
+     *
+     * @param  array|mixed  $columns
+     * @return array
+     *
+     * @since 1.0.7
+     */
+    public function all($columns = ['*']);
 }
