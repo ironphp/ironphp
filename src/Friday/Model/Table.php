@@ -637,9 +637,11 @@ class Table
      */
     public function all($columns = null)
     {
-print_r($this->getAll());exit;
+		return $this->getAll();
+		/*
         return static::query()->get(
             is_array($columns) ? $columns : func_get_args()
         );
+		*/
     }
 }

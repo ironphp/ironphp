@@ -219,10 +219,9 @@ interface Table
     /**
      * Get all of the models from the database.
      *
-     * @param  array|mixed  $columns
      * @return array
      *
      * @since 1.0.7
      */
-    public function all($columns = ['*']);
+    public function all($columns = null);
 }
