@@ -400,7 +400,7 @@ class Route implements RouteInterface
      *
      * @throws \BadMethodCallException
      *
-     * @return \Illuminate\View\View
+     * @return \Friday\Http\Route
      *
      * @since 1.0.7
      */

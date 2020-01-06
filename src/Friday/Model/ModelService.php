@@ -222,7 +222,7 @@ class ModelService
      *
      * @throws \BadMethodCallException
      *
-     * @return \Illuminate\View\View
+     * @return \Friday\Model\ModelService
      *
      * @since 1.0.7
      */

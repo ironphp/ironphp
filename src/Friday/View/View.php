@@ -812,7 +812,7 @@ class View implements ViewInterface
      *
      * @throws \BadMethodCallException
      *
-     * @return \Illuminate\View\View
+     * @return \Friday\View\View
      *
      * @since 1.0.7
      */
@@ -825,5 +825,25 @@ class View implements ViewInterface
         }
 
         call_user_func_array([self::$instance->factory, $method], $parameters);
+    }
+
+    /**
+     * Display Template.
+     *
+     * @param string $template Template to use for rendering
+     * @param array  $data     Arguments to use
+     *
+     * @return void|bool
+     */
+    public static function template($template, $data = [])
+    {
+        if (self::$instance == null) {
+            return false;
+        }
+        $templatePath = self::$instance->app->findTemplate($template);
+        $_token = self::$instance->app->session->getToken();
+        $data['_token'] = $_token;
+
+        return self::$instance->renderTemplate($templatePath, $data);
     }
 }

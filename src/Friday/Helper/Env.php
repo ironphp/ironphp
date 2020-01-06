@@ -117,12 +117,14 @@ class Env
      */
     protected function writeErrorAndDie(InvalidFileException $e)
     {
+/*
         $output = (new ConsoleOutput())->getErrorOutput();
 
         $output->writeln('The environment file is invalid!');
         $output->writeln($e->getMessage());
 
         die(1);
+*/
     }
 
     /**

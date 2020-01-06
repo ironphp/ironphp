@@ -245,6 +245,7 @@ class Controller implements ControllerInterface
             self::$instance = null;
         }
         if ($return !== null) {
+			$output .= $return;
             //handle returned value
         }
         $output = $output ?: null;
