@@ -56,7 +56,7 @@ class DataMapper
     /**
      * Set Table name and get Table instance.
      *
-     * @param string                    $table
+     * @param string                         $table
      * @param \Friday\Helper\Pagination|null $pagination
      *
      * @return \Friday\Model\Table

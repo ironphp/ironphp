@@ -15,9 +15,9 @@
  * @license       MIT License (https://opensource.org/licenses/mit-license.php)
  * @auther        GaurangKumar Parmar <gaurangkumarp@gmail.com>
  */
+use Friday\Contracts\View\Factory as ViewFactory;
 use Friday\Foundation\Application;
 use Friday\Helper\Env;
-use Friday\Contracts\View\Factory as ViewFactory;
 use Friday\View\View;
 
 if (!function_exists('env')) {
@@ -214,26 +214,27 @@ if (!function_exists('sqldate_to_timestamp')) {
     }
 }
 
-if (! function_exists('view')) {
+if (!function_exists('view')) {
     /**
      * Get the evaluated view contents for the given view.
      *
-     * @param  string|null  $view
-     * @param  array  $data
+     * @param string|null $view
+     * @param array       $data
+     *
      * @return \Friday\View\View|\Friday\Contracts\View\Factory
      */
     function view($view = null, $data = [])
     {
-		return View::template($view, $data);
-/*
-        $factory = app(ViewFactory::class);
-
-        if (func_num_args() === 0) {
-            return $factory;
-        }
-
-        return $factory->make($view, $data, $mergeData);
-*/
+        return View::template($view, $data);
+        /*
+                $factory = app(ViewFactory::class);
+        
+                if (func_num_args() === 0) {
+                    return $factory;
+                }
+        
+                return $factory->make($view, $data, $mergeData);
+        */
     }
 }
 

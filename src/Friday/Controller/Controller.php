@@ -102,7 +102,7 @@ class Controller implements ControllerInterface
         $this->app = $app;
         $this->view = new View($app);
 
-		$this->modelService = new ModelService();
+        $this->modelService = new ModelService();
         $this->modelService->initialize($app);
     }
 
@@ -245,7 +245,7 @@ class Controller implements ControllerInterface
             self::$instance = null;
         }
         if ($return !== null) {
-			$output .= $return;
+            $output .= $return;
             //handle returned value
         }
         $output = $output ?: null;

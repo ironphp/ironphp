@@ -33,7 +33,7 @@ interface ModelService
      * Create Instance of Table.
      *
      * @param string $tableName
-     * @param bool $pagination
+     * @param bool   $pagination
      *
      * @return \Friday\Model\Table
      */

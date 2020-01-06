@@ -66,7 +66,7 @@ class ModelService
      */
     public function initialize($app)
     {
-		self::$instance = $this;
+        self::$instance = $this;
         if (self::$app === null) {
             self::$app = $app;
         }
@@ -76,7 +76,7 @@ class ModelService
      * Create Instance of Table.
      *
      * @param string $tableName
-     * @param bool $pagination
+     * @param bool   $pagination
      *
      * @return \Friday\Model\Table
      */
@@ -228,11 +228,11 @@ class ModelService
      */
     public static function __callStatic($method, $parameters)
     {
-		$called_class = get_called_class();
-		$table = self::$instance->parseTable($called_class);
-		self::$instance->table($table);
+        $called_class = get_called_class();
+        $table = self::$instance->parseTable($called_class);
+        self::$instance->table($table);
 
-		if (!method_exists(self::$instance->getConnection(), $method)) {
+        if (!method_exists(self::$instance->getConnection(), $method)) {
             throw new BadMethodCallException(sprintf(
                 'Method %s::%s does not exist.', static::class, $method
             ));
@@ -246,9 +246,10 @@ class ModelService
      *
      * @return \Friday\Model\Table
      */
-    private function getConnection() {
-		return $this->getDataMapper()->getConnection();
-	}
+    private function getConnection()
+    {
+        return $this->getDataMapper()->getConnection();
+    }
 
     /**
      * Get Table from Class name.
@@ -257,7 +258,8 @@ class ModelService
      *
      * @return string
      */
-    private function parseTable($class) {
-		return Inflector::pluralize( strtolower(basename($class)) );
-	}
+    private function parseTable($class)
+    {
+        return Inflector::pluralize(strtolower(basename($class)));
+    }
 }
