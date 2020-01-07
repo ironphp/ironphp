@@ -336,7 +336,7 @@ if (!function_exists('csrf_token')) {
     }
 }
 
-if (! function_exists('route')) {
+if (!function_exists('route')) {
     /**
      * Generate the URL to a named route.
      *

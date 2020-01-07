@@ -187,7 +187,7 @@ class Application implements ApplicationInterface
 
         //route
         $this->route = $this->frontController->route();
-		UrlGenerator::getInstance()
+        UrlGenerator::getInstance()
 
         define('ROUTES_LOADED', microtime(true));
 

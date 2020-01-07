@@ -265,7 +265,7 @@ class Route implements RouteInterface
         $routes = self::$instance->routes;
         if ($uri === null) {
             foreach ($routes as $i => $route) {
-				//TODO
+                //TODO
                 $routes[$i] = \array_diff_key($routes[$i], [3 => 'xy', 4 => 'xy', 5 => 'xy', 6 => 'xy', 7 => 'xy', 8 => 'xy']);
                 if (!is_string($routes[$i][2]) && is_object($routes[$i][2]) && is_callable($routes[$i][2]) && $routes[$i][2] instanceof \Closure) {
                     $routes[$i][2] = 'Closure';
