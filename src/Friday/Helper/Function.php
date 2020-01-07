@@ -191,11 +191,11 @@ if (!function_exists('is_bot')) {
 
         foreach ($botlist as $bot) {
             if (strpos($_SERVER['HTTP_USER_AGENT'], $bot) !== false) {
-                return true;	// Is a bot
+                return true; // Is a bot
             }
         }
 
-        return false;	// Not a bot
+        return false; // Not a bot
     }
 }
 

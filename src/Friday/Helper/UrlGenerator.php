@@ -18,10 +18,15 @@
 
 namespace Friday\Helper;
 
-//use Friday\Helper\UrlGenerator;
-
 class UrlGenerator
 {
+    /**
+     * The Route instance.
+     *
+     * @var \Friday\Http\Route
+     */
+    protected $routes;
+
     /**
      * The UrlGenerator instance.
      *
