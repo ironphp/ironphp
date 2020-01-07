@@ -18,9 +18,6 @@
 
 namespace Friday\Helper;
 
-use Friday\Helper\Language;
-use Friday\Helper\UrlGenerator;
-
 class App
 {
     /**
@@ -37,16 +34,16 @@ class App
      */
     protected $app = [];
 
-	/**
+    /**
      * Create a new App instance.
      *
      * @return void
      */
     public function __construct()
     {
-		$this->app = [
-			'url' => UrlGenerator::class
-		];
+        $this->app = [
+            'url' => UrlGenerator::class,
+        ];
     }
 
     /**
@@ -56,41 +53,44 @@ class App
      */
     public function getLocale()
     {
-		return Language::getLocale();
+        return Language::getLocale();
     }
 
     /**
      * Set the default locale.
      *
-     * @param  string  $locale
+     * @param string $locale
+     *
      * @return void
      */
     public function setLocale($locale)
     {
-		Language::setLocale($locale);
+        Language::setLocale($locale);
     }
 
     /**
      * Get App instance.
      *
-     * @param  string|null  $abstract
+     * @param string|null $abstract
+     *
      * @return void
      * @exception \Exception
      */
     public static function getInstance($abstract = null)
     {
-		if(self::$instance === null) {
-			self::setInstance();
-		}
-		if($abstract === null) {
-			return self::$instance;
-		} else {
-			if(!isset(self::$instance->app[$abstract])) {
-				throw Exception("Invalid app usage.");
-			}
-			$app = self::$instance->app[$abstract];
-			return new $app();
-		}
+        if (self::$instance === null) {
+            self::setInstance();
+        }
+        if ($abstract === null) {
+            return self::$instance;
+        } else {
+            if (!isset(self::$instance->app[$abstract])) {
+                throw Exception('Invalid app usage.');
+            }
+            $app = self::$instance->app[$abstract];
+
+            return new $app();
+        }
     }
 
     /**
@@ -100,6 +100,6 @@ class App
      */
     public static function setInstance()
     {
-		static::$instance = new static;
+        static::$instance = new static();
     }
 }

@@ -715,9 +715,9 @@ class View implements ViewInterface
      */
     public function putData($templateData, $data = [])
     {
-		$templateData = $this->includeFile($templateData);
+        $templateData = $this->includeFile($templateData);
 
-		foreach ($data as $key => $val) {
+        foreach ($data as $key => $val) {
             if (is_array($val)) {
                 $findStart = strpos($templateData, '{{'.$key.':}}');
                 if ($findStart !== false) {
@@ -751,7 +751,7 @@ class View implements ViewInterface
             }
         }
 
-		$templateData = $this->evalPhp($templateData);
+        $templateData = $this->evalPhp($templateData);
 
         return $templateData;
     }
@@ -765,9 +765,10 @@ class View implements ViewInterface
      */
     public function getThemePath()
     {
-		if($this->templatePath == null) {
-			$this->setThemePath($this->app->basePath('app\Template'));
-		}
+        if ($this->templatePath == null) {
+            $this->setThemePath($this->app->basePath('app\Template'));
+        }
+
         return $this->templatePath;
     }
 
@@ -846,7 +847,7 @@ class View implements ViewInterface
      * @since 1.0.8
      */
     public function includeFile($templateData)
-	{
+    {
         $start = 0;
         while (true) {
             $findStart = strpos($templateData, '@include(', $start);
@@ -855,29 +856,30 @@ class View implements ViewInterface
                 $findEnd = strpos($templateData, ')', $findStart);
                 if ($findEnd !== false) {
                     $substr = substr($templateData, $findStart, ($findEnd - $findStart));
-					$substr = trim($substr, "'");
-					if(($f = $this->app->findTemplate("layouts\\$substr")) !== false) {
-                    	$file = $f;
-					} elseif(($f = $this->app->findTemplate("$substr")) !== false) {
-                    	$file = $f;
-					}
-					$substr = str_replace('.', "\\", $substr);
-					if(($f = $this->app->findTemplate("$substr")) !== false) {
-                    	$file = $f;
-					}
+                    $substr = trim($substr, "'");
+                    if (($f = $this->app->findTemplate("layouts\\$substr")) !== false) {
+                        $file = $f;
+                    } elseif (($f = $this->app->findTemplate("$substr")) !== false) {
+                        $file = $f;
+                    }
+                    $substr = str_replace('.', '\\', $substr);
+                    if (($f = $this->app->findTemplate("$substr")) !== false) {
+                        $file = $f;
+                    }
                     if ($file) {
                         $templateData = str_replace("@include($substr)", file_get_contents($file), $templateData);
                     } else {
                         $templateData = str_replace("@include($substr)", '', $templateData);
                     }
                 }
-                $start = $findStart;//$findEnd;
+                $start = $findStart; //$findEnd;
             } else {
                 break;
             }
         }
-		return $templateData;
-	}
+
+        return $templateData;
+    }
 
     /**
      * Evaluate PHP code in template.
@@ -889,7 +891,7 @@ class View implements ViewInterface
      * @since 1.0.8
      */
     public function evalPhp($templateData)
-	{
+    {
         $start = 0;
         while (true) {
             $findStart = strpos($templateData, '{{', $start);
@@ -898,17 +900,18 @@ class View implements ViewInterface
                 $findEnd = strpos($templateData, '}}', $findStart);
                 if ($findEnd !== false) {
                     $substr = substr($templateData, $findStart, ($findEnd - $findStart));
-                    $templateData = str_replace("{{".$substr."}}", "<?=e($substr)?>", $templateData);
+                    $templateData = str_replace('{{'.$substr.'}}', "<?=e($substr)?>", $templateData);
                 }
                 $start = $findEnd;
             } else {
                 break;
             }
         }
-		file_put_contents('xyz.php', $templateData);
-		ob_start();
-		//$return = require('xyz.php');
-		$output = ob_get_clean();
-		return $templateData;
-	}
+        file_put_contents('xyz.php', $templateData);
+        ob_start();
+        //$return = require('xyz.php');
+        $output = ob_get_clean();
+
+        return $templateData;
+    }
 }

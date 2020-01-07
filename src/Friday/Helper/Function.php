@@ -17,9 +17,9 @@
  */
 use Friday\Contracts\View\Factory as ViewFactory;
 use Friday\Foundation\Application;
+use Friday\Helper\App;
 use Friday\Helper\Env;
 use Friday\View\View;
-use Friday\Helper\App;
 
 if (!function_exists('env')) {
     /**
@@ -229,22 +229,23 @@ if (!function_exists('view')) {
         return View::template($view, $data);
         /*
                 $factory = app(ViewFactory::class);
-        
+
                 if (func_num_args() === 0) {
                     return $factory;
                 }
-        
+
                 return $factory->make($view, $data, $mergeData);
         */
     }
 }
 
-if (! function_exists('e')) {
+if (!function_exists('e')) {
     /**
      * Encode HTML special characters in a string.
      *
-     * @param  string  $value
-     * @param  bool  $doubleEncode
+     * @param string $value
+     * @param bool   $doubleEncode
+     *
      * @return string
      */
     function e($value, $doubleEncode = true)
@@ -253,11 +254,12 @@ if (! function_exists('e')) {
     }
 }
 
-if (! function_exists('app')) {
+if (!function_exists('app')) {
     /**
      * Get the App instance.
      *
-     * @param  string|null  $abstract
+     * @param string|null $abstract
+     *
      * @return \Friday\Helper\App
      */
     function app($abstract = null)
@@ -266,12 +268,13 @@ if (! function_exists('app')) {
     }
 }
 
-if (! function_exists('asset')) {
+if (!function_exists('asset')) {
     /**
      * Generate an asset path for the application.
      *
-     * @param  string  $path
-     * @param  bool|null  $secure
+     * @param string    $path
+     * @param bool|null $secure
+     *
      * @return string
      */
     function asset($path, $secure = null)
@@ -280,12 +283,13 @@ if (! function_exists('asset')) {
     }
 }
 
-if (! function_exists('contains')) {
+if (!function_exists('contains')) {
     /**
      * Determine if a given string contains a given substring.
      *
-     * @param  string  $haystack
-     * @param  string|array  $needles
+     * @param string       $haystack
+     * @param string|array $needles
+     *
      * @return bool
      */
     function contains($haystack, $needles)

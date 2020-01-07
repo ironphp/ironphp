@@ -40,7 +40,8 @@ class Language
     /**
      * Set the default locale.
      *
-     * @param  string  $locale
+     * @param string $locale
+     *
      * @return void
      */
     public static function setLocale($locale)
