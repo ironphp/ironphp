@@ -25,9 +25,10 @@ class UrlGenerator
     /**
      * Create a new URL Generator instance.
      *
-     * @param  \Illuminate\Routing\RouteCollection  $routes
-     * @param  \Illuminate\Http\Request  $request
-     * @param  string|null  $assetRoot
+     * @param \Illuminate\Routing\RouteCollection $routes
+     * @param \Illuminate\Http\Request            $request
+     * @param string|null                         $assetRoot
+     *
      * @return void
      */
     public function __construct(/*RouteCollection $routes, Request $request, $assetRoot = null*/)
@@ -41,8 +42,9 @@ class UrlGenerator
     /**
      * Generate the URL to an application asset.
      *
-     * @param  string  $path
-     * @param  bool|null  $secure
+     * @param string    $path
+     * @param bool|null $secure
+     *
      * @return string
      */
     public function asset($path, $secure = null)
@@ -62,12 +64,13 @@ class UrlGenerator
     /**
      * Determine if the given path is a valid URL.
      *
-     * @param  string  $path
+     * @param string $path
+     *
      * @return bool
      */
     public function isValidUrl($path)
     {
-        if (! preg_match('~^(#|//|https?://|mailto:|tel:)~', $path)) {
+        if (!preg_match('~^(#|//|https?://|mailto:|tel:)~', $path)) {
             return filter_var($path, FILTER_VALIDATE_URL) !== false;
         }
 
@@ -77,8 +80,9 @@ class UrlGenerator
     /**
      * Get the base URL for the request.
      *
-     * @param  string  $scheme
-     * @param  string|null  $root
+     * @param string      $scheme
+     * @param string|null $root
+     *
      * @return string
      */
     public function formatRoot($scheme, $root = null)
@@ -95,7 +99,8 @@ class UrlGenerator
     /**
      * Get the default scheme for a raw URL.
      *
-     * @param  bool|null  $secure
+     * @param bool|null $secure
+     *
      * @return string
      */
     public function formatScheme($secure = null)
@@ -106,7 +111,8 @@ class UrlGenerator
     /**
      * Remove the index.php file from a path.
      *
-     * @param  string  $root
+     * @param string $root
+     *
      * @return string
      */
     protected function removeIndex($root)

@@ -23,10 +23,10 @@ use Exception;
 use Friday\Contracts\Foundation\Application as ApplicationInterface;
 use Friday\Foundation\Exceptions\Handler;
 use Friday\Helper\Env;
+use Friday\Helper\Language;
 use Friday\Helper\Session;
 use Friday\Http\FrontController;
 use Friday\Http\Route;
-use Friday\Helper\Language;
 
 /**
  * Runs an application invoking all the registered application.
@@ -168,7 +168,7 @@ class Application implements ApplicationInterface
         define('CONFIG_LOADED', microtime(true));
 
         //set locale-timezone
-		Language::setLocale($this->config['app']['locale']);
+        Language::setLocale($this->config['app']['locale']);
         $this->setTimezone($this->config['app']['timezone']);
         $timezone = date_default_timezone_get();
         if (strcmp($timezone, ini_get('date.timezone'))) {
@@ -307,7 +307,7 @@ class Application implements ApplicationInterface
         } elseif ($this->findFile($file.'.php')) {
             return $file.'.php';
         } else {
-			return false;
+            return false;
             //throw new Exception($file.' Template file is missing.');
             //exit;
         }

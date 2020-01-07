@@ -234,12 +234,12 @@ class Controller implements ControllerInterface
         $return = $output = null;
         $this->setName($controller);
 
-		if ($this->app->findController($controller)) {
+        if ($this->app->findController($controller)) {
             $controllerClass = 'App\\Controller\\'.$controller;
             $this->controller = new $controllerClass();
         }
 
-		if ($this->app->hasMethod($this->controller, $method)) {
+        if ($this->app->hasMethod($this->controller, $method)) {
             self::$instance = $this;
             ob_start();
             $return = $this->controller->$method();
@@ -247,7 +247,7 @@ class Controller implements ControllerInterface
             self::$instance = null;
         }
 
-		if ($return !== null) {
+        if ($return !== null) {
             //handle returned value
             $output .= $return;
         }
