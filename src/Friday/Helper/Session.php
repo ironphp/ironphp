@@ -208,20 +208,23 @@ class Session implements SessionInterface
      * Get Session instance.
      *
      * @return \Friday\Helper\Session
+     *
      * @since 1.0.8
      */
     public static function getInstance()
     {
         if (self::$instance === null) {
-            return new static;
+            return new static();
         }
-		return static::$instance;
+
+        return static::$instance;
     }
 
     /**
      * Get a token.
      *
      * @return string
+     *
      * @since 1.0.8
      */
     public function token()

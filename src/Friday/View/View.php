@@ -887,8 +887,8 @@ class View implements ViewInterface
                 if ($findEnd !== false) {
                     $substr = substr($templateData, $findStart, ($findEnd - $findStart));
                     //$str = trim($substr);
-                    $templateData = str_replace("@foreach".$substr.")", "<?php foreach".$substr."): ?>", $templateData);
-                    $templateData = str_replace("@endforeach", "<?php endforeach; ?>", $templateData);
+                    $templateData = str_replace('@foreach'.$substr.')', '<?php foreach'.$substr.'): ?>', $templateData);
+                    $templateData = str_replace('@endforeach', '<?php endforeach; ?>', $templateData);
                 }
                 $start = $findEnd;
             } else {
@@ -927,8 +927,8 @@ class View implements ViewInterface
         }
 
         file_put_contents('xyz.php', $templateData);
-		ob_start();
-        $return = require('xyz.php');
+        ob_start();
+        $return = require 'xyz.php';
         $output = ob_get_clean();
 
         return $templateData;
