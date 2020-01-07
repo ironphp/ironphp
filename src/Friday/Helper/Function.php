@@ -304,6 +304,38 @@ if (!function_exists('contains')) {
     }
 }
 
+if (! function_exists('csrf_field')) {
+    /**
+     * Generate a CSRF token form field.
+     *
+     * @return \Illuminate\Support\HtmlString
+     */
+    function csrf_field()
+    {
+        return '<input type="hidden" name="_token" value="'.csrf_token().'">';
+    }
+}
+
+if (! function_exists('csrf_token')) {
+    /**
+     * Get the CSRF token value.
+     *
+     * @return string
+     *
+     * @throws \RuntimeException
+     */
+    function csrf_token()
+    {
+        $session = app('session');
+
+        if (isset($session)) {
+            return $session->token();
+        }
+
+        throw new RuntimeException('Application session store not set.');
+    }
+}
+
 /*
 function moneyInWords($m){
     if($m>=1000){

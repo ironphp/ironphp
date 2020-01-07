@@ -43,6 +43,7 @@ class App
     {
         $this->app = [
             'url' => UrlGenerator::class,
+			'session' => Session::class
         ];
     }
 
@@ -84,12 +85,12 @@ class App
         if ($abstract === null) {
             return self::$instance;
         } else {
-            if (!isset(self::$instance->app[$abstract])) {
-                throw Exception('Invalid app usage.');
+            if ( !array_key_exists($abstract, self::$instance->app) ) {
+                throw new \Exception('Invalid app usage.');
             }
             $app = self::$instance->app[$abstract];
 
-            return new $app();
+            return $app::getInstance();
         }
     }
 

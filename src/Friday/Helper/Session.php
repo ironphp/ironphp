@@ -23,6 +23,13 @@ use Friday\Contracts\Helper\Session as SessionInterface;
 class Session implements SessionInterface
 {
     /**
+     * The Session instance.
+     *
+     * @var \Friday\Helper\Session|null
+     */
+    protected static $instance = null;
+
+    /**
      * Create a new Session instance.
      *
      * @return void
@@ -32,6 +39,7 @@ class Session implements SessionInterface
         if (is_session_started() === false) {
             session_start();
         }
+        static::$instance = $this;
     }
 
     /**
@@ -194,5 +202,30 @@ class Session implements SessionInterface
     public function checkToken($token)
     {
         return !empty($token) && $token === $token;
+    }
+
+    /**
+     * Get Session instance.
+     *
+     * @return \Friday\Helper\Session
+     * @since 1.0.8
+     */
+    public static function getInstance()
+    {
+        if (self::$instance === null) {
+            return new static;
+        }
+		return static::$instance;
+    }
+
+    /**
+     * Get a token.
+     *
+     * @return string
+     * @since 1.0.8
+     */
+    public function token()
+    {
+        return $this->get('_token');
     }
 }

@@ -23,16 +23,24 @@ namespace Friday\Helper;
 class UrlGenerator
 {
     /**
+     * The UrlGenerator instance.
+     *
+     * @var \Friday\Helper\UrlGenerator|null
+     */
+    protected static $instance = null;
+
+    /**
      * Create a new URL Generator instance.
      *
-     * @param \Illuminate\Routing\RouteCollection $routes
-     * @param \Illuminate\Http\Request            $request
-     * @param string|null                         $assetRoot
+     * @param array $routes
+     * @param \Friday\Http\Request            $request
+     * @param string|null                     $assetRoot
      *
      * @return void
      */
-    public function __construct(/*RouteCollection $routes, Request $request, $assetRoot = null*/)
+    public function __construct(/*$routes, Request $request, $assetRoot = null*/)
     {
+        static::$instance = $this;
         /*$this->routes = $routes;
         $this->assetRoot = $assetRoot;
 
@@ -120,5 +128,18 @@ class UrlGenerator
         $i = 'index.php';
 
         return contains($root, $i) ? str_replace('/'.$i, '', $root) : $root;
+    }
+
+    /**
+     * Get UrlGenerator instance.
+     *
+     * @return \Friday\Helper\UrlGenerator
+     */
+    public static function getInstance()
+    {
+        if (self::$instance === null) {
+            static::$instance = new static;
+        }
+		return static::$instance;
     }
 }
