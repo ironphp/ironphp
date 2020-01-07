@@ -765,6 +765,9 @@ class View implements ViewInterface
      */
     public function getThemePath()
     {
+		if($this->templatePath == null) {
+			$this->setThemePath($this->app->basePath('app\Template'));
+		}
         return $this->templatePath;
     }
 
@@ -852,14 +855,23 @@ class View implements ViewInterface
                 $findEnd = strpos($templateData, ')', $findStart);
                 if ($findEnd !== false) {
                     $substr = substr($templateData, $findStart, ($findEnd - $findStart));
-                    $file = $this->getThemePath()."layout\\$substr.html";
-                    if (file_exists($file) && is_file($file)) {
+					$substr = trim($substr, "'");
+					if(($f = $this->app->findTemplate("layouts\\$substr")) !== false) {
+                    	$file = $f;
+					} elseif(($f = $this->app->findTemplate("$substr")) !== false) {
+                    	$file = $f;
+					}
+					$substr = str_replace('.', "\\", $substr);
+					if(($f = $this->app->findTemplate("$substr")) !== false) {
+                    	$file = $f;
+					}
+                    if ($file) {
                         $templateData = str_replace("@include($substr)", file_get_contents($file), $templateData);
                     } else {
                         $templateData = str_replace("@include($substr)", '', $templateData);
                     }
                 }
-                $start = $findEnd;
+                $start = $findStart;//$findEnd;
             } else {
                 break;
             }
@@ -894,9 +906,9 @@ class View implements ViewInterface
             }
         }
 		file_put_contents('xyz.php', $templateData);
-		$data = require('xyz.php');
-//print_r($templateData);
-exit;
+		ob_start();
+		//$return = require('xyz.php');
+		$output = ob_get_clean();
 		return $templateData;
 	}
 }

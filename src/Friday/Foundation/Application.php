@@ -295,7 +295,7 @@ class Application implements ApplicationInterface
      *
      * @throws Exception
      *
-     * @return string full template file path
+     * @return string|bool
      */
     public function findTemplate($template)
     {
@@ -307,8 +307,9 @@ class Application implements ApplicationInterface
         } elseif ($this->findFile($file.'.php')) {
             return $file.'.php';
         } else {
-            throw new Exception($file.' Template file is missing.');
-            exit;
+			return false;
+            //throw new Exception($file.' Template file is missing.');
+            //exit;
         }
     }
 

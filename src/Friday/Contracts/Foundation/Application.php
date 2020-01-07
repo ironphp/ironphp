@@ -98,7 +98,7 @@ interface Application
      *
      * @throws Exception
      *
-     * @return string full template file path
+     * @return string|bool
      */
     public function findTemplate($template);
 
