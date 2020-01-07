@@ -19,6 +19,7 @@ use Friday\Contracts\View\Factory as ViewFactory;
 use Friday\Foundation\Application;
 use Friday\Helper\Env;
 use Friday\View\View;
+use Friday\Helper\App;
 
 if (!function_exists('env')) {
     /**
@@ -235,6 +236,47 @@ if (!function_exists('view')) {
         
                 return $factory->make($view, $data, $mergeData);
         */
+    }
+}
+
+if (! function_exists('e')) {
+    /**
+     * Encode HTML special characters in a string.
+     *
+     * @param  string  $value
+     * @param  bool  $doubleEncode
+     * @return string
+     */
+    function e($value, $doubleEncode = true)
+    {
+        return htmlspecialchars($value, ENT_QUOTES, 'UTF-8', $doubleEncode);
+    }
+}
+
+if (! function_exists('app')) {
+    /**
+     * Get the App instance.
+     *
+     * @param  string|null  $abstract
+     * @return \Friday\Helper\App
+     */
+    function app($abstract = null)
+    {
+        return App::getInstance($abstract);
+    }
+}
+
+if (! function_exists('asset')) {
+    /**
+     * Generate an asset path for the application.
+     *
+     * @param  string  $path
+     * @param  bool|null  $secure
+     * @return string
+     */
+    function asset($path, $secure = null)
+    {
+        return app('url')->asset($path, $secure);
     }
 }
 

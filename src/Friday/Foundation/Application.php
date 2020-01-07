@@ -26,6 +26,7 @@ use Friday\Helper\Env;
 use Friday\Helper\Session;
 use Friday\Http\FrontController;
 use Friday\Http\Route;
+use Friday\Helper\Language;
 
 /**
  * Runs an application invoking all the registered application.
@@ -37,7 +38,7 @@ class Application implements ApplicationInterface
      *
      * @var string
      */
-    const VERSION = '1.0.7-alpha1';
+    const VERSION = '1.0.8-alpha1';
 
     /**
      * The base path for the IronPHP installation.
@@ -167,6 +168,7 @@ class Application implements ApplicationInterface
         define('CONFIG_LOADED', microtime(true));
 
         //set locale-timezone
+		Language::setLocale($this->config['app']['locale']);
         $this->setTimezone($this->config['app']['timezone']);
         $timezone = date_default_timezone_get();
         if (strcmp($timezone, ini_get('date.timezone'))) {

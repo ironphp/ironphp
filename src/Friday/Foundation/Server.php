@@ -21,6 +21,7 @@ namespace Friday\Foundation;
 use Exception;
 use Friday\Controller\Controller;
 use Friday\Helper\Cookie;
+use Friday\Helper\UrlGenerator;
 
 /**
  * Runs a server application.

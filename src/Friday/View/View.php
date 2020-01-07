@@ -711,31 +711,13 @@ class View implements ViewInterface
      *
      * @throws \Exception
      *
-     * @return string.
+     * @return string
      */
     public function putData($templateData, $data = [])
     {
-        $start = 0;
-        while (true) {
-            $findStart = strpos($templateData, '@include(', $start);
-            if ($findStart !== false) {
-                $findStart = $findStart + 9;
-                $findEnd = strpos($templateData, ')', $findStart);
-                if ($findEnd !== false) {
-                    $substr = substr($templateData, $findStart, ($findEnd - $findStart));
-                    $file = $this->getThemePath()."layout\\$substr.html";
-                    if (file_exists($file) && is_file($file)) {
-                        $templateData = str_replace("@include($substr)", file_get_contents($file), $templateData);
-                    } else {
-                        $templateData = str_replace("@include($substr)", '', $templateData);
-                    }
-                }
-                $start = $findEnd;
-            } else {
-                break;
-            }
-        }
-        foreach ($data as $key => $val) {
+		$templateData = $this->includeFile($templateData);
+
+		foreach ($data as $key => $val) {
             if (is_array($val)) {
                 $findStart = strpos($templateData, '{{'.$key.':}}');
                 if ($findStart !== false) {
@@ -768,6 +750,8 @@ class View implements ViewInterface
                 $templateData = str_replace('{{'.$key.'}}', $val, $templateData);
             }
         }
+
+		$templateData = $this->evalPhp($templateData);
 
         return $templateData;
     }
@@ -834,6 +818,8 @@ class View implements ViewInterface
      * @param array  $data     Arguments to use
      *
      * @return void|bool
+     *
+     * @since 1.0.7
      */
     public static function template($template, $data = [])
     {
@@ -846,4 +832,71 @@ class View implements ViewInterface
 
         return self::$instance->renderTemplate($templatePath, $data);
     }
+
+    /**
+     * Include file in template.
+     *
+     * @param string $templateData
+     *
+     * @return string
+     *
+     * @since 1.0.8
+     */
+    public function includeFile($templateData)
+	{
+        $start = 0;
+        while (true) {
+            $findStart = strpos($templateData, '@include(', $start);
+            if ($findStart !== false) {
+                $findStart += 9;
+                $findEnd = strpos($templateData, ')', $findStart);
+                if ($findEnd !== false) {
+                    $substr = substr($templateData, $findStart, ($findEnd - $findStart));
+                    $file = $this->getThemePath()."layout\\$substr.html";
+                    if (file_exists($file) && is_file($file)) {
+                        $templateData = str_replace("@include($substr)", file_get_contents($file), $templateData);
+                    } else {
+                        $templateData = str_replace("@include($substr)", '', $templateData);
+                    }
+                }
+                $start = $findEnd;
+            } else {
+                break;
+            }
+        }
+		return $templateData;
+	}
+
+    /**
+     * Evaluate PHP code in template.
+     *
+     * @param string $templateData
+     *
+     * @return string
+     *
+     * @since 1.0.8
+     */
+    public function evalPhp($templateData)
+	{
+        $start = 0;
+        while (true) {
+            $findStart = strpos($templateData, '{{', $start);
+            if ($findStart !== false) {
+                $findStart += 2;
+                $findEnd = strpos($templateData, '}}', $findStart);
+                if ($findEnd !== false) {
+                    $substr = substr($templateData, $findStart, ($findEnd - $findStart));
+                    $templateData = str_replace("{{".$substr."}}", "<?=e($substr)?>", $templateData);
+                }
+                $start = $findEnd;
+            } else {
+                break;
+            }
+        }
+		file_put_contents('xyz.php', $templateData);
+		$data = require('xyz.php');
+//print_r($templateData);
+exit;
+		return $templateData;
+	}
 }

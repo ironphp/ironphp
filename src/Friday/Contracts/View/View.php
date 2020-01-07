@@ -187,7 +187,40 @@ interface View
      *
      * @throws \Exception
      *
-     * @return string.
+     * @return string
      */
     public function putData($templateData, $data = []);
+
+    /**
+     * Get the current view theme path.
+     *
+     * @return string|null
+     *
+     * @since 1.0.7
+     */
+    public function getThemePath();
+
+    /**
+     * Set the view theme path.
+     *
+     * @param string $theme Theme name.
+     *
+     * @throws \Exception
+     *
+     * @return void
+     *
+     * @since 1.0.7
+     */
+    public function setThemePath($themePath);
+
+    /**
+     * Include file in template.
+     *
+     * @param string $templateData
+     *
+     * @return string
+     *
+     * @since 1.0.8
+     */
+    public function includeFile($templateData);
 }

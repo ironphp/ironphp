@@ -233,20 +233,23 @@ class Controller implements ControllerInterface
     {
         $return = $output = null;
         $this->setName($controller);
-        if ($this->app->findController($controller)) {
+
+		if ($this->app->findController($controller)) {
             $controllerClass = 'App\\Controller\\'.$controller;
             $this->controller = new $controllerClass();
         }
-        if ($this->app->hasMethod($this->controller, $method)) {
+
+		if ($this->app->hasMethod($this->controller, $method)) {
             self::$instance = $this;
             ob_start();
             $return = $this->controller->$method();
             $output = ob_get_clean();
             self::$instance = null;
         }
-        if ($return !== null) {
-            $output .= $return;
+
+		if ($return !== null) {
             //handle returned value
+            $output .= $return;
         }
         $output = $output ?: null;
 
