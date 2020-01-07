@@ -42,8 +42,8 @@ class App
     public function __construct()
     {
         $this->app = [
-            'url' => UrlGenerator::class,
-			'session' => Session::class
+            'url'     => UrlGenerator::class,
+            'session' => Session::class,
         ];
     }
 
@@ -85,7 +85,7 @@ class App
         if ($abstract === null) {
             return self::$instance;
         } else {
-            if ( !array_key_exists($abstract, self::$instance->app) ) {
+            if (!array_key_exists($abstract, self::$instance->app)) {
                 throw new \Exception('Invalid app usage.');
             }
             $app = self::$instance->app[$abstract];

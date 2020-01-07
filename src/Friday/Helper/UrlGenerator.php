@@ -32,9 +32,9 @@ class UrlGenerator
     /**
      * Create a new URL Generator instance.
      *
-     * @param array $routes
-     * @param \Friday\Http\Request            $request
-     * @param string|null                     $assetRoot
+     * @param array                $routes
+     * @param \Friday\Http\Request $request
+     * @param string|null          $assetRoot
      *
      * @return void
      */
@@ -138,8 +138,9 @@ class UrlGenerator
     public static function getInstance()
     {
         if (self::$instance === null) {
-            static::$instance = new static;
+            static::$instance = new static();
         }
-		return static::$instance;
+
+        return static::$instance;
     }
 }

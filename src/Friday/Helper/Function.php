@@ -304,7 +304,7 @@ if (!function_exists('contains')) {
     }
 }
 
-if (! function_exists('csrf_field')) {
+if (!function_exists('csrf_field')) {
     /**
      * Generate a CSRF token form field.
      *
@@ -316,13 +316,13 @@ if (! function_exists('csrf_field')) {
     }
 }
 
-if (! function_exists('csrf_token')) {
+if (!function_exists('csrf_token')) {
     /**
      * Get the CSRF token value.
      *
-     * @return string
-     *
      * @throws \RuntimeException
+     *
+     * @return string
      */
     function csrf_token()
     {
