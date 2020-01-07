@@ -896,7 +896,7 @@ class View implements ViewInterface
 		file_put_contents('xyz.php', $templateData);
 		$data = require('xyz.php');
 //print_r($templateData);
-exit;
+//exit;
 		return $templateData;
 	}
 }

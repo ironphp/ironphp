@@ -55,9 +55,8 @@ class UrlGenerator
         // file in the paths. If it does, we will remove it since it is not needed
         // for asset paths, but only for routes to endpoints in the application.
         $root = $this->formatRoot($this->formatScheme($secure));
-var_dump( $root );exit;
 
-        return $this->removeIndex($root).'/'.trim($path, '/');
+        return $this->removeIndex($root).trim($path, '/');
     }
 
     /**
@@ -114,6 +113,6 @@ var_dump( $root );exit;
     {
         $i = 'index.php';
 
-        return Str::contains($root, $i) ? str_replace('/'.$i, '', $root) : $root;
+        return contains($root, $i) ? str_replace('/'.$i, '', $root) : $root;
     }
 }

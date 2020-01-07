@@ -280,6 +280,26 @@ if (! function_exists('asset')) {
     }
 }
 
+if (! function_exists('contains')) {
+    /**
+     * Determine if a given string contains a given substring.
+     *
+     * @param  string  $haystack
+     * @param  string|array  $needles
+     * @return bool
+     */
+    function contains($haystack, $needles)
+    {
+        foreach ((array) $needles as $needle) {
+            if ($needle !== '' && mb_strpos($haystack, $needle) !== false) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+}
+
 /*
 function moneyInWords($m){
     if($m>=1000){
