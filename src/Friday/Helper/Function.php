@@ -336,6 +336,21 @@ if (!function_exists('csrf_token')) {
     }
 }
 
+if (! function_exists('route')) {
+    /**
+     * Generate the URL to a named route.
+     *
+     * @param  array|string  $name
+     * @param  mixed  $parameters
+     * @param  bool  $absolute
+     * @return string
+     */
+    function route($name, $parameters = [], $absolute = true)
+    {
+        return app('url')->route($name, $parameters, $absolute);
+    }
+}
+
 /*
 function moneyInWords($m){
     if($m>=1000){
