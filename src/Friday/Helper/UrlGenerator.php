@@ -18,12 +18,14 @@
 
 namespace Friday\Helper;
 
+use Friday\Http\Route;
+
 class UrlGenerator
 {
     /**
-     * The Route instance.
+     * The Routes list.
      *
-     * @var \Friday\Http\Route
+     * @var array
      */
     protected $routes;
 
@@ -46,7 +48,8 @@ class UrlGenerator
     public function __construct(/*$routes, Request $request, $assetRoot = null*/)
     {
         static::$instance = $this;
-        /*$this->routes = $routes;
+		$this->routes = Route::$instance->routes;
+        /*
         $this->assetRoot = $assetRoot;
 
         $this->setRequest($request);*/
@@ -148,4 +151,40 @@ class UrlGenerator
 
         return static::$instance;
     }
+
+    /**
+     * Get the URL to a named route.
+     *
+     * @param  string  $name
+     * @param  array  $parameters
+     * @param  bool  $absolute
+     * @return string
+     *
+     * @throws \Exception
+     */
+    public function route($name, $parameters = [], $absolute = true)
+    {
+        if ( array_key_exists($name, $this->routes) ) {
+			$route = $this->routes[$name];
+			return SERVER_ROOT.ltrim($route[1], '/').$this->getStringParameter($parameters);
+        }
+
+        throw new \Exception("Route [{$name}] not defined.");
+    }
+
+    /**
+     * Get the URL to a named route.
+     *
+     * @param  array  $parameters
+     * @return string
+     */
+    public function getStringParameter($parameters) {
+		foreach($parameters as $key => $val) {
+			$parameters[$key] = "$key=$val";
+		}
+		if(($parameters = implode('&', $parameters)) != '') {
+			$parameters = '?'.$parameters;
+		}
+		return $parameters;
+	}
 }

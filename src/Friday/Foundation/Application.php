@@ -27,7 +27,6 @@ use Friday\Helper\Language;
 use Friday\Helper\Session;
 use Friday\Http\FrontController;
 use Friday\Http\Route;
-use Friday\Helper\UrlGenerator;
 
 /**
  * Runs an application invoking all the registered application.
@@ -187,7 +186,6 @@ class Application implements ApplicationInterface
 
         //route
         $this->route = $this->frontController->route();
-        UrlGenerator::getInstance()
 
         define('ROUTES_LOADED', microtime(true));
 
