@@ -856,14 +856,14 @@ class View implements ViewInterface
                 $findEnd = strpos($templateData, ')', $findStart);
                 if ($findEnd !== false) {
                     $substr = substr($templateData, $findStart, ($findEnd - $findStart));
-                    $substr = trim($substr, "'");
-                    if (($f = $this->app->findTemplate("layouts\\$substr")) !== false) {
+                    $str = trim($substr, "'");
+                    if (($f = $this->app->findTemplate("layouts\\$str")) !== false) {
                         $file = $f;
-                    } elseif (($f = $this->app->findTemplate("$substr")) !== false) {
+                    } elseif (($f = $this->app->findTemplate("$str")) !== false) {
                         $file = $f;
                     }
-                    $substr = str_replace('.', '\\', $substr);
-                    if (($f = $this->app->findTemplate("$substr")) !== false) {
+                    $str = str_replace('.', '\\', $str);
+                    if (($f = $this->app->findTemplate("$str")) !== false) {
                         $file = $f;
                     }
                     if ($file) {
@@ -873,6 +873,24 @@ class View implements ViewInterface
                     }
                 }
                 $start = $findStart; //$findEnd;
+            } else {
+                break;
+            }
+        }
+
+        $start = 0;
+        while (true) {
+            $findStart = strpos($templateData, '@foreach', $start);
+            if ($findStart !== false) {
+                $findStart += 8;
+                $findEnd = strpos($templateData, ')', $findStart);
+                if ($findEnd !== false) {
+                    $substr = substr($templateData, $findStart, ($findEnd - $findStart));
+                    //$str = trim($substr);
+                    $templateData = str_replace("@foreach".$substr.")", "<?php foreach".$substr."): ?>", $templateData);
+                    $templateData = str_replace("@endforeach", "<?php endforeach; ?>", $templateData);
+                }
+                $start = $findEnd;
             } else {
                 break;
             }
@@ -907,9 +925,10 @@ class View implements ViewInterface
                 break;
             }
         }
+
         file_put_contents('xyz.php', $templateData);
-        ob_start();
-        //$return = require('xyz.php');
+		ob_start();
+        $return = require('xyz.php');
         $output = ob_get_clean();
 
         return $templateData;
