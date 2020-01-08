@@ -48,7 +48,7 @@ class UrlGenerator
     public function __construct(/*$routes, Request $request, $assetRoot = null*/)
     {
         static::$instance = $this;
-		$this->routes = Route::$instance->routes;
+        $this->routes = Route::$instance->routes;
         /*
         $this->assetRoot = $assetRoot;
 
@@ -155,18 +155,20 @@ class UrlGenerator
     /**
      * Get the URL to a named route.
      *
-     * @param  string  $name
-     * @param  array  $parameters
-     * @param  bool  $absolute
-     * @return string
+     * @param string $name
+     * @param array  $parameters
+     * @param bool   $absolute
      *
      * @throws \Exception
+     *
+     * @return string
      */
     public function route($name, $parameters = [], $absolute = true)
     {
-        if ( array_key_exists($name, $this->routes) ) {
-			$route = $this->routes[$name];
-			return SERVER_ROOT.ltrim($route[1], '/').$this->getStringParameter($parameters);
+        if (array_key_exists($name, $this->routes)) {
+            $route = $this->routes[$name];
+
+            return SERVER_ROOT.ltrim($route[1], '/').$this->getStringParameter($parameters);
         }
 
         throw new \Exception("Route [{$name}] not defined.");
@@ -175,16 +177,19 @@ class UrlGenerator
     /**
      * Get the URL to a named route.
      *
-     * @param  array  $parameters
+     * @param array $parameters
+     *
      * @return string
      */
-    public function getStringParameter($parameters) {
-		foreach($parameters as $key => $val) {
-			$parameters[$key] = "$key=$val";
-		}
-		if(($parameters = implode('&', $parameters)) != '') {
-			$parameters = '?'.$parameters;
-		}
-		return $parameters;
-	}
+    public function getStringParameter($parameters)
+    {
+        foreach ($parameters as $key => $val) {
+            $parameters[$key] = "$key=$val";
+        }
+        if (($parameters = implode('&', $parameters)) != '') {
+            $parameters = '?'.$parameters;
+        }
+
+        return $parameters;
+    }
 }
