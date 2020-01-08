@@ -424,9 +424,9 @@ class Application implements ApplicationInterface
     /**
      * Set Application secret key.
      *
-     * @return bool
-     *
      * @throws Exception
+     *
+     * @return bool
      */
     public function setKey()
     {
@@ -580,9 +580,9 @@ class Application implements ApplicationInterface
      * @param string $theme
      * @param string $file  File to use for rendering
      *
-     * @return array
-     *
      * @throws Exception
+     *
+     * @return array
      */
     public function findTheme($theme, $file = null)
     {
@@ -638,21 +638,21 @@ class Application implements ApplicationInterface
      * @param string $json
      * @param bool   $byType
      *
-     * @return array
-     *
      * @throws Exception
+     *
+     * @return array
      */
     public function parseDir($dir, $allowedExt, $json, $byType = false)
     {
         $fp = fopen($json, 'w');
         $getList = $this->getList($dir, $allowedExt, [], $byType);
-		if($fp !== false) {
-			fwrite($fp, json_encode($getList, JSON_PRETTY_PRINT));
-			fclose($fp);
-		} else {
+        if ($fp !== false) {
+            fwrite($fp, json_encode($getList, JSON_PRETTY_PRINT));
+            fclose($fp);
+        } else {
             throw new Exception('Can not write file : '.$json);
             exit;
-		}
+        }
 
         return $getList;
     }
