@@ -927,10 +927,25 @@ class View implements ViewInterface
         }
 
         file_put_contents('xyz.php', $templateData);
-        ob_start();
-        $return = require 'xyz.php';
-        $output = ob_get_clean();
+
+        $output = $this->requireToVar('xyz.php');
 
         return $templateData;
     }
+
+
+    /**
+     * Require a file and its contents into a variable.
+     *
+     * @param string $file
+     *
+     * @return string
+     *
+     * @since 1.0.8
+     */
+	public function requireToVar($file){
+		ob_start();
+		require($file);
+		return ob_get_clean();
+	}
 }
