@@ -424,9 +424,9 @@ class Application implements ApplicationInterface
     /**
      * Set Application secret key.
      *
-     * @throws Exception
+     * @return bool
      *
-     * @return string|bool
+     * @throws Exception
      */
     public function setKey()
     {
@@ -452,7 +452,7 @@ class Application implements ApplicationInterface
                 }
             }
         }
-        if ($flag == false) {
+        if ($flag === false) {
             $lines = ['APP_KEY='.$appKey] + $lines;
         }
         $data = implode("\n", $lines);
@@ -472,7 +472,7 @@ class Application implements ApplicationInterface
      *
      * @param string $file
      *
-     * @return array
+     * @return array|bool
      */
     public function parseEnvFile($file)
     {
@@ -580,9 +580,9 @@ class Application implements ApplicationInterface
      * @param string $theme
      * @param string $file  File to use for rendering
      *
-     * @throws Exception
-     *
      * @return array
+     *
+     * @throws Exception
      */
     public function findTheme($theme, $file = null)
     {
@@ -639,13 +639,20 @@ class Application implements ApplicationInterface
      * @param bool   $byType
      *
      * @return array
+     *
+     * @throws Exception
      */
     public function parseDir($dir, $allowedExt, $json, $byType = false)
     {
         $fp = fopen($json, 'w');
         $getList = $this->getList($dir, $allowedExt, [], $byType);
-        fwrite($fp, json_encode($getList, JSON_PRETTY_PRINT));
-        fclose($fp);
+		if($fp !== false) {
+			fwrite($fp, json_encode($getList, JSON_PRETTY_PRINT));
+			fclose($fp);
+		} else {
+            throw new Exception('Can not write file : '.$json);
+            exit;
+		}
 
         return $getList;
     }
@@ -653,7 +660,7 @@ class Application implements ApplicationInterface
     /*
      * Get files-dir by RecursiveDirectoryIterator
      *
-     * @param   array  $dir
+     * @param   string $dir
      * @param   array  $types
      * @param   array  $ignoreDir
      * @param   bool   $byType
@@ -687,7 +694,7 @@ class Application implements ApplicationInterface
     /*
      * Copy theme files into public dir.
      *
-     * @param   string  $jsonTheme
+     * @param   array  $jsonTheme
      * @param   array   $allowExt
      * @return  void
      */
