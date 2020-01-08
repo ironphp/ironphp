@@ -44,6 +44,7 @@ class App
         $this->app = [
             'url'     => UrlGenerator::class,
             'session' => Session::class,
+            'config' => Config::class,
         ];
     }
 
@@ -86,7 +87,7 @@ class App
             return self::$instance;
         } else {
             if (!array_key_exists($abstract, self::$instance->app)) {
-                throw new \Exception('Invalid app usage.');
+                throw new \Exception("[{$abstract}] helper not registered.");
             }
             $app = self::$instance->app[$abstract];
 
