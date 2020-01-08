@@ -68,7 +68,7 @@ class Config
      */
     public function get($key, $default = null)
     {
-        return Arr::get($this->items, $key, $default);
+        return static::getValue($this->items, $key, $default);
     }
 
     /**
@@ -83,7 +83,7 @@ class Config
         $keys = is_array($key) ? $key : [$key => $value];
 
         foreach ($keys as $key => $value) {
-            Arr::set($this->items, $key, $value);
+            static::setValue($this->items, $key, $value);
         }
     }
 
@@ -259,7 +259,7 @@ class Config
      * @param  mixed  $default
      * @return mixed
      */
-    public static function get($array, $key, $default = null)
+    public static function getValue($array, $key, $default = null)
     {
         if (! static::accessible($array)) {
             return value($default);
@@ -284,6 +284,42 @@ class Config
                 return value($default);
             }
         }
+
+        return $array;
+    }
+
+    /**
+     * Set an array item to a given value using "dot" notation.
+     *
+     * If no key is given to the method, the entire array will be replaced.
+     *
+     * @param  array  $array
+     * @param  string  $key
+     * @param  mixed  $value
+     * @return array
+     */
+    public static function setValue(&$array, $key, $value)
+    {
+        if (is_null($key)) {
+            return $array = $value;
+        }
+
+        $keys = explode('.', $key);
+
+        while (count($keys) > 1) {
+            $key = array_shift($keys);
+
+            // If the key doesn't exist at this depth, we will just create an empty array
+            // to hold the next value, allowing us to create the arrays to hold final
+            // values at the correct depth. Then we'll keep digging into the array.
+            if (! isset($array[$key]) || ! is_array($array[$key])) {
+                $array[$key] = [];
+            }
+
+            $array = &$array[$key];
+        }
+
+        $array[array_shift($keys)] = $value;
 
         return $array;
     }
