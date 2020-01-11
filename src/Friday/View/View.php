@@ -715,8 +715,8 @@ class View implements ViewInterface
      */
     public function putData($templateData, $data = [])
     {
-		//TODO
-		$data = array_merge($data, $this->factory->getShared());
+        //TODO
+        $data = array_merge($data, $this->factory->getShared());
 
         $templateData = $this->includeFile($templateData);
 
@@ -914,7 +914,7 @@ class View implements ViewInterface
      */
     public function evalPhp($templateData, $data = [])
     {
-		$start = 0;
+        $start = 0;
         while (true) {
             $findStart = strpos($templateData, '{{', $start);
             if ($findStart !== false) {
@@ -933,11 +933,11 @@ class View implements ViewInterface
         file_put_contents('xyz.php', $templateData);
 
         $output = $this->requireToVar('xyz.php', $data);
-		print_r($output);exit;
+        print_r($output);
+        exit;
 
         return $templateData;
     }
-
 
     /**
      * Require a file and its contents into a variable.
@@ -949,16 +949,17 @@ class View implements ViewInterface
      *
      * @since 1.0.8
      */
-	public function requireToVar($file, $data = [])
-	{
-		foreach($data as $key => $val) {
-			if($key != '') {
-				${$key} = $val;
-			}
-		}
-		ob_start();
-		require($file);
-		return ob_get_clean();
-		//return eval(trim(str_replace(array('< ?php', '? >'), '', file_get_contents($path))));
-	}
+    public function requireToVar($file, $data = [])
+    {
+        foreach ($data as $key => $val) {
+            if ($key != '') {
+                ${$key} = $val;
+            }
+        }
+        ob_start();
+        require $file;
+
+        return ob_get_clean();
+        //return eval(trim(str_replace(array('< ?php', '? >'), '', file_get_contents($path))));
+    }
 }

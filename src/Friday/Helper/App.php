@@ -44,7 +44,7 @@ class App
         $this->app = [
             'url'     => UrlGenerator::class,
             'session' => Session::class,
-            'config' => Config::class,
+            'config'  => Config::class,
         ];
     }
 

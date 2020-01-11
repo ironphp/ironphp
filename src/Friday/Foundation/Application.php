@@ -22,12 +22,12 @@ use Dotenv\Dotenv;
 use Exception;
 use Friday\Contracts\Foundation\Application as ApplicationInterface;
 use Friday\Foundation\Exceptions\Handler;
+use Friday\Helper\Config;
 use Friday\Helper\Env;
 use Friday\Helper\Language;
 use Friday\Helper\Session;
 use Friday\Http\FrontController;
 use Friday\Http\Route;
-use Friday\Helper\Config;
 
 /**
  * Runs an application invoking all the registered application.
@@ -166,8 +166,8 @@ class Application implements ApplicationInterface
             $this->basePath('config/database.php'),
             true
         );
-		//TODO
-		(new Config($this->config));
+        //TODO
+        (new Config($this->config));
         define('CONFIG_LOADED', microtime(true));
 
         //set locale-timezone
