@@ -39,7 +39,8 @@ class Config
     /**
      * Create a new configuration repository.
      *
-     * @param  array  $items
+     * @param array $items
+     *
      * @return void
      */
     public function __construct(array $items = [])
@@ -51,7 +52,8 @@ class Config
     /**
      * Determine if the given configuration value exists.
      *
-     * @param  string  $key
+     * @param string $key
+     *
      * @return bool
      */
     public function has($key)
@@ -62,8 +64,9 @@ class Config
     /**
      * Get the specified configuration value.
      *
-     * @param  array|string  $key
-     * @param  mixed  $default
+     * @param array|string $key
+     * @param mixed        $default
+     *
      * @return mixed
      */
     public function get($key, $default = null)
@@ -74,8 +77,9 @@ class Config
     /**
      * Set a given configuration value.
      *
-     * @param  array|string  $key
-     * @param  mixed  $value
+     * @param array|string $key
+     * @param mixed        $value
+     *
      * @return void
      */
     public function set($key, $value = null)
@@ -90,8 +94,9 @@ class Config
     /**
      * Prepend a value onto an array configuration value.
      *
-     * @param  string  $key
-     * @param  mixed  $value
+     * @param string $key
+     * @param mixed  $value
+     *
      * @return void
      */
     public function prepend($key, $value)
@@ -106,8 +111,9 @@ class Config
     /**
      * Push a value onto an array configuration value.
      *
-     * @param  string  $key
-     * @param  mixed  $value
+     * @param string $key
+     * @param mixed  $value
+     *
      * @return void
      */
     public function push($key, $value)
@@ -132,7 +138,8 @@ class Config
     /**
      * Determine if the given configuration option exists.
      *
-     * @param  string  $key
+     * @param string $key
+     *
      * @return bool
      */
     public function offsetExists($key)
@@ -143,7 +150,8 @@ class Config
     /**
      * Get a configuration option.
      *
-     * @param  string  $key
+     * @param string $key
+     *
      * @return mixed
      */
     public function offsetGet($key)
@@ -154,8 +162,9 @@ class Config
     /**
      * Set a configuration option.
      *
-     * @param  string  $key
-     * @param  mixed  $value
+     * @param string $key
+     * @param mixed  $value
+     *
      * @return void
      */
     public function offsetSet($key, $value)
@@ -166,7 +175,8 @@ class Config
     /**
      * Unset a configuration option.
      *
-     * @param  string  $key
+     * @param string $key
+     *
      * @return void
      */
     public function offsetUnset($key)
@@ -193,15 +203,16 @@ class Config
     /**
      * Check if an item or items exist in an array using "dot" notation.
      *
-     * @param  \ArrayAccess|array  $array
-     * @param  string|array  $keys
+     * @param \ArrayAccess|array $array
+     * @param string|array       $keys
+     *
      * @return bool
      */
     public static function hasItem($array, $keys)
     {
         $keys = (array) $keys;
 
-        if (! $array || $keys === []) {
+        if (!$array || $keys === []) {
             return false;
         }
 
@@ -227,8 +238,9 @@ class Config
     /**
      * Determine if the given key exists in the provided array.
      *
-     * @param  \ArrayAccess|array  $array
-     * @param  string|int  $key
+     * @param \ArrayAccess|array $array
+     * @param string|int         $key
+     *
      * @return bool
      */
     public static function exists($array, $key)
@@ -240,10 +252,11 @@ class Config
         return array_key_exists($key, $array);
     }
 
-	/**
+    /**
      * Determine whether the given value is array accessible.
      *
-     * @param  mixed  $value
+     * @param mixed $value
+     *
      * @return bool
      */
     public static function accessible($value)
@@ -254,14 +267,15 @@ class Config
     /**
      * Get an item from an array using "dot" notation.
      *
-     * @param  \ArrayAccess|array  $array
-     * @param  string|int|null  $key
-     * @param  mixed  $default
+     * @param \ArrayAccess|array $array
+     * @param string|int|null    $key
+     * @param mixed              $default
+     *
      * @return mixed
      */
     public static function getValue($array, $key, $default = null)
     {
-        if (! static::accessible($array)) {
+        if (!static::accessible($array)) {
             return value($default);
         }
 
@@ -293,9 +307,10 @@ class Config
      *
      * If no key is given to the method, the entire array will be replaced.
      *
-     * @param  array  $array
-     * @param  string  $key
-     * @param  mixed  $value
+     * @param array  $array
+     * @param string $key
+     * @param mixed  $value
+     *
      * @return array
      */
     public static function setValue(&$array, $key, $value)
@@ -312,7 +327,7 @@ class Config
             // If the key doesn't exist at this depth, we will just create an empty array
             // to hold the next value, allowing us to create the arrays to hold final
             // values at the correct depth. Then we'll keep digging into the array.
-            if (! isset($array[$key]) || ! is_array($array[$key])) {
+            if (!isset($array[$key]) || !is_array($array[$key])) {
                 $array[$key] = [];
             }
 

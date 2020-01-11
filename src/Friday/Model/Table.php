@@ -637,14 +637,14 @@ class Table
      */
     public function all($columns = null)
     {
-		$data = $this->getAll();
-		if(is_array($data)) {
-			foreach($data as $i => $item) {
-				$data[$i] = (object) $item;
-			}
-		}
+        $data = $this->getAll();
+        if (is_array($data)) {
+            foreach ($data as $i => $item) {
+                $data[$i] = (object) $item;
+            }
+        }
 
-		return $data;
+        return $data;
         /*
         return static::query()->get(
             is_array($columns) ? $columns : func_get_args()
