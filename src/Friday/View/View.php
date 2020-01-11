@@ -715,6 +715,9 @@ class View implements ViewInterface
      */
     public function putData($templateData, $data = [])
     {
+		//TODO
+		$data = array_merge($data, $this->factory->getShared());
+
         $templateData = $this->includeFile($templateData);
 
         foreach ($data as $key => $val) {
@@ -751,7 +754,7 @@ class View implements ViewInterface
             }
         }
 
-        $templateData = $this->evalPhp($templateData);
+        $templateData = $this->evalPhp($templateData, $data);
 
         return $templateData;
     }
@@ -903,14 +906,15 @@ class View implements ViewInterface
      * Evaluate PHP code in template.
      *
      * @param string $templateData
+     * @param array  $data
      *
      * @return string
      *
      * @since 1.0.8
      */
-    public function evalPhp($templateData)
+    public function evalPhp($templateData, $data = [])
     {
-        $start = 0;
+		$start = 0;
         while (true) {
             $findStart = strpos($templateData, '{{', $start);
             if ($findStart !== false) {
@@ -928,7 +932,8 @@ class View implements ViewInterface
 
         file_put_contents('xyz.php', $templateData);
 
-        $output = $this->requireToVar('xyz.php');
+        $output = $this->requireToVar('xyz.php', $data);
+		print_r($output);exit;
 
         return $templateData;
     }
@@ -938,14 +943,22 @@ class View implements ViewInterface
      * Require a file and its contents into a variable.
      *
      * @param string $file
+     * @param array  $data
      *
      * @return string
      *
      * @since 1.0.8
      */
-	public function requireToVar($file){
+	public function requireToVar($file, $data = [])
+	{
+		foreach($data as $key => $val) {
+			if($key != '') {
+				${$key} = $val;
+			}
+		}
 		ob_start();
 		require($file);
 		return ob_get_clean();
+		//return eval(trim(str_replace(array('< ?php', '? >'), '', file_get_contents($path))));
 	}
 }

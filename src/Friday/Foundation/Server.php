@@ -80,6 +80,10 @@ class Server extends Application
             $this->request->serverRequestMethod
         );
 
+		if($this->matchRoute === false) {
+			$this->matchRoute = ['GET', '/404', function(){echo 'Route::name<br>';}, null, [], [], 4, 4, 1];
+		}
+
         $this->request->setParam('Closure', $this->router->args);
 
         define('ROUTE_MATCHED', microtime(true));
