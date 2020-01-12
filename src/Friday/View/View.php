@@ -930,9 +930,16 @@ class View implements ViewInterface
             }
         }
 
-        file_put_contents('xyz.php', $templateData);
+		$temp = TMP."view";
+		if(!file_exists($temp) || !is_dir($temp)) {
+			mkdir($temp, 0177);
+		}
+		$file = $temp.DS.$this->keyGen().'.php';
 
-        $output = $this->requireToVar('xyz.php', $data);
+        file_put_contents($file, $templateData);
+
+		//print_r(1);exit;
+        $output = $this->requireToVar($file, $data);
         print_r($output);
         exit;
 
@@ -962,4 +969,16 @@ class View implements ViewInterface
         return ob_get_clean();
         //return eval(trim(str_replace(array('< ?php', '? >'), '', file_get_contents($path))));
     }
+
+    /**
+     * Get random unique key.
+     *
+     * @return string
+     *
+     * @since 1.0.8
+     */
+    public function keyGen()
+	{
+                    return md5(uniqid(mt_rand()));
+	}
 }
