@@ -351,7 +351,7 @@ class View implements ViewInterface
     public function renderTemplate($templatePath, $data = [])
     {
         $this->templateFile = $templatePath;
-		$templateData = $this->readTemplate($templatePath);
+        $templateData = $this->readTemplate($templatePath);
         if ($data === null) {
             throw new Exception('template(): expects parameter 2 to be array, null given');
         }
@@ -938,11 +938,11 @@ class View implements ViewInterface
             }
         }
 
-		$temp = TMP."view";
-		if(!file_exists($temp) || !is_dir($temp)) {
-			mkdir($temp, 0177);
-		}
-		$file = $temp.DS.$this->keyGen($this->templateFile).'.php';
+        $temp = TMP.'view';
+        if (!file_exists($temp) || !is_dir($temp)) {
+            mkdir($temp, 0177);
+        }
+        $file = $temp.DS.$this->keyGen($this->templateFile).'.php';
 
         file_put_contents($file, $templateData);
 
@@ -968,6 +968,7 @@ class View implements ViewInterface
         }
         ob_start();
         require $file;
+
         return ob_get_clean();
     }
 
@@ -975,12 +976,13 @@ class View implements ViewInterface
      * Get random unique key.
      *
      * @param string $file
+     *
      * @return string
      *
      * @since 1.0.8
      */
     public function keyGen($file = null)
-	{
-		return $file == null ? md5(uniqid(mt_rand(), true)) : md5_file($file);
-	}
+    {
+        return $file == null ? md5(uniqid(mt_rand(), true)) : md5_file($file);
+    }
 }
