@@ -21,6 +21,7 @@ namespace Friday\View;
 use BadMethodCallException;
 use Exception;
 use Friday\Contracts\View\View as ViewInterface;
+use Friday\Helper\PHPParser;
 
 class View implements ViewInterface
 {
@@ -859,7 +860,9 @@ class View implements ViewInterface
      */
     public function includeFile($templateData)
     {
-        $start = 0;
+		$templateData = $this->parsePHP($templateData);
+
+		$start = 0;
         while (true) {
             $findStart = strpos($templateData, '@include(', $start);
             if ($findStart !== false) {
@@ -915,6 +918,7 @@ class View implements ViewInterface
 				$countParanth = 0;
                 $findEnd = strpos($templateData, '(', $findStart);
                 if ($findEnd !== false) {
+				}
 print_r([$findEnd, substr($templateData, $findEnd, 100)]);exit;
                 if ($findEnd !== false) {
                     $substr = substr($templateData, $findStart, ($findEnd - $findStart));
@@ -1006,4 +1010,18 @@ print_r([$findEnd, substr($templateData, $findEnd, 100)]);exit;
     {
         return $file == null ? md5(uniqid(mt_rand(), true)) : md5_file($file);
     }
+
+    /**
+     * parse tempate code and convert to PHP code .
+     *
+     * @param string $templateData
+     *
+     * @return string
+     *
+     * @since 1.0.8
+     */
+    public function parsePHP($templateData)
+	{
+		return (new PHPParser($templateData))->run();
+	}
 }
