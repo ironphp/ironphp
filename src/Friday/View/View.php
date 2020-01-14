@@ -860,9 +860,9 @@ class View implements ViewInterface
      */
     public function includeFile($templateData)
     {
-		$templateData = $this->parsePHP($templateData);
+        $templateData = $this->parsePHP($templateData);
 
-		$start = 0;
+        $start = 0;
         while (true) {
             $findStart = strpos($templateData, '@include(', $start);
             if ($findStart !== false) {
@@ -915,11 +915,12 @@ class View implements ViewInterface
             $findStart = strpos($templateData, '@if', $start);
             if ($findStart !== false) {
                 $findStart += 3;
-				$countParanth = 0;
+                $countParanth = 0;
                 $findEnd = strpos($templateData, '(', $findStart);
                 if ($findEnd !== false) {
-				}
-print_r([$findEnd, substr($templateData, $findEnd, 100)]);exit;
+                }
+                print_r([$findEnd, substr($templateData, $findEnd, 100)]);
+                exit;
                 if ($findEnd !== false) {
                     $substr = substr($templateData, $findStart, ($findEnd - $findStart));
                     //$str = trim($substr);
@@ -1021,7 +1022,7 @@ print_r([$findEnd, substr($templateData, $findEnd, 100)]);exit;
      * @since 1.0.8
      */
     public function parsePHP($templateData)
-	{
-		return (new PHPParser($templateData))->run();
-	}
+    {
+        return (new PHPParser($templateData))->run();
+    }
 }
