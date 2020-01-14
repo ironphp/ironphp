@@ -21,42 +21,42 @@ namespace Friday\Helper;
 class PHPParser
 {
     /**
-     * Track of parens nesting
+     * Track of parens nesting.
      *
      * @var null|array
      */
     protected $stack = null;
 
     /**
-     * Current nesting level
+     * Current nesting level.
      *
      * @var null|array
      */
     protected $current = null;
 
     /**
-     * String to parse
+     * String to parse.
      *
      * @var null|string
      */
     protected $string = null;
 
     /**
-     * current character offset in string
+     * current character offset in string.
      *
      * @var null|int
      */
     protected $position = null;
 
     /**
-     * start of text-buffer
+     * start of text-buffer.
      *
      * @var null|string
      */
     protected $buffer_start = null;
 
     /**
-     * count paran
+     * count paran.
      *
      * @var int
      */
@@ -70,9 +70,9 @@ class PHPParser
      * @return void
      */
     public function __construct($code)
-	{
-		$this->string = $code;
-	}
+    {
+        $this->string = $code;
+    }
 
     /**
      * Run PHPParser.
@@ -80,38 +80,39 @@ class PHPParser
      * @return string
      */
     public function run()
-	{
-		$result = $this->parse();
-		print_r($result);exit;
-	}
+    {
+        $result = $this->parse();
+        print_r($result);
+        exit;
+    }
 
-	/**
+    /**
      * Parse a string into an array.
      *
      * @return array|bool
      */
-	public function parse()
+    public function parse()
     {
         if (empty($this->string)) {
-            return array();
+            return [];
         }
 
-		$this->current = array();
-        $this->stack = array();
+        $this->current = [];
+        $this->stack = [];
         $this->length = strlen($this->string);
 
-		// look at each character
+        // look at each character
         for ($this->position = 0; $this->position < $this->length; $this->position++) {
             switch ($this->string[$this->position]) {
                 case '(':
-					$this->count++;
+                    $this->count++;
                     $this->push();
                     // push current scope to the stack an begin a new scope
                     array_push($this->stack, $this->current);
-                    $this->current = array();
+                    $this->current = [];
                     break;
                 case ')':
-					$this->count--;
+                    $this->count--;
                     $this->push();
                     // save current scope
                     $t = $this->current;
@@ -120,7 +121,7 @@ class PHPParser
                     // add just saved scope to current scope
                     $this->current[] = $t;
                     break;
-                /* 
+                /*
                 case ' ':
                     // make each word its own token
                     $this->push();
@@ -135,11 +136,13 @@ class PHPParser
                     }
             }
         }
-print_r($this);exit;
+        print_r($this);
+        exit;
+
         return $this->current;
     }
-	
-	protected function push()
+
+    protected function push()
     {
         if ($this->buffer_start !== null) {
             // extract string from buffer start to current position
@@ -151,4 +154,3 @@ print_r($this);exit;
         }
     }
 }
-
