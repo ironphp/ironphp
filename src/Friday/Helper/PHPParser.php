@@ -63,6 +63,13 @@ class PHPParser
     protected $count = 0;
 
     /**
+     * Length of string.
+     *
+     * @var int
+     */
+    protected $length = 0;
+
+    /**
      * Create a new PHPParser instance.
      *
      * @param string $code
