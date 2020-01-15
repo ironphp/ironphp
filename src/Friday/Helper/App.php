@@ -102,6 +102,6 @@ class App
      */
     public static function setInstance()
     {
-        static::$instance = new static();
+        static::$instance = new App;
     }
 }
