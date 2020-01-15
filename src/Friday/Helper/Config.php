@@ -194,7 +194,7 @@ class Config
     public static function getInstance()
     {
         if (self::$instance === null) {
-            return new static();
+            return new Config;
         }
 
         return static::$instance;
