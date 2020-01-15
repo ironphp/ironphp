@@ -88,6 +88,7 @@ class App
         } else {
             if (!array_key_exists($abstract, self::$instance->app)) {
                 throw new \Exception("[{$abstract}] helper not registered.");
+				exit;
             }
             $app = self::$instance->app[$abstract];
 
@@ -102,6 +103,6 @@ class App
      */
     public static function setInstance()
     {
-        return (static::$instance = new App);
+        static::$instance = new App;
     }
 }
