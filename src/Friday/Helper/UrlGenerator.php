@@ -146,7 +146,7 @@ class UrlGenerator
     public static function getInstance()
     {
         if (self::$instance === null) {
-            static::$instance = new static();
+            static::$instance = new UrlGenerator;
         }
 
         return static::$instance;
