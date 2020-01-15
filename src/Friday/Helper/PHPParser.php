@@ -18,6 +18,8 @@
 
 namespace Friday\Helper;
 
+use Exception;
+
 class PHPParser
 {
     /**
