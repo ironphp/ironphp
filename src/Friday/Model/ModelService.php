@@ -19,6 +19,7 @@
 namespace Friday\Model;
 
 use Friday\Helper\Inflector;
+use BadMethodCallException;
 
 class ModelService
 {
