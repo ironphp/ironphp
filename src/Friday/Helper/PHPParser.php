@@ -142,6 +142,12 @@ class PHPParser
         return $this->current;
     }
 
+
+    /**
+     * Add data into buffer_start
+     *
+     * @return void
+     */
     protected function push()
     {
         if ($this->buffer_start !== null) {
@@ -153,4 +159,49 @@ class PHPParser
             $this->current[] = $buffer;
         }
     }
+
+    /**
+     * Add value in key.
+     *
+     * @param array $data
+     *
+     * @return string
+     */
+    public function addKeyVal($data)
+	{
+        foreach ($data as $key => $val) {
+            if (is_array($val)) {
+                $findStart = strpos($this->string, '{{'.$key.':}}');
+                if ($findStart !== false) {
+                    $findEnd = strpos($this->string, '{{:'.$key.'}}');
+                    if ($findEnd !== false) {
+                        $len = 5 + strlen($key);
+                        $substr = substr($this->string, $findStart, ($findEnd - $findStart));
+                        $substr = substr($substr, $len);
+                        $loopstr = []; //fixed-for: Uncaught Error: [] operator not supported for strings $loopstr[]
+                        foreach ($val as $k => $v) {
+                            $temp = $substr;
+                            if (is_array($v)) {
+                                //$temp = strtr($temp, $v); {{}} not replaced
+                                foreach ($v as $ks => $vs) {
+                                    $temp = str_replace('{{'.$ks.'}}', $vs, $temp);
+                                }
+                            } else {
+                                $temp = str_replace('{{'.$key.'}}', $v, $temp);
+                            }
+                            $loopstr[] = $temp;
+                        }
+                        $loopstr = implode("\n", $loopstr);
+                        $this->string = str_replace('{{'.$key.':}}'.$substr.'{{:'.$key.'}}', $loopstr, $this->string);
+                    } else {
+                        throw new Exception('Error in template : loop has not closed properely');
+                        exit;
+                    }
+                }
+            } else {
+                $this->string = str_replace('{{'.$key.'}}', $val, $this->string);
+            }
+        }
+		return $this->string;
+	}
 }
