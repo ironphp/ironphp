@@ -736,8 +736,8 @@ class View implements ViewInterface
 
         $templateData = $this->includeFile($templateData);
 
-		$this->parser = new PHPParser($templateData);
-		$templateData = $this->parser->addKeyVal($data);
+        $this->parser = new PHPParser($templateData);
+        $templateData = $this->parser->addKeyVal($data);
 
         return $this->evalPhp($templateData, $data);
     }
@@ -997,9 +997,10 @@ class View implements ViewInterface
      */
     public function parsePHP($templateData)
     {
-		if($this->parser == null) {
-			$this->parser = new PHPParser($templateData);
-		}
-		return $this->parser->run();
+        if ($this->parser == null) {
+            $this->parser = new PHPParser($templateData);
+        }
+
+        return $this->parser->run();
     }
 }

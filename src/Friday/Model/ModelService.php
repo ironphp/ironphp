@@ -18,8 +18,8 @@
 
 namespace Friday\Model;
 
-use Friday\Helper\Inflector;
 use BadMethodCallException;
+use Friday\Helper\Inflector;
 
 class ModelService
 {
