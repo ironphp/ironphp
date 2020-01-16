@@ -82,7 +82,7 @@ automated upgrades atleast for NOT FOR NOW, so you have to do any updates manual
 
 ## Configuration
 
-Read and edit `'Configuraton'` in `config/app.php` and setup the `'Datasource'` in `config/database.php`.
+Read and edit `Configuraton` in `.env`, `config/app.php` and setup the `Datasource` in `config/database.php`.
 
 ## Community
 
