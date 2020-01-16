@@ -151,9 +151,8 @@ class PHPParser
         return $this->current;
     }
 
-
     /**
-     * Add data into buffer_start
+     * Add data into buffer_start.
      *
      * @return void
      */
@@ -177,7 +176,7 @@ class PHPParser
      * @return string
      */
     public function addKeyVal($data)
-	{
+    {
         foreach ($data as $key => $val) {
             if (is_array($val)) {
                 $findStart = strpos($this->string, '{{'.$key.':}}');
@@ -211,6 +210,7 @@ class PHPParser
                 $this->string = str_replace('{{'.$key.'}}', $val, $this->string);
             }
         }
-		return $this->string;
-	}
+
+        return $this->string;
+    }
 }
