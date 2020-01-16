@@ -365,7 +365,10 @@ class View implements ViewInterface
         //TODO
         $data[''] = null;
 
-        return $this->putData($this->includeFile($this->readTemplate($templatePath)), $data);
+        return $this->putData(
+            $this->includeFile($this->readTemplate($templatePath)),
+            $data
+        );
     }
 
     /**
@@ -732,9 +735,10 @@ class View implements ViewInterface
     public function putData($templateData, $data = [])
     {
         //TODO
-        $data = array_merge($data, $this->factory->getShared());
-
-        return $this->evalPhp($this->getParser($templateData)->addKeyVal($data), $data);
+        return $this->evalPhp(
+            $this->getParser($templateData)->addKeyVal($data),
+            array_merge($data, $this->factory->getShared())
+        );
     }
 
     /**
@@ -811,10 +815,12 @@ class View implements ViewInterface
         if (self::$instance == null) {
             return false;
         }
-        $templatePath = self::$instance->app->findTemplate($template);
         $data['_token'] = self::$instance->app->session->getToken();
 
-        return self::$instance->renderTemplate($templatePath, $data);
+        return self::$instance->renderTemplate(
+            self::$instance->app->findTemplate($template),
+            $data
+        );
     }
 
     /**
