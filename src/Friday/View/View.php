@@ -359,13 +359,13 @@ class View implements ViewInterface
     public function renderTemplate($templatePath, $data = [])
     {
         $this->templateFile = $templatePath;
-        $templateData = $this->readTemplate($templatePath);
         if ($data === null) {
             throw new Exception('template(): expects parameter 2 to be array, null given');
         }
+        //TODO
         $data[''] = null;
 
-        return $this->putData($templateData, $data);
+        return $this->putData($this->includeFile($this->readTemplate($templatePath)), $data);
     }
 
     /**
@@ -734,12 +734,7 @@ class View implements ViewInterface
         //TODO
         $data = array_merge($data, $this->factory->getShared());
 
-        $templateData = $this->includeFile($templateData);
-
-        $this->parser = new PHPParser($templateData);
-        $templateData = $this->parser->addKeyVal($data);
-
-        return $this->evalPhp($templateData, $data);
+        return $this->evalPhp($this->getParser($templateData)->addKeyVal($data), $data);
     }
 
     /**
@@ -817,8 +812,7 @@ class View implements ViewInterface
             return false;
         }
         $templatePath = self::$instance->app->findTemplate($template);
-        $_token = self::$instance->app->session->getToken();
-        $data['_token'] = $_token;
+        $data['_token'] = self::$instance->app->session->getToken();
 
         return self::$instance->renderTemplate($templatePath, $data);
     }
@@ -834,8 +828,6 @@ class View implements ViewInterface
      */
     public function includeFile($templateData)
     {
-        $templateData = $this->parsePHP($templateData);
-
         $start = 0;
         while (true) {
             $findStart = strpos($templateData, '@include(', $start);
@@ -865,6 +857,8 @@ class View implements ViewInterface
                 break;
             }
         }
+
+        return $templateData;
 
         $start = 0;
         while (true) {
@@ -906,8 +900,6 @@ class View implements ViewInterface
                 break;
             }
         }
-
-        return $templateData;
     }
 
     /**
@@ -997,10 +989,24 @@ class View implements ViewInterface
      */
     public function parsePHP($templateData)
     {
+        return $this->getParser($templateData)->run();
+    }
+
+    /**
+     * Get PHPParser instance
+     *
+     * @param string $templateData
+     *
+     * @return Friday\Helper\PHPParser
+     *
+     * @since 1.0.8
+     */
+    public function getParser($templateData)
+    {
         if ($this->parser == null) {
             $this->parser = new PHPParser($templateData);
         }
 
-        return $this->parser->run();
+        return $this->parser;
     }
 }
