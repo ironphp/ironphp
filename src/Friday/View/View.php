@@ -937,6 +937,9 @@ class View implements ViewInterface
         }
 
         $temp = TMP.'view';
+        if (!file_exists(TMP) || !is_dir(TMP)) {
+            mkdir(TMP, 0177);
+        }
         if (!file_exists($temp) || !is_dir($temp)) {
             mkdir($temp, 0177);
         }
