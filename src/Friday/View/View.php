@@ -993,7 +993,7 @@ class View implements ViewInterface
     }
 
     /**
-     * Get PHPParser instance
+     * Get PHPParser instance.
      *
      * @param string $templateData
      *
