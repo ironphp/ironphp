@@ -1006,7 +1006,7 @@ class View implements ViewInterface
      *
      * @param string $templateData
      *
-     * @return Friday\Helper\PHPParser
+     * @return \Friday\Helper\PHPParser
      *
      * @since 1.0.8
      */
