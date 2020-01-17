@@ -362,8 +362,6 @@ class View implements ViewInterface
         if ($data === null) {
             throw new Exception('template(): expects parameter 2 to be array, null given');
         }
-        //TODO
-        $data[''] = null;
 
         return $this->putData(
             $this->includeFile($this->readTemplate($templatePath)),
@@ -920,21 +918,8 @@ class View implements ViewInterface
      */
     public function evalPhp($templateData, $data = [])
     {
-        $start = 0;
-        while (true) {
-            $findStart = strpos($templateData, '{{', $start);
-            if ($findStart !== false) {
-                $findStart += 2;
-                $findEnd = strpos($templateData, '}}', $findStart);
-                if ($findEnd !== false) {
-                    $substr = substr($templateData, $findStart, ($findEnd - $findStart));
-                    $templateData = str_replace('{{'.$substr.'}}', "<?=e($substr)?>", $templateData);
-                }
-                $start = $findEnd;
-            } else {
-                break;
-            }
-        }
+        $this->getParser($templateData)->replaceBraces();
+        print_r($data);exit;
 
         $temp = TMP.'view';
         if (!file_exists(TMP) || !is_dir(TMP)) {
