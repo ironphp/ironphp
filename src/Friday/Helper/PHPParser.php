@@ -90,7 +90,9 @@ class PHPParser
      */
     public function run()
     {
-        print_r($this->parseForEach());exit;
+        $this->parseForEach();
+        $this->parseIf();
+print_r($this->string);exit;
         $result = $this->parse();
         print_r($result);
         exit;
@@ -263,6 +265,46 @@ class PHPParser
                     //$str = trim($substr);
                     $this->string = str_replace('@foreach'.$substr.')', '<?php foreach'.$substr.'): ?>', $this->string);
                     $this->string = str_replace('@endforeach', '<?php endforeach; ?>', $this->string);
+                }
+                $start = $findEnd;
+            } else {
+                break;
+            }
+        }
+    }
+
+    /**
+     * Replace all @if to PHP code.
+     *
+     * @return void
+     */
+    public function parseIf()
+    {
+        $start = 0;
+        while (true) {
+            $findStart = strpos($this->string, '@if', $start);
+            if ($findStart !== false) {
+                $findStart += 3;
+                $countParan = 0;
+                $i = $findStart;
+                if ($this->string[$i] === '(') {
+                    $countParan++;
+                }
+                while($countParan) {
+                    $i++;
+                    if ($this->string[$i] === '(') {
+                        $countParan++;
+                    }
+                    if ($this->string[$i] === ')') {
+                        $countParan--;
+                    }
+                }
+                $findEnd = $i+1;
+                if ($findEnd !== false) {
+                    $substr = substr($this->string, $findStart, ($findEnd - $findStart));
+                    $this->string = str_replace('@if'.$substr, '<?php if'.trim($substr).'): ?>', $this->string);
+                    $this->string = str_replace('@else', '<?php else: ?>', $this->string);
+                    $this->string = str_replace('@endif', '<?php endif; ?>', $this->string);
                 }
                 $start = $findEnd;
             } else {
