@@ -92,10 +92,7 @@ class PHPParser
     {
         $this->parseForEach();
         $this->parseIf();
-print_r($this->string);exit;
-        $result = $this->parse();
-        print_r($result);
-        exit;
+        return $this->string;
     }
 
     /**
@@ -302,7 +299,7 @@ print_r($this->string);exit;
                 $findEnd = $i+1;
                 if ($findEnd !== false) {
                     $substr = substr($this->string, $findStart, ($findEnd - $findStart));
-                    $this->string = str_replace('@if'.$substr, '<?php if'.trim($substr).'): ?>', $this->string);
+                    $this->string = str_replace('@if'.$substr, '<?php if'.trim($substr).': ?>', $this->string);
                     $this->string = str_replace('@else', '<?php else: ?>', $this->string);
                     $this->string = str_replace('@endif', '<?php endif; ?>', $this->string);
                 }
