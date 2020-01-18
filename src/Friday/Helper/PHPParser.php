@@ -232,7 +232,7 @@ class PHPParser
                     if(empty(trim($substr))) {
                         $this->string = str_replace('{{'.$substr.'}}', "", $this->string);
                     } else {
-                        $this->string = str_replace('{{'.$substr.'}}', "<?=e($substr)?>", $this->string);
+                        $this->string = str_replace('{{'.$substr.'}}', "<?=e(".trim($substr).")?>", $this->string);
                     }
                 }
                 $start = $findEnd;
