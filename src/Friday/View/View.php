@@ -866,24 +866,6 @@ class View implements ViewInterface
 
         $start = 0;
         while (true) {
-            $findStart = strpos($templateData, '@foreach', $start);
-            if ($findStart !== false) {
-                $findStart += 8;
-                $findEnd = strpos($templateData, ')', $findStart);
-                if ($findEnd !== false) {
-                    $substr = substr($templateData, $findStart, ($findEnd - $findStart));
-                    //$str = trim($substr);
-                    $templateData = str_replace('@foreach'.$substr.')', '<?php foreach'.$substr.'): ?>', $templateData);
-                    $templateData = str_replace('@endforeach', '<?php endforeach; ?>', $templateData);
-                }
-                $start = $findEnd;
-            } else {
-                break;
-            }
-        }
-
-        $start = 0;
-        while (true) {
             $findStart = strpos($templateData, '@if', $start);
             if ($findStart !== false) {
                 $findStart += 3;
@@ -919,7 +901,7 @@ class View implements ViewInterface
     public function evalPhp($templateData, $data = [])
     {
         $templateData = $this->getParser($templateData)->replaceBraces();
-        print_r($templateData);exit;
+        $templateData = $this->parsePHP($templateData);
 
         $temp = TMP.'view';
         if (!file_exists(TMP) || !is_dir(TMP)) {

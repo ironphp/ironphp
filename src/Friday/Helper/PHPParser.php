@@ -90,6 +90,7 @@ class PHPParser
      */
     public function run()
     {
+        print_r($this->parseForEach());exit;
         $result = $this->parse();
         print_r($result);
         exit;
@@ -242,5 +243,31 @@ class PHPParser
         }
 
         return $this->string;
+    }
+
+    /**
+     * Replace all @foreach to PHP code.
+     *
+     * @return void
+     */
+    public function parseForEach()
+    {
+        $start = 0;
+        while (true) {
+            $findStart = strpos($this->string, '@foreach', $start);
+            if ($findStart !== false) {
+                $findStart += 8;
+                $findEnd = strpos($this->string, ')', $findStart);
+                if ($findEnd !== false) {
+                    $substr = substr($this->string, $findStart, ($findEnd - $findStart));
+                    //$str = trim($substr);
+                    $this->string = str_replace('@foreach'.$substr.')', '<?php foreach'.$substr.'): ?>', $this->string);
+                    $this->string = str_replace('@endforeach', '<?php endforeach; ?>', $this->string);
+                }
+                $start = $findEnd;
+            } else {
+                break;
+            }
+        }
     }
 }
