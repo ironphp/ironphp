@@ -92,6 +92,7 @@ class PHPParser
     {
         $this->parseForEach();
         $this->parseIf();
+
         return $this->string;
     }
 
@@ -229,10 +230,10 @@ class PHPParser
                 $findEnd = strpos($this->string, '}}', $findStart);
                 if ($findEnd !== false) {
                     $substr = substr($this->string, $findStart, ($findEnd - $findStart));
-                    if(empty(trim($substr))) {
-                        $this->string = str_replace('{{'.$substr.'}}', "", $this->string);
+                    if (empty(trim($substr))) {
+                        $this->string = str_replace('{{'.$substr.'}}', '', $this->string);
                     } else {
-                        $this->string = str_replace('{{'.$substr.'}}', "<?=e(".trim($substr).")?>", $this->string);
+                        $this->string = str_replace('{{'.$substr.'}}', '<?=e('.trim($substr).')?>', $this->string);
                     }
                 }
                 $start = $findEnd;
@@ -287,7 +288,7 @@ class PHPParser
                 if ($this->string[$i] === '(') {
                     $countParan++;
                 }
-                while($countParan) {
+                while ($countParan) {
                     $i++;
                     if ($this->string[$i] === '(') {
                         $countParan++;
@@ -296,7 +297,7 @@ class PHPParser
                         $countParan--;
                     }
                 }
-                $findEnd = $i+1;
+                $findEnd = $i + 1;
                 if ($findEnd !== false) {
                     $substr = substr($this->string, $findStart, ($findEnd - $findStart));
                     $this->string = str_replace('@if'.$substr, '<?php if'.trim($substr).': ?>', $this->string);
