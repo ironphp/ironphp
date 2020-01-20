@@ -122,7 +122,11 @@ class Table
      */
     public function __construct(array $config = [])
     {
-        $mysqli = new mysqli($config['host'], $config['username'], $config['password'], $config['database'], $config['port']);
+        try {
+            $mysqli = new mysqli($config['host'], $config['username'], $config['password'], $config['database'], $config['port']);
+        } catch(Exception $e) {
+            die('Error : '.$e->getMessage());
+        }
 
         if (version_compare(PHP_VERSION, '5.2.9', '<=') && version_compare(PHP_VERSION, '5.3.0', '>=')) {
             /*
