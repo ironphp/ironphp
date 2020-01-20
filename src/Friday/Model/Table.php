@@ -124,7 +124,7 @@ class Table
     {
         try {
             $mysqli = new mysqli($config['host'], $config['username'], $config['password'], $config['database'], $config['port']);
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             die('Error : '.$e->getMessage());
         }
 
