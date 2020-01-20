@@ -261,6 +261,14 @@ class ModelService
      */
     private function parseTable($class)
     {
-        return Inflector::pluralize(strtolower(basename($class)));
+        // TODO - (new \ReflectionClass($class))->getShortName() is also can be used here
+        return Inflector::pluralize(
+            strtolower(
+                substr(
+                    $class,
+                    strrchr($class, "\\")
+                )
+            )
+        );
     }
 }
