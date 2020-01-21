@@ -266,7 +266,7 @@ class ModelService
             strtolower(
                 substr(
                     $class,
-                    strrchr($class, "\\")
+                    strrchr($class, '\\')
                 )
             )
         );
