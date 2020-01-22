@@ -846,7 +846,7 @@ class View implements ViewInterface
                     } elseif (($f = $this->app->findTemplate("$str")) !== false) {
                         $file = $f;
                     }
-                    $str = str_replace('.', '\\', $str);
+                    $str = str_replace('.', '/', $str); // \\ does not work in linux
                     if (($f = $this->app->findTemplate("$str")) !== false) {
                         $file = $f;
                     }
@@ -883,10 +883,10 @@ class View implements ViewInterface
 
         $temp = TMP.'view';
         if (!file_exists(TMP) || !is_dir(TMP)) {
-            mkdir(TMP, 0177);
+            mkdir(TMP, 0711);
         }
         if (!file_exists($temp) || !is_dir($temp)) {
-            mkdir($temp, 0177);
+            mkdir($temp, 0711);
         }
         $file = $temp.DS.$this->keyGen($this->templateFile).'.php';
 
