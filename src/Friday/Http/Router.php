@@ -56,8 +56,7 @@ class Router implements RouterInterface
         }
 
         $route = trim($uriRoute, '/ ');
-        $array = $route === '' ? [] : explode('/', $route);
-        $size = count($array);
+        $size = count($route === '' ? [] : explode('/', $route));
         $allRoute = array_filter($allRoute, function ($v) use ($size, $httpMethod) {
             if ($v[0] != $httpMethod) {
                 return false;
