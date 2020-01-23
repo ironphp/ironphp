@@ -53,17 +53,18 @@ class Server extends Application
     {
         parent::__construct($basePath);
 
-        //boot http server ???
+        //TODO - boot http server ???
 
         //load cookie
+        // TODO - Friday\Helper\Cookie::_host is .127.0.0.1:8000
         $this->cookie = new Cookie();
 
-        //get url, client data
-        $parse = $this->parseUri();
-
-        //request
-        $this->request = $this->frontController->request($parse);
+        //request - get url, client data
+        $this->request = $this->frontController->request(
+            $this->parseUri()
+        );
         $this->request->setConstant();
+        // TODO - token checking should be in request
         if ($this->request->getRequestMethod() == 'POST') {
             if (!isset($_POST['_token']) || $_POST['_token'] != $this->session->get('_token')) {
                 throw new Exception('Token is missing or invalid for this request.');

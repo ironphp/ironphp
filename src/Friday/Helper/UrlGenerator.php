@@ -19,6 +19,7 @@
 namespace Friday\Helper;
 
 use Friday\Http\Route;
+use Friday\Http\Request;
 
 class UrlGenerator
 {
@@ -65,6 +66,10 @@ class UrlGenerator
      */
     public function asset($path, $secure = null)
     {
+        if($secure == null) {
+            $secure = Request::getInstance()->isHttps();
+        }
+
         if ($this->isValidUrl($path)) {
             return $path;
         }

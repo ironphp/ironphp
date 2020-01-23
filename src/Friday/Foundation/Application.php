@@ -39,7 +39,7 @@ class Application implements ApplicationInterface
      *
      * @var string
      */
-    const VERSION = '1.0.8-alpha1';
+    const VERSION = '1.0.9-alpha1';
 
     /**
      * The base path for the IronPHP installation.
@@ -147,10 +147,12 @@ class Application implements ApplicationInterface
         (new Env())->bootstrap($this);
 
         //Set Exception Handler
+        // TODO - Monolog\Logger::timezone is by default Europe/Berlin
         $e = new Handler();
         $e->register();
 
         //set install config
+        // TODO - set all time with update version status
         if ($this->getIntallTime(true) === false) {
             $this->setIntallTime();
         } elseif (empty(env('APP_KEY'))) {
@@ -158,6 +160,7 @@ class Application implements ApplicationInterface
         }
 
         //load config
+        // TODO - Error handler needs Timezone config
         $this->config['app'] = $this->requireFile(
             $this->basePath('config/app.php'),
             true

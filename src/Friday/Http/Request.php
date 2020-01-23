@@ -70,6 +70,13 @@ class Request implements RequestInterface
     public $host;
 
     /**
+     * Instance of Request.
+     *
+     * @var \Friday\Http\Request
+     */
+    private static $instance;
+
+    /**
      * Create new Request instance with uri and param.
      *
      * @param string $uri
@@ -89,6 +96,7 @@ class Request implements RequestInterface
         $this->https = $https;
         $this->host = rtrim($host, '/\\');
         $this->ip = $ip;
+        static::$instance = $this;
     }
 
     /**
@@ -205,5 +213,25 @@ class Request implements RequestInterface
     public function getRequestMethod()
     {
         return $this->serverRequestMethod;
+    }
+
+    /**
+     * Get Request instance.
+     *
+     * @return \Friday\Http\Request
+     */
+    public static function getInstance()
+    {
+        return static::$instance;
+    }
+
+    /**
+     * Check server used HTTPS or not.
+     *
+     * @return bool
+     */
+    public function isHttps()
+    {
+        return $this->https;
     }
 }
