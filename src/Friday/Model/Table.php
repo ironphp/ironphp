@@ -282,7 +282,7 @@ class Table
      * @param array $data
      * @param bool  $sqlQuery
      *
-     * @return bool|string
+     * @return \mysqli_result|bool|string
      */
     public function add($data, $sqlQuery = false)
     {
@@ -305,7 +305,7 @@ class Table
      * @param string|array|null $field
      * @param bool              $sqlQuery
      *
-     * @return bool|string
+     * @return \mysqli_result|bool|string
      */
     public function update($field = null, $sqlQuery = false)
     {
