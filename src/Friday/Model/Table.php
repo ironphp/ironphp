@@ -319,8 +319,9 @@ class Table
         if ($sqlQuery === true) {
             return $this->getQuery();
         }
+
         $result = $this->executeQuery();
-        $this->num_rows = $result->num_rows;
+        $this->num_rows = null;
 
         return $result;
     }
