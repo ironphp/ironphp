@@ -217,10 +217,15 @@ class Table
         if ($sqlQuery === true) {
             return $this->getQuery();
         }
-        $result = $this->executeQuery();
-        $this->num_rows = $result->num_rows;
 
-        return $result->fetch_array(MYSQLI_ASSOC);
+        $result = $this->executeQuery();
+        if($result == false) {
+            $this->num_rows = null;
+            return false;
+        } else {
+            $this->num_rows = $result->num_rows;
+            return $result->fetch_array(MYSQLI_ASSOC);
+        }
     }
 
     /**
