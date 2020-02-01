@@ -230,8 +230,9 @@ class ModelService
     public static function __callStatic($method, $parameters)
     {
         $called_class = get_called_class();
-        $table = self::$instance->parseTable($called_class);
-        self::$instance->table($table);
+        self::$instance->table(
+            self::$instance->parseTable($called_class)
+        );
 
         if (!method_exists(self::$instance->getConnection(), $method)) {
             throw new BadMethodCallException(sprintf(
