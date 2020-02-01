@@ -143,7 +143,7 @@ class Route implements RouteInterface
             }
         }
         $route = trim($route, '/ ');
-        $route = (self::$instance->prefix == null) ? $route : self::$instance->prefix.'/'.$route;
+        $route = (self::$instance->prefix == null) ? $route : rtrim(self::$instance->prefix.'/'.$route, '/');
         $array = $route === '' ? [] : explode('/', $route);
         $size = count($array);
         $route = '/'.$route;
