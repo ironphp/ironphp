@@ -305,7 +305,7 @@ class Application implements ApplicationInterface
      */
     public function findTemplate($template)
     {
-        $file = $this->basePath("app/Template/$template");
+        $file = $this->basePath("app/Template/".str_replace('.', '/', $template));
         if ($this->findFile($file)) {
             return $file;
         } elseif ($this->findFile($file.'.html')) {
