@@ -92,6 +92,7 @@ class PHPParser
     {
         $this->parseForEach();
         $this->parseIf();
+        $this->removeComment();
 
         return $this->string;
     }
@@ -309,5 +310,16 @@ class PHPParser
                 break;
             }
         }
+    }
+
+    /**
+     * Replace all @if to PHP code.
+     *
+     * @return void
+     */
+    public function removeComment()
+    {
+        $this->string = str_replace('{{--', '', $this->string);
+        $this->string = str_replace('--}}', '', $this->string);
     }
 }
