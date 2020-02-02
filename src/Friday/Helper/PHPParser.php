@@ -81,6 +81,7 @@ class PHPParser
     public function __construct($code)
     {
         $this->string = $code;
+        $this->removeComment();
     }
 
     /**
@@ -92,7 +93,6 @@ class PHPParser
     {
         $this->parseForEach();
         $this->parseIf();
-        $this->removeComment();
 
         return $this->string;
     }
