@@ -323,27 +323,28 @@ class Route implements RouteInterface
         if ($controller === null) {
             $controller = 'IndexController';
         }
+        $prefix = strtolower(str_replace('Controller', '', $controller));
 
         //index
-        self::$instance->register('GET', $route, "$controller@index");
+        self::$instance->register('GET', $route, "$controller@index")->name("$prefix.index");
 
         //show
-        self::$instance->register('GET', $route.'/{id}', "$controller@show");
+        self::$instance->register('GET', $route.'/{id}', "$controller@show")->name("$prefix.show");
 
         //create
-        self::$instance->register('GET', $route.'/create', "$controller@create");
+        self::$instance->register('GET', $route.'/create', "$controller@create")->name("$prefix.create");
 
         //store
-        self::$instance->register('POST', $route.'/', "$controller@store");
+        self::$instance->register('POST', $route.'/', "$controller@store")->name("$prefix.store");
 
         //show
-        self::$instance->register('GET', $route.'/{id}/edit', "$controller@edit");
+        self::$instance->register('GET', $route.'/{id}/edit', "$controller@edit")->name("$prefix.edit");
 
         //store
-        self::$instance->register('PUT', $route.'/{id}', "$controller@update");
+        self::$instance->register('PUT', $route.'/{id}', "$controller@update")->name("$prefix.update");
 
         //show
-        self::$instance->register('DELETE', $route.'/{id}', "$controller@destroy");
+        self::$instance->register('DELETE', $route.'/{id}', "$controller@destroy")->name("$prefix.destroy");
     }
 
     /**
