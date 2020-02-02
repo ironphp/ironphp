@@ -81,7 +81,7 @@ class PHPParser
     public function __construct($code)
     {
         $this->string = $code;
-        $this->removeComment();
+        $this->addComment();
     }
 
     /**
@@ -317,9 +317,9 @@ class PHPParser
      *
      * @return void
      */
-    public function removeComment()
+    public function addComment()
     {
-        $this->string = str_replace('{{--', '', $this->string);
-        $this->string = str_replace('--}}', '', $this->string);
+        $this->string = str_replace('{{--', '<!--', $this->string);
+        $this->string = str_replace('--}}', '-->', $this->string);
     }
 }
