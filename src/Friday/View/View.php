@@ -847,10 +847,7 @@ class View implements ViewInterface
                     } elseif (($f = $this->app->findTemplate("$str")) !== false) {
                         $file = $f;
                     }
-                    $str = str_replace('.', '/', $str); // \\ does not work in linux
-                    if (($f = $this->app->findTemplate("$str")) !== false) {
-                        $file = $f;
-                    }
+
                     if ($file) {
                         $templateData = str_replace("@include($substr)", file_get_contents($file), $templateData);
                     } else {
