@@ -148,8 +148,7 @@ class Application implements ApplicationInterface
 
         //Set Exception Handler
         // TODO - Monolog\Logger::timezone is by default Europe/Berlin
-        $e = new Handler();
-        $e->register();
+        (new Handler())->register();
 
         //set install config
         // TODO - set all time with update version status
