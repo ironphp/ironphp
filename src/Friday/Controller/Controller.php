@@ -104,6 +104,7 @@ class Controller implements ControllerInterface
 
         $this->modelService = new ModelService();
         $this->modelService->initialize($app);
+        self::$instance = $this;
     }
 
     /**
@@ -172,18 +173,28 @@ class Controller implements ControllerInterface
      * @param string $model View to use for rendering
      *
      * @return \Friday\Model\ModelService|bool
+     *
+     * @throws Exception
      */
     public function model($model)
     {
         if (self::$instance == null) {
             return false;
         }
-        //$model = ucfirst($model).'Model';
         $modelPath = self::$instance->app->findModel($model);
-        $modelClass = 'App\\Model\\'.$model;
-        $this->model = new $modelClass();
-
-        return $this->model;
+        if($modelPath === false) {
+            $model = ucfirst($model).'Model';
+            $modelPath = self::$instance->app->findModel($model);
+            if($modelPath === false) {
+                throw new Exception($model.'Model file is missing.');
+                exit;
+            } else {
+                $modelClass = 'App\\Model\\'.$model.'Model';
+            }
+        } else {
+            $modelClass = 'App\\Model\\'.$model;
+        }
+        return $this->model = new $modelClass();
         //$appModel->handleModel($controller, $method);
     }
 

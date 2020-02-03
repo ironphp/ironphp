@@ -74,9 +74,7 @@ interface Application
      *
      * @param string $model
      *
-     * @throws Exception
-     *
-     * @return string full model file path
+     * @return string|bool full model file path
      */
     public function findModel($model);
 

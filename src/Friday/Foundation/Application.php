@@ -258,9 +258,7 @@ class Application implements ApplicationInterface
      *
      * @param string $model
      *
-     * @throws Exception
-     *
-     * @return string full model file path
+     * @return string|bool full model file path
      */
     public function findModel($model)
     {
@@ -268,8 +266,7 @@ class Application implements ApplicationInterface
         if ($this->findFile($file)) {
             return $file;
         } else {
-            throw new Exception($file.' Model file is missing.');
-            exit;
+            return false;
         }
     }
 
