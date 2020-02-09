@@ -76,9 +76,9 @@ interface Controller
      *
      * @param string $model View to use for rendering
      *
-     * @return \Friday\Model\ModelService|bool
-     *
      * @throws Exception
+     *
+     * @return \Friday\Model\ModelService|bool
      */
     public function model($model);
 
