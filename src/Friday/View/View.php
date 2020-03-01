@@ -842,9 +842,10 @@ class View implements ViewInterface
                     $substr = substr($templateData, $findStart, ($findEnd - $findStart));
                     $str = trim($substr, "'");
                     $file = false;
-                    if (($f = $this->app->findTemplate("layouts\\$str")) !== false) {
+                    $theme = $this->theme ? $this->theme.'\\' : null;
+                    if (($f = $this->app->findTemplate("{$theme}layouts\\$str")) !== false) {
                         $file = $f;
-                    } elseif (($f = $this->app->findTemplate("$str")) !== false) {
+                    } elseif (($f = $this->app->findTemplate("{$theme}$str")) !== false) {
                         $file = $f;
                     }
 
