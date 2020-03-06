@@ -161,7 +161,7 @@ class Cookie
             $this->_host,
             $this->_secure,
             $this->_httponly
-            );
+        );
     }
 
     /**
@@ -241,7 +241,7 @@ class Cookie
             $this->_host,
             $this->_secure,
             $this->_httponly
-            );
+        );
         setcookie(
             $signature,
             '',
@@ -250,7 +250,7 @@ class Cookie
             $this->_host,
             $this->_secure,
             $this->_httponly
-            );
+        );
 
         /*
          * Clear out of global scope, since setcookie requires buffer flush
