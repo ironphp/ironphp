@@ -258,11 +258,30 @@ class PHPParser
             $findStart = strpos($this->string, '@foreach', $start);
             if ($findStart !== false) {
                 $findStart += 8;
-                $findEnd = strpos($this->string, ')', $findStart);
+                $countParan = 1;
+                $loop = true;
+                $start_loop = false;
+                $i = $findStart;
+
+                while ($countParan && $loop) {
+                    if ($this->string[$i] === '(') {
+                        $start_loop = true;
+                        $countParan++;
+                    }
+                    if ($this->string[$i] === ')') {
+                        $countParan--;
+                    }
+                    if($start_loop && $countParan == 1) {
+                        $loop = false;
+                    }
+                    $i++;
+                }
+
+                //$findEnd = strpos($this->string, ')', $findStart);
+                $findEnd = $i + 1;
                 if ($findEnd !== false) {
                     $substr = substr($this->string, $findStart, ($findEnd - $findStart));
-                    //$str = trim($substr);
-                    $this->string = str_replace('@foreach'.$substr.')', '<?php foreach'.$substr.'): ?>', $this->string);
+                    $this->string = str_replace('@foreach'.$substr, '<?php foreach'.$substr.': ?>', $this->string);
                     $this->string = str_replace('@endforeach', '<?php endforeach; ?>', $this->string);
                 }
                 $start = $findEnd;
@@ -284,20 +303,25 @@ class PHPParser
             $findStart = strpos($this->string, '@if', $start);
             if ($findStart !== false) {
                 $findStart += 3;
-                $countParan = 0;
+                $countParan = 1;
+                $loop = true;
+                $start_loop = false;
                 $i = $findStart;
-                if ($this->string[$i] === '(') {
-                    $countParan++;
-                }
-                while ($countParan) {
-                    $i++;
+
+                while ($countParan && $loop) {
                     if ($this->string[$i] === '(') {
+                        $start_loop = true;
                         $countParan++;
                     }
                     if ($this->string[$i] === ')') {
                         $countParan--;
                     }
+                    if($start_loop && $countParan == 1) {
+                        $loop = false;
+                    }
+                    $i++;
                 }
+
                 $findEnd = $i + 1;
                 if ($findEnd !== false) {
                     $substr = substr($this->string, $findStart, ($findEnd - $findStart));
