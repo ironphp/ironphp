@@ -237,7 +237,9 @@ class ModelService
 
         if (!method_exists(self::$instance->getConnection(), $method)) {
             throw new BadMethodCallException(sprintf(
-                'Method %s::%s does not exist.', static::class, $method
+                'Method %s::%s does not exist.',
+                static::class,
+                $method
             ));
         }
 

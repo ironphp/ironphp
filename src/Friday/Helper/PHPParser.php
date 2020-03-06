@@ -271,7 +271,7 @@ class PHPParser
                     if ($this->string[$i] === ')') {
                         $countParan--;
                     }
-                    if($start_loop && $countParan == 1) {
+                    if ($start_loop && $countParan == 1) {
                         $loop = false;
                     }
                     $i++;
@@ -316,7 +316,7 @@ class PHPParser
                     if ($this->string[$i] === ')') {
                         $countParan--;
                     }
-                    if($start_loop && $countParan == 1) {
+                    if ($start_loop && $countParan == 1) {
                         $loop = false;
                     }
                     $i++;

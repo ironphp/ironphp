@@ -410,7 +410,9 @@ class Route implements RouteInterface
     {
         if (!method_exists(self::$instance->router, $method)) {
             throw new BadMethodCallException(sprintf(
-                'Method %s::%s does not exist.', static::class, $method
+                'Method %s::%s does not exist.',
+                static::class,
+                $method
             ));
         }
 
