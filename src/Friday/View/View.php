@@ -913,6 +913,7 @@ class View implements ViewInterface
                 ${$key} = $val;
             }
         }
+
         ob_start();
         require $file;
 
