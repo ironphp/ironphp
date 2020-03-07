@@ -33,7 +33,8 @@ class ViewErrorMsg implements Countable
     /**
      * Checks if a named MessageBag exists in the bags.
      *
-     * @param  string  $key
+     * @param string $key
+     *
      * @return bool
      */
     public function hasBag($key = 'default')
@@ -44,12 +45,13 @@ class ViewErrorMsg implements Countable
     /**
      * Get a Message instance from the bags.
      *
-     * @param  string  $key
+     * @param string $key
+     *
      * @return \Friday\Contracts\Helper\Message
      */
     public function getBag($key)
     {
-        return Arr::get($this->bags, $key) ?: new MessageBag;
+        return Arr::get($this->bags, $key) ?: new MessageBag();
     }
 
     /**
@@ -65,8 +67,9 @@ class ViewErrorMsg implements Countable
     /**
      * Add a new MessageBag instance to the bags.
      *
-     * @param  string  $key
-     * @param  \Friday\Contracts\Helper\Message $bag
+     * @param string                           $key
+     * @param \Friday\Contracts\Helper\Message $bag
+     *
      * @return $this
      */
     public function put($key, MessageContract $bag)
@@ -99,8 +102,9 @@ class ViewErrorMsg implements Countable
     /**
      * Dynamically call methods on the default bag.
      *
-     * @param  string  $method
-     * @param  array  $parameters
+     * @param string $method
+     * @param array  $parameters
+     *
      * @return mixed
      */
     public function __call($method, $parameters)
@@ -111,7 +115,8 @@ class ViewErrorMsg implements Countable
     /**
      * Dynamically access a view error bag.
      *
-     * @param  string  $key
+     * @param string $key
+     *
      * @return \Friday\Contracts\Helper\Message
      */
     public function __get($key)
@@ -122,8 +127,9 @@ class ViewErrorMsg implements Countable
     /**
      * Dynamically set a view error bag.
      *
-     * @param  string  $key
-     * @param  \Friday\Contracts\Helper\Message  $value
+     * @param string                           $key
+     * @param \Friday\Contracts\Helper\Message $value
+     *
      * @return void
      */
     public function __set($key, $value)
