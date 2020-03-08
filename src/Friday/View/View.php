@@ -22,7 +22,6 @@ use BadMethodCallException;
 use Exception;
 use Friday\Contracts\View\View as ViewInterface;
 use Friday\Helper\PHPParser;
-use Friday\View\ViewErrorMsg;
 
 class View implements ViewInterface
 {

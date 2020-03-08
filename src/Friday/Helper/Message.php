@@ -41,7 +41,8 @@ class Message implements Arrayable, Countable, MessageContract
     /**
      * Create a new message bag instance.
      *
-     * @param  array  $messages
+     * @param array $messages
+     *
      * @return void
      */
     public function __construct(array $messages = [])
@@ -66,8 +67,9 @@ class Message implements Arrayable, Countable, MessageContract
     /**
      * Add a message to the message bag.
      *
-     * @param  string  $key
-     * @param  string  $message
+     * @param string $key
+     * @param string $message
+     *
      * @return $this
      */
     public function add($key, $message)
@@ -82,21 +84,23 @@ class Message implements Arrayable, Countable, MessageContract
     /**
      * Determine if a key and message combination already exists.
      *
-     * @param  string  $key
-     * @param  string  $message
+     * @param string $key
+     * @param string $message
+     *
      * @return bool
      */
     protected function isUnique($key, $message)
     {
         $messages = (array) $this->messages;
 
-        return ! isset($messages[$key]) || ! in_array($message, $messages[$key]);
+        return !isset($messages[$key]) || !in_array($message, $messages[$key]);
     }
 
     /**
      * Merge a new array of messages into the message bag.
      *
-     * @param  array  $messages
+     * @param array $messages
+     *
      * @return $this
      */
     public function merge($messages)
@@ -111,7 +115,8 @@ class Message implements Arrayable, Countable, MessageContract
     /**
      * Determine if messages exist for all of the given keys.
      *
-     * @param  array|string|null  $key
+     * @param array|string|null $key
+     *
      * @return bool
      */
     public function has($key)
@@ -138,7 +143,8 @@ class Message implements Arrayable, Countable, MessageContract
     /**
      * Determine if messages exist for any of the given keys.
      *
-     * @param  array|string  $keys
+     * @param array|string $keys
+     *
      * @return bool
      */
     public function hasAny($keys = [])
@@ -161,8 +167,9 @@ class Message implements Arrayable, Countable, MessageContract
     /**
      * Get the first message from the message bag for a given key.
      *
-     * @param  string|null  $key
-     * @param  string|null  $format
+     * @param string|null $key
+     * @param string|null $format
+     *
      * @return string
      */
     public function first($key = null, $format = null)
@@ -177,8 +184,9 @@ class Message implements Arrayable, Countable, MessageContract
     /**
      * Get all of the messages from the message bag for a given key.
      *
-     * @param  string  $key
-     * @param  string|null  $format
+     * @param string      $key
+     * @param string|null $format
+     *
      * @return array
      */
     public function get($key, $format = null)
@@ -188,7 +196,9 @@ class Message implements Arrayable, Countable, MessageContract
         // all the messages that match the given key and output it as an array.
         if (array_key_exists($key, $this->messages)) {
             return $this->transform(
-                $this->messages[$key], $this->checkFormat($format), $key
+                $this->messages[$key],
+                $this->checkFormat($format),
+                $key
             );
         }
 
@@ -202,8 +212,9 @@ class Message implements Arrayable, Countable, MessageContract
     /**
      * Get the messages for a wildcard key.
      *
-     * @param  string  $key
-     * @param  string|null  $format
+     * @param string      $key
+     * @param string|null $format
+     *
      * @return array
      */
     protected function getMessagesForWildcardKey($key, $format)
@@ -214,7 +225,9 @@ class Message implements Arrayable, Countable, MessageContract
                 })
                 ->map(function ($messages, $messageKey) use ($format) {
                     return $this->transform(
-                        $messages, $this->checkFormat($format), $messageKey
+                        $messages,
+                        $this->checkFormat($format),
+                        $messageKey
                     );
                 })->all();
     }
@@ -222,7 +235,8 @@ class Message implements Arrayable, Countable, MessageContract
     /**
      * Get all of the messages for every key in the message bag.
      *
-     * @param  string|null  $format
+     * @param string|null $format
+     *
      * @return array
      */
     public function all($format = null)
@@ -241,7 +255,8 @@ class Message implements Arrayable, Countable, MessageContract
     /**
      * Get all of the unique messages for every key in the message bag.
      *
-     * @param  string|null  $format
+     * @param string|null $format
+     *
      * @return array
      */
     public function unique($format = null)
@@ -252,9 +267,10 @@ class Message implements Arrayable, Countable, MessageContract
     /**
      * Format an array of messages.
      *
-     * @param  array  $messages
-     * @param  string  $format
-     * @param  string  $messageKey
+     * @param array  $messages
+     * @param string $format
+     * @param string $messageKey
+     *
      * @return array
      */
     protected function transform($messages, $format, $messageKey)
@@ -271,7 +287,8 @@ class Message implements Arrayable, Countable, MessageContract
     /**
      * Get the appropriate format based on the given format.
      *
-     * @param  string  $format
+     * @param string $format
+     *
      * @return string
      */
     protected function checkFormat($format)
@@ -322,7 +339,8 @@ class Message implements Arrayable, Countable, MessageContract
     /**
      * Set the default message format.
      *
-     * @param  string  $format
+     * @param string $format
+     *
      * @return \Friday\Helper\Message
      */
     public function setFormat($format = ':message')
@@ -339,7 +357,7 @@ class Message implements Arrayable, Countable, MessageContract
      */
     public function isEmpty()
     {
-        return ! $this->any();
+        return !$this->any();
     }
 
     /**
@@ -395,7 +413,8 @@ class Message implements Arrayable, Countable, MessageContract
     /**
      * Convert the object to its JSON representation.
      *
-     * @param  int  $options
+     * @param int $options
+     *
      * @return string
      */
     public function toJson($options = 0)

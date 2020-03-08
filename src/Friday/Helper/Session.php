@@ -236,7 +236,7 @@ class Session implements SessionInterface
      * Get old form data.
      *
      * @param string $key
-     * @param mixed $default
+     * @param mixed  $default
      *
      * @return mixed
      *
@@ -245,7 +245,7 @@ class Session implements SessionInterface
     public function old($key, $default)
     {
         $old = $this->get('old');
-        if(is_array($old)) {
+        if (is_array($old)) {
             return $old[$key] ?? $default;
         } else {
             return $default;
