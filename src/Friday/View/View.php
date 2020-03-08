@@ -22,6 +22,7 @@ use BadMethodCallException;
 use Exception;
 use Friday\Contracts\View\View as ViewInterface;
 use Friday\Helper\PHPParser;
+use Friday\View\ViewErrorMsg;
 
 class View implements ViewInterface
 {
@@ -183,6 +184,13 @@ class View implements ViewInterface
      * @var \Friday\Helper\PHPParser
      */
     private $parser;
+
+    /**
+     * ViewErrorMsg instance.
+     *
+     * @var \Friday\View\ViewErrorMsg
+     */
+    private $viewError;
 
     /**
      * Create a new View instance.
@@ -816,6 +824,7 @@ class View implements ViewInterface
             return false;
         }
         $data['_token'] = self::$instance->app->session->getToken();
+        self::$instance->viewError = new ViewErrorMsg();
 
         return self::$instance->renderTemplate(
             self::$instance->app->findTemplate($template),
@@ -913,6 +922,9 @@ class View implements ViewInterface
                 ${$key} = $val;
             }
         }
+
+        // TODO : View Error
+        $errors = $this->viewError;
 
         ob_start();
         require $file;

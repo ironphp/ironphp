@@ -20,6 +20,7 @@ namespace Friday\View;
 
 use Countable;
 use Friday\Contracts\Helper\Message as MessageContract;
+use Friday\Helper\Message;
 
 class ViewErrorMsg implements Countable
 {
@@ -51,7 +52,7 @@ class ViewErrorMsg implements Countable
      */
     public function getBag($key)
     {
-        return Arr::get($this->bags, $key) ?: new MessageBag();
+        return $this->bags[$key] ?? new Message();
     }
 
     /**
