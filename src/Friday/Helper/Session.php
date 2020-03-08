@@ -231,4 +231,24 @@ class Session implements SessionInterface
     {
         return $this->get('_token');
     }
+
+    /**
+     * Get old form data.
+     *
+     * @param string $key
+     * @param mixed $default
+     *
+     * @return mixed
+     *
+     * @since 1.0.10
+     */
+    public function old($key, $default)
+    {
+        $old = $this->get('old');
+        if(is_array($old)) {
+            return $old[$key] ?? $default;
+        } else {
+            return $default;
+        }
+    }
 }

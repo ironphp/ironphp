@@ -391,6 +391,20 @@ if (!function_exists('value')) {
     }
 }
 
+if (! function_exists('old')) {
+    /**
+     * Retrieve an old input item.
+     *
+     * @param  string|null  $key
+     * @param  mixed  $default
+     * @return mixed
+     */
+    function old($key = null, $default = null)
+    {
+        return app('session')->old($key, $default);
+    }
+}
+
 /*
 function moneyInWords($m){
     if($m>=1000){
