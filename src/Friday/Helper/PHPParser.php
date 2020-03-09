@@ -93,6 +93,7 @@ class PHPParser
     {
         $this->parseForEach();
         $this->parseIf();
+        $this->parseCsrf();
 
         return $this->string;
     }
@@ -345,5 +346,15 @@ class PHPParser
     {
         $this->string = str_replace('{{--', '<!--', $this->string);
         $this->string = str_replace('--}}', '-->', $this->string);
+    }
+
+    /**
+     * Replace all @csrf to CSRF tag.
+     *
+     * @return void
+     */
+    public function parseCsrf()
+    {
+        $this->string = str_replace('@csrf', csrf_field(), $this->string);
     }
 }
