@@ -161,7 +161,8 @@ class Controller implements ControllerInterface
         if (self::$instance == null) {
             return false;
         }
-        $_token = $this->app->session->getToken();
+
+        $_token = $this->app->session->token() ?: $this->app->session->getToken();
         $data['_token'] = $_token;
 
         return $this->view->renderTemplate($templatePath, $data);
