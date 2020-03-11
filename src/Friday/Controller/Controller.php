@@ -252,6 +252,7 @@ class Controller implements ControllerInterface
             $this->controller = new $controllerClass();
         }
 
+        // TODO in_array($method, get_class_methods($controllerClass))
         if ($this->app->hasMethod($this->controller, $method)) {
             self::$instance = $this;
             ob_start();

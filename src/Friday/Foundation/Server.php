@@ -65,7 +65,7 @@ class Server extends Application
         );
         $this->request->setConstant();
         // TODO - token checking should be in request
-        if ($this->request->getRequestMethod() == 'POST') {
+    if ($this->request->getRequestMethod() == 'POST') {
             if (!isset($_POST['_token']) || $_POST['_token'] != $this->session->get('_token')) {
                 throw new Exception('Token is missing or invalid for this request.');
                 exit;
