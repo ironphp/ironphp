@@ -255,13 +255,14 @@ class Session implements SessionInterface
     /**
      * Put a key / value pair or array of key / value pairs in the session.
      *
-     * @param  string|array  $key
-     * @param  mixed  $value
+     * @param string|array $key
+     * @param mixed        $value
+     *
      * @return void
      */
     public function put($key, $value = null)
     {
-        if (! is_array($key)) {
+        if (!is_array($key)) {
             $key = [$key => $value];
         }
 
