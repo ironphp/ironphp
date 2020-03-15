@@ -406,6 +406,34 @@ if (!function_exists('old')) {
     }
 }
 
+if (! function_exists('session')) {
+    /**
+     * Get / set the specified session value.
+     *
+     * If an array is passed as the key, we will assume you want to set an array of values.
+     *
+     * @param  array|string|null  $key
+     * @param  mixed  $value
+     * @return mixed
+     */
+    function session($key = null, $value = null)
+    {
+        if (is_null($key)) {
+            return app('session')->all();
+        }
+
+        if (is_array($key)) {
+            return app('session')->put($key);
+        }
+
+        if(!is_null($value) && !is_array($value)) {
+            return app('session')->set($key, $value);
+        }
+
+        return app('session')->get($key);
+    }
+}
+
 /*
 function moneyInWords($m){
     if($m>=1000){

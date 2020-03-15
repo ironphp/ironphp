@@ -251,4 +251,33 @@ class Session implements SessionInterface
             return $default;
         }
     }
+
+    /**
+     * Put a key / value pair or array of key / value pairs in the session.
+     *
+     * @param  string|array  $key
+     * @param  mixed  $value
+     * @return void
+     */
+    public function put($key, $value = null)
+    {
+        if (! is_array($key)) {
+            $key = [$key => $value];
+        }
+
+        foreach ($key as $arrayKey => $arrayValue) {
+            $this->set($arrayKey, $arrayValue);
+        }
+    }
+
+    /**
+     * Get all of the session data.
+     *
+     * @return array
+     */
+    public function all()
+    {
+        //TODO store SESSION in $this->attributes
+        return $_SESSION;
+    }
 }
