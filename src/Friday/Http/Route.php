@@ -323,7 +323,7 @@ class Route implements RouteInterface
         if ($controller === null) {
             $controller = 'IndexController';
         }
-        $prefix = strtolower(str_replace('Controller', '', $controller));
+        $prefix = strtolower(str_replace(['Controller', '\\'], ['', '.'], $controller));
 
         //index
         self::$instance->register('GET', $route, "$controller@index")->name("$prefix.index");
@@ -358,6 +358,7 @@ class Route implements RouteInterface
      */
     public static function name($name)
     {
+        var_dump($name);
         self::$instance->routes[$name] = self::$instance->routes[self::$routeCount];
         unset(self::$instance->routes[self::$routeCount]);
     }
