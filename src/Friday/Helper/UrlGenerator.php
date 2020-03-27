@@ -173,7 +173,53 @@ class UrlGenerator
         if (array_key_exists($name, $this->routes)) {
             $route = $this->routes[$name];
 
-            return SERVER_ROOT.ltrim($route[1], '/').$this->getStringParameter($parameters);
+            if(!is_array($parameters)) {
+                echo "\n\n";
+                print_r([$route[1], $parameters]);
+                echo "\n\n";
+
+                $routeUriPattern = $route[1];
+
+                for ($i = 0; $i < count($routeUriPattern); $i++) {
+                    $start = $end = false;
+                    if ($routeUriPattern[$i] === '(') {
+                        $start = $i;
+                    }
+                    if ($routeUriPattern[$i] === ')') {
+                        $end = $i;
+                    }
+                var_export([$start, $end]);exit;
+
+                    $findStart = strpos($route[1], '{', $start);
+                    if ($findStart !== false) {
+                        $findStart += 3;
+                        $countParan = 1;
+                        $loop = true;
+                        $start_loop = false;
+                        $i = $findStart;
+
+                        while ($countParan && $loop) {
+                            if ($start_loop && $countParan == 1) {
+                                $loop = false;
+                            }
+                            $i++;
+                        }
+
+                        $findEnd = $i + 1;
+                        if ($findEnd !== false) {
+                            $substr = substr($this->string, $findStart, ($findEnd - $findStart));
+                            $route[1] = str_replace('@if'.$substr, '<?php if'.trim($substr).': ?>', $route[1]);
+                        }
+                        $start = $findEnd;
+                    } else {
+                        break;
+                    }
+                }
+
+                exit;
+            }
+
+            return SERVER_ROOT.ltrim($route[1], '/').(is_array($parameters) ? $this->getStringParameter($parameters) : $parameters);
         }
 
         throw new \Exception("Route [{$name}] not defined.");

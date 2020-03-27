@@ -824,7 +824,6 @@ class View implements ViewInterface
         }
         $data['_token'] = self::$instance->app->session->getToken();
         self::$instance->viewError = new ViewErrorMsg();
-
         return self::$instance->renderTemplate(
             self::$instance->app->findTemplate($template),
             $data

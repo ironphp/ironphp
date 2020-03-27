@@ -269,6 +269,7 @@ class Table
     public function getPaginated($limit = 1, $fields = null, $sqlQuery = false)
     {
         if ($this->pagination === null) {
+            // TODO
         }
         $this->buildQuery('select', $fields, ['count'=>null, 'field'=>'num']);
         $result = $this->executeQuery();
@@ -280,7 +281,16 @@ class Table
         }
         $this->pagination->initialize($limit, $total);
 
-        return $this->limit($limit, $this->pagination->getStartPoint())->getAll($fields, $sqlQuery);
+        $data =  $this->limit($limit, $this->pagination->getStartPoint())->getAll($fields, $sqlQuery);
+
+        // should return normal array instead of array of objects, should be use paginate() for array of objects
+        if (is_array($data)) {
+            foreach ($data as $i => $item) {
+                $data[$i] = (object) $item;
+            }
+        }
+
+        return $data;
     }
 
     /**

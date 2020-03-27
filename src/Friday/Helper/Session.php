@@ -259,6 +259,8 @@ class Session implements SessionInterface
      * @param mixed        $value
      *
      * @return void
+     *
+     * @since 1.0.10
      */
     public function put($key, $value = null)
     {
@@ -275,6 +277,8 @@ class Session implements SessionInterface
      * Get all of the session data.
      *
      * @return array
+     *
+     * @since 1.0.10
      */
     public function all()
     {

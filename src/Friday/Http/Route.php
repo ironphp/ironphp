@@ -358,7 +358,6 @@ class Route implements RouteInterface
      */
     public static function name($name)
     {
-        var_dump($name);
         self::$instance->routes[$name] = self::$instance->routes[self::$routeCount];
         unset(self::$instance->routes[self::$routeCount]);
     }
