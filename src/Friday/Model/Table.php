@@ -281,7 +281,7 @@ class Table
         }
         $this->pagination->initialize($limit, $total);
 
-        $data =  $this->limit($limit, $this->pagination->getStartPoint())->getAll($fields, $sqlQuery);
+        $data = $this->limit($limit, $this->pagination->getStartPoint())->getAll($fields, $sqlQuery);
 
         // should return normal array instead of array of objects, should be use paginate() for array of objects
         if (is_array($data)) {
