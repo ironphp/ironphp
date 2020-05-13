@@ -538,6 +538,7 @@ class Application implements ApplicationInterface
 
         // On many systems (Mac, for instance) "/etc/localtime" is a symlink
         // to the file with the timezone info
+		/*
         if (is_link('/etc/localtime')) {
 
             // If it is, that file's name is actually the "Olsen" format timezone
@@ -561,6 +562,8 @@ class Application implements ApplicationInterface
         } else {
             $timezone = $default;
         }
+		*/
+        $timezone = $default;
         date_default_timezone_set($timezone);
     }
 
