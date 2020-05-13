@@ -173,7 +173,7 @@ class UrlGenerator
         if (array_key_exists($name, $this->routes)) {
             $route = $this->routes[$name];
 
-            if(!is_array($parameters)) {
+            if (!is_array($parameters)) {
                 echo "\n\n";
                 print_r([$route[1], $parameters]);
                 echo "\n\n";
@@ -188,7 +188,8 @@ class UrlGenerator
                     if ($routeUriPattern[$i] === ')') {
                         $end = $i;
                     }
-                var_export([$start, $end]);exit;
+                    var_export([$start, $end]);
+                    exit;
 
                     $findStart = strpos($route[1], '{', $start);
                     if ($findStart !== false) {
