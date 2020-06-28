@@ -29,7 +29,6 @@
     },
     "require": {
         "php": ">=4.0",
-        "egulias/email-validator": "@stable",
         "erusev/parsedown": "@stable",
         "league/flysystem": "@stable",
         "monolog/monolog": "@stable",
