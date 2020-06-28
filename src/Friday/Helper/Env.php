@@ -20,6 +20,9 @@ namespace Friday\Helper;
 
 use Dotenv\Dotenv;
 use Dotenv\Exception\InvalidFileException;
+use Dotenv\Repository\Adapter\EnvConstAdapter;
+use Dotenv\Repository\Adapter\PutenvAdapter;
+use Dotenv\Repository\Adapter\ServerConstAdapter;
 use Dotenv\Repository\RepositoryBuilder;
 use Friday\Foundation\Application;
 use PhpOption\Option;
@@ -155,17 +158,15 @@ class Env
     {
         if (static::$repository === null) {
             $adapters = array_merge(
-                [],
-                static::$putenv ? [] : []
+                [new EnvConstAdapter, new ServerConstAdapter],
+                static::$putenv ? [new PutenvAdapter] : []
             );
 
-            /*
-                        static::$repository = RepositoryBuilder::create()
-                            ->withReaders($adapters)
-                            ->withWriters($adapters)
-                            ->immutable()
-                            ->make();
-            */
+            static::$repository = RepositoryBuilder::create()
+                ->withReaders($adapters)
+                ->withWriters($adapters)
+                ->immutable()
+                ->make();
         }
 
         return static::$repository;
