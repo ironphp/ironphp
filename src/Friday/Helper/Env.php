@@ -26,6 +26,7 @@ use Dotenv\Repository\Adapter\ServerConstAdapter;
 use Dotenv\Repository\RepositoryBuilder;
 use Friday\Foundation\Application;
 use PhpOption\Option;
+use Dotenv\Repository\RepositoryInterface;
 
 class Env
 {
@@ -102,7 +103,7 @@ class Env
     protected function createDotenv($app)
     {
         return Dotenv::create(
-            self::getRepository(),
+            Env::getRepository(),
             $app->environmentPath(),
             $app->environmentFile()
         );
@@ -158,15 +159,17 @@ class Env
     {
         if (static::$repository === null) {
             $adapters = array_merge(
-                [new EnvConstAdapter(), new ServerConstAdapter()],
-                static::$putenv ? [new PutenvAdapter()] : []
+                [],
+                static::$putenv ? [] : []
             );
 
+/*
             static::$repository = RepositoryBuilder::create()
                 ->withReaders($adapters)
                 ->withWriters($adapters)
                 ->immutable()
                 ->make();
+*/
         }
 
         return static::$repository;
