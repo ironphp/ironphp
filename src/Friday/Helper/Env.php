@@ -158,8 +158,8 @@ class Env
     {
         if (static::$repository === null) {
             $adapters = array_merge(
-                [new EnvConstAdapter, new ServerConstAdapter],
-                static::$putenv ? [new PutenvAdapter] : []
+                [new EnvConstAdapter(), new ServerConstAdapter()],
+                static::$putenv ? [new PutenvAdapter()] : []
             );
 
             static::$repository = RepositoryBuilder::create()
