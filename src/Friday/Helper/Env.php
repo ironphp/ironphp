@@ -20,13 +20,9 @@ namespace Friday\Helper;
 
 use Dotenv\Dotenv;
 use Dotenv\Exception\InvalidFileException;
-use Dotenv\Repository\Adapter\EnvConstAdapter;
-use Dotenv\Repository\Adapter\PutenvAdapter;
-use Dotenv\Repository\Adapter\ServerConstAdapter;
 use Dotenv\Repository\RepositoryBuilder;
 use Friday\Foundation\Application;
 use PhpOption\Option;
-use Dotenv\Repository\RepositoryInterface;
 
 class Env
 {
@@ -103,7 +99,7 @@ class Env
     protected function createDotenv($app)
     {
         return Dotenv::create(
-            Env::getRepository(),
+            self::getRepository(),
             $app->environmentPath(),
             $app->environmentFile()
         );
@@ -163,13 +159,13 @@ class Env
                 static::$putenv ? [] : []
             );
 
-/*
-            static::$repository = RepositoryBuilder::create()
-                ->withReaders($adapters)
-                ->withWriters($adapters)
-                ->immutable()
-                ->make();
-*/
+            /*
+                        static::$repository = RepositoryBuilder::create()
+                            ->withReaders($adapters)
+                            ->withWriters($adapters)
+                            ->immutable()
+                            ->make();
+            */
         }
 
         return static::$repository;
