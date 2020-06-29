@@ -34,7 +34,7 @@
         "monolog/monolog": "@stable",
         "psr/log": "@stable",
         "swiftmailer/swiftmailer": "@stable",
-        "vlucas/phpdotenv": "4.0"
+        "vlucas/phpdotenv": "^4.0"
     },
     "require-dev": {
         "atoum/atoum": "@stable",
