@@ -192,7 +192,7 @@ class PHPParser
                         $loopstr = []; //fixed-for: Uncaught Error: [] operator not supported for strings $loopstr[]
                         foreach ($val as $k => $v) {
                             $temp = $substr;
-                            if (is_array($v)) {
+                            if (is_array($v) || is_object($v)) {
                                 //$temp = strtr($temp, $v); {{}} not replaced
                                 foreach ($v as $ks => $vs) {
                                     $temp = str_replace('{{'.$ks.'}}', $vs, $temp);
