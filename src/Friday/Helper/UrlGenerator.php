@@ -174,98 +174,98 @@ class UrlGenerator
             $route = $this->routes[$name];
 
             $parameters = !is_array($parameters) ? [$parameters] : $parameters;
-			
-			// TODO: test for optional parameter route
-			if($route) {
-				if (!empty($parameters)) {
 
-					$routeUriPattern = $route[1];
-					$param = $route[1];
-					echo "\n\n";
-					print_r([$name]);
-					print_r($parameters);
-					print_r(var_export($route));
-					echo "\n\n";exit;
+            // TODO: test for optional parameter route
+            if ($route) {
+                if (!empty($parameters)) {
+                    $routeUriPattern = $route[1];
+                    $param = $route[1];
+                    echo "\n\n";
+                    print_r([$name]);
+                    print_r($parameters);
+                    print_r(var_export($route));
+                    echo "\n\n";
+                    exit;
 
-					for ($i = 0; $i < count($routeUriPattern); $i++) {
-						$start = $end = false;
-						if ($routeUriPattern[$i] === '(') {
-							$start = $i;
-						}
-						if ($routeUriPattern[$i] === ')') {
-							$end = $i;
-						}
-						var_export([$start, $end]);
-						exit;
+                    for ($i = 0; $i < count($routeUriPattern); $i++) {
+                        $start = $end = false;
+                        if ($routeUriPattern[$i] === '(') {
+                            $start = $i;
+                        }
+                        if ($routeUriPattern[$i] === ')') {
+                            $end = $i;
+                        }
+                        var_export([$start, $end]);
+                        exit;
 
-						$findStart = strpos($route[1], '{', $start);
-						if ($findStart !== false) {
-							$findStart += 3;
-							$countParan = 1;
-							$loop = true;
-							$start_loop = false;
-							$i = $findStart;
+                        $findStart = strpos($route[1], '{', $start);
+                        if ($findStart !== false) {
+                            $findStart += 3;
+                            $countParan = 1;
+                            $loop = true;
+                            $start_loop = false;
+                            $i = $findStart;
 
-							while ($countParan && $loop) {
-								if ($start_loop && $countParan == 1) {
-									$loop = false;
-								}
-								$i++;
-							}
+                            while ($countParan && $loop) {
+                                if ($start_loop && $countParan == 1) {
+                                    $loop = false;
+                                }
+                                $i++;
+                            }
 
-							$findEnd = $i + 1;
-							if ($findEnd !== false) {
-								$substr = substr($this->string, $findStart, ($findEnd - $findStart));
-								$route[1] = str_replace('@if'.$substr, '<?php if'.trim($substr).': ?>', $route[1]);
-							}
-							$start = $findEnd;
-						} else {
-							break;
-						}
-					}
-					/***
-					TODO: I dont know why i write this !
-					for ($i = 0; $i < count($routeUriPattern); $i++) {
-						$start = $end = false;
-						if ($routeUriPattern[$i] === '(') {
-							$start = $i;
-						}
-						if ($routeUriPattern[$i] === ')') {
-							$end = $i;
-						}
-						var_export([$start, $end]);
-						exit;
+                            $findEnd = $i + 1;
+                            if ($findEnd !== false) {
+                                $substr = substr($this->string, $findStart, ($findEnd - $findStart));
+                                $route[1] = str_replace('@if'.$substr, '<?php if'.trim($substr).': ?>', $route[1]);
+                            }
+                            $start = $findEnd;
+                        } else {
+                            break;
+                        }
+                    }
+                    /***
+                    TODO: I dont know why i write this !
+                    for ($i = 0; $i < count($routeUriPattern); $i++) {
+                        $start = $end = false;
+                        if ($routeUriPattern[$i] === '(') {
+                            $start = $i;
+                        }
+                        if ($routeUriPattern[$i] === ')') {
+                            $end = $i;
+                        }
+                        var_export([$start, $end]);
+                        exit;
 
-						$findStart = strpos($route[1], '{', $start);
-						if ($findStart !== false) {
-							$findStart += 3;
-							$countParan = 1;
-							$loop = true;
-							$start_loop = false;
-							$i = $findStart;
+                        $findStart = strpos($route[1], '{', $start);
+                        if ($findStart !== false) {
+                            $findStart += 3;
+                            $countParan = 1;
+                            $loop = true;
+                            $start_loop = false;
+                            $i = $findStart;
 
-							while ($countParan && $loop) {
-								if ($start_loop && $countParan == 1) {
-									$loop = false;
-								}
-								$i++;
-							}
+                            while ($countParan && $loop) {
+                                if ($start_loop && $countParan == 1) {
+                                    $loop = false;
+                                }
+                                $i++;
+                            }
 
-							$findEnd = $i + 1;
-							if ($findEnd !== false) {
-								$substr = substr($this->string, $findStart, ($findEnd - $findStart));
-								$route[1] = str_replace('@if'.$substr, '<?php if'.trim($substr).': ?>', $route[1]);
-							}
-							$start = $findEnd;
-						} else {
-							break;
-						}
-					}
-					****/
-				} else {
-					throw new \Exception("Route parameter are required.");
-				}
-			}
+                            $findEnd = $i + 1;
+                            if ($findEnd !== false) {
+                                $substr = substr($this->string, $findStart, ($findEnd - $findStart));
+                                $route[1] = str_replace('@if'.$substr, '<?php if'.trim($substr).': ?>', $route[1]);
+                            }
+                            $start = $findEnd;
+                        } else {
+                            break;
+                        }
+                    }
+                    ****/
+                } else {
+                    throw new \Exception('Route parameter are required.');
+                }
+            }
 
             return SERVER_ROOT.ltrim($route[1], '/').(is_array($parameters) ? $this->getStringParameter($parameters) : $parameters);
         }
