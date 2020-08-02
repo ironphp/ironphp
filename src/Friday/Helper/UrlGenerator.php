@@ -176,92 +176,21 @@ class UrlGenerator
             $parameters = !is_array($parameters) ? [$parameters] : $parameters;
 
             // TODO: test for optional parameter route
-            if ($route) {
+            if ($route[8]) {
                 if (!empty($parameters)) {
                     $routeUriPattern = $route[1];
-                    $param = $route[1];
-                    echo "\n\n";
-                    print_r([$name]);
-                    print_r($parameters);
-                    print_r(var_export($route));
-                    echo "\n\n";
-                    exit;
+                    $uri = $route[1];
 
-                    for ($i = 0; $i < count($routeUriPattern); $i++) {
-                        $start = $end = false;
-                        if ($routeUriPattern[$i] === '(') {
-                            $start = $i;
-                        }
-                        if ($routeUriPattern[$i] === ')') {
-                            $end = $i;
-                        }
-                        var_export([$start, $end]);
-                        exit;
-
-                        $findStart = strpos($route[1], '{', $start);
-                        if ($findStart !== false) {
-                            $findStart += 3;
-                            $countParan = 1;
-                            $loop = true;
-                            $start_loop = false;
-                            $i = $findStart;
-
-                            while ($countParan && $loop) {
-                                if ($start_loop && $countParan == 1) {
-                                    $loop = false;
-                                }
-                                $i++;
-                            }
-
-                            $findEnd = $i + 1;
-                            if ($findEnd !== false) {
-                                $substr = substr($this->string, $findStart, ($findEnd - $findStart));
-                                $route[1] = str_replace('@if'.$substr, '<?php if'.trim($substr).': ?>', $route[1]);
-                            }
-                            $start = $findEnd;
-                        } else {
-                            break;
-                        }
+					$i = $p = 0;
+                    foreach ( $route[5] as $i => $param ) {
+						if(!empty($param)) {
+                    		$url = str_replace($i, $parameters[$p], $uri);
+							$p++;
+						}
+						$i++;
                     }
-                    /***
-                    TODO: I dont know why i write this !
-                    for ($i = 0; $i < count($routeUriPattern); $i++) {
-                        $start = $end = false;
-                        if ($routeUriPattern[$i] === '(') {
-                            $start = $i;
-                        }
-                        if ($routeUriPattern[$i] === ')') {
-                            $end = $i;
-                        }
-                        var_export([$start, $end]);
-                        exit;
 
-                        $findStart = strpos($route[1], '{', $start);
-                        if ($findStart !== false) {
-                            $findStart += 3;
-                            $countParan = 1;
-                            $loop = true;
-                            $start_loop = false;
-                            $i = $findStart;
-
-                            while ($countParan && $loop) {
-                                if ($start_loop && $countParan == 1) {
-                                    $loop = false;
-                                }
-                                $i++;
-                            }
-
-                            $findEnd = $i + 1;
-                            if ($findEnd !== false) {
-                                $substr = substr($this->string, $findStart, ($findEnd - $findStart));
-                                $route[1] = str_replace('@if'.$substr, '<?php if'.trim($substr).': ?>', $route[1]);
-                            }
-                            $start = $findEnd;
-                        } else {
-                            break;
-                        }
-                    }
-                    ****/
+					return SERVER_ROOT.ltrim($url, '/');
                 } else {
                     throw new \Exception('Route parameter are required.');
                 }
