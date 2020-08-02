@@ -371,10 +371,11 @@ class Table
      *
      * @param array  $where
      * @param string $glue
+     * @param mix    $value
      *
      * @return $this
      */
-    public function where($where, $glue = 'AND')
+    public function where($where, $glue = 'AND', $value = null)
     {
         if (is_array($where) && count($where) != 0) {
             $array = [];
@@ -383,10 +384,15 @@ class Table
             }
             $this->where = ' WHERE'.implode(" $glue", $array);
         } elseif (is_string($where) && trim($where) != '') {
-            $where = trim($where);
-            $where = trim($where, 'WHERE ');
-            $where = rtrim($where);
-            $this->where = ' WHERE '.$where;
+			$where = trim($where);
+			if($value == null) {
+				$where = trim($where, 'WHERE ');
+				$where = rtrim($where);
+				$this->where = ' WHERE '.$where;
+			} else {
+				$value = is_string($value) ? "\"$value\"" : $value;
+				$this->where = ' WHERE `'.$where.'` '.$glue.' '.$value;
+			}
         }
 
         return $this;
