@@ -181,16 +181,16 @@ class UrlGenerator
                     $routeUriPattern = $route[1];
                     $uri = $route[1];
 
-					$i = $p = 0;
-                    foreach ( $route[5] as $i => $param ) {
-						if(!empty($param)) {
-                    		$url = str_replace($i, $parameters[$p], $uri);
-							$p++;
-						}
-						$i++;
+                    $i = $p = 0;
+                    foreach ($route[5] as $i => $param) {
+                        if (!empty($param)) {
+                            $url = str_replace($i, $parameters[$p], $uri);
+                            $p++;
+                        }
+                        $i++;
                     }
 
-					return SERVER_ROOT.ltrim($url, '/');
+                    return SERVER_ROOT.ltrim($url, '/');
                 } else {
                     throw new \Exception('Route parameter are required.');
                 }
