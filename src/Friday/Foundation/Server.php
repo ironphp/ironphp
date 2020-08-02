@@ -86,7 +86,7 @@ class Server extends Application
                 http_response_code(404);
                 echo 'Page not found. Error 404';
                 //header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found");
-                die();
+                exit();
             }, null, [], [], 4, 4, 1];
         }
 

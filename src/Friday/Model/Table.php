@@ -125,7 +125,7 @@ class Table
         try {
             $mysqli = new mysqli($config['host'], $config['username'], $config['password'], $config['database'], $config['port']);
         } catch (Exception $e) {
-            die('Error : '.$e->getMessage());
+            exit('Error : '.$e->getMessage());
         }
 
         if (version_compare(PHP_VERSION, '5.2.9', '<=') && version_compare(PHP_VERSION, '5.3.0', '>=')) {
@@ -145,7 +145,7 @@ class Table
 
         $this->connect_errno = $mysqli->connect_errno;
         if ($this->connect_errno) {
-            die('Connect Error ['.$this->connect_errno.']: '.$this->connect_error);
+            exit('Connect Error ['.$this->connect_errno.']: '.$this->connect_error);
         }
         $this->connection = $mysqli;
     }
@@ -384,15 +384,15 @@ class Table
             }
             $this->where = ' WHERE'.implode(" $glue", $array);
         } elseif (is_string($where) && trim($where) != '') {
-			$where = trim($where);
-			if($value == null) {
-				$where = trim($where, 'WHERE ');
-				$where = rtrim($where);
-				$this->where = ' WHERE '.$where;
-			} else {
-				$value = is_string($value) ? "\"$value\"" : $value;
-				$this->where = ' WHERE `'.$where.'` '.$glue.' '.$value;
-			}
+            $where = trim($where);
+            if ($value == null) {
+                $where = trim($where, 'WHERE ');
+                $where = rtrim($where);
+                $this->where = ' WHERE '.$where;
+            } else {
+                $value = is_string($value) ? "\"$value\"" : $value;
+                $this->where = ' WHERE `'.$where.'` '.$glue.' '.$value;
+            }
         }
 
         return $this;
