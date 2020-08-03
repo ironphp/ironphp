@@ -427,7 +427,7 @@ if (!function_exists('session')) {
             return app('session')->put($key);
         }
 
-        if (!is_null($value)) {// && !is_array($value)) {
+        if (!is_null($value)) {
             return app('session')->set($key, $value);
         }
 
