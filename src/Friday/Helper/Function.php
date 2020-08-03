@@ -435,27 +435,28 @@ if (!function_exists('session')) {
     }
 }
 
-if (! function_exists('redirect')) {
+if (!function_exists('redirect')) {
     /**
      * Get an instance of the redirector.
      *
-     * @param  string|null  $to
-     * @param  int  $status
-     * @param  array  $headers
-     * @param  bool|null  $secure
+     * @param string|null $to
+     * @param int         $status
+     * @param array       $headers
+     * @param bool|null   $secure
+     *
      * @return \-\Routing\Redirector|\-\Http\RedirectResponse
      */
     function redirect($to = null, $status = 302, $headers = [], $secure = null)
     {
-			header("Location: ".$to, true, $status);
-			exit;
-/*
-        if (is_null($to)) {
-            return app('redirect');
-        }
+        header('Location: '.$to, true, $status);
+        exit;
+        /*
+                if (is_null($to)) {
+                    return app('redirect');
+                }
 
-        return app('redirect')->to($to, $status, $headers, $secure);
-*/
+                return app('redirect')->to($to, $status, $headers, $secure);
+        */
     }
 }
 
