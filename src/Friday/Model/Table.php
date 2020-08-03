@@ -213,10 +213,10 @@ class Table
      */
     public function get($fields = null, $sqlQuery = false)
     {
-        if(count($fields) == 1 && $fields[0] == '*') {
-			$fields = null;
-		}
-		$this->buildQuery('select', $fields);
+        if (count($fields) == 1 && $fields[0] == '*') {
+            $fields = null;
+        }
+        $this->buildQuery('select', $fields);
         if ($sqlQuery === true) {
             return $this->getQuery();
         }
@@ -686,7 +686,8 @@ class Table
     /**
      * Execute the query and get the first related model.
      *
-     * @param  array  $columns
+     * @param array $columns
+     *
      * @return mixed
      */
     public function first($columns = ['*'])
