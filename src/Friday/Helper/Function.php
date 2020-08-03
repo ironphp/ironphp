@@ -435,6 +435,30 @@ if (!function_exists('session')) {
     }
 }
 
+if (! function_exists('redirect')) {
+    /**
+     * Get an instance of the redirector.
+     *
+     * @param  string|null  $to
+     * @param  int  $status
+     * @param  array  $headers
+     * @param  bool|null  $secure
+     * @return \-\Routing\Redirector|\-\Http\RedirectResponse
+     */
+    function redirect($to = null, $status = 302, $headers = [], $secure = null)
+    {
+			header("Location: ".$to, true, $status);
+			exit;
+/*
+        if (is_null($to)) {
+            return app('redirect');
+        }
+
+        return app('redirect')->to($to, $status, $headers, $secure);
+*/
+    }
+}
+
 /*
 function moneyInWords($m){
     if($m>=1000){
