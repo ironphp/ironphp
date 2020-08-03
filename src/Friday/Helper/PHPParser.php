@@ -148,8 +148,6 @@ class PHPParser
                     }
             }
         }
-        print_r($this);
-        exit;
 
         return $this->current;
     }
@@ -218,11 +216,11 @@ class PHPParser
     }
 
     /**
-     * Replace all {{}} to PHP code.
+     * Replace all {{}}, {! !} to PHP code.
      *
      * @return string
      */
-    public function replaceBraces()
+    public function replaceBraces($htmlspecialchars = true)
     {
         $start = 0;
         while (true) {
@@ -235,7 +233,11 @@ class PHPParser
                     if (empty(trim($substr))) {
                         $this->string = str_replace('{{'.$substr.'}}', '', $this->string);
                     } else {
-                        $this->string = str_replace('{{'.$substr.'}}', '<?=e('.trim($substr).')?>', $this->string);
+						if($htmlspecialchars) {
+							$this->string = str_replace('{{'.$substr.'}}', '<?=e('.trim($substr).')?>', $this->string);
+						} else {
+							$this->string = str_replace('{{'.$substr.'}}', '<?='.trim($substr).'?>', $this->string);
+						}
                     }
                 }
                 $start = $findEnd;
