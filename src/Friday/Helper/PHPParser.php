@@ -216,11 +216,11 @@ class PHPParser
     }
 
     /**
-     * Replace all {{}}, {! !} to PHP code.
+     * Replace all {{}} to PHP code.
      *
      * @return string
      */
-    public function replaceBraces($htmlspecialchars = true)
+    public function replaceBraces()
     {
         $start = 0;
         while (true) {
@@ -233,11 +233,7 @@ class PHPParser
                     if (empty(trim($substr))) {
                         $this->string = str_replace('{{'.$substr.'}}', '', $this->string);
                     } else {
-						if($htmlspecialchars) {
-							$this->string = str_replace('{{'.$substr.'}}', '<?=e('.trim($substr).')?>', $this->string);
-						} else {
-							$this->string = str_replace('{{'.$substr.'}}', '<?='.trim($substr).'?>', $this->string);
-						}
+						$this->string = str_replace('{{'.$substr.'}}', '<?=e('.trim($substr).')?>', $this->string);
                     }
                 }
                 $start = $findEnd;
@@ -358,5 +354,37 @@ class PHPParser
     public function parseCsrf()
     {
         $this->string = str_replace('@csrf', csrf_field(), $this->string);
+    }
+
+	/**
+     * Replace all {! !} to PHP code.
+     *
+     * @return string
+     *
+     * @since 1.0.11
+     */
+    public function replaceUnescapedBraces()
+    {
+        $start = 0;
+        while (true) {
+            $findStart = strpos($this->string, '{!', $start);
+            if ($findStart !== false) {
+                $findStart += 2;
+                $findEnd = strpos($this->string, '!}', $findStart);
+                if ($findEnd !== false) {
+                    $substr = substr($this->string, $findStart, ($findEnd - $findStart));
+                    if (empty(trim($substr))) {
+                        $this->string = str_replace('{!'.$substr.'!}', '', $this->string);
+                    } else {
+						$this->string = str_replace('{!'.$substr.'!}', '<?='.trim($substr).'?>', $this->string);
+                    }
+                }
+                $start = $findEnd;
+            } else {
+                break;
+            }
+        }
+
+        return $this->string;
     }
 }
