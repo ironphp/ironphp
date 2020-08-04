@@ -233,7 +233,7 @@ class PHPParser
                     if (empty(trim($substr))) {
                         $this->string = str_replace('{{'.$substr.'}}', '', $this->string);
                     } else {
-						$this->string = str_replace('{{'.$substr.'}}', '<?=e('.trim($substr).')?>', $this->string);
+                        $this->string = str_replace('{{'.$substr.'}}', '<?=e('.trim($substr).')?>', $this->string);
                     }
                 }
                 $start = $findEnd;
@@ -356,7 +356,7 @@ class PHPParser
         $this->string = str_replace('@csrf', csrf_field(), $this->string);
     }
 
-	/**
+    /**
      * Replace all {! !} to PHP code.
      *
      * @return string
@@ -376,7 +376,7 @@ class PHPParser
                     if (empty(trim($substr))) {
                         $this->string = str_replace('{!'.$substr.'!}', '', $this->string);
                     } else {
-						$this->string = str_replace('{!'.$substr.'!}', '<?='.trim($substr).'?>', $this->string);
+                        $this->string = str_replace('{!'.$substr.'!}', '<?='.trim($substr).'?>', $this->string);
                     }
                 }
                 $start = $findEnd;
