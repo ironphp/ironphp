@@ -886,9 +886,9 @@ class View implements ViewInterface
      */
     public function evalPhp($templateData, $data = [])
     {
-        $templateData = $this->parsePHP(
-            $this->getParser($templateData)->replaceBraces()
-        );
+        $templateData = $this->getParser($templateData)->replaceBraces();
+		$templateData = $this->getParser($templateData)->replaceUnescapedBraces();
+        $templateData = $this->parsePHP($templateData);
 
         $temp = TMP.'view';
         if (!file_exists(TMP) || !is_dir(TMP)) {
