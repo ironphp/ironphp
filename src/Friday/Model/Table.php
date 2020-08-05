@@ -310,9 +310,11 @@ class Table
             echo 'no data to save'; //no argument
             exit;
         }
-        $this->buildQuery('insert', $data);
+
+		$this->buildQuery('insert', $data);
         $this->num_rows = 0;
-        if ($sqlQuery === true) {
+
+		if ($sqlQuery === true) {
             return $this->getQuery();
         }
 
@@ -620,10 +622,10 @@ class Table
     {
         $str = trim($str);
         /*
-                Function get_magic_quotes_gpc() is deprecated in PHP 7.4
-                if (get_magic_quotes_gpc()) {
-                    $str = stripslashes($str);
-                }
+		Function get_magic_quotes_gpc() is deprecated in PHP 7.4
+		if (get_magic_quotes_gpc()) {
+			$str = stripslashes($str);
+		}
         */
 
         return $this->connection->real_escape_string($str);
@@ -689,9 +691,25 @@ class Table
      * @param array $columns
      *
      * @return mixed
+     *
+     * @since 1.0.11
      */
     public function first($columns = ['*'])
     {
         return $this->get($columns);
+    }
+
+    /**
+     * Execute the query and add data to related table.
+     *
+     * @param array $data
+     *
+     * @return mixed
+     *
+     * @since 1.0.11
+     */
+    public function create($data)
+    {
+        return $this->add($data);
     }
 }
