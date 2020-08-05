@@ -692,8 +692,6 @@ class Table
      */
     public function first($columns = ['*'])
     {
-        $results = $this->get($columns);
-
-        return count($results) > 0 ? $results->first() : null;
+        return $this->get($columns);
     }
 }
