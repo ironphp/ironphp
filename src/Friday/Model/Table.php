@@ -696,7 +696,11 @@ class Table
      */
     public function first($columns = ['*'])
     {
-        return $this->get($columns);
+		$data = $this->get($columns);
+		if($data) {
+			$data = (object) $data;
+		}
+        return $data;
     }
 
     /**
