@@ -697,6 +697,7 @@ class Table
     public function first($columns = ['*'])
     {
 		$data = $this->get($columns);
+
 		if($data) {
 			$data = (object) $data;
 		}
