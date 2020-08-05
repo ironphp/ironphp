@@ -311,10 +311,10 @@ class Table
             exit;
         }
 
-		$this->buildQuery('insert', $data);
+        $this->buildQuery('insert', $data);
         $this->num_rows = 0;
 
-		if ($sqlQuery === true) {
+        if ($sqlQuery === true) {
             return $this->getQuery();
         }
 
@@ -622,10 +622,10 @@ class Table
     {
         $str = trim($str);
         /*
-		Function get_magic_quotes_gpc() is deprecated in PHP 7.4
-		if (get_magic_quotes_gpc()) {
-			$str = stripslashes($str);
-		}
+        Function get_magic_quotes_gpc() is deprecated in PHP 7.4
+        if (get_magic_quotes_gpc()) {
+            $str = stripslashes($str);
+        }
         */
 
         return $this->connection->real_escape_string($str);
@@ -696,11 +696,11 @@ class Table
      */
     public function first($columns = ['*'])
     {
-		$data = $this->get($columns);
+        $data = $this->get($columns);
+        if ($data) {
+            $data = (object) $data;
+        }
 
-		if($data) {
-			$data = (object) $data;
-		}
         return $data;
     }
 
