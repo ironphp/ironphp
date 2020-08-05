@@ -208,7 +208,9 @@ class PHPParser
                     }
                 }
             } else {
-                $this->string = str_replace('{{'.$key.'}}', $val, $this->string);
+				if(!is_array($val) && !is_object($val)) {
+					$this->string = str_replace('{{'.$key.'}}', $val, $this->string);
+				}
             }
         }
 
