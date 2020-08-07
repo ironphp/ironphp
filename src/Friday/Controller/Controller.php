@@ -402,7 +402,7 @@ class Controller implements ControllerInterface
     /**
      * Save file from $_FILES data.
      *
-     * @param array $file
+     * @param array       $file
      * @param string|null $path
      * @param string|null $name
      *
@@ -410,45 +410,46 @@ class Controller implements ControllerInterface
      *
      * @since 1.0.11
      */
-	public function saveFile($file, $path = null, $name = null) {
-/*
-		'name' => string '2211.jpg' (length=8)
-      'type' => string 'image/jpeg' (length=10)
-      'tmp_name' => string 'D:\xampp\tmp\php2295.tmp' (length=24)
-      'error' => int 0
-      'size' => int 619490
-*/
-		if($file['name'] == '' || $file['error'] > 0) {
-			return false;
-		}
+    public function saveFile($file, $path = null, $name = null)
+    {
+        /*
+                'name' => string '2211.jpg' (length=8)
+              'type' => string 'image/jpeg' (length=10)
+              'tmp_name' => string 'D:\xampp\tmp\php2295.tmp' (length=24)
+              'error' => int 0
+              'size' => int 619490
+        */
+        if ($file['name'] == '' || $file['error'] > 0) {
+            return false;
+        }
 
-		$storage = STORAGE;
+        $storage = STORAGE;
 
-		if(! (file_exists($storage) && is_dir($storage)) ) {
-			if(mkdir($storage) == false) {
-				return false;
-			}
-		}
+        if (!(file_exists($storage) && is_dir($storage))) {
+            if (mkdir($storage) == false) {
+                return false;
+            }
+        }
 
-		$relative_path = trim($path,'\\/').'/';
-		$storage = STORAGE.$relative_path;
+        $relative_path = trim($path, '\\/').'/';
+        $storage = STORAGE.$relative_path;
 
-		if(! (file_exists($storage) && is_dir($storage)) ) {
-			if(mkdir($storage) == false) {
-				return false;
-			}
-		}
+        if (!(file_exists($storage) && is_dir($storage))) {
+            if (mkdir($storage) == false) {
+                return false;
+            }
+        }
 
-		$ext = \mime2ext($file['type']);
-		$relative_path .= ($name ?: md5($file['name'].time())).'.'.$ext;
-		$filepath = STORAGE.$relative_path;
+        $ext = \mime2ext($file['type']);
+        $relative_path .= ($name ?: md5($file['name'].time())).'.'.$ext;
+        $filepath = STORAGE.$relative_path;
 
-		$f = 1;//move_uploaded_file($file['tmp_name'], $filepath);
+        $f = 1; //move_uploaded_file($file['tmp_name'], $filepath);
 
-		if($f) {
-			return $relative_path;
-		} else {
-			return false;
-		}
-	}
+        if ($f) {
+            return $relative_path;
+        } else {
+            return false;
+        }
+    }
 }
