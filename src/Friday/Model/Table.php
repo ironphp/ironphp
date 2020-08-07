@@ -206,17 +206,18 @@ class Table
     /**
      * Get field from table.
      *
-     * @param array|null $fields
+     * @param string|array|null $fields
      * @param bool       $sqlQuery
      *
      * @return array|string
      */
     public function get($fields = null, $sqlQuery = false)
     {
-        if (count($fields) == 1 && $fields[0] == '*') {
+        if($fields = '*' || (is_array($fields) && count($fields) == 1 && $fields[0] == '*')) {
             $fields = null;
         }
-        $this->buildQuery('select', $fields);
+
+		$this->buildQuery('select', $fields);
         if ($sqlQuery === true) {
             return $this->getQuery();
         }
@@ -312,7 +313,8 @@ class Table
         }
 
         $this->buildQuery('insert', $data);
-        $this->num_rows = 0;
+var_dump($this->getQuery());exit;
+		$this->num_rows = 0;
 
         if ($sqlQuery === true) {
             return $this->getQuery();
