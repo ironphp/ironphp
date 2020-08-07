@@ -452,4 +452,20 @@ class Controller implements ControllerInterface
             return false;
         }
     }
+
+    /**
+     * Get hash salt value.
+     *
+     * @return string|bool
+     *
+     * @moved 1.0.11
+     */
+    protected function getSalt()
+    {
+        if (self::$instance == null) {
+            return false;
+        }
+
+		return self::$instance->app->config['app']['salt'];
+    }
 }

@@ -151,7 +151,7 @@ class ModelService
      *
      * @return mixed
      */
-    protected function sanitizeFormValue($string)
+    public function sanitizeFormValue($string)
     {
         return $this->getConnection()->sanitizeFormValue($string);
     }
@@ -177,16 +177,6 @@ class ModelService
         $key = str_replace('base64:', '', $key);
 
         return base64_decode($key);
-    }
-
-    /**
-     * Get hash salt value.
-     *
-     * @return string
-     */
-    protected function getSalt()
-    {
-        return self::$app->config['app']['salt'];
     }
 
     /**

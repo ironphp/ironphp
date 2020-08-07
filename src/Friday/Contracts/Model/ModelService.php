@@ -38,4 +38,13 @@ interface ModelService
      * @return \Friday\Model\Table
      */
     public function table($tableName, $pagination = false);
+
+    /**
+     * Function to sanitize values received from the form. Prevents SQL injection.
+     *
+     * @param mixed $string
+     *
+     * @return mixed
+     */
+    public function sanitizeFormValue($string);
 }
