@@ -276,13 +276,13 @@ class Table
             // TODO
         }
 
-		$this->buildQuery('select', $fields, ['count'=>null, 'field'=>'num']);
+        $this->buildQuery('select', $fields, ['count'=>null, 'field'=>'num']);
         $result = $this->executeQuery();
         $this->num_rows = $result->num_rows;
         $row = $result->fetch_array(MYSQLI_ASSOC);
         $total = $row['num'];
 
-		if ($total == 0 && $sqlQuery == false) {
+        if ($total == 0 && $sqlQuery == false) {
             return [];
         }
         $this->pagination->initialize($limit, $total);
@@ -315,7 +315,7 @@ class Table
         }
 
         $this->buildQuery('insert', $data);
-		$this->num_rows = 0;
+        $this->num_rows = 0;
 
         if ($sqlQuery === true) {
             return $this->getQuery();
@@ -732,7 +732,7 @@ class Table
      * @since 1.0.11
      */
     public function paginate($limit = 1, $fields = null)
-	{
+    {
         return $this->getPaginated($limit, $fields);
-	}
+    }
 }

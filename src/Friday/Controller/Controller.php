@@ -459,6 +459,6 @@ class Controller implements ControllerInterface
             return false;
         }
 
-		return self::$instance->app->config['app']['salt'];
+        return self::$instance->app->config['app']['salt'];
     }
 }
