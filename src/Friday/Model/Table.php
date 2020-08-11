@@ -275,12 +275,14 @@ class Table
         if ($this->pagination === null) {
             // TODO
         }
-        $this->buildQuery('select', $fields, ['count'=>null, 'field'=>'num']);
+
+		$this->buildQuery('select', $fields, ['count'=>null, 'field'=>'num']);
         $result = $this->executeQuery();
         $this->num_rows = $result->num_rows;
         $row = $result->fetch_array(MYSQLI_ASSOC);
         $total = $row['num'];
-        if ($total == 0 && $sqlQuery == false) {
+
+		if ($total == 0 && $sqlQuery == false) {
             return [];
         }
         $this->pagination->initialize($limit, $total);
@@ -313,9 +315,7 @@ class Table
         }
 
         $this->buildQuery('insert', $data);
-        var_dump($this->getQuery());
-        exit;
-        $this->num_rows = 0;
+		$this->num_rows = 0;
 
         if ($sqlQuery === true) {
             return $this->getQuery();
@@ -595,7 +595,7 @@ class Table
         $this->errno = $this->connection->errno;
         $this->error = $this->connection->error;
         if ($this->connection->errno) {
-            echo 'Query Error ['.$this->errno.'] : '.$this->error.' : '.$this->query;
+            echo 'Query Error <strong>['.$this->errno.']</strong> : <strong>'.$this->error.'</strong> : '.$this->query;
         }
         if ($this->errno == 1054) {
             echo 'Table not set properly in query';
@@ -720,4 +720,19 @@ class Table
     {
         return $this->add($data);
     }
+
+    /**
+     * Get paginated fields from table.
+     *
+     * @param int        $limit
+     * @param array|null $fields
+     *
+     * @return array
+     *
+     * @since 1.0.11
+     */
+    public function paginate($limit = 1, $fields = null)
+	{
+        return $this->getPaginated($limit, $fields);
+	}
 }
