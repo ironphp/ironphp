@@ -40,6 +40,18 @@ interface ModelService
     public function table($tableName, $pagination = false);
 
     /**
+     * Get pagination html.
+     *
+     * @param string $url
+     * @param int    $style
+     * @param array  $cssClass
+     * @param bool   $replaceClass
+     *
+     * @return bool|string|null
+     */
+    public function getPaginationHtml($url = '?', $style = 0, $cssClass = null, $replaceClass = false);
+
+    /**
      * Function to sanitize values received from the form. Prevents SQL injection.
      *
      * @param mixed $string
