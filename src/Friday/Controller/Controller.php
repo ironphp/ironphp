@@ -412,13 +412,6 @@ class Controller implements ControllerInterface
      */
     public function saveFile($file, $path = null, $name = null)
     {
-        /*
-                'name' => string '2211.jpg' (length=8)
-              'type' => string 'image/jpeg' (length=10)
-              'tmp_name' => string 'D:\xampp\tmp\php2295.tmp' (length=24)
-              'error' => int 0
-              'size' => int 619490
-        */
         if ($file['name'] == '' || $file['error'] > 0) {
             return false;
         }
@@ -444,7 +437,7 @@ class Controller implements ControllerInterface
         $relative_path .= ($name ?: md5($file['name'].time())).'.'.$ext;
         $filepath = STORAGE.$relative_path;
 
-        $f = 1; //move_uploaded_file($file['tmp_name'], $filepath);
+        $f = move_uploaded_file($file['tmp_name'], $filepath);
 
         if ($f) {
             return $relative_path;
