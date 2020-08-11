@@ -110,7 +110,7 @@ class ModelService
      *
      * @return bool|string|null
      */
-    protected function getPaginationHtml($url = '?', $style = 0, $cssClass = null, $replaceClass = false)
+    public function getPaginationHtml($url = '?', $style = 0, $cssClass = null, $replaceClass = false)
     {
         return $this->pagination->getPaginationHtml($url, $style, $cssClass, $replaceClass);
     }
