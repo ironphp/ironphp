@@ -58,7 +58,7 @@ class Router implements RouterInterface
         $route = trim($uriRoute, '/ ');
         $size = count($route === '' ? [] : explode('/', $route));
 
-		$allRoute = array_filter($allRoute, function ($v) use ($size, $httpMethod) {
+        $allRoute = array_filter($allRoute, function ($v) use ($size, $httpMethod) {
             if ($v[0] != $httpMethod) {
                 return false;
             }
@@ -70,7 +70,7 @@ class Router implements RouterInterface
             }
         });
 
-		foreach ($allRoute as $route) {
+        foreach ($allRoute as $route) {
             if ($this->match($route, $uriRoute)) {
                 return $route;
             }
