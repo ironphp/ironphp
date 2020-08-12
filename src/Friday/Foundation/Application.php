@@ -326,11 +326,11 @@ class Application implements ApplicationInterface
      */
     public function findController($controller)
     {
-        $file = $this->basePath("app".DS."Controller".DS.$controller.".php");
+        $file = $this->basePath('app'.DS.'Controller'.DS.$controller.'.php');
         //TODO for linux
-		//$file = str_replace("\\", DS, $file);
+        //$file = str_replace("\\", DS, $file);
 
-		if ($this->findFile($file)) {
+        if ($this->findFile($file)) {
             return true;
         } else {
             throw new Exception($file.' Controller file is missing.');
