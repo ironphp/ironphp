@@ -137,7 +137,8 @@ class Route implements RouteInterface
         if ($mix == null && $view == null) {
             $mix = 'IndexController@index';
         }
-        if (is_string($mix) && $mix !== null) {
+
+		if (is_string($mix) && $mix !== null) {
             if (strpos($mix, '@') === false) {
                 $mix = $mix.'@index';
             }
