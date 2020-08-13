@@ -326,9 +326,8 @@ class Application implements ApplicationInterface
      */
     public function findController($controller)
     {
-        $file = $this->basePath('app'.DS.'Controller'.DS.$controller.'.php');
-        //TODO for linux
-        //$file = str_replace("\\", DS, $file);
+        $controller = str_replace("\\", DS, $controller);
+        $file = $this->basePath("app".DS."Controller".DS.$controller.".php");
 
         if ($this->findFile($file)) {
             return true;

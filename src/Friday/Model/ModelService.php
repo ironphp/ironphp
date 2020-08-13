@@ -112,11 +112,10 @@ class ModelService
      */
     public function getPaginationHtml($url = '?', $style = 0, $cssClass = null, $replaceClass = false)
     {
-        if ($this->pagination) {
-            return $this->pagination->getPaginationHtml($url, $style, $cssClass, $replaceClass);
-        }
-
-        return self::$instance->pagination->getPaginationHtml($url, $style, $cssClass, $replaceClass);
+		if($this->pagination) {
+			return $this->pagination->getPaginationHtml($url, $style, $cssClass, $replaceClass);
+		}
+		return self::$instance->pagination->getPaginationHtml($url, $style, $cssClass, $replaceClass);
     }
 
     /**

@@ -51,6 +51,7 @@ class Router implements RouterInterface
      */
     public function route($allRoute, $uriRoute, $httpMethod)
     {
+
         if (is_null($allRoute) || (is_array($allRoute) && !count($allRoute))) {
             throw new Exception('No routes. Define them at /app/Route/web.php');
         }
@@ -59,12 +60,15 @@ class Router implements RouterInterface
         $size = count($route === '' ? [] : explode('/', $route));
 
         $allRoute = array_filter($allRoute, function ($v) use ($size, $httpMethod) {
+
             if ($v[0] != $httpMethod) {
                 return false;
             }
+
             if ($v[6] == $size) {
                 return true;
             }
+
             if ($v[8] == true && $v[7] <= $size && $v[6] >= $size) {
                 return true;
             }
@@ -75,6 +79,7 @@ class Router implements RouterInterface
                 return $route;
             }
         }
+
         foreach ($allRoute as $route) {
             if ($this->match($route, $uriRoute, true)) {
                 return $route;
@@ -97,9 +102,10 @@ class Router implements RouterInterface
      */
     public function match($route, $uriRoute, $parameterized = false)
     {
-        if ($route[1] === $uriRoute) {
+        if ($route[1] === '/'.trim($uriRoute, '/ ')) {
             return true;
         }
+
         if ($parameterized) {
             $array = explode('/', trim($route[1], '/'));
             $size = count($array);

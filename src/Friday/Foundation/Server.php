@@ -140,29 +140,27 @@ class Server extends Application
         $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
         $uri = str_replace(['{', '}'], '', urldecode($uri));
         $extDir = dirname(dirname($_SERVER['SCRIPT_NAME']));
-        $uri = ($extDir == '/' || $extDir == '\\') ? $uri : str_replace($extDir, '', $uri);
+        $uri = ($extDir == "/" || $extDir == "\\") ? $uri : str_replace($extDir, '', $uri);
         $uri = rtrim($uri, '/');
         $uri = empty($uri) ? '/' : $uri;
 
-        $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-        $uri = str_replace(['{', '}'], '', urldecode($uri));
-        $extDir = dirname(dirname($_SERVER['SCRIPT_NAME']));
-        $uri = str_replace($extDir, '', $uri);
-        $uri = rtrim($uri, '/');
-        $uri = empty($uri) ? '/' : $uri;
         $serverRequestMethod = $_SERVER['REQUEST_METHOD'];
+
         if ($serverRequestMethod == 'POST') {
             if (isset($_POST['_method']) && ($_POST['_method'] === 'PUT' || $_POST['_method'] === 'DELETE')) {
                 $serverRequestMethod = $_POST['_method'];
                 $GLOBALS['_'.$serverRequestMethod] = $GLOBALS['_POST'];
             }
         }
+
         $params = $GLOBALS['_'.$serverRequestMethod];
+
         if (!empty($_SERVER['HTTPS']) && ('on' == $_SERVER['HTTPS'])) {
             $https = true;
         } else {
             $https = false;
         }
+
         $host = $_SERVER['HTTP_HOST'].str_replace('\\', '/', $extDir);
         $ip = $_SERVER['REMOTE_ADDR'];
 

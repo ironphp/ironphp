@@ -143,11 +143,13 @@ class Route implements RouteInterface
                 $mix = $mix.'@index';
             }
         }
+
         $route = trim($route, '/ ');
         $route = (self::$instance->prefix == null) ? $route : rtrim(self::$instance->prefix.'/'.$route, '/');
         $array = $route === '' ? [] : explode('/', $route);
         $size = count($array);
         $route = '/'.$route;
+
         if (strpos($route, '{') !== false) {
             $to = 0;
             $param = true;
@@ -177,6 +179,7 @@ class Route implements RouteInterface
             $base_route = $route;
         }
         $base_route = is_array($base_route) ? implode('/', $base_route) : $base_route;
+
         if (trim($base_route) === '') {
             $base_route = '/';
         }
