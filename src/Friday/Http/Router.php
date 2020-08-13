@@ -51,7 +51,6 @@ class Router implements RouterInterface
      */
     public function route($allRoute, $uriRoute, $httpMethod)
     {
-
         if (is_null($allRoute) || (is_array($allRoute) && !count($allRoute))) {
             throw new Exception('No routes. Define them at /app/Route/web.php');
         }
@@ -60,7 +59,6 @@ class Router implements RouterInterface
         $size = count($route === '' ? [] : explode('/', $route));
 
         $allRoute = array_filter($allRoute, function ($v) use ($size, $httpMethod) {
-
             if ($v[0] != $httpMethod) {
                 return false;
             }
