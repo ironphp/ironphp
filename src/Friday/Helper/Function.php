@@ -661,6 +661,21 @@ if (!function_exists('mime2ext')) {
     }
 }
 
+if (!function_exists('str_slug')) {
+    /**
+     * Create slug for string.
+     *
+     * @param string $str
+     * @param string $glue
+     *
+     * @return string
+     */
+    function str_slug($str, $glue = '-')
+    {
+		return str_replace([' ', '_', '-'], $glue, strtolower($str));
+	}
+}
+
 /*
 function moneyInWords($m){
     if($m>=1000){
