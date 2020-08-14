@@ -753,7 +753,8 @@ class Table
 		$this->where($where, $glue, $value);
 		$next_where = trim(str_replace('WHERE', '', $this->where));
 		$this->where = $prev_where." AND ".$next_where;
-		return $this->where;
+
+		return $this;
 	}
 
     /**
@@ -773,6 +774,7 @@ class Table
 		$this->where($where, $glue, $value);
 		$next_where = trim(str_replace('WHERE', '', $this->where));
 		$this->where = $prev_where." OR ".$next_where;
-		return $this->where;
+
+		return $this;
 	}
 }
