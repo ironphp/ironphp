@@ -735,4 +735,44 @@ class Table
     {
         return $this->getPaginated($limit, $fields);
     }
+
+    /**
+     * Add WHERE clause with AND conjuction.
+     *
+     * @param array  $where
+     * @param string $glue
+     * @param mix    $value
+     *
+     * @return $this
+     *
+     * @since 1.0.11
+     */
+    public function andWhere($where, $glue = 'AND', $value = null)
+	{
+		$prev_where = $this->where;
+		$this->where($where, $glue, $value);
+		$next_where = trim(str_replace('WHERE', '', $this->where));
+		$this->where = $prev_where." AND ".$next_where;
+		return $this->where;
+	}
+
+    /**
+     * Add WHERE clause with OR conjuction.
+     *
+     * @param array  $where
+     * @param string $glue
+     * @param mix    $value
+     *
+     * @return $this
+     *
+     * @since 1.0.11
+     */
+    public function orWhere($where, $glue = 'AND', $value = null)
+	{
+		$prev_where = $this->where;
+		$this->where($where, $glue, $value);
+		$next_where = trim(str_replace('WHERE', '', $this->where));
+		$this->where = $prev_where." OR ".$next_where;
+		return $this->where;
+	}
 }
