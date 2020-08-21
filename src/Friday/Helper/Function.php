@@ -343,12 +343,13 @@ if (!function_exists('route')) {
      * @param array|string $name
      * @param mixed        $parameters
      * @param bool         $absolute
+     * @param string|null  $id
      *
      * @return string
      */
-    function route($name, $parameters = [], $absolute = true)
+    function route($name, $parameters = [], $absolute = true, $id = null)
     {
-        return app('url')->route($name, $parameters, $absolute);
+        return app('url')->route($name, $parameters, $absolute, $id);
     }
 }
 
