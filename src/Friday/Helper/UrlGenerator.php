@@ -160,10 +160,10 @@ class UrlGenerator
     /**
      * Get the URL to a named route.
      *
-     * @param string 		$name
-     * @param array  		$parameters
-     * @param bool   		$absolute
-     * @param string|null 	$id
+     * @param string      $name
+     * @param array       $parameters
+     * @param bool        $absolute
+     * @param string|null $id
      *
      * @throws \Exception
      *
@@ -171,8 +171,8 @@ class UrlGenerator
      */
     public function route($name, $parameters = [], $absolute = true, $id = null)
     {
-        $id = is_null($id) ? null : "#".$id;
-		if (array_key_exists($name, $this->routes)) {
+        $id = is_null($id) ? null : '#'.$id;
+        if (array_key_exists($name, $this->routes)) {
             $route = $this->routes[$name];
 
             $parameters = !is_array($parameters) ? [$parameters] : $parameters;
