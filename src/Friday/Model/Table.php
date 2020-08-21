@@ -748,14 +748,14 @@ class Table
      * @since 1.0.11
      */
     public function andWhere($where, $glue = 'AND', $value = null)
-	{
-		$prev_where = $this->where;
-		$this->where($where, $glue, $value);
-		$next_where = trim(str_replace('WHERE', '', $this->where));
-		$this->where = $prev_where." AND ".$next_where;
+    {
+        $prev_where = $this->where;
+        $this->where($where, $glue, $value);
+        $next_where = trim(str_replace('WHERE', '', $this->where));
+        $this->where = $prev_where.' AND '.$next_where;
 
-		return $this;
-	}
+        return $this;
+    }
 
     /**
      * Add WHERE clause with OR conjuction.
@@ -769,12 +769,12 @@ class Table
      * @since 1.0.11
      */
     public function orWhere($where, $glue = 'AND', $value = null)
-	{
-		$prev_where = $this->where;
-		$this->where($where, $glue, $value);
-		$next_where = trim(str_replace('WHERE', '', $this->where));
-		$this->where = $prev_where." OR ".$next_where;
+    {
+        $prev_where = $this->where;
+        $this->where($where, $glue, $value);
+        $next_where = trim(str_replace('WHERE', '', $this->where));
+        $this->where = $prev_where.' OR '.$next_where;
 
-		return $this;
-	}
+        return $this;
+    }
 }

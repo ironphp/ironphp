@@ -673,8 +673,8 @@ if (!function_exists('str_slug')) {
      */
     function str_slug($str, $glue = '-')
     {
-		return str_replace([' ', '_', '-'], $glue, strtolower($str));
-	}
+        return str_replace([' ', '_', '-'], $glue, strtolower($str));
+    }
 }
 
 /*
