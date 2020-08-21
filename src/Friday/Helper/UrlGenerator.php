@@ -160,17 +160,19 @@ class UrlGenerator
     /**
      * Get the URL to a named route.
      *
-     * @param string $name
-     * @param array  $parameters
-     * @param bool   $absolute
+     * @param string 		$name
+     * @param array  		$parameters
+     * @param bool   		$absolute
+     * @param string|null 	$id
      *
      * @throws \Exception
      *
      * @return string
      */
-    public function route($name, $parameters = [], $absolute = true)
+    public function route($name, $parameters = [], $absolute = true, $id = null)
     {
-        if (array_key_exists($name, $this->routes)) {
+        $id = is_null($id) ? null : "#".$id;
+		if (array_key_exists($name, $this->routes)) {
             $route = $this->routes[$name];
 
             $parameters = !is_array($parameters) ? [$parameters] : $parameters;
@@ -190,13 +192,13 @@ class UrlGenerator
                         $i++;
                     }
 
-                    return SERVER_ROOT.ltrim($url, '/');
+                    return SERVER_ROOT.ltrim($url, '/').$id;
                 } else {
                     throw new \Exception('Route parameter are required.');
                 }
             }
 
-            return SERVER_ROOT.ltrim($route[1], '/').(is_array($parameters) ? $this->getStringParameter($parameters) : $parameters);
+            return SERVER_ROOT.ltrim($route[1], '/').(is_array($parameters) ? $this->getStringParameter($parameters) : $parameters).$id;
         }
 
         throw new \Exception("Route [{$name}] not defined.");
