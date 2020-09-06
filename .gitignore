@@ -12,3 +12,7 @@ yarn.lock
 .phpunit.result.cache
 .php_cs.cache
 phpmd.html
+src/Friday/Controller/_notes/dwsync.xml
+src/Friday/Foundation/_notes/dwsync.xml
+src/Friday/Helper/_notes/dwsync.xml
+src/Friday/View/_notes/dwsync.xml
