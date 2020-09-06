@@ -225,6 +225,7 @@ class PHPParser
     public function replaceBraces()
     {
         $start = 0;
+        $i = 0;
         while (true) {
             $findStart = strpos($this->string, '{{', $start);
             if ($findStart !== false) {
@@ -237,11 +238,14 @@ class PHPParser
                     } else {
                         $this->string = str_replace('{{'.$substr.'}}', '<?=e('.trim($substr).')?>', $this->string);
                     }
+                } else {
+                    break;
                 }
                 $start = $findEnd;
             } else {
                 break;
             }
+            $i++;
         }
 
         return $this->string;
