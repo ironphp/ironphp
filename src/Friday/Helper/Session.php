@@ -47,7 +47,7 @@ class Session implements SessionInterface
      *
      * @param int $time
      */
-    public function register($time = 60)
+    public function register($time = 60*60*24)
     {
         $_SESSION['session_id'] = session_id();
         $_SESSION['session_time'] = intval($time);
