@@ -177,25 +177,32 @@ class UrlGenerator
 
             $parameters = !is_array($parameters) ? [$parameters] : $parameters;
 
-            // TODO: test for optional parameter route
+            // TODO: optional parameter route can be improve
             if ($route[8]) {
-                if (!empty($parameters)) {
-                    $routeUriPattern = $route[1];
-                    $uri = $route[1];
-
-                    $i = $p = 0;
-                    foreach ($route[5] as $i => $param) {
-                        if (!empty($param)) {
-                            $url = str_replace($i, $parameters[$p], $uri);
-                            $p++;
+                $uri = $route[1];
+                $p = 0;
+                foreach ($route[5] as $i => $param) {
+                    if (!empty($param)) {
+                        if($param[0] == '?') {
+                            if(!isset($parameters[$p])) {
+                                $uri = str_replace($i, '', $uri); 
+                                $p++;
+                            } else {
+                                $uri = str_replace($i, $parameters[$p], $uri); 
+                                $p++;
+                            }
+                        } else {
+                            if(!isset($parameters[$p])) {
+                                throw new \Exception('Route parameter are required.');
+                            } else {
+                                $uri = str_replace($i, $parameters[$p], $uri); 
+                                $p++;
+                            }
                         }
-                        $i++;
                     }
-
-                    return SERVER_ROOT.ltrim($url, '/').$id;
-                } else {
-                    throw new \Exception('Route parameter are required.');
                 }
+
+                return SERVER_ROOT.trim($uri, '/').'/'.$id;
             }
 
             return SERVER_ROOT.ltrim($route[1], '/').(is_array($parameters) ? $this->getStringParameter($parameters) : $parameters).$id;
