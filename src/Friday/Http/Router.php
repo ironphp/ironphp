@@ -72,8 +72,9 @@ class Router implements RouterInterface
             }
         });
 
-        foreach ($allRoute as $route) {
+        foreach ($allRoute as $name => $route) {
             if ($this->match($route, $uriRoute)) {
+                Route::$currentRouteName = $name;
                 return $route;
             }
         }
@@ -143,7 +144,7 @@ class Router implements RouterInterface
      */
     public function currentRouteName()
     {
-        return Route::$currentRoute ? Route::$currentRoute[1] : null;
+        return Route::$currentRoute ? Route::$currentRouteName : null;
     }
 
     /**
