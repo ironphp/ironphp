@@ -75,6 +75,7 @@ class Router implements RouterInterface
         foreach ($allRoute as $name => $route) {
             if ($this->match($route, $uriRoute)) {
                 Route::$currentRouteName = $name;
+
                 return $route;
             }
         }

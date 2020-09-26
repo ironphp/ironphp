@@ -183,19 +183,19 @@ class UrlGenerator
                 $p = 0;
                 foreach ($route[5] as $i => $param) {
                     if (!empty($param)) {
-                        if($param[0] == '?') {
-                            if(!isset($parameters[$p])) {
-                                $uri = str_replace($i, '', $uri); 
+                        if ($param[0] == '?') {
+                            if (!isset($parameters[$p])) {
+                                $uri = str_replace($i, '', $uri);
                                 $p++;
                             } else {
-                                $uri = str_replace($i, $parameters[$p], $uri); 
+                                $uri = str_replace($i, $parameters[$p], $uri);
                                 $p++;
                             }
                         } else {
-                            if(!isset($parameters[$p])) {
+                            if (!isset($parameters[$p])) {
                                 throw new \Exception('Route parameter are required.');
                             } else {
-                                $uri = str_replace($i, $parameters[$p], $uri); 
+                                $uri = str_replace($i, $parameters[$p], $uri);
                                 $p++;
                             }
                         }

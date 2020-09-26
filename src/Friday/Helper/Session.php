@@ -47,7 +47,7 @@ class Session implements SessionInterface
      *
      * @param int $time
      */
-    public function register($time = 60*60*24)
+    public function register($time = 60 * 60 * 24)
     {
         $_SESSION['session_id'] = session_id();
         $_SESSION['session_time'] = intval($time);
@@ -143,16 +143,16 @@ class Session implements SessionInterface
     private function timeNow()
     {
         return time();
-/*
-        $currentHour = date('H');
-        $currentMin = date('i');
-        $currentSec = date('s');
-        $currentMon = date('m');
-        $currentDay = date('d');
-        $currentYear = date('y');
+        /*
+                $currentHour = date('H');
+                $currentMin = date('i');
+                $currentSec = date('s');
+                $currentMon = date('m');
+                $currentDay = date('d');
+                $currentYear = date('y');
 
-        return mktime($currentHour, $currentMin, $currentSec, $currentMon, $currentDay, $currentYear);
-*/
+                return mktime($currentHour, $currentMin, $currentSec, $currentMon, $currentDay, $currentYear);
+        */
     }
 
     /**
@@ -162,17 +162,17 @@ class Session implements SessionInterface
      */
     private function newTime()
     {
-        return time()+$_SESSION['session_time'];
-/*
-        $currentHour = date('H');
-        $currentMin = date('i');
-        $currentSec = date('s');
-        $currentMon = date('m');
-        $currentDay = date('d');
-        $currentYear = date('y');
+        return time() + $_SESSION['session_time'];
+        /*
+                $currentHour = date('H');
+                $currentMin = date('i');
+                $currentSec = date('s');
+                $currentMon = date('m');
+                $currentDay = date('d');
+                $currentYear = date('y');
 
-        return mktime($currentHour, ($currentMin + $_SESSION['session_time']), $currentSec, $currentMon, $currentDay, $currentYear);
-*/
+                return mktime($currentHour, ($currentMin + $_SESSION['session_time']), $currentSec, $currentMon, $currentDay, $currentYear);
+        */
     }
 
     /**
