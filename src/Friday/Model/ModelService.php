@@ -126,6 +126,7 @@ class ModelService
      */
     protected function isLogged()
     {
+//echo "<pre>";var_dump(['isLogged'=>self::$app->session->get('SESS_MEMBER_ID')]);
         if (self::$app->session->get('SESS_MEMBER_ID')) {
             return true;
         } else {
@@ -140,6 +141,7 @@ class ModelService
      */
     protected function isAdmin()
     {
+//echo "<pre>";var_dump(['isAdmin'=>self::$app->session->get('SESS_USER_TYPE')]);
         $usertype = self::$app->session->get('SESS_USER_TYPE');
         if ($usertype === 'Master') {
             return true;
