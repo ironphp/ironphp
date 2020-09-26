@@ -60,6 +60,15 @@ class Route implements RouteInterface
     public static $currentRoute;
 
     /**
+     * Current Route Name.
+     *
+     * @var string
+     *
+     * @since 1.0.12
+     */
+    public static $currentRouteName;
+
+    /**
      * The view factory instance.
      *
      * @var \Friday\Http\Router
