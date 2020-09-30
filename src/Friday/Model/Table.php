@@ -777,4 +777,26 @@ class Table
 
         return $this;
     }
+
+    /**
+     * Get pagination html.
+     *
+     * @param string $url
+     * @param int    $style
+     * @param array  $cssClass
+     * @param bool   $replaceClass
+     *
+     * @return bool|string|null
+     */
+    public function getPaginationHtml($url = '?', $style = 0, $cssClass = null, $replaceClass = false)
+    {
+        if ($this->pagination) {
+            return $this->pagination->getPaginationHtml($url, $style, $cssClass, $replaceClass);
+        }
+
+        return false;
+
+        // TODO: in case pagination not exist
+        //return self::$instance->pagination->getPaginationHtml($url, $style, $cssClass, $replaceClass);
+    }
 }

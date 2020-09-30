@@ -101,25 +101,6 @@ class ModelService
     }
 
     /**
-     * Get pagination html.
-     *
-     * @param string $url
-     * @param int    $style
-     * @param array  $cssClass
-     * @param bool   $replaceClass
-     *
-     * @return bool|string|null
-     */
-    public function getPaginationHtml($url = '?', $style = 0, $cssClass = null, $replaceClass = false)
-    {
-        if ($this->pagination) {
-            return $this->pagination->getPaginationHtml($url, $style, $cssClass, $replaceClass);
-        }
-
-        return self::$instance->pagination->getPaginationHtml($url, $style, $cssClass, $replaceClass);
-    }
-
-    /**
      * Is user logged or not.
      *
      * @return bool
