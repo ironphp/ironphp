@@ -248,4 +248,46 @@ class ModelService
             )
         );
     }
+
+    /**
+     * Auth Middleware.
+     *
+     * @param string $auth
+     *
+     * @return Friday\Model\ModelService|void
+     */
+    public static function middleware($auth = 'user')
+    {
+        switch($auth) {
+            case 'user':
+                if(self::$instance->isLogged() === false) {
+                    redirect( route('login') );
+                }
+                break;
+
+            case 'admin':
+                if(self::$instance->isAdmin() === false) {
+                    redirect( route('login') );
+                }
+                break;
+
+            case 'guest':
+                if(self::$instance->isLogged() === true) {
+                    redirect( route('index') );
+                }
+                break;
+
+            case 'admin-guest':
+                if(self::$instance->isLogged() === true && self::$instance->isAdmin() === true) {
+                    redirect( route('index') );
+                }
+                break;
+
+            default:
+                if(self::$instance->isLogged() === false) {
+                    redirect( route('login') );
+                }
+                break;
+        }
+    }
 }
