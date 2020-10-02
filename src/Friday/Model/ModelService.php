@@ -254,6 +254,8 @@ class ModelService
      *
      * @param string $auth
      *
+     * @since 1.0.12
+     *
      * @return Friday\Model\ModelService|void
      */
     public static function middleware($auth = 'user')

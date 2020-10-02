@@ -79,16 +79,16 @@ class Request implements RequestInterface
     /**
      * Create new Request instance with uri and param.
      *
-     * @param string $uri
-     * @param string $host
-     * @param string $ip
+     * @param string|null $uri
+     * @param string|null $host
+     * @param string|null $ip
      * @param array  $params
      * @param string $method (GET, POST)
      * @param bool   $https
      *
      * @return void
      */
-    public function __construct($uri, $host, $ip, $params = [], $method = 'GET', $https = false)
+    public function __construct($uri = null, $host = null, $ip = null, $params = [], $method = 'GET', $https = false)
     {
         $this->uri = $uri;
         $this->params = $params;
@@ -233,5 +233,56 @@ class Request implements RequestInterface
     public function isHttps()
     {
         return $this->https;
+    }
+
+    /**
+     * Get all GET data.
+     *
+     * @return Request
+     *
+     * @since 1.0.12
+     */
+    public static function get()
+    {
+        return (new Request)->formatData($_GET);
+    }
+
+    /**
+     * Get all POST data.
+     *
+     * @return Request
+     *
+     * @since 1.0.12
+     */
+    public static function post()
+    {
+        return (new Request)->formatData($_POST);
+    }
+
+    /**
+     * Get all FILES data.
+     *
+     * @return Request
+     *
+     * @since 1.0.12
+     */
+    public static function files()
+    {
+        return (new Request)->formatData($_FILES);
+    }
+
+    /**
+     * Format data.
+     *
+     * @return Request
+     *
+     * @since 1.0.12
+     */
+    public function formatData($array)
+    {
+        foreach($array as $key => $val) {
+            $this->$key = $val;
+        }
+        return $this;
     }
 }

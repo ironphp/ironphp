@@ -787,6 +787,8 @@ class Table
      * @param bool   $replaceClass
      *
      * @return bool|string|null
+     *
+     * @moved 1.0.11
      */
     public function getPaginationHtml($url = '?', $style = 0, $cssClass = null, $replaceClass = false)
     {
