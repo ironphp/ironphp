@@ -260,34 +260,34 @@ class ModelService
      */
     public static function middleware($auth = 'user')
     {
-        switch($auth) {
+        switch ($auth) {
             case 'user':
-                if(self::$instance->isLogged() === false) {
-                    redirect( route('login') );
+                if (self::$instance->isLogged() === false) {
+                    redirect(route('login'));
                 }
                 break;
 
             case 'admin':
-                if(self::$instance->isAdmin() === false) {
-                    redirect( route('login') );
+                if (self::$instance->isAdmin() === false) {
+                    redirect(route('login'));
                 }
                 break;
 
             case 'guest':
-                if(self::$instance->isLogged() === true) {
-                    redirect( route('index') );
+                if (self::$instance->isLogged() === true) {
+                    redirect(route('index'));
                 }
                 break;
 
             case 'admin-guest':
-                if(self::$instance->isLogged() === true && self::$instance->isAdmin() === true) {
-                    redirect( route('index') );
+                if (self::$instance->isLogged() === true && self::$instance->isAdmin() === true) {
+                    redirect(route('index'));
                 }
                 break;
 
             default:
-                if(self::$instance->isLogged() === false) {
-                    redirect( route('login') );
+                if (self::$instance->isLogged() === false) {
+                    redirect(route('login'));
                 }
                 break;
         }

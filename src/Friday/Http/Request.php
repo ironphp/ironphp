@@ -89,15 +89,15 @@ class Request implements RequestInterface
      * @param string|null $uri
      * @param string|null $host
      * @param string|null $ip
-     * @param array  $params
-     * @param string $method (GET, POST)
-     * @param bool   $https
+     * @param array       $params
+     * @param string      $method (GET, POST)
+     * @param bool        $https
      *
      * @return void
      */
     public function __construct($uri = null, $host = null, $ip = null, $params = [], $method = 'GET', $https = false)
     {
-        if(static::$instance == null) {
+        if (static::$instance == null) {
             $this->parseUri();
             static::$instance = $this;
         }
@@ -284,11 +284,12 @@ class Request implements RequestInterface
      */
     public function formatData($array)
     {
-        $request = new \stdClass;
-        foreach($array as $key => $val) {
+        $request = new \stdClass();
+        foreach ($array as $key => $val) {
             $key = str_replace('-', '_', $key);
             $request->$key = $val;
         }
+
         return $request;
     }
 
@@ -337,12 +338,12 @@ class Request implements RequestInterface
             $this->setParam('POST', []);
         }
 
-        $this->setParam('COOKIE',   $GLOBALS['_COOKIE']);
-        $this->setParam('FILES',    $GLOBALS['_FILES']);
-        $this->setParam('ENV',      $GLOBALS['_ENV']);
-        $this->setParam('SERVER',   $GLOBALS['_COOKIE']);
-        $this->setParam('SESSION',  $GLOBALS['_SERVER']);
-        $this->setParam('Url',      $host.$uri);
-        $this->setParam('Headers',  getallheaders());
+        $this->setParam('COOKIE', $GLOBALS['_COOKIE']);
+        $this->setParam('FILES', $GLOBALS['_FILES']);
+        $this->setParam('ENV', $GLOBALS['_ENV']);
+        $this->setParam('SERVER', $GLOBALS['_COOKIE']);
+        $this->setParam('SESSION', $GLOBALS['_SERVER']);
+        $this->setParam('Url', $host.$uri);
+        $this->setParam('Headers', getallheaders());
     }
 }
