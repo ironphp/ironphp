@@ -77,6 +77,13 @@ class Request implements RequestInterface
     private static $instance;
 
     /**
+     * Send data.
+     *
+     * @var array
+     */
+    public $data;
+
+    /**
      * Create new Request instance with uri and param.
      *
      * @param string|null $uri
@@ -90,13 +97,10 @@ class Request implements RequestInterface
      */
     public function __construct($uri = null, $host = null, $ip = null, $params = [], $method = 'GET', $https = false)
     {
-        $this->uri = $uri;
-        $this->params = $params;
-        $this->serverRequestMethod = $method;
-        $this->https = $https;
-        $this->host = rtrim($host, '/\\');
-        $this->ip = $ip;
-        static::$instance = $this;
+        if(static::$instance == null) {
+            $this->parseUri();
+            static::$instance = $this;
+        }
     }
 
     /**
@@ -122,7 +126,7 @@ class Request implements RequestInterface
      */
     public function getUrl()
     {
-        return $this->getHost().$this->uri;
+        return $this->getHost().ltrim($this->uri, '/');
     }
 
     /**
@@ -238,51 +242,107 @@ class Request implements RequestInterface
     /**
      * Get all GET data.
      *
-     * @return Request
+     * @return stdClass
      *
      * @since 1.0.12
      */
     public static function get()
     {
-        return (new Request)->formatData($_GET);
+        return static::getInstance()->formatData($_GET);
     }
 
     /**
      * Get all POST data.
      *
-     * @return Request
+     * @return stdClass
      *
      * @since 1.0.12
      */
     public static function post()
     {
-        return (new Request)->formatData($_POST);
+        return static::getInstance()->formatData($_POST);
     }
 
     /**
      * Get all FILES data.
      *
-     * @return Request
+     * @return stdClass
      *
      * @since 1.0.12
      */
     public static function files()
     {
-        return (new Request)->formatData($_FILES);
+        return static::getInstance()->formatData($_FILES);
     }
 
     /**
      * Format data.
      *
-     * @return Request
+     * @return stdClass
      *
      * @since 1.0.12
      */
     public function formatData($array)
     {
+        $request = new \stdClass;
         foreach($array as $key => $val) {
-            $this->$key = $val;
+            $key = str_replace('-', '_', $key);
+            $request->$key = $val;
         }
-        return $this;
+        return $request;
+    }
+
+    /**
+     * Parse Uri and get path uri, params, server method.
+     *
+     * @return void
+     *
+     * @moved 1.0.12
+     */
+    public function parseUri()
+    {
+        // TODO
+        $this->uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+        $this->uri = str_replace(['{', '}'], '', urldecode($this->uri));
+        $extDir = dirname(dirname($_SERVER['SCRIPT_NAME']));
+        $this->uri = ($extDir == '/' || $extDir == '\\') ? $this->uri : str_replace($extDir, '', $this->uri);
+        $this->uri = rtrim($this->uri, '/');
+        $this->uri = empty($this->uri) ? '/' : $this->uri;
+
+        $this->serverRequestMethod = $_SERVER['REQUEST_METHOD'];
+
+        if ($this->serverRequestMethod == 'POST') {
+            if (isset($_POST['_method']) && ($_POST['_method'] === 'PUT' || $_POST['_method'] === 'DELETE')) {
+                $this->serverRequestMethod = $_POST['_method'];
+                $GLOBALS['_'.$this->serverRequestMethod] = $GLOBALS['_POST'];
+            }
+        }
+
+        $params = $GLOBALS['_'.$this->serverRequestMethod];
+
+        if (!empty($_SERVER['HTTPS']) && ('on' == $_SERVER['HTTPS'])) {
+            $this->https = true;
+        } else {
+            $this->https = false;
+        }
+
+        $this->host = rtrim($_SERVER['HTTP_HOST'].str_replace('\\', '/', $extDir), '/\\');
+        $this->ip = $_SERVER['REMOTE_ADDR'];
+
+        if ($this->serverRequestMethod === 'POST') {
+            $this->setParam('GET', $_GET);
+            $this->setParam('POST', $params);
+        } else {
+            $this->setParam('GET', $params);
+            $this->setParam('POST', []);
+        }
+
+        $this->setParam('COOKIE',   $GLOBALS['_COOKIE']);
+        $this->setParam('FILES',    $GLOBALS['_FILES']);
+        $this->setParam('ENV',      $GLOBALS['_ENV']);
+        $this->setParam('SERVER',   $GLOBALS['_COOKIE']);
+        $this->setParam('SESSION',  $GLOBALS['_SERVER']);
+        $this->setParam('Url',      $host.$uri);
+        $this->setParam('Headers',  getallheaders());
     }
 }
