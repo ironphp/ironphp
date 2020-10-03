@@ -43,11 +43,9 @@ interface FrontControllerInterface
     /**
      * Create Responce instance.
      *
-     * @param array $parsedUrl
-     *
      * @return \Friday\Http\Request
      */
-    public function request($parsedUrl);
+    public function request();
 
     /**
      * Create Route instance.
