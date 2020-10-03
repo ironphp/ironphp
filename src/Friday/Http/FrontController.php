@@ -71,11 +71,9 @@ class FrontController implements FrontControllerInterface
     /**
      * Create Responce instance.
      *
-     * @param array $parsedUrl
-     *
      * @return \Friday\Http\Request
      */
-    public function request($parsedUrl)
+    public function request()
     {
         /*
         else {
@@ -90,7 +88,7 @@ class FrontController implements FrontControllerInterface
             }
         }
         */
-        return new Request($parsedUrl['uri'], $parsedUrl['host'], $parsedUrl['ip'], $parsedUrl['params'], $parsedUrl['method'], $parsedUrl['https']);
+        return new Request();
     }
 
     /**
