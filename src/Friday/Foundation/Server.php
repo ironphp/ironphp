@@ -62,6 +62,7 @@ class Server extends Application
         //request - get url, client data
         $this->request = $this->frontController->request();
         $this->request->setConstant();
+
         // TODO - token checking should be in request
         if ($this->request->getRequestMethod() == 'POST') {
             if (!isset($_POST['_token']) || $_POST['_token'] != $this->session->get('_token')) {

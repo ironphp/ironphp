@@ -32,42 +32,42 @@ class Request implements RequestInterface
      *
      * @var string
      */
-    public $uri;
+    //public $uri;
 
     /**
      * Parameter.
      *
      * @var array
      */
-    public $params;
+    //public $params;
 
     /**
      * HTTP Request Method.
      *
      * @var string
      */
-    public $serverRequestMethod;
+    //public $serverRequestMethod;
 
     /**
      * User IP.
      *
      * @var string
      */
-    public $ip;
+    //public $ip;
 
     /**
      * Http/Htts.
      *
      * @var bool
      */
-    public $https;
+    //public $https;
 
     /**
      * Host.
      *
      * @var string
      */
-    public $host;
+    //public $host;
 
     /**
      * Instance of Request.
@@ -81,7 +81,7 @@ class Request implements RequestInterface
      *
      * @var array
      */
-    public $data;
+    //public $data;
 
     /**
      * Create new Request instance with uri and param.
@@ -284,7 +284,7 @@ class Request implements RequestInterface
      */
     public function formatData($array)
     {
-        $request = new \stdClass();
+        $request = new Request;
         foreach ($array as $key => $val) {
             $key = str_replace('-', '_', $key);
             $request->$key = $val;
@@ -306,14 +306,18 @@ class Request implements RequestInterface
         $this->uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
         $this->uri = str_replace(['{', '}'], '', urldecode($this->uri));
         $extDir = dirname(dirname($_SERVER['SCRIPT_NAME']));
-        $this->uri = ($extDir == '/' || $extDir == '\\') ? $this->uri : str_replace($extDir, '', $this->uri);
+        $this->uri = ($extDir == '/' || $extDir == '\\')
+            ? $this->uri
+            : str_replace($extDir, '', $this->uri);
         $this->uri = rtrim($this->uri, '/');
         $this->uri = empty($this->uri) ? '/' : $this->uri;
 
         $this->serverRequestMethod = $_SERVER['REQUEST_METHOD'];
 
         if ($this->serverRequestMethod == 'POST') {
-            if (isset($_POST['_method']) && ($_POST['_method'] === 'PUT' || $_POST['_method'] === 'DELETE')) {
+            if (isset($_POST['_method'])
+                && ($_POST['_method'] === 'PUT' || $_POST['_method'] === 'DELETE')
+               ) {
                 $this->serverRequestMethod = $_POST['_method'];
                 $GLOBALS['_'.$this->serverRequestMethod] = $GLOBALS['_POST'];
             }
@@ -345,5 +349,41 @@ class Request implements RequestInterface
         $this->setParam('SESSION', $GLOBALS['_SERVER']);
         $this->setParam('Url', $host.$uri);
         $this->setParam('Headers', getallheaders());
+    }
+
+    /**
+     * Get all GET/POST/FILES data.
+     *
+     * @return stdClass
+     *
+     * @since 1.0.12
+     */
+    public static function all()
+    {
+        return static::getInstance()->formatData($_GET);
+    }
+
+    /**
+     * Get Server Request Method.
+     *
+     * @return string
+     *
+     * @since 1.0.12
+     */
+    public function getServerRequestMethod()
+    {
+        return $this->serverRequestMethod;
+    }
+
+    /**
+     * Get IP.
+     *
+     * @return string
+     *
+     * @since 1.0.12
+     */
+    public function getIp()
+    {
+        return $this->ip;
     }
 }
