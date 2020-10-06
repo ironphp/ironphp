@@ -347,7 +347,7 @@ class Request implements RequestInterface
         $this->setParam('ENV', $GLOBALS['_ENV']);
         $this->setParam('SERVER', $GLOBALS['_COOKIE']);
         $this->setParam('SESSION', $GLOBALS['_SERVER']);
-        $this->setParam('Url', $host.$uri);
+        $this->setParam('Url', $this->host.$this->uri);
         $this->setParam('Headers', getallheaders());
     }
 
@@ -376,14 +376,18 @@ class Request implements RequestInterface
     }
 
     /**
-     * Get IP.
+     * Validate data.
+     *
+     * @param  array  $rules
+     * @param  array|null  $messages
+     * @param  array|null  $customAttributes
      *
      * @return string
      *
      * @since 1.0.12
      */
-    public function getIp()
+    public function validate($rules, $messages = null, $customAttributes = [])
     {
-        return $this->ip;
+var_dump($rules);exit();
     }
 }
