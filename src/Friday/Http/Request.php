@@ -284,7 +284,7 @@ class Request implements RequestInterface
      */
     public function formatData($array)
     {
-        $request = new Request;
+        $request = new Request();
         foreach ($array as $key => $val) {
             $key = str_replace('-', '_', $key);
             $request->$key = $val;
@@ -378,9 +378,9 @@ class Request implements RequestInterface
     /**
      * Validate data.
      *
-     * @param  array  $rules
-     * @param  array|null  $messages
-     * @param  array|null  $customAttributes
+     * @param array      $rules
+     * @param array|null $messages
+     * @param array|null $customAttributes
      *
      * @return string
      *
@@ -388,6 +388,7 @@ class Request implements RequestInterface
      */
     public function validate($rules, $messages = null, $customAttributes = [])
     {
-var_dump($rules);exit();
+        var_dump($rules);
+        exit();
     }
 }
