@@ -18,12 +18,10 @@
 
 namespace Friday\Model;
 
-use Friday\Model\ModelService;
 use mysqli;
 
 class DB extends ModelService
 {
-
     /**
      * Instance of the DB.
      *
@@ -50,9 +48,10 @@ class DB extends ModelService
      */
     public static function connection()
     {
-        if(is_null(static::$instance)) {
-            return new DB;
+        if (is_null(static::$instance)) {
+            return new DB();
         }
+
         return $this;
     }
 
