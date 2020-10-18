@@ -21,6 +21,7 @@ namespace Friday\Controller;
 use Friday\Contracts\Controller\Controller as ControllerInterface;
 use Friday\Model\ModelService;
 use Friday\View\View;
+use Exception;
 
 class Controller implements ControllerInterface
 {
@@ -183,14 +184,14 @@ class Controller implements ControllerInterface
             return false;
         }
         $modelPath = self::$instance->app->findModel($model);
+
         if ($modelPath === false) {
-            $model = ucfirst($model).'Model';
-            $modelPath = self::$instance->app->findModel($model);
+            $modelPath = self::$instance->app->findModel( ucfirst($model).'Model' );
             if ($modelPath === false) {
-                throw new Exception($model.'Model file is missing.');
+                throw new Exception($model.' Model file is missing.');
                 exit;
             } else {
-                $modelClass = 'App\\Model\\'.$model.'Model';
+                $modelClass = 'App\\Model\\'.ucfirst($model).'Model'.'Model';
             }
         } else {
             $modelClass = 'App\\Model\\'.$model;
