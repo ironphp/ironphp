@@ -13,3 +13,4 @@ yarn.lock
 .php_cs.cache
 phpmd.html
 dwsync.xml
+*.xml
