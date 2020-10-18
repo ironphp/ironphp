@@ -248,6 +248,7 @@ class Controller implements ControllerInterface
         $this->setName($controller);
 
         if ($this->app->findController($controller)) {
+            $controller = str_replace(DS, '\\', $controller);
             $controllerClass = 'App\\Controller\\'.$controller;
             $this->controller = new $controllerClass();
         }
