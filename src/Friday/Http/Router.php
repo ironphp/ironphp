@@ -102,6 +102,7 @@ class Router implements RouterInterface
      */
     public function match($route, $uriRoute, $parameterized = false)
     {
+        // TODO: (trim($route[1], '/') === $uriRoute)
         if ($route[1] === '/'.trim($uriRoute, '/ ')) {
             return true;
         }
