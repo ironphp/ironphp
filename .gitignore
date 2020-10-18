@@ -12,4 +12,4 @@ yarn.lock
 .phpunit.result.cache
 .php_cs.cache
 phpmd.html
-**/_notes/dwsync.xml
+dwsync.xml
