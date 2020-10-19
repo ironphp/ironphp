@@ -253,41 +253,42 @@ class ModelService
      * Auth Middleware.
      *
      * @param string $auth
+     * @param string|null $page
      *
      * @since 1.0.12
      *
      * @return Friday\Model\ModelService|void
      */
-    public static function middleware($auth = 'user')
+    public static function middleware($auth = 'user', $page = null)
     {
         switch ($auth) {
             case 'user':
                 if (self::$instance->isLogged() === false) {
-                    redirect(route('login'));
+                    redirect($page ?: route('login'));
                 }
                 break;
 
             case 'admin':
                 if (self::$instance->isAdmin() === false) {
-                    redirect(route('login'));
+                    redirect($page ?: route('login'));
                 }
                 break;
 
             case 'guest':
                 if (self::$instance->isLogged() === true) {
-                    redirect(route('index'));
+                    redirect($page ?: route('index'));
                 }
                 break;
 
             case 'admin-guest':
                 if (self::$instance->isLogged() === true && self::$instance->isAdmin() === true) {
-                    redirect(route('index'));
+                    redirect($page ?: route('index'));
                 }
                 break;
 
             default:
                 if (self::$instance->isLogged() === false) {
-                    redirect(route('login'));
+                    redirect($page ?: route('login'));
                 }
                 break;
         }

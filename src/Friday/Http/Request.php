@@ -388,6 +388,7 @@ class Request implements RequestInterface
      */
     public function validate($rules, $messages = null, $customAttributes = [])
     {
+        // TODO update validations
         foreach($rules as $key => $rule) {
             $rule_items = explode('|', $rule);
             foreach($rule_items as $rule_item) {
