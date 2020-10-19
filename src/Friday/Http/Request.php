@@ -382,13 +382,24 @@ class Request implements RequestInterface
      * @param array|null $messages
      * @param array|null $customAttributes
      *
-     * @return string
+     * @return bool|void
      *
      * @since 1.0.12
      */
     public function validate($rules, $messages = null, $customAttributes = [])
     {
-        var_dump($rules);
-        exit();
+        foreach($rules as $key => $rule) {
+            $rule_items = explode('|', $rule);
+            foreach($rule_items as $rule_item) {
+                switch($rule_item) {
+                    case 'required':
+                        if(!isset($this->$key) || empty($this->$key)) {
+                            echo $key.' is required.';
+                            exit;
+                        }
+                }
+            }
+        }
+        return true;
     }
 }
