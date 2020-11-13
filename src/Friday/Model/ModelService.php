@@ -20,6 +20,8 @@ namespace Friday\Model;
 
 use BadMethodCallException;
 use Friday\Helper\Inflector;
+use Friday\Helper\Pagination;
+use Friday\Model\DataMapper;
 
 class ModelService
 {
@@ -83,7 +85,8 @@ class ModelService
      */
     public function table($tableName, $pagination = true)
     {
-        return $this->getDataMapper()->getTable($tableName, $pagination ? $this->getPagination() : null);
+        return $this->getDataMapper()
+            ->getTable($tableName, $pagination ? $this->getPagination() : null);
     }
 
     /**
@@ -94,7 +97,7 @@ class ModelService
     private function getPagination()
     {
         if ($this->pagination == null) {
-            $this->pagination = new \Friday\Helper\Pagination();
+            $this->pagination = new Pagination();
         }
 
         return $this->pagination;
@@ -107,7 +110,8 @@ class ModelService
      */
     protected function isLogged()
     {
-        //echo "<pre>";var_dump(['isLogged'=>self::$app->session->get('SESS_MEMBER_ID')]);
+        // TODO: SESS_MEMBER_ID key predefined by user
+        // TODO: user auth method can be inside user-auth class
         if (self::$app->session->get('SESS_MEMBER_ID')) {
             return true;
         } else {
@@ -122,7 +126,8 @@ class ModelService
      */
     protected function isAdmin()
     {
-        //echo "<pre>";var_dump(['isAdmin'=>self::$app->session->get('SESS_USER_TYPE')]);
+        // TODO: SESS_USER_TYPE key predefined or optional by user
+        // TODO: user auth method can be inside user-auth class
         $usertype = self::$app->session->get('SESS_USER_TYPE');
         if ($usertype === 'Master') {
             return true;
@@ -140,7 +145,8 @@ class ModelService
      */
     public function sanitizeFormValue($string)
     {
-        return $this->getConnection()->sanitizeFormValue($string);
+        return $this->getConnection()
+            ->sanitizeFormValue($string);
     }
 
     /**
@@ -160,10 +166,9 @@ class ModelService
      */
     protected function getAppKey()
     {
-        $key = env('APP_KEY');
-        $key = str_replace('base64:', '', $key);
-
-        return base64_decode($key);
+        return base64_decode(
+            str_replace('base64:', '', env('APP_KEY'))
+        );
     }
 
     /**
@@ -175,7 +180,8 @@ class ModelService
      */
     protected function runQuery($query)
     {
-        return $this->getConnection()->executeQuery($query);
+        return $this->getConnection()
+            ->executeQuery($query);
     }
 
     /**
@@ -186,7 +192,7 @@ class ModelService
     private function getDataMapper()
     {
         if ($this->dataMapper == null) {
-            $this->dataMapper = new \Friday\Model\DataMapper(self::$app->config);
+            $this->dataMapper = new DataMapper(self::$app->config);
         }
 
         return $this->dataMapper;
@@ -206,10 +212,9 @@ class ModelService
      */
     public static function __callStatic($method, $parameters)
     {
-        self::$instance->table(
-            self::$instance->parseTable(
-                get_called_class()
-            )
+        self::$instance->parseAndAddTable(
+            get_called_class(),
+            $parameters
         );
 
         if (!method_exists(self::$instance->getConnection(), $method)) {
@@ -230,23 +235,24 @@ class ModelService
      */
     private function getConnection()
     {
-        return $this->getDataMapper()->getConnection();
+        return $this->getDataMapper()
+            ->getConnection();
     }
 
     /**
-     * Get Table from Class name.
+     * Parse and Get Table from Class name.
      *
      * @param string $class
      *
      * @return string
+     *
+     * @renamed 1.0.12
      */
-    private function parseTable($class)
+    private function parseAndAddTable($class)
     {
-        return Inflector::pluralize(
-            strtolower(
-                (new \ReflectionClass($class))->getShortName()
-            )
-        );
+        return $this->getDataMapper()
+            ->getConnection()
+            ->parseAndAddTable($class, $this->getPagination());
     }
 
     /**
@@ -261,6 +267,7 @@ class ModelService
      */
     public static function middleware($auth = 'user', $page = null)
     {
+        // TODO: login, index - $page can predefined by user
         switch ($auth) {
             case 'user':
                 if (self::$instance->isLogged() === false) {
