@@ -19,6 +19,7 @@
 namespace Friday\Model;
 
 use mysqli;
+use Friday\Helper\Inflector;
 
 class Table
 {
@@ -112,6 +113,13 @@ class Table
      * @var int|null
      */
     private $num_rows = null;
+
+    /**
+     * Model fully classified name.
+     *
+     * @var string|null
+     */
+    private $model = null;
 
     /**
      * Create a new Table instance.
@@ -800,5 +808,45 @@ class Table
 
         // TODO: in case pagination not exist
         //return self::$instance->pagination->getPaginationHtml($url, $style, $cssClass, $replaceClass);
+    }
+
+    /**
+     * Get record by id.
+     *
+     * @param int  $id
+     *
+     * @return \App\Model
+     *
+     * @since 1.0.12
+     */
+    public function find($id)
+    {
+        $row = $this->where('id','=',$id)->get();
+        $model = new $this->model();
+        foreach($row as $key => $val) {
+            $model->$key = $val;
+        }
+        return $model;
+    }
+
+    /**
+     * Parse and Get Table from Class name.
+     *
+     * @param string $class
+     * @param \Friday\Helper\Pagination $pagination
+     *
+     * @return string
+     *
+     * @copied 1.0.12
+     */
+    public function parseAndAddTable($class, $pagination)
+    {
+        $this->model = $class;
+        $table = Inflector::pluralize(
+            strtolower(
+                (new \ReflectionClass($class))->getShortName()
+            )
+        );
+        return $this->setTable($table, $pagination);
     }
 }
