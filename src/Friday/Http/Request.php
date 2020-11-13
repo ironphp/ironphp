@@ -389,18 +389,19 @@ class Request implements RequestInterface
     public function validate($rules, $messages = null, $customAttributes = [])
     {
         // TODO update validations
-        foreach($rules as $key => $rule) {
+        foreach ($rules as $key => $rule) {
             $rule_items = explode('|', $rule);
-            foreach($rule_items as $rule_item) {
-                switch($rule_item) {
+            foreach ($rule_items as $rule_item) {
+                switch ($rule_item) {
                     case 'required':
-                        if(!isset($this->$key) || empty($this->$key)) {
+                        if (!isset($this->$key) || empty($this->$key)) {
                             echo $key.' is required.';
                             exit;
                         }
                 }
             }
         }
+
         return true;
     }
 }
