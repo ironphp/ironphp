@@ -18,8 +18,8 @@
 
 namespace Friday\Model;
 
-use mysqli;
 use Friday\Helper\Inflector;
+use mysqli;
 
 class Table
 {
@@ -813,7 +813,7 @@ class Table
     /**
      * Get record by id.
      *
-     * @param int  $id
+     * @param int $id
      *
      * @return \App\Model
      *
@@ -821,18 +821,19 @@ class Table
      */
     public function find($id)
     {
-        $row = $this->where('id','=',$id)->get();
+        $row = $this->where('id', '=', $id)->get();
         $model = new $this->model();
-        foreach($row as $key => $val) {
+        foreach ($row as $key => $val) {
             $model->$key = $val;
         }
+
         return $model;
     }
 
     /**
      * Parse and Get Table from Class name.
      *
-     * @param string $class
+     * @param string                    $class
      * @param \Friday\Helper\Pagination $pagination
      *
      * @return string
@@ -847,6 +848,7 @@ class Table
                 (new \ReflectionClass($class))->getShortName()
             )
         );
+
         return $this->setTable($table, $pagination);
     }
 }

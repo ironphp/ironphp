@@ -19,9 +19,7 @@
 namespace Friday\Model;
 
 use BadMethodCallException;
-use Friday\Helper\Inflector;
 use Friday\Helper\Pagination;
-use Friday\Model\DataMapper;
 
 class ModelService
 {
@@ -258,7 +256,7 @@ class ModelService
     /**
      * Auth Middleware.
      *
-     * @param string $auth
+     * @param string      $auth
      * @param string|null $page
      *
      * @since 1.0.12
