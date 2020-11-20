@@ -32,6 +32,14 @@
     </a>
 </p>
 
+<p align="center">
+    <a href="http://isitmaintained.com/project/ironphp/ironphp" title="Average time to resolve an issue" target="_blank">
+        <img alt="Average time to resolve an issue" src="http://isitmaintained.com/badge/resolution/ironphp/ironphp.svg">
+    </a>
+    <a href="http://isitmaintained.com/project/ironphp/ironphp" title="Percentage of issues still open">
+        <img alt="Percentage of issues still open" src="http://isitmaintained.com/badge/open/ironphp/ironphp.svg">
+    </a>
+</p>
 ## About IronPHP
 
 IronPHP is a development framework for PHP which
