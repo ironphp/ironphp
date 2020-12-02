@@ -18,9 +18,9 @@
 
 namespace Friday\Model;
 
+use Exception;
 use Friday\Helper\Inflector;
 use mysqli;
-use Exception;
 
 class Table
 {
