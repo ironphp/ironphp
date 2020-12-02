@@ -20,6 +20,7 @@ namespace Friday\Model;
 
 use Friday\Helper\Inflector;
 use mysqli;
+use Exception;
 
 class Table
 {
