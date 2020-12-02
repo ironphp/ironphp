@@ -39,7 +39,7 @@ class Application implements ApplicationInterface
      *
      * @var string
      */
-    const VERSION = '1.0.12-alpha1';
+    const VERSION = '1.0.13-dev';
 
     /**
      * The base path for the IronPHP installation.
