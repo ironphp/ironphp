@@ -152,7 +152,7 @@ class Table
             $this->connect_error = mysqli_connect_error();
         }
 
-        $this->connect_errno = $mysqli->connect_errno;
+        $this->connect_errno = (int) $mysqli->connect_errno;
         if ($this->connect_errno) {
             exit('Connect Error ['.$this->connect_errno.']: '.$this->connect_error);
         }
