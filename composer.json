@@ -28,13 +28,13 @@
         "source": "https://github.com/ironphp/ironphp"
     },
     "require": {
-        "php": ">=4.0",
+        "php": "^7.3|^8.0",
         "erusev/parsedown": "@stable",
         "league/flysystem": "@stable",
         "monolog/monolog": "@stable",
         "psr/log": "@stable",
         "swiftmailer/swiftmailer": "@stable",
-        "vlucas/phpdotenv": "^4.0"
+        "vlucas/phpdotenv": "^5.2"
     },
     "require-dev": {
         "atoum/atoum": "@stable",
