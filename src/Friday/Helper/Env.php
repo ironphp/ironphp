@@ -18,14 +18,15 @@
 
 namespace Friday\Helper;
 
+use Friday\Foundation\Application;
+
 use Dotenv\Dotenv;
 use Dotenv\Exception\InvalidFileException;
-use Dotenv\Repository\Adapter\EnvConstAdapter;
+
 use Dotenv\Repository\Adapter\PutenvAdapter;
-use Dotenv\Repository\Adapter\ServerConstAdapter;
 use Dotenv\Repository\RepositoryBuilder;
-use Friday\Foundation\Application;
 use PhpOption\Option;
+
 
 class Env
 {
@@ -35,6 +36,14 @@ class Env
      * @var bool
      */
     protected static $putenv = true;
+
+    /**
+     * The environment repository instance.
+     *
+     * @var \Dotenv\Repository\RepositoryInterface|null
+     */
+    protected static $repository;
+
 
     /**
      * The environment factory instance.
@@ -49,13 +58,6 @@ class Env
      * @var \Dotenv\Environment\VariablesInterface|null
      */
     protected static $variables;
-
-    /**
-     * The environment repository instance.
-     *
-     * @var \Dotenv\Repository\RepositoryInterface|null
-     */
-    protected static $repository;
 
     /**
      * Bootstrap the given application.
@@ -101,8 +103,7 @@ class Env
      */
     protected function createDotenv($app)
     {
-        return Dotenv::create(
-            self::getRepository(),
+        return Dotenv::createImmutable(
             $app->environmentPath(),
             $app->environmentFile()
         );
@@ -118,12 +119,12 @@ class Env
     protected function writeErrorAndDie(InvalidFileException $e)
     {
         /*
-                $output = (new ConsoleOutput())->getErrorOutput();
+        $output = (new ConsoleOutput)->getErrorOutput();
 
-                $output->writeln('The environment file is invalid!');
-                $output->writeln($e->getMessage());
+        $output->writeln('The environment file is invalid!');
+        $output->writeln($e->getMessage());
 
-                die(1);
+        exit(1);
         */
     }
 
@@ -157,16 +158,13 @@ class Env
     public static function getRepository()
     {
         if (static::$repository === null) {
-            $adapters = array_merge(
-                [new EnvConstAdapter(), new ServerConstAdapter()],
-                static::$putenv ? [new PutenvAdapter()] : []
-            );
+            $builder = RepositoryBuilder::createWithDefaultAdapters();
 
-            static::$repository = RepositoryBuilder::create()
-                ->withReaders($adapters)
-                ->withWriters($adapters)
-                ->immutable()
-                ->make();
+            if (static::$putenv) {
+                $builder = $builder->addAdapter(PutenvAdapter::class);
+            }
+
+            static::$repository = $builder->immutable()->make();
         }
 
         return static::$repository;
@@ -175,9 +173,8 @@ class Env
     /**
      * Gets the value of an environment variable.
      *
-     * @param string $key
-     * @param mixed  $default
-     *
+     * @param  string  $key
+     * @param  mixed  $default
      * @return mixed
      */
     public static function get($key, $default = null)
