@@ -18,15 +18,12 @@
 
 namespace Friday\Helper;
 
-use Friday\Foundation\Application;
-
 use Dotenv\Dotenv;
 use Dotenv\Exception\InvalidFileException;
-
 use Dotenv\Repository\Adapter\PutenvAdapter;
 use Dotenv\Repository\RepositoryBuilder;
+use Friday\Foundation\Application;
 use PhpOption\Option;
-
 
 class Env
 {
@@ -43,7 +40,6 @@ class Env
      * @var \Dotenv\Repository\RepositoryInterface|null
      */
     protected static $repository;
-
 
     /**
      * The environment factory instance.
@@ -173,8 +169,9 @@ class Env
     /**
      * Gets the value of an environment variable.
      *
-     * @param  string  $key
-     * @param  mixed  $default
+     * @param string $key
+     * @param mixed  $default
+     *
      * @return mixed
      */
     public static function get($key, $default = null)
