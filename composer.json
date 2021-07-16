@@ -29,11 +29,11 @@
     },
     "require": {
         "php": "^7.3|^8.0",
-        "erusev/parsedown": "1.7.4",
-        "league/flysystem": "2.1.1",
-        "monolog/monolog": "2.3.1",
-        "psr/log": "3.0.0",
-        "swiftmailer/swiftmailer": "6.2.7",
+        "erusev/parsedown": "^1.7",
+        "league/flysystem": "^2.1",
+        "monolog/monolog": "^2.3",
+        "psr/log": "^3.0",
+        "swiftmailer/swiftmailer": "^6.2",
         "vlucas/phpdotenv": "^5.3"
     },
     "require-dev": {
