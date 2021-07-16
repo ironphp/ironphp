@@ -29,12 +29,12 @@
     },
     "require": {
         "php": "^7.3|^8.0",
-        "erusev/parsedown": "@stable",
-        "league/flysystem": "@stable",
-        "monolog/monolog": "@stable",
-        "psr/log": "@stable",
-        "swiftmailer/swiftmailer": "@stable",
-        "vlucas/phpdotenv": "^5.2"
+        "erusev/parsedown": "1.7.4",
+        "league/flysystem": "2.1.1",
+        "monolog/monolog": "2.3.1",
+        "psr/log": "3.0.0",
+        "swiftmailer/swiftmailer": "6.2.7",
+        "vlucas/phpdotenv": "^5.3"
     },
     "require-dev": {
         "atoum/atoum": "@stable",
