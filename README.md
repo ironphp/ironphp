@@ -12,8 +12,8 @@
     <a href="https://github.styleci.io/repos/147162023">
         <img alt="StyleCI" src="https://github.styleci.io/repos/147162023/shield?branch=master">
     </a>
-    <a href="https://travis-ci.org/ironphp/ironphp">
-        <img alt="TravisCI" src="https://travis-ci.org/ironphp/ironphp.svg">
+    <a href="https://travis-ci.com/ironphp/ironphp">
+        <img alt="TravisCI" src="https://travis-ci.com/ironphp/ironphp.svg">
     </a>
     <a href="https://packagist.org/packages/ironphp/ironphp" target="_blank">
         <img alt="Latest Stable Version" src="https://poser.pugx.org/ironphp/ironphp/v/stable.svg">
