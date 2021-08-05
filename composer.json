@@ -44,7 +44,7 @@
         "phing/phing": "@dev",
         "phpspec/phpspec": "@dev",
         "phpstan/phpstan": "@dev",
-        "phpunit/phpunit": "10.0.x-dev"
+        "phpunit/phpunit": "@dev"
     },
     "autoload": {
         "psr-4": {
