@@ -28,9 +28,7 @@
     <a href="https://github.styleci.io/repos/147162023">
         <img alt="StyleCI" src="https://github.styleci.io/repos/147162023/shield?branch=master">
     </a>
-</p>
-
-<p align="center">
+    <br>
     <a href="http://isitmaintained.com/project/ironphp/ironphp" title="Average time to resolve an issue" target="_blank">
         <img alt="Average time to resolve an issue" src="http://isitmaintained.com/badge/resolution/ironphp/ironphp.svg">
     </a>
