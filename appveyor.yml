@@ -1,4 +1,0 @@
-version: 1.0.0.{build}
-skip_tags: true
-on_finish:
-- cmd: composer install
