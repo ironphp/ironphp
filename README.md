@@ -3,6 +3,9 @@
     <a href="https://packagist.org/packages/ironphp/ironphp" target="_blank">
         <img alt="Total Downloads" src="https://poser.pugx.org/ironphp/ironphp/d/total.svg">
     </a>
+    <a href="https://packagist.org/packages/ironphp/ironphp/stats" target="_blank">
+        <img alt="Total Downloads" src="https://badgen.net/packagist/dm/ironphp/ironphp">
+    </a>
     <a href="https://packagist.org/packages/ironphp/ironphp" target="_blank">
         <img alt="Latest Stable Version" src="https://poser.pugx.org/ironphp/ironphp/v/stable.svg">
     </a>
