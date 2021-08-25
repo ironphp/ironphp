@@ -2,9 +2,6 @@
 /vendor
 /dist
 /build
-/_notes/dwsync.xml
-*/_notes/dwsync.xml
-**/_notes/dwsync.xml
 .env
 composer.lock
 package-lock.json
