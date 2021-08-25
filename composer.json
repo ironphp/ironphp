@@ -28,24 +28,23 @@
         "source": "https://github.com/ironphp/ironphp"
     },
     "require": {
-        "php": ">=4.0",
-        "erusev/parsedown": "@stable",
-        "league/flysystem": "@stable",
-        "monolog/monolog": "@stable",
-        "psr/log": "@stable",
-        "swiftmailer/swiftmailer": "@stable",
-        "vlucas/phpdotenv": "^4.0"
+        "erusev/parsedown": "@dev",
+        "league/flysystem": "@dev",
+        "monolog/monolog": "@dev",
+        "psr/log": "@dev",
+        "swiftmailer/swiftmailer": "@dev",
+        "vlucas/phpdotenv": "@dev"
     },
     "require-dev": {
-        "atoum/atoum": "@stable",
-        "codeception/codeception": "@stable",
-        "datasift/storyplayer": "@stable",
-        "designsecurity/progpilot": "@stable",
-        "kahlan/kahlan": "@stable",
-        "phing/phing": "@stable",
-        "phpspec/phpspec": "@stable",
-        "phpstan/phpstan": "@stable",
-        "phpunit/phpunit": "@stable"
+        "atoum/atoum": "@dev",
+        "codeception/codeception": "@dev",
+        "datasift/storyplayer": "@dev",
+        "designsecurity/progpilot": "@dev",
+        "kahlan/kahlan": "@dev",
+        "phing/phing": "@dev",
+        "phpspec/phpspec": "@dev",
+        "phpstan/phpstan": "@dev",
+        "phpunit/phpunit": "@dev"
     },
     "autoload": {
         "psr-4": {

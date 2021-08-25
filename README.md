@@ -3,17 +3,8 @@
     <a href="https://packagist.org/packages/ironphp/ironphp" target="_blank">
         <img alt="Total Downloads" src="https://poser.pugx.org/ironphp/ironphp/d/total.svg">
     </a>
-    <a href="https://circleci.com/gh/ironphp/ironphp" target="_blank">
-        <img alt="CircleCI Build status" src="https://circleci.com/gh/ironphp/ironphp.svg?style=svg">
-    </a>
-    <a href="https://ci.appveyor.com/project/gaurangkumar/ironphp" target="_blank">
-        <img alt="AppVeyor Build status" src="https://ci.appveyor.com/api/projects/status/njmsgijb6bnr8y5y?svg=true">
-    </a>
-    <a href="https://github.styleci.io/repos/147162023">
-        <img alt="StyleCI" src="https://github.styleci.io/repos/147162023/shield?branch=master">
-    </a>
-    <a href="https://travis-ci.org/ironphp/ironphp">
-        <img alt="TravisCI" src="https://travis-ci.org/ironphp/ironphp.svg">
+    <a href="https://packagist.org/packages/ironphp/ironphp/stats" target="_blank">
+        <img alt="Total Downloads" src="https://badgen.net/packagist/dm/ironphp/ironphp">
     </a>
     <a href="https://packagist.org/packages/ironphp/ironphp" target="_blank">
         <img alt="Latest Stable Version" src="https://poser.pugx.org/ironphp/ironphp/v/stable.svg">
@@ -24,15 +15,23 @@
     <a href="https://opensource.org/licenses/MIT" target="_blank">
         <img alt="Software License" src="https://poser.pugx.org/ironphp/ironphp/license.svg">
     </a>
-    <a href="http://hits.dwyl.io/ironphp/ironphp/ironphp" target="_blank">
-        <img alt="HitCount" src="http://hits.dwyl.io/ironphp/ironphp/ironphp.svg">
-    </a>
     <a href="http://php.net/" target="_blank">
         <img alt="Minimum PHP Version" src="https://img.shields.io/badge/php-%3E%3D%207.2-ee4499.svg?style=flat-plastic">
     </a>
-</p>
-
-<p align="center">
+    <br>
+    <a href="https://circleci.com/gh/ironphp/ironphp" target="_blank">
+        <img alt="CircleCI Build status" src="https://circleci.com/gh/ironphp/ironphp.svg?style=svg">
+    </a>
+    <a href="https://ci.appveyor.com/project/gaurangkumar/ironphp" target="_blank">
+        <img alt="AppVeyor Build status" src="https://ci.appveyor.com/api/projects/status/njmsgijb6bnr8y5y?svg=true">
+    </a>
+    <a href="https://travis-ci.com/ironphp/ironphp">
+        <img alt="TravisCI" src="https://travis-ci.com/ironphp/ironphp.svg">
+    </a>
+    <a href="https://github.styleci.io/repos/147162023">
+        <img alt="StyleCI" src="https://github.styleci.io/repos/147162023/shield?branch=master">
+    </a>
+    <br>
     <a href="http://isitmaintained.com/project/ironphp/ironphp" title="Average time to resolve an issue" target="_blank">
         <img alt="Average time to resolve an issue" src="http://isitmaintained.com/badge/resolution/ironphp/ironphp.svg">
     </a>
@@ -40,6 +39,7 @@
         <img alt="Percentage of issues still open" src="http://isitmaintained.com/badge/open/ironphp/ironphp.svg">
     </a>
 </p>
+
 ## About IronPHP
 
 IronPHP is a development framework for PHP which
