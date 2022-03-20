@@ -94,11 +94,9 @@ class ViewErrorMsg implements Countable
      * Get the number of messages in the default bag.
      *
      * @return int
-     * #[\ReturnTypeWillChange]
      */
     public function count(): int
     {
-        var_dump($this->getBag('default'));exit;
         return $this->getBag('default')->count();
     }
 
