@@ -39,7 +39,6 @@
         "atoum/atoum": "@dev",
         "codeception/codeception": "@dev",
         "datasift/storyplayer": "@dev",
-        "designsecurity/progpilot": "@dev",
         "kahlan/kahlan": "@dev",
         "phing/phing": "@dev",
         "phpspec/phpspec": "@dev",
