@@ -23,7 +23,7 @@
         <img alt="CircleCI Build status" src="https://circleci.com/gh/ironphp/ironphp.svg?style=svg">
     </a>
     <a href="https://ci.appveyor.com/project/gaurangkumar/ironphp" target="_blank">
-        <img alt="AppVeyor Build status" src="https://ci.appveyor.com/api/projects/status/njmsgijb6bnr8y5y?svg=true">
+        <img alt="AppVeyor Build status" src="https://ci.appveyor.com/api/projects/status/o5yh5e0geatk3qnh?svg=true">
     </a>
     <a href="https://travis-ci.com/ironphp/ironphp">
         <img alt="TravisCI" src="https://api.travis-ci.com/ironphp/ironphp.svg?branch=master&status=started">
