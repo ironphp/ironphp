@@ -144,4 +144,4 @@ Thank you for supporting us by using IronPHP Framework and by your donations.
 The IronPHP framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
 [1]: https://github.com/ironphp
-[2]: https://www.facebook.com/IronPHP-Framwork-325690624644002
+[2]: https://www.facebook.com/IronPHP
