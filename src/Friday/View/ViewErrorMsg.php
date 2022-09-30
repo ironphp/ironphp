@@ -95,7 +95,7 @@ class ViewErrorMsg implements Countable
      *
      * @return int
      */
-    public function count(): int
+    public function count()
     {
         return $this->getBag('default')->count();
     }
