@@ -13,6 +13,7 @@
  * @since         1.0.0
  *
  * @license       MIT License (https://opensource.org/licenses/mit-license.php)
+ *
  * @auther        Gaurang Parmar <gaurangkumarp@gmail.com>
  */
 
@@ -41,6 +42,7 @@ class Dispatcher implements DispatcherInterface
      * @param \Friday\Http\Request $request
      *
      * @return array
+     *
      * @throw  Exception
      */
     public function dispatch($route, $request)

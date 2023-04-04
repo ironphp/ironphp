@@ -13,6 +13,7 @@
  * @since         1.0.7
  *
  * @license       MIT License (https://opensource.org/licenses/mit-license.php)
+ *
  * @auther        GaurangKumar Parmar <gaurangkumarp@gmail.com>
  */
 
@@ -63,7 +64,7 @@ class Inflector
         $lowercased_word = strtolower($word);
 
         foreach ($uncountable as $_uncountable) {
-            if (substr($lowercased_word, (-1 * strlen($_uncountable))) == $_uncountable) {
+            if (substr($lowercased_word, -1 * strlen($_uncountable)) == $_uncountable) {
                 return $word;
             }
         }
@@ -130,7 +131,7 @@ class Inflector
 
         $lowercased_word = strtolower($word);
         foreach ($uncountable as $_uncountable) {
-            if (substr($lowercased_word, (-1 * strlen($_uncountable))) == $_uncountable) {
+            if (substr($lowercased_word, -1 * strlen($_uncountable)) == $_uncountable) {
                 return $word;
             }
         }
@@ -265,21 +266,21 @@ class Inflector
      */
     public static function ordinalize($number)
     {
-        if (in_array(($number % 100), range(11, 13))) {
+        if (in_array($number % 100, range(11, 13))) {
             return $number.'th';
         } else {
-            switch (($number % 10)) {
+            switch ($number % 10) {
                 case 1:
-                return $number.'st';
-                break;
+                    return $number.'st';
+                    break;
                 case 2:
-                return $number.'nd';
-                break;
+                    return $number.'nd';
+                    break;
                 case 3:
-                return $number.'rd';
+                    return $number.'rd';
                 default:
-                return $number.'th';
-                break;
+                    return $number.'th';
+                    break;
             }
         }
     }

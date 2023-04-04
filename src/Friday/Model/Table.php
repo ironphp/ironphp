@@ -13,6 +13,7 @@
  * @since         1.0.0
  *
  * @license       MIT License (https://opensource.org/licenses/mit-license.php)
+ *
  * @auther        GaurangKumar Parmar <gaurangkumarp@gmail.com>
  */
 
@@ -397,7 +398,7 @@ class Table
         if (is_array($where) && count($where) != 0) {
             $array = [];
             foreach ($where as $field => $value) {
-                $array[] = " `$field` = ".((is_string($value) ? "'$value'" : $value));
+                $array[] = " `$field` = ".(is_string($value) ? "'$value'" : $value);
             }
             $this->where = ' WHERE'.implode(" $glue", $array);
         } elseif (is_string($where) && trim($where) != '') {
@@ -428,7 +429,7 @@ class Table
         if (is_array($where) && count($where) != 0) {
             $array = [];
             foreach ($where as $field => $value) {
-                $array[] = " `$field` LIKE ".((is_string($value) ? "'$value'" : $value));
+                $array[] = " `$field` LIKE ".(is_string($value) ? "'$value'" : $value);
             }
             $this->where = ' WHERE'.implode(" $glue", $array);
         } elseif (is_string($where) && trim($where) != '') {
@@ -493,7 +494,7 @@ class Table
         if (is_array($fields) && count($fields) != 0) {
             $array = [];
             foreach ($fields as $field => $value) {
-                $array[] = " `$field` = ".((is_string($value) ? "'$value'" : $value));
+                $array[] = " `$field` = ".(is_string($value) ? "'$value'" : $value);
             }
             $this->duplicateUpdate = ' ON DUPLICATE KEY UPDATE '.implode(' ,', $array);
         } elseif (is_string($fields) && trim($fields) != '') {

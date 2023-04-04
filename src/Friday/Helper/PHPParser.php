@@ -13,6 +13,7 @@
  * @since         1.0.8
  *
  * @license       MIT License (https://opensource.org/licenses/mit-license.php)
+ *
  * @auther        Gaurang Parmar <gaurangkumarp@gmail.com>
  */
 
@@ -133,12 +134,12 @@ class PHPParser
                     // add just saved scope to current scope
                     $this->current[] = $t;
                     break;
-                /*
-                case ' ':
-                    // make each word its own token
-                    $this->push();
-                    break;
-                */
+                    /*
+                    case ' ':
+                        // make each word its own token
+                        $this->push();
+                        break;
+                    */
                 default:
                     // remember the offset to do a string capture later
                     // could've also done $buffer .= $string[$position]
@@ -185,7 +186,7 @@ class PHPParser
                     $findEnd = strpos($this->string, '{{:'.$key.'}}');
                     if ($findEnd !== false) {
                         $len = 5 + strlen($key);
-                        $substr = substr($this->string, $findStart, ($findEnd - $findStart));
+                        $substr = substr($this->string, $findStart, $findEnd - $findStart);
                         $substr = substr($substr, $len);
                         $loopstr = []; //fixed-for: Uncaught Error: [] operator not supported for strings $loopstr[]
                         foreach ($val as $k => $v) {
@@ -232,7 +233,7 @@ class PHPParser
                 $findStart += 2;
                 $findEnd = strpos($this->string, '}}', $findStart);
                 if ($findEnd !== false) {
-                    $substr = substr($this->string, $findStart, ($findEnd - $findStart));
+                    $substr = substr($this->string, $findStart, $findEnd - $findStart);
                     if (empty(trim($substr))) {
                         $this->string = str_replace('{{'.$substr.'}}', '', $this->string);
                     } else {
@@ -285,7 +286,7 @@ class PHPParser
                 //$findEnd = strpos($this->string, ')', $findStart);
                 $findEnd = $i + 1;
                 if ($findEnd !== false) {
-                    $substr = substr($this->string, $findStart, ($findEnd - $findStart));
+                    $substr = substr($this->string, $findStart, $findEnd - $findStart);
                     $this->string = str_replace('@foreach'.$substr, '<?php foreach'.$substr.': ?>', $this->string);
                     $this->string = str_replace('@endforeach', '<?php endforeach; ?>', $this->string);
                 }
@@ -329,7 +330,7 @@ class PHPParser
 
                 $findEnd = $i + 1;
                 if ($findEnd !== false) {
-                    $substr = substr($this->string, $findStart, ($findEnd - $findStart));
+                    $substr = substr($this->string, $findStart, $findEnd - $findStart);
                     $this->string = str_replace('@if'.$substr, '<?php if'.trim($substr).': ?>', $this->string);
                     $this->string = str_replace('@else', '<?php else: ?>', $this->string);
                     $this->string = str_replace('@endif', '<?php endif; ?>', $this->string);
@@ -378,7 +379,7 @@ class PHPParser
                 $findStart += 2;
                 $findEnd = strpos($this->string, '!}', $findStart);
                 if ($findEnd !== false) {
-                    $substr = substr($this->string, $findStart, ($findEnd - $findStart));
+                    $substr = substr($this->string, $findStart, $findEnd - $findStart);
                     if (empty(trim($substr))) {
                         $this->string = str_replace('{!'.$substr.'!}', '', $this->string);
                     } else {

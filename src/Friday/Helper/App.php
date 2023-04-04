@@ -13,6 +13,7 @@
  * @since         1.0.8
  *
  * @license       MIT License (https://opensource.org/licenses/mit-license.php)
+ *
  * @auther        GaurangKumar Parmar <gaurangkumarp@gmail.com>
  */
 
@@ -76,6 +77,7 @@ class App
      * @param string|null $abstract
      *
      * @return void
+     *
      * @exception \Exception
      */
     public static function getInstance($abstract = null)

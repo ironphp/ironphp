@@ -13,6 +13,7 @@
  * @since         1.0.5
  *
  * @license       MIT License (https://opensource.org/licenses/mit-license.php)
+ *
  * @auther        GaurangKumar Parmar <gaurangkumarp@gmail.com>
  */
 
@@ -37,6 +38,7 @@ interface RouterInterface
      * @param string $httpMethod GET/POST
      *
      * @return \Friday\Http\Route|bool
+     *
      * @exception \Exception
      */
     public function route($allRoute, $uriRoute, $httpMethod);

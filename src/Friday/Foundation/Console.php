@@ -13,6 +13,7 @@
  * @since         1.0.0
  *
  * @license       MIT License (https://opensource.org/licenses/mit-license.php)
+ *
  * @auther        GaurangKumar Parmar <gaurangkumarp@gmail.com>
  */
 
@@ -95,7 +96,7 @@ class Console extends Application
                 $this->findExecute($command);
                 break;
 
-            // php jarvis cmd
+                // php jarvis cmd
             case 1:
                 $command = $tokens[0];
                 if ($this->findCommand($command)) {
@@ -112,7 +113,7 @@ class Console extends Application
                 }
                 break;
 
-            // php jarvis cmd arg ...
+                // php jarvis cmd arg ...
             default:
                 $command = $tokens[0];
                 array_shift($tokens);
