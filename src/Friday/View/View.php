@@ -13,6 +13,7 @@
  * @since         1.0.0
  *
  * @license       MIT License (https://opensource.org/licenses/mit-license.php)
+ *
  * @auther        Gaurang Parmar <gaurangkumarp@gmail.com>
  */
 
@@ -327,6 +328,7 @@ class View implements ViewInterface
      * @param string|null $layout
      *
      * @return string
+     *
      * @exception \Exception
      */
     public function renderView($viewPath, $data = [], $layout = null)
@@ -849,7 +851,7 @@ class View implements ViewInterface
                 $findStart += 9;
                 $findEnd = strpos($templateData, ')', $findStart);
                 if ($findEnd !== false) {
-                    $substr = substr($templateData, $findStart, ($findEnd - $findStart));
+                    $substr = substr($templateData, $findStart, $findEnd - $findStart);
                     $str = trim($substr, "'");
                     $file = false;
                     $theme = $this->theme ? $this->theme.'\\' : null;

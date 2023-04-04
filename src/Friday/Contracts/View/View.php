@@ -13,6 +13,7 @@
  * @since         1.0.6
  *
  * @license       MIT License (https://opensource.org/licenses/mit-license.php)
+ *
  * @auther        Gaurang Parmar <gaurangkumarp@gmail.com>
  */
 
@@ -62,6 +63,7 @@ interface View
      * @param string|null $layout
      *
      * @return string
+     *
      * @exception \Exception
      */
     public function renderView($viewPath, $data = [], $layout = null);

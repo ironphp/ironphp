@@ -13,6 +13,7 @@
  * @since         1.0.10
  *
  * @license       MIT License (https://opensource.org/licenses/mit-license.php)
+ *
  * @auther        Gaurang Parmar <gaurangkumarp@gmail.com>
  */
 

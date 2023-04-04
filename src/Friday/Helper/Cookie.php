@@ -13,6 +13,7 @@
  * @since         1.0.0
  *
  * @license       MIT License (https://opensource.org/licenses/mit-license.php)
+ *
  * @auther        GaurangKumar Parmar <gaurangkumarp@gmail.com>
  */
 
@@ -108,7 +109,7 @@ class Cookie
      */
     public function __construct()
     {
-        $this->setHost('.'.($_SERVER['HTTP_HOST']));
+        $this->setHost('.'.$_SERVER['HTTP_HOST']);
     }
 
     /**
@@ -232,7 +233,7 @@ class Cookie
         $_SESSION = [];
 
         // clear cookies from agent
-        $signature = ($this->_name).'Signature';
+        $signature = $this->_name.'Signature';
         setcookie(
             $this->_name,
             '',
@@ -281,21 +282,18 @@ class Cookie
         $this->_open = true;
 
         // signature check
-        $key = ($this->_name).'Signature';
+        $key = $this->_name.'Signature';
         if (isset($_COOKIE[$key]) === true) {
-
             // if session id is invalid
             $signature = $_COOKIE[$key];
             $valid = $this->_valid($sid, $signature);
             if ($valid === false) {
-
                 // invalid session processing
                 $this->_invalid();
             }
         }
         // session not yet opened
         else {
-
             // create signature-cookie
             $signature = $this->_sign($sid);
             setcookie(

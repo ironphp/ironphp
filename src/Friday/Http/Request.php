@@ -13,6 +13,7 @@
  * @since         1.0.0
  *
  * @license       MIT License (https://opensource.org/licenses/mit-license.php)
+ *
  * @auther        GaurangKumar Parmar <gaurangkumarp@gmail.com>
  */
 
@@ -317,7 +318,7 @@ class Request implements RequestInterface
         if ($this->serverRequestMethod == 'POST') {
             if (isset($_POST['_method'])
                 && ($_POST['_method'] === 'PUT' || $_POST['_method'] === 'DELETE')
-               ) {
+            ) {
                 $this->serverRequestMethod = $_POST['_method'];
                 $GLOBALS['_'.$this->serverRequestMethod] = $GLOBALS['_POST'];
             }

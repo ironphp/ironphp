@@ -13,6 +13,7 @@
  * @since         1.0.0
  *
  * @license       MIT License (https://opensource.org/licenses/mit-license.php)
+ *
  * @auther        GaurangKumar Parmar <gaurangkumarp@gmail.com>
  */
 
@@ -47,6 +48,7 @@ class Server extends Application
      * @param string|null $basePath
      *
      * @return void
+     *
      * @exception \Exception
      */
     public function __construct($basePath = null)
@@ -85,7 +87,7 @@ class Server extends Application
                 http_response_code(404);
                 echo 'Page not found. Error 404';
                 //header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found");
-                exit();
+                exit;
             }, null, [], [], 4, 4, 1];
         }
 

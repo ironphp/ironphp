@@ -13,6 +13,7 @@
  * @since         1.0.0
  *
  * @license       MIT License (https://opensource.org/licenses/mit-license.php)
+ *
  * @auther        GaurangKumar Parmar <gaurangkumarp@gmail.com>
  */
 
@@ -169,7 +170,7 @@ class Application implements ApplicationInterface
             true
         );
         //TODO
-        (new Config($this->config));
+        new Config($this->config);
         define('CONFIG_LOADED', microtime(true));
 
         //set locale-timezone
