@@ -33,42 +33,42 @@ class Request implements RequestInterface
      *
      * @var string
      */
-    //public $uri;
+    public $uri;
 
     /**
      * Parameter.
      *
      * @var array
      */
-    //public $params;
+    public $params;
 
     /**
      * HTTP Request Method.
      *
      * @var string
      */
-    //public $serverRequestMethod;
+    public $serverRequestMethod;
 
     /**
      * User IP.
      *
      * @var string
      */
-    //public $ip;
+    public $ip;
 
     /**
      * Http/Htts.
      *
      * @var bool
      */
-    //public $https;
+    public $https;
 
     /**
      * Host.
      *
      * @var string
      */
-    //public $host;
+    public $host;
 
     /**
      * Instance of Request.
