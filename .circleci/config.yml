@@ -1,9 +1,11 @@
 version: 2 # use CircleCI 2.0
 
+orbs:
+  browser-tools: circleci/browser-tools@1.1
 jobs: # a collection of steps
   build: # runs not using Workflows must have a `build` job as entry point
     docker:
-      - image: cimg/php:8.2-browsers
+      - image: cimg/php:7.4.26-browsers
     working_directory: ~/repo # directory where steps will run
     steps: # a set of executable commands
       - browser-tools/install-browser-tools
