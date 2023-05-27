@@ -59,7 +59,7 @@
     "require": {
         "erusev/parsedown": "dev-master",
         "guzzlehttp/guzzle": "^7.5@dev",
-        "league/flysystem": "3.x-dev",
+        "league/flysystem": "^3.15",
         "monolog/monolog": "^3.0@dev",
         "psr/log": "^3.0@dev",
         "symfony/mailer": "6.3.x-dev",
