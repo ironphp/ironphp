@@ -63,6 +63,6 @@
         "monolog/monolog": "^3.0@dev",
         "psr/log": "^3.0@dev",
         "symfony/mailer": "6.3.x-dev",
-        "vlucas/phpdotenv": "^5.5@dev"
+        "vlucas/phpdotenv": "^5.5"
     }
 }
