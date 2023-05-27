@@ -57,12 +57,12 @@
         }
     },
     "require": {
-        "erusev/parsedown": "@stable",
-        "guzzlehttp/guzzle": "@stable",
-        "league/flysystem": "@stable",
-        "monolog/monolog": "@stable",
-        "psr/log": "@stable",
-        "symfony/mailer": "@stable",
-        "vlucas/phpdotenv": "@stable"
+        "erusev/parsedown": "1.7.4",
+        "guzzlehttp/guzzle": "7.7.0",
+        "league/flysystem": "3.15.1",
+        "monolog/monolog": "3.3.1",
+        "psr/log": "3.0.0",
+        "symfony/mailer": "6.2.8",
+        "vlucas/phpdotenv": "5.5.0"
     }
 }
